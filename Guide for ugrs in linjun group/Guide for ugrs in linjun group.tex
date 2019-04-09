@@ -2,8 +2,33 @@
 % 使用 ctexart 文类，UTF-8 编码
 \documentclass{article}
   \usepackage{xeCJK,indentfirst}
-  \usepackage{amsmath}
+  \usepackage{amsfonts, amsmath, amssymb}
   \usepackage[normalem]{ulem}
+
+    \newtheorem{theorem}{Theorem}[section]
+  \newtheorem{lemma}{Lemma}  
+  \newtheorem{definition}{Definition}[section]
+  \newtheorem{proof}{Proof}[section]  
+  \numberwithin{equation}{section}
+
+    \newcommand{\bra}[1]{\langle #1 |}
+  \newcommand{\ket}[1]{| #1 \rangle}
+  \newcommand{\bracket}[2]{\langle #1 | #2 \rangle}
+  \newcommand{\bracketl}[3]{\langle #1 | #2 | #3 \rangle}
+  \newcommand{\func}{\mathrm \,}
+  \newcommand{\define}[2]{
+   \begin{definition}
+    \begin{description}
+    \item[#1]
+    #2
+   \end{description}
+   \end{definition}
+  }
+  \newcommand{\mean}[1]{\langle #1 \rangle}
+
+  \newcommand{\sch}{Schr\"odinger} 
+  \newcommand{\grad}{\nabla}
+
   \setlength{\parindent}{2em}
   \setlength{\textheight}{240mm}
   \setlength{\textwidth}{155mm}
@@ -19,16 +44,16 @@
     \tableofcontents
     \newpage
     \section{引言}
-	\begin{quote}
-		老师说``这个东西很简单''的时候，往往是普通化学本科生搞不定的东西。
-		\begin{flushright}
-			————李睿，在抱怨化学本科生编程能力不够时的调侃
-		\end{flushright}
-	\end{quote}
+  \begin{quote}
+    老师说``这个东西很简单''的时候，往往是普通化学本科生搞不定的东西。
+    \begin{flushright}
+      ————李睿，在抱怨化学本科生编程能力不够时的调侃
+    \end{flushright}
+  \end{quote}
 
-	欢迎进入王林军老师的课题组！无论您是由于何种原因，出于什么目的，来到王林军老师的课题组足以证明了您的勇气！\sout{看，在王林军老师组的都很休闲的}
+  欢迎进入王林军老师的课题组！无论您是由于何种原因，出于什么目的，来到王林军老师的课题组足以证明了您的勇气！\sout{看，在王林军老师组的都很休闲的}
 
-	由于王林军老师研究比较``底层''的计算化学，所以会对数学、物理、计算机等知识内容会有更高的要求。而历届在王老师做事的本科生们都不止一次地抱怨来王老师的课题组的门槛非常高，而且没有合适的入门指南，使得难度进一步提高（\sout{你会发现你听了一年组会都学不到什么东西}），同时化学系对数理方面的要求实在不敢恭维，从而刚参加王老师的组会的时候会近乎100\%地出现``这是什么/我是谁/我在干什么''的疑惑，因此编者们共同商量，觉得出一份入门指南非常的重要，于是草草编写了这样的一份。
+  由于王林军老师研究比较``底层''的计算化学，所以会对数学、物理、计算机等知识内容会有更高的要求。而历届在王老师做事的本科生们都不止一次地抱怨来王老师的课题组的门槛非常高，而且没有合适的入门指南，使得难度进一步提高（\sout{你会发现你听了一年组会都学不到什么东西}），同时化学系对数理方面的要求实在不敢恭维，从而刚参加王老师的组会的时候会近乎100\%地出现``这是什么/我是谁/我在干什么''的疑惑，因此编者们共同商量，觉得出一份入门指南非常的重要，于是草草编写了这样的一份。
 
     \section{Linux基础及服务器使用}
     Linux和macOS、Windows并称为三大电脑操作系统，都是用来完成用户和计算机之间的互动。Linux由于其出色的稳定性以及免费（相对于Unix系统），被广泛用于服务器的操作系统。当然Linux是存在图形界面的，但它的最为使用，也最为核心的部分还是它的终端，也就是字符界面。为了如何操作这玩意儿，一些基础知识是必须的。
@@ -38,47 +63,47 @@
 
     \subsection{Linux基本操作}
     \begin{description}
-		\item[cd]
-			进入输入目录的文件夹；
-			`cd folder/'
-			P.S : `cd ..' 返回上一级文件夹
-		\item[ls]
-			列出所在文件夹的子文件夹；
+    \item[cd]
+      进入输入目录的文件夹；
+      `cd folder/'
+      P.S : `cd ..' 返回上一级文件夹
+    \item[ls]
+      列出所在文件夹的子文件夹；
 
-		\item[vi / vim]
-			打开文件查看内容；vim事实上是一个文本编辑器（比方说这个文档的一部分也是用vim编辑的）
+    \item[vi / vim]
+      打开文件查看内容；vim事实上是一个文本编辑器（比方说这个文档的一部分也是用vim编辑的）
 
-			P.S :输入不存在的文件可直接创立该文件；
+      P.S :输入不存在的文件可直接创立该文件；
 
-		vim有一个梗，就是几乎所有的人刚上手的时候都不知道{\textbf 该怎么退出}。在这里面稍微描述一下最基本的使用方法：
-		\begin{description}
-			\item[i / Ins] 如果已经打开了某个文本，那么这两个键中的一个能够允许你对文本作出修改。它左下角会显示 ``--INSERT--'' 这样的文段，这说明你处在编辑模式，这时候你按出的大部分操作会如同你使用大部分文本编辑器的时候一样，会完整地呈现在你正在修改的文本上。
-			\item[Esc] 无论你处在何种模式，按了Esc你就能回到正常模式，在该模式下你可以用它自身的快捷键来直接作出一些修改，也可输入命令来完成别的操作（比如{\textbf 退出}）。
+    vim有一个梗，就是几乎所有的人刚上手的时候都不知道{\textbf 该怎么退出}。在这里面稍微描述一下最基本的使用方法：
+    \begin{description}
+      \item[i / Ins] 如果已经打开了某个文本，那么这两个键中的一个能够允许你对文本作出修改。它左下角会显示 ``--INSERT--'' 这样的文段，这说明你处在编辑模式，这时候你按出的大部分操作会如同你使用大部分文本编辑器的时候一样，会完整地呈现在你正在修改的文本上。
+      \item[Esc] 无论你处在何种模式，按了Esc你就能回到正常模式，在该模式下你可以用它自身的快捷键来直接作出一些修改，也可输入命令来完成别的操作（比如{\textbf 退出}）。
 
-			\item[:q!] 这里`:'表示进行对vim程序自身的命令，`q'是quit，`!'表示强制。也就是输了这个命令并按回车后会强制退出并不保存文件。
+      \item[:q!] 这里`:'表示进行对vim程序自身的命令，`q'是quit，`!'表示强制。也就是输了这个命令并按回车后会强制退出并不保存文件。
 
-			\item[:wq] 以此类推，这个表示的是保存并退出。没错，`:w'就是进行保存，并不退出。
-		\end{description}
-		好了，现在你也是会用vim的人了！跟我一起喊，\sout{vim天下第一！}
-		\item[pwd]
-			显示所在目录路径；它会显示所处目录的绝对路径，而这个绝对路径是你在任何别的目录下都能访问的。从该角度出发,事实上别的几乎所有操作都可以指定绝对路径（比如简单的访问，或者复制，或者在程序里面调用/生成文件）。
+      \item[:wq] 以此类推，这个表示的是保存并退出。没错，`:w'就是进行保存，并不退出。
+    \end{description}
+    好了，现在你也是会用vim的人了！跟我一起喊，\sout{vim天下第一！}
+    \item[pwd]
+      显示所在目录路径；它会显示所处目录的绝对路径，而这个绝对路径是你在任何别的目录下都能访问的。从该角度出发,事实上别的几乎所有操作都可以指定绝对路径（比如简单的访问，或者复制，或者在程序里面调用/生成文件）。
 
-		\item[mkdir]
-			在所在目录下建立文件夹：
-			`mkdir levest' 表示建立名字为`levest'的文件夹
+    \item[mkdir]
+      在所在目录下建立文件夹：
+      `mkdir levest' 表示建立名字为`levest'的文件夹
 
-		\item[cp] 复制文件至某个目录
-			`cp einfield.com slot' 表示将`einfield.com' 在`slot'文件夹下进行粘贴
+    \item[cp] 复制文件至某个目录
+      `cp einfield.com slot' 表示将`einfield.com' 在`slot'文件夹下进行粘贴
 
-		\item[mv] 原则上它表示将某个东西移动到什么地方，但它的另一个神奇操作在于它可以重命名文件/文件夹（后缀还是要加好）。
+    \item[mv] 原则上它表示将某个东西移动到什么地方，但它的另一个神奇操作在于它可以重命名文件/文件夹（后缀还是要加好）。
 
-		\item[rm] \textbf{ 危险！}这是表示删除操作。
+    \item[rm] \textbf{ 危险！}这是表示删除操作。
 
-		\item[-r] 在Linux中大部分的`-*' 表示了所进行的主要命令的附加指令（附加属性，\sout{buff}）。像这里`-r'一般用来表示是对整个文件夹进行操作，像上面的cp, rm 都可以加上-r。
+    \item[-r] 在Linux中大部分的`-*' 表示了所进行的主要命令的附加指令（附加属性，\sout{buff}）。像这里`-r'一般用来表示是对整个文件夹进行操作，像上面的cp, rm 都可以加上-r。
 
-		\item[*] *一般在Linux表示缺省符号，也就是在这里面可以填任何东西。比方说，`rm *.c' 表示任何后缀为`.c'的文件都会被删除\footnote{这就是为什么sudo rm -rf /* 这个梗会流行的原因。}。
+    \item[*] *一般在Linux表示缺省符号，也就是在这里面可以填任何东西。比方说，`rm *.c' 表示任何后缀为`.c'的文件都会被删除\footnote{这就是为什么sudo rm -rf /* 这个梗会流行的原因。}。
 
-	\end{description}
+  \end{description}
 
     \section{数学基础}
     \subsection{符号使用}
@@ -99,13 +124,13 @@
     当然这么说可能很难有感觉这些到底是什么东西，让我们再换一种方式来表达。算符，变换，这些东西实则上都代表了类似于函数的概念，也就是传进去一个东西，传出去另一个东西，这两个东西可以相等，可以完全不是同一类。而左矢和右矢则代表了可以传进去的``参量''，并经过算符作用后得到了另一个左矢或右矢。比如一个关于$x$的函数$f(x)$，经过求导算符$\frac{d }{d x} $作用后得到它的导函数$f'(x)$，实则上也没有脱离这样的描述体系\footnote{从而为Dirac说明海森堡的矩阵力学和薛定谔的波动力学是等价表述做好了铺垫。}。
 
     \subsection{傅立叶变换}
-	\begin{quote}
-		它，改变了世界。
-		\begin{flushright}
-			——李睿，谈傅立叶变换时
-		\end{flushright}
-	\end{quote}     
-	咕咕……咕咕咕……
+  \begin{quote}
+    它，改变了世界。
+    \begin{flushright}
+      ——李睿，谈傅立叶变换时
+    \end{flushright}
+  \end{quote}     
+  咕咕……咕咕咕……
 
     \section{量子力学}
 
@@ -131,7 +156,51 @@
   \psi (x) = \langle x | \psi \rangle , \quad \psi(p) = \langle p | \psi \rangle
   \end{equation} 
 \end{enumerate}
+  
 
+\begin{theorem}
+Ehrenfest Theorem:
+
+\begin{align}
+\mean{\textbf{p}}= m \frac{d \mean{\textbf{x}}}{dt}\\
+\mean{\textbf{F}}= \frac{d\mean{\textbf{p}}}{dt}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+  充分考虑到
+  \begin{equation}
+  \frac{d\ket{\phi}}{dt}=\frac{1}{i\hbar}[\frac{\textbf{p}^2}{2m}+V(\textbf{x})]\ket{\phi}
+  \end{equation}
+
+  \begin{align*}
+  \frac{d \mean{\textbf{x}}}{dt}  & = \frac{d \bracketl{\psi}{\textbf{x}}{\psi}}{dt} \\ 
+  & = \frac{d\bra{\psi}}{dt} \textbf{x} \ket{\psi} + \bra{\psi} \textbf{x} \frac{d\ket{\psi}}{dt} \\
+  &= - \frac{1}{i \hbar}\bra{\psi}[\frac{\textbf{p}^2}{2m}+V(\textbf{x})]\textbf{x}\ket{\psi}+ \bra{\psi}\textbf{x}\frac{1}{i\hbar}[\frac{\textbf{p}^2}{2m}+V(\textbf{x})]\ket{\psi}\\
+  &= -\frac{1}{i\hbar}(\frac{\textbf{p}^2}{2m}\textbf{x}-\textbf{x}\frac{\textbf{p}^2}{2m})\ket{\psi}\\
+  &= -\frac{1}{2mi\hbar}\bracketl{\psi}{[\textbf{p}^2,\textbf{x}]}{\psi}\\
+  &=-\frac{1}{2mi\hbar}\bracketl{\psi}{2\textbf{p}[\textbf{p},\textbf{x}]}{\psi}\\
+  &=\frac{1}{m}\bracketl{\phi}{\textbf{p}}{\phi}\\
+  &=\mean{\textbf{p}}
+  \end{align*}
+
+  \begin{align*}
+  \frac{d\mean{\textbf{p}}}{dt} &= \frac{d\bracketl{\psi}{\textbf{p}}{\psi}}{dt}\\
+  &=\frac{d\bra{\psi}}{dt} \textbf{p} \ket{\psi} + \bra{\psi} \textbf{p} \frac{d\ket{\psi}}{dt} \\
+  &= - \frac{1}{i \hbar}\bra{\psi}[\frac{\textbf{p}^2}{2m}+V(\textbf{x})]\textbf{p}\ket{\psi}+ \bra{\psi}\textbf{p}\frac{1}{i\hbar}[\frac{\textbf{p}^2}{2m}+V(\textbf{x})]\ket{\psi}\\
+  &= -\frac{1}{i\hbar}\bracketl{\psi}{[V(\textbf{x}),\textbf{p}]}{\phi} \\
+  & = -\frac{1}{i\hbar}\bracketl{\phi}{i\hbar\frac{\partial V(\textbf{x})}{\partial \textbf{x}}}{\phi}\\
+  & = \bracketl{\phi}{[-\frac{\partial V(\textbf{x})}{\partial \textbf{x}}]}{\phi}\\
+  & = \mean{\textbf{F}}
+  \end{align*}
+
+  \begin{align*}
+  [V(\textbf{x}),\textbf{p}] \ket{\psi} & = [V(x),-i\hbar \frac{\partial}{\partial \textbf{x}}]\ket{\psi}\\
+  & = -i\hbar V(x) \frac{\partial }{\partial \textbf{x}} + i\hbar \frac{\partial}{\partial \textbf{x}}[V(\textbf{x})\ket{\psi}]\\
+  &= -i\hbar V(x) \frac{\partial }{\partial \textbf{x}}+ i\hbar \frac{\partial V(\textbf{x})}{\partial \textbf{x}}\ket{\psi} + i\hbar V(\textbf{x}) \frac{\partial \ket{\psi}}{\partial \textbf{x}}\\
+  &= i\hbar \frac{\partial V(\textbf{x})}{\partial \textbf{x}} \ket{\psi}
+  \end{align*}
+  \end{proof}
     \section{量子化学-电子结构基础}
 
     \section{非绝热动力学与势间跳跃方法}
@@ -213,3 +282,4 @@
         非绝热耦合即使有些时候较小，仍是十分重要的。
       \subsection{势间跳跃方法与FSSH}
   \end{document} 
+
