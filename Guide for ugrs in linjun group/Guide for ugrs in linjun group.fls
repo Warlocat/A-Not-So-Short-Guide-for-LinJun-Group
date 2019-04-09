@@ -1,0 +1,98 @@
+PWD /Users/Apple/Documents/GitHub/Guide-for-ugrs-in-linjun-group/Guide for ugrs in linjun group
+INPUT /usr/local/texlive/2016/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf-var/web2c/xetex/xelatex.fmt
+INPUT Guide for ugrs in linjun group.tex
+OUTPUT Guide for ugrs in linjun group.log
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/size10.clo
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/size10.clo
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/l3kernel/expl3.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/l3kernel/expl3.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/l3kernel/expl3-code.tex
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/l3kernel/expl3-code.tex
+INPUT /usr/local/texlive/2016/texmf-dist/tex/generic/unicode-data/UnicodeData.txt
+INPUT /usr/local/texlive/2016/texmf-dist/tex/generic/unicode-data/CaseFolding.txt
+INPUT /usr/local/texlive/2016/texmf-dist/tex/generic/unicode-data/SpecialCasing.txt
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/l3kernel/l3xdvipdfmx.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/l3kernel/l3xdvipdfmx.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/tuenc.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/fontenc.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/fontenc.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/tuenc.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/tuenc.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec.cfg
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec.cfg
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xunicode-addon.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xunicode-addon.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xunicode/xunicode.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xunicode/xunicode.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tipa/t3enc.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics-def/xetex.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics-def/xetex.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xunicode/xunicode.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xunicode/xunicode.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xunicode-extra.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xunicode-extra.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tools/indentfirst.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tools/indentfirst.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsmath.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsmath.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amstext.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amstext.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsgen.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsgen.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsbsy.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsbsy.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsopn.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsopn.sty
+INPUT Guide for ugrs in linjun group.aux
+INPUT Guide for ugrs in linjun group.aux
+OUTPUT Guide for ugrs in linjun group.aux
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tipa/t3cmr.fd
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tipa/t3cmr.fd
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
+INPUT Guide for ugrs in linjun group.toc
+INPUT Guide for ugrs in linjun group.toc
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+OUTPUT Guide for ugrs in linjun group.toc
+OUTPUT Guide for ugrs in linjun group.xdv
+INPUT Guide for ugrs in linjun group.aux
