@@ -1,9 +1,9 @@
 # Fdb version 3
-["xdvipdfmx"] 1554778224 "Guide for ugrs in linjun group.xdv" "Guide for ugrs in linjun group.pdf" "Guide for ugrs in linjun group" 1554778225
-  "Guide for ugrs in linjun group.xdv" 1554778224 73956 392ce7a3a1f82ca54283307f74440b20 "xelatex"
+["xdvipdfmx"] 1554807067 "Guide for ugrs in linjun group.xdv" "Guide for ugrs in linjun group.pdf" "Guide for ugrs in linjun group" 1554807067
+  "Guide for ugrs in linjun group.xdv" 1554807066 105816 6e455770d154da26c9805807c7bbc5d0 "xelatex"
   (generated)
   "Guide for ugrs in linjun group.pdf"
-["xelatex"] 1554778222 "Guide for ugrs in linjun group.tex" "Guide for ugrs in linjun group.xdv" "Guide for ugrs in linjun group" 1554778225
+["xelatex"] 1554807064 "Guide for ugrs in linjun group.tex" "Guide for ugrs in linjun group.xdv" "Guide for ugrs in linjun group" 1554807067
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -17,6 +17,8 @@
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
+  "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm" 1136768653 520 4889cce2180234b97cad636b6039c722 ""
+  "/usr/local/texlive/2016/texmf-dist/tex/generic/ulem/ulem.sty" 1338588421 23756 854c01b779030ff5b2aad88ba7a119f2 ""
   "/usr/local/texlive/2016/texmf-dist/tex/generic/unicode-data/CaseFolding.txt" 1466630993 78161 e3fbf2f626f10070000fe66f3a2ff5ef ""
   "/usr/local/texlive/2016/texmf-dist/tex/generic/unicode-data/SpecialCasing.txt" 1466630993 16830 fea30f45a2f81ffa474fd984d297e2ea ""
   "/usr/local/texlive/2016/texmf-dist/tex/generic/unicode-data/UnicodeData.txt" 1466630993 1686443 dde25b1cf9bbb4ba1140ac12e4128b0b ""
@@ -29,6 +31,8 @@
   "/usr/local/texlive/2016/texmf-dist/tex/latex/base/fontenc.sty" 1487887269 4571 9038da8f43b184392cf48183aeb91e1a ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/base/size10.clo" 1480098821 8292 e897c12e1e886ce77fe26afc5d470886 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/base/tuenc.def" 1487887269 27641 138b831ee2e4ce190de05a327afc9263 ""
+  "/usr/local/texlive/2016/texmf-dist/tex/latex/cjk/texinput/CJKfntef.sty" 1429482942 12851 a92a26031294f6fa88114f524b3b794a ""
+  "/usr/local/texlive/2016/texmf-dist/tex/latex/environ/environ.sty" 1399239813 4378 f429f0da968c278653359293040a8f52 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty" 1491002578 145304 c1d766aa2e99bfd7c88991e357108c76 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec.cfg" 1491002578 549 e7553134efaf62922106a54300834ab9 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/fontspec/fontspec.sty" 1491002578 1704 f155bd31324526584df93d8880629e82 ""
@@ -47,19 +51,21 @@
   "/usr/local/texlive/2016/texmf-dist/tex/latex/tipa/t3cmr.fd" 1137110956 1257 fd5b1c2f0106f9cf12cdb2ff961987c5 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/tipa/t3enc.def" 1137110956 26483 c461a68c34040cb0d96c43e86c012a6d ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/tools/indentfirst.sty" 1480098841 1617 820bc46185ca5aeeda2ecc6c21866b18 ""
+  "/usr/local/texlive/2016/texmf-dist/tex/latex/trimspaces/trimspaces.sty" 1253232110 1380 971a51b00a14503ddf754cab24c3f209 ""
   "/usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg" 1491080253 408 d28048b78efa698f0fbfbb3711d720d4 ""
   "/usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJK.sty" 1491080253 161172 9cd153c3113f7d9c9c9c9b31c6bd2569 ""
+  "/usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJKfntef.sty" 1491080253 38668 1bdccfba305369b761f226da149d1268 ""
   "/usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xunicode-addon.sty" 1491080253 23609 168dd4dee72465f7264e7ce5121b113a ""
   "/usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xunicode-extra.def" 1491080253 61599 1f10e3ce9873a7d780d70d2ff885a9d6 ""
   "/usr/local/texlive/2016/texmf-dist/tex/xelatex/xunicode/xunicode.sty" 1315783907 205722 8027ed7ab2230086d647802c25f3ee42 ""
   "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1491389445 32192 c18bc721db8195c55b3f5b993e802bbf ""
   "/usr/local/texlive/2016/texmf-var/web2c/xetex/xelatex.fmt" 1492672231 3746849 0b491056ceb54f69e6ea9ccec3cead46 ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "Guide for ugrs in linjun group.aux" 1554778224 964 5007827fdf79ebe13e4c4e7b5b24529a ""
-  "Guide for ugrs in linjun group.tex" 1554778219 12572 359bf15f1078c8939b85c700fdfc6bc4 ""
-  "Guide for ugrs in linjun group.toc" 1554778224 732 aa7e654b5915886370248bc7020c11e2 ""
+  "Guide for ugrs in linjun group.aux" 1554807066 1134 1aa37ccd8121aed23e09f2e785bd2f9d ""
+  "Guide for ugrs in linjun group.tex" 1554807064 17863 834454aea1575dba7f8688100b823874 ""
+  "Guide for ugrs in linjun group.toc" 1554807066 865 1abe93b7446a42c2b42017f92918756d ""
   (generated)
-  "Guide for ugrs in linjun group.aux"
-  "Guide for ugrs in linjun group.toc"
-  "Guide for ugrs in linjun group.log"
   "Guide for ugrs in linjun group.xdv"
+  "Guide for ugrs in linjun group.log"
+  "Guide for ugrs in linjun group.toc"
+  "Guide for ugrs in linjun group.aux"

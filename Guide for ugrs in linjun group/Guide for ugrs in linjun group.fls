@@ -71,12 +71,24 @@ INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsbsy.sty
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsbsy.sty
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsopn.sty
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsopn.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/generic/ulem/ulem.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/generic/ulem/ulem.sty
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJKfntef.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/xelatex/xecjk/xeCJKfntef.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/environ/environ.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/environ/environ.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/cjk/texinput/CJKfntef.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/cjk/texinput/CJKfntef.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/cjk/texinput/CJKfntef.sty
 INPUT Guide for ugrs in linjun group.aux
 INPUT Guide for ugrs in linjun group.aux
 OUTPUT Guide for ugrs in linjun group.aux
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tipa/t3cmr.fd
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tipa/t3cmr.fd
-INPUT /usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
