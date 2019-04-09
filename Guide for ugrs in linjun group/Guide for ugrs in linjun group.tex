@@ -180,7 +180,7 @@
           =\frac{\langle\phi_i(\mathbf{R})|\phi_j(\mathbf{R}+\Delta\mathbf{R})\rangle}{\Delta\mathbf{R}}
         \end{equation}
         上式的最后结果说明非绝热耦合直接正比于不同核位置的波函数之间重叠，要知道如果这些态在同一个
-        核坐标下，他们满足正交性。之所以有不等于0的非绝热耦合，就是因为在不同核坐标下的不同电子态间有“耦合”，
+        核坐标下满足正交性，当$i\neq j$时不应该有重叠。之所以有不等于0的非绝热耦合，就是因为在不同核坐标下的不同电子态间有“耦合”，
         而这个耦合正是超越BO近似所引入的，是“非绝热”而引入的。
         
         最后，尽管计算非绝热耦合在很多时候都非常重要，我们在这篇向导中不作特别仔细的讨论，通常有类似上式的数值求解方法
@@ -190,8 +190,8 @@
         绝热是基于Born–Oppenheimer近似而言的，需要注意由于翻译的问题，请不要混淆非绝热(non-adiabatic)和透热(diabatic)
         两个概念。
 
-        根据Troy Van Voorhis在他那篇著名的综述(Annu. Rev. Phys. Chem. 2010. 61:149–70)中的说法，绝热态定义
-        为BO近似下的哈密顿量的本征态，也就是说在BO近似下解定态Schr\"odinger方程(电子结构计算)得到的波函数就是
+        根据Troy Van Voorhis在他那篇著名的综述\footnote{Annu. Rev. Phys. Chem. 2010. 61:149–170: The Diabatic Picture of Electron Transfer, Reaction Barriers, and Molecular Dynamics}
+        中的说法，绝热态定义为BO近似下的哈密顿量的本征态，也就是说在BO近似下解定态Schr\"odinger方程(电子结构计算)得到的波函数就是
         绝热态，即$\hat{H}|\phi_i\rangle=E_i|\phi_i\rangle$。而透热态是指不随核坐标(分子构型)变化的态，最常用的
         就是Troy提到的NaCl的例子，透热态其实是量子化学家们为了理解图像和计算的方便提出的不真实存在的量子态，如不管
         Na和Cl的距离多大，永远为两个中性原子的态，或者是永远是两个离子的态。这样说来十分抽象，但是本质上就是
