@@ -3,6 +3,7 @@
 \documentclass{article}
   \usepackage{xeCJK,indentfirst}
   \usepackage{amsfonts, amsmath, amssymb}
+  \usepackage{graphicx}
   \usepackage[normalem]{ulem}
 
     \newtheorem{theorem}{Theorem}[section]
@@ -50,6 +51,12 @@
       ————李睿，在抱怨化学本科生编程能力不够时的调侃
     \end{flushright}
   \end{quote}
+  \begin{quote}
+    你有问题就要问，你如果不问，我就默认你都会了。
+    \begin{flushright}
+      ————王林军老师
+    \end{flushright}
+  \end{quote}
 
   欢迎进入王林军老师的课题组！无论您是由于何种原因，出于什么目的，来到王林军老师的课题组足以证明了您的勇气！\sout{看，在王林军老师组的都很休闲的}
 
@@ -59,7 +66,20 @@
     Linux和macOS、Windows并称为三大电脑操作系统，都是用来完成用户和计算机之间的互动。Linux由于其出色的稳定性以及免费（相对于Unix系统），被广泛用于服务器的操作系统。当然Linux是存在图形界面的，但它的最为使用，也最为核心的部分还是它的终端，也就是字符界面。为了如何操作这玩意儿，一些基础知识是必须的。
 
     \subsection{连接至服务器}
-    咕咕咕，咕咕咕咕……
+    王林军老师课题组是使用浙大西溪校区的超级计算机集群来进行日常的工作的，简单地就叫服务器。听起来非常高大上，我们所编写的程序(或者商业软件)在普通计算机上当然也可以运行，只是很多时候
+    需要过分长的时间，还要保持电脑全天开机，基本是不可能的，因此我们需要交给集群处理。
+
+    集群计算机的操作系统都是Linux系统，我们需要用自己的个人电脑连接到服务器上，这样可以实现对服务器的远程操作，如果你的个人电脑是Linux或者mac系统，可以直接
+    在终端使用ssh命令登录服务器，但是由于组内工作电脑和多数个人电脑为Windows系统，这一部分我们暂时不作展开，有兴趣的同学可以直接网上搜索。在Windows系统下连接
+    Linux服务器，需要通过一些软件的辅助，比如PuTTY和XSHELL，鉴于后者有不少优势，比如更加新人友好\sout{并且好看}，我们就以后者举例。
+
+    XSHELL目前有官方的中文网站\footnote{https://www.netsarang.com/zh/xshell/}，可以找到学生用的免费版，下载XSHELL和XFTP两个软件，
+    前者是一个在Windows操作系统下实现ssh功能的软件，用于连接远程服务器；后者是实现sftp功能的软件，用于服务器和本地计算机之间的文件传递。
+    这两个软件可以满足在理论计算化学组连接远程服务器的一切需求。安装好之后打开XSHELL，如下图所示新建会话，
+    \begin{center}
+      \includegraphics[width = 14cm]{fig/xshell1.png}
+    \end{center}
+    其中主机填入10.22.51.200
 
     \subsection{Linux基本操作}
     \begin{description}

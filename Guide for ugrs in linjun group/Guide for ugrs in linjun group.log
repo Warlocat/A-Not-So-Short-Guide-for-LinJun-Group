@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2018.10.23)  9 APR 2019 20:11
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2018.10.23)  9 APR 2019 22:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -11,14 +11,14 @@ Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (d:/texlive/2018/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
-\c@part=\count79
-\c@section=\count80
-\c@subsection=\count81
-\c@subsubsection=\count82
-\c@paragraph=\count83
-\c@subparagraph=\count84
-\c@figure=\count85
-\c@table=\count86
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
@@ -340,17 +340,35 @@ LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 ) (d:/texlive/2018/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
+) (d:/texlive/2018/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+ (d:/texlive/2018/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks20
+) (d:/texlive/2018/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+ (d:/texlive/2018/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+) (d:/texlive/2018/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 99.
+ (d:/texlive/2018/texmf-dist/tex/latex/graphics-def/xetex.def
+File: xetex.def 2017/06/24 v5.0h Graphics/color driver for xetex
+))
+\Gin@req@height=\dimen176
+\Gin@req@width=\dimen177
 ) (d:/texlive/2018/texmf-dist/tex/generic/ulem/ulem.sty
 \UL@box=\box44
 \UL@hyphenbox=\box45
 \UL@skip=\skip59
-\UL@hook=\toks20
-\UL@height=\dimen176
+\UL@hook=\toks21
+\UL@height=\dimen178
 \UL@pe=\count272
-\UL@pixel=\dimen177
+\UL@pixel=\dimen179
 \ULC@box=\box46
 Package: ulem 2012/05/18
-\ULdepth=\dimen178
+\ULdepth=\dimen180
 )
 \c@theorem=\count273
 \c@lemma=\count274
@@ -393,13 +411,13 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 Package: CJKfntef 2015/04/18 4.8.4
 \CJK@fntefSkip=\skip60
 \CJK@nest=\count277
-\CJK@fntefDimen=\dimen179
+\CJK@fntefDimen=\dimen181
 \CJK@underdotBox=\box47
 \CJK@ULbox=\box48
-\CJK@underanyskip=\dimen180
+\CJK@underanyskip=\dimen182
 )
 \l__xeCJK_space_skip=\skip61
-\c__xeCJK_ulem-begin_node_dim=\dimen181
+\c__xeCJK_ulem-begin_node_dim=\dimen183
 \c__xeCJK_null_box=\box49
 \l__xeCJK_fntef_box=\box50
 \l__xeCJK_under_symbol_box=\box51
@@ -407,81 +425,81 @@ Package: CJKfntef 2015/04/18 4.8.4
 ) (./Guide for ugrs in linjun group.aux)
 \openout1 = `"Guide for ugrs in linjun group.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
 
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
 (fontspec)             this).
 
 \symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 42.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 42.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 42.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 42.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 42.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 42.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 42.
-LaTeX Font Info:    Redeclaring math accent \check on input line 42.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 42.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 42.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 42.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 42.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 42.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 42.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 42.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 42.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 42.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 42.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 42.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 42.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 42.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 42.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 42.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 42.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 43.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 43.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 43.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 43.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 43.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 43.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 43.
+LaTeX Font Info:    Redeclaring math accent \check on input line 43.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 43.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 43.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 43.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 43.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 42.
+(Font)              `operators' in the math version `normal' on input line 43.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 42.
+(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 43.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 42.
+(Font)              `operators' in the math version `bold' on input line 43.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 42.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 43.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 42.
+(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 43.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 42.
+(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 43.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/bx/n on input line 42.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/bx/n on input line 43.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 42.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 43.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 42.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 43.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/lmr/m/n --> TU/lmr/bx/n on input line 42.
+(Font)                  TU/lmr/m/n --> TU/lmr/bx/n on input line 43.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/lmr/bx/it on input line 42.
+(Font)                  OT1/cmr/bx/it --> TU/lmr/bx/it on input line 43.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/bx/n on input line 42.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/bx/n on input line 43.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 42.
-LaTeX Font Info:    Try loading font information for U+msa on input line 43.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 43.
+LaTeX Font Info:    Try loading font information for U+msa on input line 44.
  (d:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 43.
+LaTeX Font Info:    Try loading font information for U+msb on input line 44.
  (d:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (./Guide for ugrs in linjun group.toc)
@@ -490,14 +508,17 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  [1
 
-] [2] [3] [4] [5] [6] [7] (./Guide for ugrs in linjun group.aux) ) 
+]
+File: fig/xshell1.png Graphic file (type bmp)
+<fig/xshell1.png>
+ [2] [3] [4] [5] [6] [7] [8] (./Guide for ugrs in linjun group.aux) ) 
 Here is how much of TeX's memory you used:
- 14523 strings out of 492956
- 335829 string characters out of 6136893
- 409257 words of memory out of 5000000
- 18449 multiletter control sequences out of 15000+600000
+ 14907 strings out of 492956
+ 340850 string characters out of 6136893
+ 415625 words of memory out of 5000000
+ 18809 multiletter control sequences out of 15000+600000
  539044 words of font info for 83 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  41i,11n,64p,522b,443s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Guide for ugrs in linjun group.pdf (7 pages).
+Output written on Guide for ugrs in linjun group.pdf (8 pages).
