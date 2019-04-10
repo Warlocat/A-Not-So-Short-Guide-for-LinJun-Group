@@ -170,6 +170,160 @@
 
     当然这么说可能很难有感觉这些到底是什么东西，让我们再换一种方式来表达。算符，变换，这些东西实则上都代表了类似于函数的概念，也就是传进去一个东西，传出去另一个东西，这两个东西可以相等，可以完全不是同一类。而左矢和右矢则代表了可以传进去的``参量''，并经过算符作用后得到了另一个左矢或右矢。比如一个关于$x$的函数$f(x)$，经过求导算符$\frac{d }{d x} $作用后得到它的导函数$f'(x)$，实则上也没有脱离这样的描述体系\footnote{从而为Dirac说明海森堡的矩阵力学和薛定谔的波动力学是等价表述做好了铺垫。}。
 
+    \subsection{完备基展开}
+    完备基展开是一个非常重要的概念，它直接提供了解决众多微分方程的方法，而解决微分方程是量子力学的至关重要的一个内容。
+
+    ``完备''一词说明某一个基组的完备性，也就是我只要通过这个基组的线性组合就能完整描述我所研究的空间中的所有向量。我用$\hat{x}$,$\hat{y}$,$\hat{z}$三个基向量就能完整描述三维空间里的所有向量，我用${x^n}$便能描述一维的所有函数，我用${\sin{nx},\cos{nx}}$就能描述有限空间内的函数/周期性函数，这些都构成了所谓的完备基。
+
+    在这里请允许编者引入施图姆-刘维尔型方程和对应本征值问题。
+    \begin{theorem}
+    	对形如
+	\begin{equation}
+		\frac{d }{d x} \left[ k(x) \frac{d y}{d x}  \right] -q(x)y + \lambda \rho(x) y = 0 \quad (a\leqslant x \leqslant b)
+	\end{equation}
+	的方程，若$k(x),k'(x),q(x)$ 连续或最多以$x=a$ 和$x=b$ 为一阶极点\footnote{也就是最低项为$\frac{1}{x}$ 项。}，则
+	\begin{enumerate}
+		\item 存在无穷多个本征值
+		\[
+		\lambda_1 \leqslant \lambda_2 \leqslant \lambda_3 \leqslant ...
+		,\] 
+		相应地有无限多个本征函数
+		\[
+			y_1(x),y_2(x),y_3(x),...
+		.\] 
+		这些本征函数的排列持续正好使节点个数依次增多（即函数值为零的点的个数）。
+		\item 所有本征值 $\lambda_n \geqslant 0$,
+		\item 相应于不同本征值$\lambda_m$ 和 $\lambda_n$的本征函数$y_m(x)$和$y_n(x)$在区间$[a,b]$上带权重$\rho(x)$正交，即
+			\begin{equation}
+				\int ^b_a y_m(x) y_n(x) \rho(x) \, dx = 0 
+			\end{equation}
+		\item 本征函数族$y_1(x),y_2(x),y_3(x)...$是完备的，即函数$f(x)$如具有连续一阶导数和分段连续二阶导数，且满足本征函数族所满足的边界条件，就可以展开为绝对且一致收敛的级数
+			\[
+				f(x) = \sum_n f_n y_n(x)
+			.\] 
+	\end{enumerate}
+    \end{theorem}
+    并由此引入广义傅里叶级数展开
+    \[
+	    \int ^b_a f(x) y_m(x) \, dx = \sum_n \int f_n y_m(x)y_n(x) \, dx = f_m \int y_m(x)^2 dx   
+    .\] 
+    即
+    \[
+	    f_m = \frac{\int ^b_a f(x) y_m(x) \, dx }{\int y_m(x)^2 \, dx }
+    .\] 
+    这一套系统非常的重要，它能够直接用来解决球坐标下的稳态问题（使用Legendre函数），柱坐标下的稳态问题和动态演化问题（使用贝塞尔函数），以及球坐标下的时间演化问题（使用球贝塞尔函数），其核心内容就在于使用广义傅立叶级数进行展开得到精确解并同时满足边界条件。
+
+    没什么感觉？在这里举一个非常典型的例子，二维传热稳态问题，
+    \begin{quote}
+	    均匀的薄板占据区域$0<x<a,0<y<\infty$,边界上的温度
+	    \[
+		    u\big|_{x=0} = 0, u\big|_{x=a} = 0, u\big|_{y=0} = u_0, \lim_{y \to \infty} u =0
+	    .\] 
+	    求解板的稳定温度分布。
+    \end{quote}
+    传热这东西，它满足一个扩散方程
+    \begin{equation}
+	    \frac{\partial u}{\partial t} -a^2 (\frac{\partial ^2 u}{\partial x^2 } + \frac{\partial^2 u}{\partial y^2} + \frac{\partial ^2 u}{\partial z^2}  ) = 0
+    \end{equation}
+    稳态，也就是它不随时间变化，$\frac{\partial u}{\partial t} = 0$,而这是二维，所以
+    \begin{equation}
+	    \frac{\partial ^2 u}{\partial x^2 } + \frac{\partial ^2 u}{\partial y^2 } = 0
+	    \label{2Ddiffusion}
+    \end{equation}
+    先分离变量，设$u=X(x)Y(y)$,代入\ref{2Ddiffusion}，左右同除以$u$,
+    \begin{equation}
+	     \frac{d ^2 X}{X d x^2} = - \frac{d ^2 Y}{Y d y^2} = -k^2 
+    \end{equation}
+    由于左边只关于$x$,右边只关于$y$,那么它们只能等于一个常数，考虑到在$x$方向上的边界条件（两边为零，不应该是指数型函数），它们应等于一个负数$-k^2$.
+    直接解这个常微分方程，得到
+    \begin{equation}
+    	\begin{cases}
+		X = A_k\sin{kx} + B_k\cos{kx} \\
+		Y = C_k e^{-kt}
+    	\end{cases}
+    \end{equation}
+    由于这个世界实在不太可能有无穷大的温度，故$Y = e^{kt}$项不考虑。
+
+    考虑到$u\big|_{x=0} = u\big|_{x=a} = 0$，$k$应该要满足某种条件才能满足这个，那么事实上
+    \begin{equation}
+	    X = A_n \sin{\frac{n\pi x}{a}} , k = \frac{n\pi x}{a}, n \in N_+
+    \end{equation}
+    由于前面提到的本征值问题，$-k^2$是$X$的常微分方程的本征值，对应本征函数构成完备基，对$Y$也有相应情况，从而$u$可以展开为$XY$的线性组合，即
+    \begin{equation}
+	    X = \sum_n A_n \sin{\frac{n\pi x}{a}} e^{- \frac{n\pi y}{a}}
+    \end{equation}
+    可是……$A_n$怎么确定呀？
+    
+    就是广义傅立叶级数呀！
+    注意到$u\big|_{y=0} = u_0$,有
+    \begin{equation}
+	    A_n = \int ^a_0 u_0 \sin{\frac{n\pi x}{a}} \, dx = \frac{a u_0}{n\pi} (1-\cos{n\pi}) 
+    \end{equation}
+    于是我们成功地获得了温度分布的解析解!(?)\footnote{当然有些人会觉得级数展开不算解析解。能展开成简单函数求和已经不容易了\sout{饶了我吧}}
+
+    花了这么多篇幅，只是想要说明完备基展开是一个非常重要的内容，它提供了一个解决复杂的微分方程问题的方法\footnote{其实线性代数里的本征值和本征向量也有同样的性质。}。同时它从某种角度上已经道明了量子力学的一个重要的点：
+    \begin{center}
+    	所有的态都能用本征态的线性组合来表示。
+    \end{center}
+
+    哦，我们的读者，然而故事还没有结束呢。
+
+    我们先用曾经描述的量子力学符号来说说这个完备基。对于某个完备的特征值集$\{\lambda_n\}$和特征向量集$\{| e_i \rangle \}$，我们认为特征向量集已经正交归一\footnote{即不同的两个特征向量之间相互正交，且每个向量模为1（即\sout{自交}自己与自己的内积为1）。你可能还记得存在多重特征根的情况，此时你或许也记得这个特征根对应多个特征向量，它们并不一定需要正交。那么你想想就能明白，你能通过某些奇技淫巧让它们互相之间变得正交并仍旧是特征向量（比如大名鼎鼎的Gram-Schmidt 正交化）。}，那么有定理
+    \begin{theorem}
+	\begin{equation}
+		\sum \ket{e_i}\bra{e_i} = 1 \, / \, \int dq' \, \ket{q'}\bra{q'} = 1
+	\end{equation}
+    \end{theorem}
+
+    \sout{编者自我检讨：写的太快了}
+
+    $| e_i \rangle \langle e_i | $是一个全新的操作，事实上它其实就是一个算符。为什么呢？因为你可以看到，
+    \begin{equation}
+	    (| e_i \rangle \langle e_i | ) | \xi \rangle = | e_i \rangle \langle e_i | \xi \rangle = \langle e_i | \xi \rangle | e_i \rangle  
+    \end{equation}
+    这是由于$ \langle e_i | \xi \rangle $是一个数，所以它可以游荡在任何地方（向量可以非常自然地乘上任何一个数而不需要管顺序）。也就是我作用于$| \xi \rangle $然后获得了一个新的向量，那么它就是一个算符。
+
+    $1$是沿用了Dirac大佬的写法\footnote{编者表示被Dirac虐得越多\sout{对Dirac越爱得深沉}}，就是表示单位算符（或者单位矩阵），作用后得到原来的结果，即
+    \begin{equation}
+    	1 | \xi \rangle = | \xi \rangle 
+    \end{equation}
+    所以上面的定理就是在说我把特征向量按照那种方式组合求和后它就会变成单位算符。
+
+    \begin{proof}
+    	证明思路：验证其对完备基中任意向量都成立$\Rightarrow$空间内任意向量皆成立
+
+\begin{equation}
+	\sum_i \ket{e_i}\bracket{e_i}{e_j} = \sum_i\ket{e_i} \delta_{ij} = \ket{e_j}
+\end{equation}
+从而说明该算符对所有特征向量都满足自身为单位算符。
+
+利用展开的唯一性(即一个向量只有一种方式展开/系数组是唯一的)，得到
+\begin{equation}
+\ket{\psi} = \sum c_i \ket{e_i} \Rightarrow c_i = \bracket{e_i}{\psi}
+\end{equation}
+因此对所有向量皆满足自身为单位算符。
+    \end{proof}
+    恭喜你发现了\sout{镇站之宝}，展开系数为
+    \begin{equation}
+    	c_i = \langle e_i | \psi \rangle 
+    \end{equation}
+    是不是有那么一点感觉？其实就是广义傅立叶级数展开。
+
+    oh忘记说了，$\delta_{ij}$这是（离散）狄拉克函数，它表示$i=j$时其值为1，$i\neq j$时为零。同样地，对于连续狄拉克函数$\delta(x)$，表示$x=0$时其值不为零（或者正无穷），$x\neq 0$时恒为零，同时保证
+    \begin{equation}
+	    \int \delta(x) \, dx = 1 
+    \end{equation}
+    由此可以说明，
+    \begin{align}
+\delta(-x) & = \delta(x) \\
+x\delta(x) & = 0 \\
+\delta(a x) & = a^{-1} \delta(x)\\
+\delta(x^2-a^2) & = \frac{1}{2} a^{-1} {\delta(x-a)+\delta(x+a)} \quad (a>0)\\
+\int \delta(a-x) \, dx \, \delta(x-b) & = \delta(a-b) \\
+f(x) \delta(x-a) &=  f(a)\delta(x-a)\\
+\int f(x)x\delta(x) \, dx & = 0
+\end{align}
+
     \subsection{傅立叶变换}
   \begin{quote}
     它，改变了世界。
