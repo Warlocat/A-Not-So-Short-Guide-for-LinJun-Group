@@ -235,7 +235,7 @@
 	    \frac{\partial ^2 u}{\partial x^2 } + \frac{\partial ^2 u}{\partial y^2 } = 0
 	    \label{2Ddiffusion}
     \end{equation}
-    先分离变量，设$u=X(x)Y(y)$,代入\ref{2Ddiffusion}，左右同除以$u$,
+    先分离变量，设$u=X(x)Y(y)$,代入(\ref{2Ddiffusion})，左右同除以$u$,
     \begin{equation}
 	     \frac{d ^2 X}{X d x^2} = - \frac{d ^2 Y}{Y d y^2} = -k^2 
     \end{equation}
@@ -338,8 +338,10 @@ f(x) \delta(x-a) &=  f(a)\delta(x-a)\\
   \end{quote}     
   咕咕……咕咕咕……
 
-    \section{量子力学}
+  \section{量子力学}
+  本指南默认入门者对量子力学最基础的部分有一定的理解，因此不会从Schr\"odinger方程入手，也不会涉及五大基本假设。另外，本指南也不涉及高深内容，只有在电子结构部分会从实用的角度简单介绍电子(费米子)的二次量子化。如果你需要量子力学的基础知识，暂时可以参阅各类量子力学教材，但是各类书籍难度差别巨大，我们为初学者推荐Griffiths的量子力学导论，基本看过基础理论部分就已经能满足我们的多数需求。另外，可以参见Levine量子化学中的量子力学基础部分，推导详实。
 
+  \subsection{概念总结篇}
     \begin{enumerate}
     \item 算符对易子：
   \begin{equation}
@@ -407,27 +409,41 @@ Ehrenfest Theorem:
   &= i\hbar \frac{\partial V(\textbf{x})}{\partial \textbf{x}} \ket{\psi}
   \end{align*}
   \end{proof}
+
+  \begin{theorem}
+    Hellmann-Feynman Theorem:
+    对于依赖某个参数$\lambda$(在本指南的后文中通常为原子核坐标$\mathbf{R}$)的哈密顿算符$\hat{H}_\lambda$本征态$|\psi_\lambda\rangle$，其能量期望值对参数的求导，等于哈密顿量对参数求导再求期望，即
+    \begin{equation}
+      \frac{\mathrm{d}E_\lambda}{\mathrm{d}\lambda} = \langle\psi_\lambda|\frac{\mathrm{d}\hat{H}_\lambda}{\mathrm{d}\lambda}|\psi_\lambda\rangle
+    \end{equation}
+  \end{theorem}
+
+  \begin{proof}
+    由于$|\psi_\lambda\rangle$是哈密顿算符本征态
+    \begin{equation*}
+      \hat{H}_\lambda|\psi_\lambda\rangle=E_\lambda|\psi_\lambda\rangle
+    \end{equation*}  
+    容易得到
+    \begin{align*}
+      \begin{aligned}
+        \frac{\mathrm{d} E_{\lambda}}{\mathrm{d} \lambda}=&\frac{\mathrm{d}}{\mathrm{d} \lambda}\left\langle\psi_{\lambda}\left|\hat{H}_{\lambda}\right| \psi_{\lambda}\right\rangle\\
+        =&\frac{\mathrm{d} \langle\psi_\lambda|}{\mathrm{d} \lambda}\hat{H}_\lambda|\psi_\lambda\rangle+\langle\psi_\lambda|\hat{H}_\lambda\frac{\mathrm{d} |\psi_\lambda\rangle}{\mathrm{d} \lambda}+\langle\psi_\lambda|\frac{\mathrm{d}\hat{H}_\lambda}{\mathrm{d}\lambda}|\psi_\lambda\rangle\\
+        =&E_\lambda\frac{\mathrm{d} \langle\psi_\lambda|}{\mathrm{d} \lambda}|\psi_\lambda\rangle+E_\lambda\langle\psi_\lambda|\frac{\mathrm{d} |\psi_\lambda\rangle}{\mathrm{d} \lambda}+\langle\psi_\lambda|\frac{\mathrm{d}\hat{H}_\lambda}{\mathrm{d}\lambda}|\psi_\lambda\rangle\\
+        =&E_\lambda\frac{\mathrm{d}}{\mathrm{d}\lambda}\left\langle\psi_{\lambda} | \psi_{\lambda}\right\rangle+\langle\psi_\lambda|\frac{\mathrm{d}\hat{H}_\lambda}{\mathrm{d}\lambda}|\psi_\lambda\rangle\\
+        =&\langle\psi_\lambda|\frac{\mathrm{d}\hat{H}_\lambda}{\mathrm{d}\lambda}|\psi_\lambda\rangle
+      \end{aligned}
+    \end{align*}
+  \end{proof}
     \section{量子化学-电子结构基础}
 
     \section{非绝热动力学与势间跳跃方法}
-    简单的说，量子化学主要分为电子结构理论和动力学，上一大节专注于前者，本节就关注后者，电子结构计算可以给出电子能级的分布，激发态的
-    位置以及其他一系列与之相关的静态性质，而动力学，正如其名，研究电子/原子核在特定情况下随时间的演化，通常化学中的光激发驰豫过程、
-    电荷转移过程、异构化，甚至广义上的所有化学反应都是动力学的范畴。当然很容易想到，动力学的准确性是依赖于电子结构方法的准确性的，
-    随着电子结构理论发展，动力学在研究化学物理等一系列问题中有不可忽视的作用。
+    简单的说，量子化学主要分为电子结构理论和动力学，上一大节专注于前者，本节就关注后者，电子结构计算可以给出电子能级的分布，激发态的位置以及其他一系列与之相关的静态性质，而动力学，正如其名，研究电子/原子核在特定情况下随时间的演化，通常化学中的光激发驰豫过程、电荷转移过程、异构化，甚至广义上的所有化学反应都是动力学的范畴。当然很容易想到，动力学的准确性是依赖于电子结构方法的准确性的，随着电子结构理论发展，动力学在研究化学物理等一系列问题中有不可忽视的作用。
 
-    在Born-Oppenheimer近似下，我们可以针对特定的分子构型(核的位置)计算对应的电子能量，对于不同的核坐标$\mathbf{R}$(习惯上大写
-    表示原子核坐标，小写表示电子坐标)，可以给出一系列电子能量$U=U(\mathbf{R})$，这就是我们通常所说的势能面。需要注意的是，
-    势能面是基于BO近似的结果，这是一切的前提。
+    在Born-Oppenheimer近似下，我们可以针对特定的分子构型(核的位置)计算对应的电子能量，对于不同的核坐标$\mathbf{R}$(习惯上大写表示原子核坐标，小写表示电子坐标)，可以给出一系列电子能量$U=U(\mathbf{R})$，这就是我们通常所说的势能面。需要注意的是，势能面是基于BO近似的结果，这是一切的前提。
     
-    (TODO需要修改)BO近似几乎是量子化学中最重要的近似条件，可以适用于我们平常遇到几乎全部静态问题和很多动态问题，BO近似下基态的势能面也是比较合理的。
-    但是在一些情况下，尤其是当研究的体系涉及多个激发态——比如光激发然后通过非辐射方式回到基态过程时，BO近似就显示出了其弊端。一类
-    常见的BO近似失效的情景称为圆锥交叉(conical intersections)，理想的圆锥交叉指的是两个势能面的至少两个维度在某一分子构型上简并(交叉)。
-    通过早期实验光谱上和理论上的研究，人们发现涉及圆锥交叉的势能面的动力学是BO近似无法描述的。
+    (TODO需要修改)BO近似几乎是量子化学中最重要的近似条件，可以适用于我们平常遇到几乎全部静态问题和很多动态问题，BO近似下基态的势能面也是比较合理的。但是在一些情况下，尤其是当研究的体系涉及多个激发态——比如光激发然后通过非辐射方式回到基态过程时，BO近似就显示出了其弊端。一类常见的BO近似失效的情景称为圆锥交叉(conical intersections)，理想的圆锥交叉指的是两个势能面的至少两个维度在某一分子构型上简并(交叉)。通过早期实验光谱上和理论上的研究，人们发现涉及圆锥交叉的势能面的动力学是BO近似无法描述的。
     
-    为了解决这个问题，必须把原子核和电子的运动一起加进动力学模拟的过程中，这类动力学通常称为非绝热动力学(non-adiabatic coupling)。处理核的运动
-    有多种方式，经典的分子动力学就是只有原子核的运动，不属于非绝热动力学的范畴，但是经典运动是处理原子核的一种方式，另外还可以将原子核的运动
-    也用量子力学求解，进行全量子的非绝热动力学模拟。王林军老师课题组常用的势间跳跃(surface hopping)方法，就是原子核做经典处理，电子做量子处理
-    的一种混合量子经典的非绝热动力学方法。
+    为了解决这个问题，必须把原子核和电子的运动一起加进动力学模拟的过程中，这类动力学通常称为非绝热动力学(non-adiabatic coupling)。处理核的运动有多种方式，经典的分子动力学就是只有原子核的运动，不属于非绝热动力学的范畴，但是经典运动是处理原子核的一种方式，另外还可以将原子核的运动也用量子力学求解，进行全量子的非绝热动力学模拟。王林军老师课题组常用的势间跳跃(surface hopping)方法，就是原子核做经典处理，电子做量子处理的一种混合量子经典的非绝热动力学方法。
       \subsection{非绝热耦合}
         作为“动力学”下的讨论，我们一定会用到含时Schr\"odinger方程：
         \begin{equation}
@@ -437,77 +453,71 @@ Ehrenfest Theorem:
         \begin{equation}
           \frac{\mathrm{d} \hat{\rho}}{\mathrm{d} t}=\frac{-i}{\hbar}[\hat{H}, \hat{\rho}]
         \end{equation}
-        Liouville方程的优点是直接演化密度矩阵(TODO电子结构部分解释)，动力学所关心的问题就是波函数/密度矩阵如何随时间演化，而在一般的量子力学
-        语境中，波函数的演化通常是波函数系数的演化，含时的波函数可以写作不含时基组的线性组合
+        Liouville方程的优点是直接演化密度矩阵(TODO电子结构部分解释)，动力学所关心的问题就是波函数/密度矩阵如何随时间演化，而在一般的量子力学语境中，波函数的演化通常是波函数系数的演化，含时的波函数可以写作不含时基组的线性组合
         \begin{equation}
           |\psi(\mathbf{r}, \mathbf{R}, t)\rangle=\sum_{j} c_{j}(t) |\phi_{j}(\mathbf{r} ; \mathbf{R})\rangle
+          \label{linear combination}
         \end{equation}
-        这个不含时基组可以是(也可以不是)定态Schr\"odinger方程的解，我们讨论一个更一般的情况，这个基组只被要求满足正交归一性，
-        带入含时Schr\"odinger方程得到
+        这个不含时基组可以是(也可以不是)定态Schr\"odinger方程的解，我们讨论一个更一般的情况，这个基组只被要求满足正交归一性，带入含时Schr\"odinger方程得到
         \begin{equation}
           \sum_j c_j \hat{H}|\phi_j\rangle=i \hbar \frac{\mathrm{d} | \psi \rangle}{\mathrm{d} t}=i \hbar\sum_j\left(\dot{c}_j|\phi_j\rangle+c_j\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\phi_j\rangle\dot{\mathbf{R}}\right)
         \end{equation}
         在上式左右两端乘以$\langle\phi_i|$就得到了
         \begin{equation}
           i \hbar \dot{c}_{i}=\sum_{j} c_{j}\left(V_{i j}-i \hbar \dot{R} \cdot d_{i j}\right)
-          \label{ihcdot}
+          \label{time-depend-coeff}
         \end{equation}
         其中定义了$V_{ij}=\langle\phi_i|\hat{H}|\phi_j\rangle$和$d_{ij}=\langle\phi_i|\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\phi_j\rangle$，
-        后者称为非绝热耦合(non-adiabatic coupling，NAC)，该项所引发的问题是非绝热动力学的领域核心问题之一。在这里，我们可以通过另一种方式来理解它
-        名字的来源以及它的物理意义：如果我们用最简单的数值方法计算非绝热耦合，即
+        后者称为非绝热耦合(non-adiabatic coupling，NAC)，该项所引发的问题是非绝热动力学的领域核心问题之一。在这里，我们可以通过另一种方式来理解它名字的来源以及它的物理意义：如果我们用最简单的数值方法计算非绝热耦合，即
         \begin{equation}
           d_{ij}=\langle\phi_i|\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\phi_j\rangle\approx\langle\phi_i(\mathbf{R})|\frac{|\phi_j(\mathbf{R}+\Delta\mathbf{R})\rangle-|\phi_j(\mathbf{R})\rangle}{\Delta\mathbf{R}}
           =\frac{\langle\phi_i(\mathbf{R})|\phi_j(\mathbf{R}+\Delta\mathbf{R})\rangle}{\Delta\mathbf{R}}
+          \label{numerical dij}
         \end{equation}
-        上式的最后结果说明非绝热耦合直接正比于不同核位置的波函数之间重叠，要知道如果这些态在同一个
-        核坐标下满足正交性，当$i\neq j$时不应该有重叠。之所以有不等于0的非绝热耦合，就是因为在不同核坐标下的不同电子态间有“耦合”，
-        而这个耦合正是超越BO近似所引入的，是“非绝热”而引入的。
-        
-        最后，尽管计算非绝热耦合在很多时候都非常重要，我们在这篇向导中不作特别仔细的讨论，通常有类似上式的数值求解方法
-        和通过解析导数的方法求解，但是具体要在不同表象下讨论，下一小节我们就要介绍所谓绝热表象与透热表象。
+        上式的最后结果说明非绝热耦合直接正比于不同核位置的波函数之间重叠，要知道如果这些态在同一个核坐标下满足正交性，当$i\neq j$时不应该有重叠。之所以有不等于0的非绝热耦合，就是因为在不同核坐标下的不同电子态间有“耦合”，而这个耦合正是超越BO近似所引入的，是“非绝热”而引入的。
+
+        非绝热耦合还有另外的性质，它相当于算符$\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}$，要注意它并非量子力学中的力学量，这是因为它并非一个厄米算符，考虑到动量算符为$i\hbar\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}$，因此$\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}$算符是反厄米算符，这等价于对于任意两个态，满足
+        \begin{equation}
+          d_{ij}=\langle\psi_i|\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\psi_j\rangle=-\langle\psi_j|\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\psi_i\rangle=-d_{ji}
+          \label{dij=-dji}
+        \end{equation}
+        根据上式还可以推出一个平凡的结论$d_{ii}=0$。如果回顾等式(\ref{numerical dij})的结果，可以认为在同一个态的前提下分子约等于$1-1$，最终得到$0$。除去数值方法，还有一种常数的解析求解非绝热耦合的思路。如果$|\psi_i\rangle$和$|\psi_j\rangle$是哈密顿算符的两个本征态，显然有
+        \begin{equation}
+          \begin{aligned}
+            0=\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}\langle\psi_i|\hat{H}|\psi_j\rangle&=E_j d_{ji}+\langle\psi_i|\frac{\mathrm{d}\hat{H}}{\mathrm{d}\mathbf{R}}|\psi_j\rangle+E_i d_{ij}\\
+            d_{ij}&=\frac{\langle\psi_i|\frac{\mathrm{d}\hat{H}}{\mathrm{d}\mathbf{R}}|\psi_j\rangle}{E_j-E_i}
+          \end{aligned} 
+          \label{analytical dij}
+        \end{equation}
+        如果知道哈密顿量的形式，对核坐标导数的积分可以直接用来计算非绝热耦合。
       \subsection{绝热表象与透热表象}
         本文中所说的绝热(adiabatic)与透热(diabatic)与热学中相关概念并无直接联系，属于量化领域常用的一种表达。
-        绝热是基于Born–Oppenheimer近似而言的，需要注意由于翻译的问题，请不要混淆非绝热(non-adiabatic)和透热(diabatic)
-        两个概念。
+        绝热是基于Born–Oppenheimer近似而言的，需要注意由于翻译的问题，请不要混淆非绝热(non-adiabatic)和透热(diabatic)两个概念。
 
         根据Troy Van Voorhis在他那篇著名的综述\footnote{Annu. Rev. Phys. Chem. 2010. 61:149–170: The Diabatic Picture of Electron Transfer, Reaction Barriers, and Molecular Dynamics}
-        中的说法，绝热态定义为BO近似下的哈密顿量的本征态，也就是说在BO近似下解定态Schr\"odinger方程(电子结构计算)得到的波函数就是
-        绝热态，即$\hat{H}|\phi_i\rangle=E_i|\phi_i\rangle$。而透热态是指不随核坐标(分子构型)变化的态，最常用的
-        就是Troy提到的NaCl的例子，透热态其实是量子化学家们为了理解图像和计算的方便提出的不真实存在的量子态，如不管
-        Na和Cl的距离多大，永远为两个中性原子的态，或者是永远是两个离子的态。这样说来十分抽象，但是本质上就是
-        其波函数不随核坐标变化而变化，一个严格的定义为透热态的非绝热耦合为0(甚至很多时候简化为$\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\phi_j\rangle=0$)。
-        在电荷转移中的图像更加清晰，如果电荷转移发生在两个分子间，透热态通常定为电荷局域在第一个分子上的态和局域在第二个分子上的态，
-        而真实的态(电荷分散在两个分子上，也就是绝热态)是两个透热态的线性组合。
+        中的说法，绝热态定义为BO近似下的哈密顿量的本征态，也就是说在BO近似下解定态Schr\"odinger方程(电子结构计算)得到的波函数就是绝热态，即$\hat{H}|\phi_i\rangle=E_i|\phi_i\rangle$。而透热态是指不随核坐标(分子构型)变化的态，最常用的就是Troy提到的NaCl的例子，透热态其实是量子化学家们为了理解图像和计算的方便提出的不真实存在的量子态，如不管Na和Cl的距离多大，永远为两个中性原子的态，或者是永远是两个离子的态。这样说来十分抽象，但是本质上就是其波函数不随核坐标变化而变化，一个严格的定义为透热态的非绝热耦合为0(甚至很多时候简化为$\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\phi_j\rangle=0$)。
+        在电荷转移中的图像更加清晰，如果电荷转移发生在两个分子间，透热态通常定为电荷局域在第一个分子上的态和局域在第二个分子上的态，而真实的态(电荷分散在两个分子上，也就是绝热态)是两个透热态的线性组合。
 
-        在实际操作中，绝热态是很容易得到的，因为绝热态是哈密顿量本征态，我们可以用各种电子结构的计算方法得到他们，但是
-        在绝热表象下，两个绝热态之间存在非绝热耦合，势能面间也会有圆锥交叉或者trivial crossing，这几项往往会给动力学计算带来
-        很大难度，因此人们很多时候会希望通过绝热态的线性组合来构建透热态，在透热表象下进行动力学模拟，这个过程称为透热化(diabatization)。透热化的
-        方法非常多，本向导中也不作仔细的展开，但是根据Troy的综述，真正的透热态是难以通过绝热态线性组合得到的，所以很多文章中会使用
-        构建半透热态(quasi-diabatic state)的说法。需要注意，根据非绝热耦合等于零的定义，透热态按照某个固定的系数的线性组合还是透热态，也就是
-        透热态并不是唯一的，这种不唯一性给了量子化学家构建透热态的更大的自由度。这也是目前透热化的方法多种多样的一个原因。
+        在实际操作中，绝热态是很容易得到的，因为绝热态是哈密顿量本征态，我们可以用各种电子结构的计算方法得到他们，但是在绝热表象下，两个绝热态之间存在非绝热耦合，势能面间也会有圆锥交叉或者trivial crossing，这几项往往会给动力学计算带来很大难度，因此人们很多时候会希望通过绝热态的线性组合来构建透热态，在透热表象下进行动力学模拟，这个过程称为透热化(diabatization)。透热化的方法非常多，本向导中也不作仔细的展开，但是根据Troy的综述，真正的透热态是难以通过绝热态线性组合得到的，所以很多文章中会使用构建半透热态(quasi-diabatic state)的说法。需要注意，根据非绝热耦合等于零的定义，透热态按照某个固定的系数的线性组合还是透热态，也就是透热态并不是唯一的，这种不唯一性给了量子化学家构建透热态的更大的自由度。这也是目前透热化的方法多种多样的一个原因。
 
-        在透热表象下，由于透热态不是哈密顿量的本征态，所以此时哈密顿量不再是对角矩阵，而是有非零的非对角元，在某些问题(如电荷转移)中，
-        这些非对角元通常被叫做转移积分(transfer integrals)，对角化透热态哈密顿量应该能重新得到绝热态的能量。
-        在透热表象下，可以认为式(\ref{ihcdot})中的$V_{ij}$就是转移积分，所以在某种程度上说，即使透热化并不完全，仍有很小数值的
-        非绝热耦合，只要该项对转移积分是一个小量，对动力学的影响也可以忽略，但是在绝热表象中由于$V_{ij}=0$，因此
-        非绝热耦合即使有些时候较小，仍是十分重要的。
+        在透热表象下，由于透热态不是哈密顿量的本征态，所以此时哈密顿量不再是对角矩阵，而是有非零的非对角元，在某些问题(如电荷转移)中，这些非对角元通常被叫做转移积分(transfer integrals)，对角化透热态哈密顿量应该能重新得到绝热态的能量。在透热表象下，可以认为式(\ref{time-depend-coeff})中的$V_{ij}$就是转移积分，所以在某种程度上说，即使透热化并不完全，仍有很小数值的非绝热耦合，只要该项对转移积分是一个小量，对动力学的影响也可以忽略，但是在绝热表象中由于$V_{ij}=0$，因此非绝热耦合即使有些时候较小，仍是十分重要的。
       \subsection{势间跳跃方法与FSSH}
         势间跳跃(Surface Hopping)方法是一种混合量子经典(Mixed-Quantum-Classical)方法\footnote{需要注意混合量子经典与半经典方法(Semi-Classical)不同，
         前者一般指方法中既有经典部分又有量子部分，后者偏向量子力学做经典近似，演化一个半量子半经典的方程}，它是非绝热动力学中非常常用的一类，尽管很早就有类似的
-        思路，直到1990年John Tully提出了最少跃迁的势间跳跃(Fewest Switch Surface Hopping, FSSH)方法\footnote{The Journal of Chemical Physics 93, 1061 
-        (1990): Molecular dynamics with electronic transitions}，在这之后surface hopping方法被大量使用并且一直被发展，王老师课题组的核心研究方向就是SH
-        方法中某些复杂问题的处理以及将其往更大体系更多自由度推广。
+        思路，直到1990年John Tully提出了最少跃迁的势间跳跃(Fewest Switch Surface Hopping, FSSH)方法\footnote{The Journal of Chemical Physics 93, 1061(1990): Molecular dynamics with electronic transitions}，在这之后surface hopping方法被大量使用并且一直被发展，王老师课题组的核心研究方向就是SH方法中某些复杂问题的处理以及将其往更大体系更多自由度推广。
 
-        在势间跳跃方法，原子核做经典处理，按照分子动力学的方法运动，但是其感受到的势能是由电子势能而非力场提供，电子的势能是根据电子的
-        Schr\"odinger方程描述的，即电子的运动是量子处理。简单地说，如果读者熟悉分子动力学，那么这套方法理解起来是非常容易的，它的思路非常
-        平凡，即在一个某一个时刻开始，在$dt$的时间间隔内用经典方法演化核的运动，然后计算电子波函数在这个$dt$内的演化，电子势能梯度为原子核的运动提供力，进而演化下一个时刻
-        的原子核运动和电子运动，如此重复，就可以得到非绝热动力学的模拟结果。
+        在势间跳跃方法，原子核做经典处理，按照分子动力学的方法运动，但是其感受到的势能是由电子势能而非力场提供，电子的势能是根据电子的Schr\"odinger方程描述的，即电子的运动是量子处理。简单地说，如果读者熟悉分子动力学，那么这套方法理解起来是非常容易的，它的思路非常平凡，即在一个某一个时刻开始，在$dt$的时间间隔内用经典方法演化核的运动，然后计算电子波函数在这个$dt$内的演化，电子势能梯度为原子核的运动提供力，进而演化下一个时刻的原子核运动和电子运动，如此重复，就可以得到非绝热动力学的模拟结果。
 
-        当然尽管图像上非常简单，但是实际操作起来会有各种各样的问题，比如下一小节中稍微涉及的势能面交叉和退相干的问题，包括电子如何在势能面上运动，
-        都是现在仍然在讨论的重要问题，我们都会稍作涉及，但是首先要回到最早的FSSH方法上来。
+        当然尽管图像上非常简单，但是实际操作起来会有各种各样的问题，比如下一小节中稍微涉及的势能面交叉和退相干的问题，包括电子如何在势能面上运动，都是现在仍然在讨论的重要问题，我们都会稍作涉及，但是首先要回到最早的FSSH方法上来。
 
-        TODO-FSSH推导相关。
+        之所以称为Surface Hopping，就是因为在这套方法中电子的运动其实是在势能面间的跳跃，在特定的时刻内，电子只会存在于其中的某一个势能面(即通常说的active态)，不同的SH方法的核心区别通常在于如何定义电子在不同势能面之间的跃迁概率，什么时候会跃迁。当然如果我们研究一个简单的隧穿问题，单一的SH计算只会得到一个固定的结果，要么穿过了势垒要么被反射等等，不会得到具体的隧穿概率数据，因此SH方法通常需要做很多次轨迹，然后取轨迹平均来得到物理观测量的结果。
 
+        在等式(\ref{time-depend-coeff})中，我们演化波函数的系数，但是为了方便，我们会使用密度矩阵的演化，在等式(\ref{linear combination})的展开形式下，密度矩阵的矩阵元定义为$a_{kj}=c_k c_j^*$，在这个两边取时间导数并将(\ref{time-depend-coeff})的结果代入，我们就得到了关键性的等式
+        \begin{equation}
+          \begin{aligned} i \hbar \dot{a}_{k j}=& \sum_{T}\left\{a_{l j}\left[V_{k l}-i \hbar \mathbf{R} \cdot \mathbf{d}_{k l}\right]\right.\\ &-a_{k l}\left[V_{l j}-i \hbar \mathbf{R} \cdot \mathbf{d}_{i j}\right] \} \end{aligned}
+          \label{time-de DM}
+        \end{equation}
+        
       \subsection{鸟瞰SH方法中的特殊问题}
         本小节将会简要地介绍在SH发展这么多年来，出现的很多问题，包括王老师组学长学姐在这方面的工作的简介，但是由于编者水平有限，只能略作介绍，而王老师课题组的各位
         学长学姐在这方面有更多可说的内容。
