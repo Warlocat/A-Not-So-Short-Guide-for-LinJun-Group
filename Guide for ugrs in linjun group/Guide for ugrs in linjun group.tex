@@ -434,7 +434,401 @@ Ehrenfest Theorem:
       \end{aligned}
     \end{align*}
   \end{proof}
-    \section{量子化学-电子结构基础}
+
+  \begin{description}
+	\item[变分法] 在有限空间中寻找最优解；任意波函数对应的能量期望值都不小于最低本征态能量
+
+	\begin{theorem}
+	The eigenstate of the system has the minimum energy compared to all other states.
+	\end{theorem}
+
+	\begin{proof}
+	\begin{align}
+	&\begin{cases}
+	H\ket{\psi_i} = E_i\ket{\psi_i}\\
+	\ket{\psi}=\sum_i c_i \ket{\psi_i}
+	\end{cases}\\
+	\Rightarrow & \bracketl{\psi}{H}{\psi} = \sum_i c_i^* \bracketl{\psi_i}{H \sum_j c_j}{\psi_j} \\
+	=& \sum_{ij}c_i^*c_j E_j \delta_{ij}=\sum_i c_i^* c_i E_i \geq \sum_i c_i^* c_i E_{0}=E_{0}
+	\end{align}
+	\end{proof}
+
+	\item[微扰法] 尽可能利用简单体系的精确解描述复杂问题
+	\begin{equation}
+	H\ket{\psi_i}=E_i\ket{\psi_i} \quad H=H^{(0)} +\lambda H^{(1)}
+	\end{equation}
+
+	\begin{align*}
+	&\begin{cases}
+	\ket{\psi_i} = \ket{\psi_i^{(0)}}+\lambda \ket{\psi_i^{(1)}}\\
+	E_i=E_i^{(0)} + \lambda E_i^{(1)}
+	\end{cases}\\
+	\Rightarrow & (H^{(0)}+\lambda H^{(1)})(\ket{\psi^{(0)}_i}+\lambda \ket{\psi_i^{(0)}})=(E_i^{(0)}+\lambda E^{(1)}_i)(\ket{\psi_i^{(0)}}+\lambda \ket{\psi^{(1)}_i}) \\
+	\Rightarrow & \begin{cases}
+	(H^{(0)}-E_i^{(0)})\ket{\psi_i^{(0)}}=0\\
+	(H^{(0)}-E_i^{(0)})\ket{\psi_i^{(1)}}+(H^{(1)}-E_i^{(1)})\ket{\psi_i^{(0)}} =0
+	\end{cases}\\
+	\Rightarrow & \bracketl{\psi_j^{(0)}}{H^{(0)}-E_i^{(0)}}{\psi_i^{(1)}}=\bracketl{\psi_j^{(0)}}{(E_i^{(1)}-H^{(1)})}{\psi_i^{(0)}}\\
+	\Rightarrow & (E_j^{(0)}-E_i^{(0)})\bracket{\psi_j^{(0)}}{\psi_i^{(1)}}=E_i^{(1)}\delta_{ij} -\bracketl{\psi^{(0)}_j}{H^{(1)}}{\psi_i^{(0)}}\\
+	\Rightarrow &
+	\begin{cases}
+	E_i^{(1)}=\bracketl{\psi_i^{(0)}}{H^{(1)}}{\psi_i^{(0)}} &\quad i=j \\
+	\ket{\psi_i^{(1)}}=\sum_{j\neq i}\frac{\bracketl{\psi^{(0)}_j}{H^{(1)}}{\psi^{(0)}_i}}{E^{(0)}_i-E^{(0)}_j} &\quad i\neq j
+	\end{cases}
+	\end{align*}
+
+	二阶微扰先略。
+
+	微扰应用：
+
+	\begin{equation}
+	T=\frac{p^2}{2m}-\frac{p^4}{8c^2m^3}+....
+	\end{equation}
+	\begin{description}
+		\item 非谐性：对势能项做微扰
+		\begin{equation}
+		V=V(0)+\frac{k}{2}x^2+\frac{\alpha}{6}x^3+\frac{\beta}{24}x^4+...
+		\end{equation}
+		\item Stark效应：对外场做微扰
+		\begin{equation}
+		H=H_0-\mu\cdot F
+		\end{equation}
+	\end{description}
+
+
+\end{description}
+
+
+\begin{description}
+	\item[全同性原理] 量子世界的全同粒子不可区分，任何两个粒子交换不影响体系的状态；
+
+	\item[交换算符]
+	\begin{equation}
+	\textbf{P}_{12}[f(q_1,q_2,....,q_n)]=f(p_2,p_1,....,p_n)
+	\end{equation}
+	\begin{equation}
+	P_{12}[1s(1)\alpha(1)3s(2)\beta(2)]=1s(2)\alpha(2)3s(1)\beta(1)
+	\end{equation}
+
+	\item[交换算符的本征值]
+	\begin{equation}
+	\textbf{P}_{12}[\textbf{P}_{12}[f(q_1,q_2,.....,q_n)]]=f(q_1,q_2,...,q_n)\Rightarrow P_{12}^2=1
+	\end{equation}
+	Thus
+	\begin{equation}
+	c_i=\pm 1
+	\end{equation}
+
+	交换算符的本征值为实数，只能为$\pm 1$，对应波函数分别称为对称和反对称。不具备对称性的波函数无法用于描述全同粒子。
+
+	\item[玻色子和费米子] 波函数反对称的粒子为费米子，而波函数对称的粒子为玻色子
+
+	\item[反对称粒子的泡利不相容原理]
+	\begin{equation}
+	f(q_1,q_1,....,q_n)=-f(q_1,q_1,....,q_n) \Rightarrow f(q_1,q_1,....,q_n)=0
+	\end{equation}
+	\item[自旋统计] Pauli 使用量子场论证明了自旋统计理论，指出费米子（电子和质子等）拥有半整数自旋，而玻色子（光子和声子等）具有整数自旋，电子具有$\frac{1}{2}$的自旋。
+
+	\item[相对论量子化学] 自旋角动量很自然地以内禀方式蕴含在相对论性狄拉克方程中。作为最低阶非相对论近似，薛定谔方程人为地丢弃了自旋这种相对论效应。
+
+	\item[Slater行列式]
+	\begin{equation}
+	|\Psi(p_1,p_2,...,p_n)|=\frac{1}{\sqrt{N!}}
+	\begin{vmatrix}
+	\ket{\phi_1(q_1)} & \ket{\phi_2(q_1)} & ... & \ket{\phi_n(q_1)}\\
+	\ket{\phi_2(q_2)} & \ket{\phi_2(q_2)} & ... & \ket{\phi_n(q_2)}\\
+	... & ...& ... & ...\\
+	\ket{\phi_1(q_n)} & \ket{\phi_2(q_n)} & ... & \ket{\phi_n(q_n)}\\
+	\end{vmatrix}
+	\end{equation}
+
+	\item[双电子自旋]
+	\begin{equation}
+	\alpha(1)\alpha(2),\beta(1)\beta(2),\alpha(1)\beta(2),\beta(1)\alpha(2)
+	\begin{cases}
+	\frac{1}{\sqrt{2}}[\alpha(1)\beta(2)+\beta(1)\alpha(2)]\\
+	\frac{1}{\sqrt{2}}[\alpha(1)\beta(2)-\beta(1)\alpha(2)]
+	\end{cases}
+	\end{equation}
+
+\end{description}
+  \begin{description}
+	\item[库伦积分法]
+	\begin{equation}
+	\begin{cases}
+	\ket{\phi_{1s}^{(1)}}=\frac{1}{\sqrt{\pi}}e^{-r_1}\\
+	\ket{\phi_{1s}^{(2)}}\frac{1}{\sqrt{\pi}}e^{-r_2}
+	\end{cases}
+	\Rightarrow J=(1+\frac{1}{R})e^{-2R}
+	\end{equation}
+
+	\item[交换积分]
+	\begin{equation}
+	\begin{cases}
+	\ket{\phi_{1s}^{(1)}}=\frac{1}{\sqrt{\pi}}e^{-r_1}\\
+	\ket{\phi_{1s}^{(2)}}\frac{1}{\sqrt{\pi}}e^{-r_2}
+	\end{cases}
+	\Rightarrow K=(\frac{1}{R}-\frac{2R}{3})e^{-R}
+	\end{equation}
+	它在分子成键中起到了非常关键的作用，是量子效应。
+\end{description}
+
+\begin{description}
+	\item[平均场近似] 忽略电子动态关联，多电子问题转化为单电子问题，多电子波函数简化为单电子波函数的乘积，使用自洽场得到单电子波函数
+
+	\item[Koopmans 定理]假设离子轨道与中性分子轨道相同，可计算分子的电离能喝亲和势，改变电子数会引起单电子轨道重排和弛豫，与电子关联量级相似，但符号相反
+\end{description}
+
+
+\begin{description}
+	\item[平均场近似] 忽略电子动态关联，多电子问题转化为单电子问题，多电子波函数简化为单电子波函数的乘积，使用自洽场得到单电子波函数
+
+	\item[Koopmans 定理]假设离子轨道与中性分子轨道相同，可计算分子的电离能喝亲和势，改变电子数会引起单电子轨道重排和弛豫，与电子关联量级相似，但符号相反
+\end{description}
+\begin{align*}
+&\mean{\hat{H}}_{Hartree} \\
+=& \bracketl{\Psi(\{r_i\})}{\hat{H}}{\Psi(\{r_i\})}\\
+=&(\prod_i\bra{\phi_i(r_i)})(\sum_k\hat{h}_k+\frac{1}{2}\sum_{k\neq l}\frac{1}{\hat{r}_kl})(\prod_j\ket{\phi_j(r_j)})\\
+=&\sum_k\bracketl{\phi_k(r_k)}{\hat{h}_k}{\phi_k(r_k)}(\prod_{i\neq k}\bra{\phi_i(r_i)})(\prod_{j \neq k}\ket{\phi_j(r_j)})\\
+&+\frac{1}{2}\sum_{k \neq l}\bracketl{\phi_k(r_k)\phi_l(r_l)}{\frac{1}{\hat{r}_{kl}}\phi_k(r_k)\phi_l(r_l)}(\prod_{i \neq \{k,l\}}\bra{\phi_i(r_i)})(\prod_{i \neq \{k,l\}}\ket{\phi_j(r_j)})\\
+=&\sum_k\bracketl{\phi_k(r_k)}{\hat{h}_k}{\phi_k(r_k)}+\frac{1}{2}\sum_{k \neq l}\bracketl{\phi_k(r_k)\phi_l(r_l)}{\frac{1}{\hat{r}_{kl}}}{\phi_k(r_k)\phi_l(r_l)}
+\end{align*}
+
+\begin{description}
+	\item[变分法与基组] Hartree-Fock 变分法中，波函数的形式原则上是任意的，但是波函数的随意变化数字处理起来非常麻烦，使用基组对波函数进行线性展开，对量子化学中的所有电子结构计算都至关重要。
+
+	\item[原子轨道基组] 完备的基组在量子化学是很难实现的，从计算量的角度需要尽可能地减少基组的数目。氢原子的电子结构可解析求解，为理解更复杂原子和分子的电子结构打开了大门。使用氢原子和类氢离子的原子轨道作为基组，是解决复杂化学问题的通用做法，有着重要的意义。
+
+	\item[原子轨道]
+	\begin{equation}
+		\psi(r,\theta,\phi)=R_{nl}(r)Y_{lm}(\theta,\phi)
+	\end{equation}
+
+	\item[Slater基组和Gaussian基组]
+	\begin{equation}
+	\chi(r)\sim e^{-\xi r} \qquad g(r)\sim e^{-\alpha r^2}
+	\end{equation}
+
+	从基组数目角度看，STO比GTO好；
+
+	从波函数积分计算效率角度看，GTO比STO好。
+
+	\item[高斯函数线性组合]
+	\begin{equation}
+	e^{-\xi r}=\frac{\xi}{2\sqrt{\pi}}\int_0^\infty \alpha^{-3/2} e^{-\xi^2/4\alpha}e^{-\alpha r^2} \, d\alpha
+	\end{equation}
+	\begin{equation}
+	\Rightarrow \xi_\mu(r-R_A)\approx \sum_Pc_{p\mu}g_p(\alpha_{p\mu},r-R_p)
+	\end{equation}
+	\begin{equation}
+	\begin{cases}
+	g_{1s}(\alpha,r)=(8\alpha^3/\pi^3)^{1/4}e^{-\alpha r^2};\\
+	(\alpha,r)=(128\alpha^5/\pi^3)^{1/4}xe^{-\alpha r^2};\\
+	g_{3dxy}(\alpha,r)=(2048\alpha^7/\pi^3)^{1/4}xye^{-\alpha^2}
+	\end{cases}
+	\end{equation}
+\end{description}
+
+\begin{description}
+	\item[Dunning 原子轨道基组] 如 aug-cc-pVDZ, aug-cc-pVTZ, aug-cc-pVQZ, aug-cc-pV5Z...
+
+	aug:弥散, cc: correlation consistent; p: polarized; V: Valence bonds; DZ: double zeta.
+
+	\item[赝势原子轨道基组] 当原子中的电子很多事，内层电子通常对原子性质的影响很小，但是其对应的全电子基组很复杂，为了减少计算量，其贡献可通过有效势能来描述，而且可以包含相对论效应的修正。
+
+	\item[赝势基组]
+	赝势基组包括赝势和基组两部分，内部电子的贡献采用赝势描述，直接放在哈密顿量里，外层价电子采用一般的基组。
+
+	LANL1只考虑加电子，LANL2系列除了加电子外，还考虑次外层电子，因为他们与价层的能查不明显，而且对成键有贡献。
+
+	LanL2DZ：对H-Ne使用D95V全电子基组，对Na-Bi使用赝势基组，也就是LANL有效核势加上DZ基组；LanL2DZ是常用基组，适合过渡金属等中等质量的金属元素。
+
+	\item[总能量] 变分法保证基组越大，HF能量越小，越接近于精确值。
+
+	\item[Hessian矩阵]
+	\begin{equation}
+	F_{ij}=\frac{1}{\sqrt{m_im_j}}\frac{\partial^2 U}{\partial x_i \partial x_j}
+	\end{equation}
+
+	\item[振动频率]
+	\begin{equation}
+	\sum_{j-1}^N (F_{ij}-\delta_{ij}\lambda_k)l_{jk}\Rightarrow det(F_{ij}-\delta_{ij}\lambda_{k})=0
+	\end{equation}
+\end{description}
+
+\begin{description}
+	\item[电子关联] Hartree-Fock理论中采用平均场处理电子-电子相互作用，缺乏电子关联，直接用多电子基组展开多电子波函数计算量巨大，很难实现。
+
+	\item[如何有效加入电子关联] 以Hartree-Fock得到的单Slater行列式为基础，考虑多电子关联的主要方法有CI(Configurate Interaction)、MCSCF(Multi-Configured Self-Consistent Field)、MPn、CC(Couple Cluster)等。
+
+	HF方法的计算量与电子数的四次方成正比，MP2为五次方，CISD和CCS为六次方，CCSD（T）为七次方，CISDT和CCSDT为八次方，随着电子数增加而迅速增加。
+
+	\item[多电子组态] 在Hartree-Fock分子轨道的基础上，组态相当于多电子组态，用之可展开多电子波函数，对角化多电子哈密顿量，得到基态和激发态性质。
+
+	若有K个分子轨道，每个轨道最多占据两个电子，总电子书数N，则n激发组态数为
+	\begin{equation}
+	C_N^nC_{2K-N}=\frac{N!}{n!(N-n)!}\frac{(2K-N)!}{n!(2K-N-n)!}
+	\end{equation}
+
+	每个组态都可以用Slater行列式表示。
+
+
+	\item[多电子波函数的组态线性组合]
+	\begin{align*}
+	\ket{\Phi} &= c_0\ket{\psi_0} +\sum_{ra}c_a^r\ket{\psi_a^r}+\sum_{a<b,r<s}c_{ab}^{rs}\ket{\psi_{ab}^{rs}}+\sum_{a<b<c,r<s<t}c^{rst}_{abc}\ket{\psi^{rst}_{abc}}+...\\
+	&=c_0\ket{\psi_0} + c_S\ket{S}+c_D\ket{D}+c_T\ket{T}+...
+	\end{align*}
+
+	Full CI（FCI）包括所有可能的激发，可以给出多电子问题的精确解，
+
+	实际上即使我们只考虑有限个单电子基组，所有可能的N-电子基组数目也非常庞大。
+
+	通常需要对组态进行阶段，只处理有限个N-电子基组。如只考虑单激发，成为CIS；截断到双激发，成为CISD。
+
+
+	\item[组态相互作用关系] 单激发对基态能量没有直接贡献，双激发对基态能量的修正起首要作用，Hartree Fock的本征值问题等价于确保组态与单激发不直接混合，相差两个激发的组态之间没有直接相互作用。
+
+	\item[Brillouin 定理]
+	\begin{equation}
+	\bracketl{\psi_0}{\hat{H}}{\psi_a^r}=\bracketl{a}{\hat{h}}{r}+\sum_b\bra{ab}\ket{rb}=\bracketl{\phi_a}{\hat{f}}{\phi_r}=0
+	\end{equation}
+
+	\begin{align*}
+	\bracketl{\psi_0}{\hat{H}}{\psi_a^r}&=(\prod_i\bra{\phi_i})O_1(\prod_j\ket{\phi_j})\\
+	&=\sum_k(\prod_i\bra{\psi{\phi_i}})h_k(\prod_l\ket{\phi_j})\\
+	&=\sum_k \bracketl{\phi_k}{h_k}{\phi_k}*\prod_{i \neq k} \bra{\phi_i} \prod_{j \neq k} \bra{\phi_j}\\
+	&-\sum_k \bracketl{\phi_k}{h_k}{\phi_k}
+	\end{align*}
+\end{description}
+
+\begin{description}
+	\item[Thomas-Fermi 理论]
+		是现代密度泛函理论的雏形，能量期望值完全形成电子密度的泛函，使得电子结构处理变得非常简单。
+
+		当时其精度有限，因为动能项通过简单的近似得到，而且没有考虑交换和关联对总能量的贡献。
+	\item[Hohenberg-Kohn 定理]
+	\begin{itemize}
+		\item 所有客观测量的期望值原则上都是基态电子密度的泛函。
+
+		电子密度分布$\rho(r)$决定了总电子数$N$，从而哈密顿量$H=T_e+U_{ee}+V_{ext}$总只有最后一项可能是不确定的。如果$\rho(r)$是两个不同哈密顿量$H$和$H'$的基态电子密度，而两者的基态波函数分别为$\ket{\Psi}$和$\ket{\Psi'}$，基态能量分别为$E_0$和$E'_0$,基态在不兼并的情况下有
+		\begin{equation}
+		\begin{cases}
+		E_0&=\bracketl{\Psi}{H}{\Psi}\\
+		&<\bracketl{\Psi'}{H}{\Psi'}\\
+		&=\bracketl{\Psi'}{H'}{\Psi'}+\bracketl{\Psi'}{(H-H')}{\Psi'}\\
+		&=E_0'+\int \rho(r)(V_{ext}-V'_{ext})\,dr\\
+		E_0'&=\bracketl{\Psi'}{H'}{\Psi'}\\&
+		<\bracketl{\Psi}{H'}{\Psi}\\
+		&=\bracketl{\Psi}{H}{\Psi}+\bracketl{\Psi}{(H'-H)}{\Psi}\\
+		&=E_0-\int \rho(r)(V_{ext}-V'_{ext})\,dr\\
+		\end{cases}
+		\end{equation}
+		Then
+		\begin{equation}
+		E_0+E'_0<E_0+E_0'
+		\end{equation}
+		矛盾，故电子密度与唯一的哈密顿量对应。反过来，哈密顿量有唯一的基态电子密度。\footnote{在这里，需要指出的是此定理在基态不兼并的情况下成立。}因此，所有可观测量的期望值都是基态电子密度的泛函，特别地，基态总能量是电子密度的泛函：
+		\begin{equation}
+		E[\rho]=T_e[\rho]+V_{ext}[\rho]+U_{ee}[\rho]
+		\end{equation}
+
+		\item 基态电子密度原则上可以通过变分法严格得到。
+
+	\end{itemize}
+
+	\item[Kohn-Sham密度泛函理论]
+	哈密顿量中的动能项难以用密度泛函直接表达，而波函数可以更容易地计算动能，为此1965年Kohn和Sham提出了融合波函数和密度的现代DFT理论，使密度泛函理论成为实际可行的理论方法。
+
+	\begin{itemize}
+		\item 动能
+		\begin{equation}
+		T_0[\rho]=\sum_i\bracketl{\phi_i}{-\frac{1}{2}\grad^2}{\phi_i}
+		\end{equation}
+
+		\item 库伦势
+		\begin{equation}
+		U_{cl}[\rho]=\frac{1}{2}\iint\frac{\rho(r')\rho(r)}{|r'-r|}\,drdr'
+		\end{equation}
+	\end{itemize}
+
+\end{description}
+
+
+\begin{theorem}
+The external potential(and hence the total energy) $v(\textbf{r})$, is a unique functional of the electron density $n(\textbf{r})$.
+\end{theorem}
+
+\begin{proof}
+The proof proceeds by \emph{reducio ad absurdum}. 
+
+Assume that another potential $v'(\textbf{r})$, with ground state $\Psi'$ gives rise to the \emph{same} density $n(\textbf{r})$. Now clearly [unless $v'(\textbf{r})-v(\textbf{r})=\mathrm{const}$] $\Psi'$ cannot be equal to $\Psi$ since they satisfy different \sch equations. Hence, if we denote the Hamiltonian and ground-state energies associated with $\Psi$ and $\Psi'$ by $H$, $H'$ and $E$, $E'$, we have by the minimal property of the ground state,
+\begin{equation}
+E'=\bracketl{\Psi'}{H'}{\Psi'}<\bracketl{\Psi}{H'}{\Psi}=\bracketl{\Psi}{H+V'-V}{\Psi}
+\end{equation}
+so that
+\begin{equation}
+E'<E+\int [v'(\textbf{r})-v(\textbf{r})]n(\textbf{r})d\textbf{r}
+\label{ueq1}
+\end{equation}
+Interchanging the primed and unprimed quantities, we find in exactly the same way that
+\begin{equation}
+E<E'+\int [v(\textbf{r})-v'(\textbf{r})]n(\textbf{r})d\textbf{r}
+\label{ueq2}
+\end{equation}
+Addition of \ref{ueq1} and \ref{ueq2} leads to the incosistency
+\begin{equation}
+E+E'<E+E'
+\end{equation}
+Thus $v(\textbf{r})$ is (to within a constant) a unique functional of $n(\textbf{r})$; since, in turn, $v(\textbf{r})$ fixes $H$ we see that the full many-particle ground state is a unique functional of $n(\textbf{r})$.\cite{PhysRev.136.B864}
+\end{proof}
+
+\begin{theorem}
+The functional that delivers the ground state energy of the system, gives the lowest energy if and only if the input density is the true ground state density.
+
+For any positive integer $N$ and potential $v(\textbf{r})$, a density functional $F[n]$ exists such that
+\begin{equation}
+E_{(v,N)}[n]=F[n]+\iiint v(\textbf{r})n(\textbf{r})\,d^3\textbf{r}
+\end{equation}
+obtains its minimal value at the ground-state density of $N$ electrons in the potential $v(\textbf{r})$. The minimal value of $E_{(v,N)}[n]$ is then the ground state energy of this state.
+
+\end{theorem}
+
+\begin{proof}
+Since $\Psi$ is a functional of $n(\textbf{r})$, so is evidently the kinetic and interaction energy. We therefore difine 
+\begin{equation}
+F[n(\textbf{r})] \equiv \bracketl{\Psi}{T+U}{\Psi}
+\end{equation}
+With its aid we difine, for a given potential $v(\textbf{r})$, the energy functional
+\begin{equation}
+E_v[n]\equiv \int v(\textbf{r})n(\textbf{r})d\textbf{r} + F[n]
+\end{equation}
+It can be easily proved that for a system of N particles, the energy functional of $\Psi'$
+\begin{equation}
+\varepsilon_v[\Psi']\equiv\bracketl{\Psi'}{V}{\Psi'}+\bracketl{\Psi'}{T+U}{\Psi'}
+\end{equation}
+has a minimum at the correct ground state $\Psi$, relative to arbitrary variations of $\Psi'$ in which the number of particles is kept constant. Let $\Psi'$ be the ground state associated with a different external potential $v'(\textbf{r})$. Then,
+\begin{equation}
+\varepsilon_v[\Psi']=\int v(\textbf{r})n'(\textbf{r})d\textbf{r}+F[n']>\varepsilon_v[\Psi]
+\end{equation}
+Thus the minimal property is established relative to all density functions $n'(\textbf{r})$ associated with some other external potential $v'(\textbf{r})$.\cite{PhysRev.136.B864}
+\end{proof}
+
+
+\begin{description}
+	\item[电流密度]
+	\begin{equation}
+	j(r)=\frac{1}{2i}\sum_{i=1}^{N}[\grad_i\delta(r-r_i)+\delta(r-r_i)\grad_i]\quad f(r,t)=\bracketl{\psi(t)}{j(r)}{\psi(t)}\end{equation}
+
+
+	 \item[海森堡方程]
+	 \begin{equation}
+	 \frac{\partial}{\partial t}j(r,t)=-i\bracketl{\psi(r,t)}{[j(r),H(r,t)]}{\psi(r,t)}
+	 \end{equation}
+
+
+\end{description}
+
+  \section{量子化学-电子结构基础}
 
     \section{非绝热动力学与势间跳跃方法}
     简单的说，量子化学主要分为电子结构理论和动力学，上一大节专注于前者，本节就关注后者，电子结构计算可以给出电子能级的分布，激发态的位置以及其他一系列与之相关的静态性质，而动力学，正如其名，研究电子/原子核在特定情况下随时间的演化，通常化学中的光激发驰豫过程、电荷转移过程、异构化，甚至广义上的所有化学反应都是动力学的范畴。当然很容易想到，动力学的准确性是依赖于电子结构方法的准确性的，随着电子结构理论发展，动力学在研究化学物理等一系列问题中有不可忽视的作用。
