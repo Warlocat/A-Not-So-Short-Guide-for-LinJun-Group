@@ -15,4 +15,7 @@
 \contentsline {subsection}{\numberline {6.1}非绝热耦合}{17}
 \contentsline {subsection}{\numberline {6.2}绝热表象与透热表象}{18}
 \contentsline {subsection}{\numberline {6.3}势间跳跃方法与FSSH}{19}
-\contentsline {subsection}{\numberline {6.4}鸟瞰SH方法中的特殊问题}{19}
+\contentsline {subsection}{\numberline {6.4}鸟瞰SH方法中的特殊问题}{20}
+\contentsline {paragraph}{Trivial Crossing：}{20}
+\contentsline {paragraph}{超交换问题：}{21}
+\contentsline {paragraph}{退相干：}{21}

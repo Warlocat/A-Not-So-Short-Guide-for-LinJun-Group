@@ -835,9 +835,9 @@ Thus the minimal property is established relative to all density functions $n'(\
 
     在Born-Oppenheimer近似下，我们可以针对特定的分子构型(核的位置)计算对应的电子能量，对于不同的核坐标$\mathbf{R}$(习惯上大写表示原子核坐标，小写表示电子坐标)，可以给出一系列电子能量$U=U(\mathbf{R})$，这就是我们通常所说的势能面。需要注意的是，势能面是基于BO近似的结果，这是一切的前提。
     
-    (TODO需要修改)BO近似几乎是量子化学中最重要的近似条件，可以适用于我们平常遇到几乎全部静态问题和很多动态问题，BO近似下基态的势能面也是比较合理的。但是在一些情况下，尤其是当研究的体系涉及多个激发态——比如光激发然后通过非辐射方式回到基态过程时，BO近似就显示出了其弊端。一类常见的BO近似失效的情景称为圆锥交叉(conical intersections)，理想的圆锥交叉指的是两个势能面的至少两个维度在某一分子构型上简并(交叉)。通过早期实验光谱上和理论上的研究，人们发现涉及圆锥交叉的势能面的动力学是BO近似无法描述的。
+    BO近似几乎是量子化学中最重要的近似条件，可以适用于我们平常遇到几乎全部静态问题和很多动态问题，BO近似下基态的势能面也是比较合理的。但是在特定的情况下，尤其是当研究的体系涉及多个激发态——比如光激发然后通过非辐射方式回到基态过程时，BO近似就显示出了其弊端。一类常见的BO近似失效的情况就是圆锥交叉(conical intersections)，理想的圆锥交叉指的是两个势能面的至少两个维度在某一分子构型上简并(交叉)。通过早期实验光谱上和理论上的研究，人们发现涉及圆锥交叉的势能面的动力学是BO近似无法描述的。
     
-    为了解决这个问题，必须把原子核和电子的运动一起加进动力学模拟的过程中，这类动力学通常称为非绝热动力学(non-adiabatic coupling)。处理核的运动有多种方式，经典的分子动力学就是只有原子核的运动，不属于非绝热动力学的范畴，但是经典运动是处理原子核的一种方式，另外还可以将原子核的运动也用量子力学求解，进行全量子的非绝热动力学模拟。王林军老师课题组常用的势间跳跃(surface hopping)方法，就是原子核做经典处理，电子做量子处理的一种混合量子经典的非绝热动力学方法。
+    而此类问题又是化学和物理学中广泛存在的问题，为了解决这类动力学问题，必须把原子核和电子的运动一起加进动力学模拟的过程中，这类动力学通常称为非绝热动力学(non-adiabatic coupling)。处理核的运动有多种方式，经典的分子动力学就是只有原子核的运动，不属于非绝热动力学的范畴，但是经典运动是处理原子核的一种方式，另外还可以将原子核的运动也用量子力学求解，进行全量子的非绝热动力学模拟。王林军老师课题组常用的势间跳跃(surface hopping)方法，就是原子核做经典处理，电子做量子处理的一种混合量子经典的非绝热动力学方法。
       \subsection{非绝热耦合}
         作为“动力学”下的讨论，我们一定会用到含时Schr\"odinger方程：
         \begin{equation}
@@ -861,8 +861,7 @@ Thus the minimal property is established relative to all density functions $n'(\
           i \hbar \dot{c}_{i}=\sum_{j} c_{j}\left(V_{i j}-i \hbar \dot{R} \cdot d_{i j}\right)
           \label{time-depend-coeff}
         \end{equation}
-        其中定义了$V_{ij}=\langle\phi_i|\hat{H}|\phi_j\rangle$和$d_{ij}=\langle\phi_i|\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\phi_j\rangle$，
-        后者称为非绝热耦合(non-adiabatic coupling，NAC)，该项所引发的问题是非绝热动力学的领域核心问题之一。在这里，我们可以通过另一种方式来理解它名字的来源以及它的物理意义：如果我们用最简单的数值方法计算非绝热耦合，即
+        其中定义了$V_{ij}=\langle\phi_i|\hat{H}|\phi_j\rangle$和$d_{ij}=\langle\phi_i|\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\phi_j\rangle$，后者称为非绝热耦合(non-adiabatic coupling，NAC)，该项所引发的问题是非绝热动力学的领域核心问题之一。在这里，我们可以通过另一种方式来理解它名字的来源以及它的物理意义：如果我们用最简单的数值方法计算非绝热耦合，即
         \begin{equation}
           d_{ij}=\langle\phi_i|\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\phi_j\rangle\approx\langle\phi_i(\mathbf{R})|\frac{|\phi_j(\mathbf{R}+\Delta\mathbf{R})\rangle-|\phi_j(\mathbf{R})\rangle}{\Delta\mathbf{R}}
           =\frac{\langle\phi_i(\mathbf{R})|\phi_j(\mathbf{R}+\Delta\mathbf{R})\rangle}{\Delta\mathbf{R}}
@@ -885,20 +884,17 @@ Thus the minimal property is established relative to all density functions $n'(\
         \end{equation}
         如果知道哈密顿量的形式，对核坐标导数的积分可以直接用来计算非绝热耦合。
       \subsection{绝热表象与透热表象}
-        本文中所说的绝热(adiabatic)与透热(diabatic)与热学中相关概念并无直接联系，属于量化领域常用的一种表达。
-        绝热是基于Born–Oppenheimer近似而言的，需要注意由于翻译的问题，请不要混淆非绝热(non-adiabatic)和透热(diabatic)两个概念。
+        本文中所说的绝热(adiabatic)与透热(diabatic)与热学中相关概念并无直接联系，属于量化领域常用的一种表达。绝热是相对于Born–Oppenheimer近似而言的，需要注意由于翻译的问题，请不要混淆非绝热(non-adiabatic)和透热(diabatic)两个概念。
 
-        根据Troy Van Voorhis在他那篇著名的综述\footnote{Annu. Rev. Phys. Chem. 2010. 61:149–170: The Diabatic Picture of Electron Transfer, Reaction Barriers, and Molecular Dynamics}
-        中的说法，绝热态定义为BO近似下的哈密顿量的本征态，也就是说在BO近似下解定态Schr\"odinger方程(电子结构计算)得到的波函数就是绝热态，即$\hat{H}|\phi_i\rangle=E_i|\phi_i\rangle$。而透热态是指不随核坐标(分子构型)变化的态，最常用的就是Troy提到的NaCl的例子，透热态其实是量子化学家们为了理解图像和计算的方便提出的不真实存在的量子态，如不管Na和Cl的距离多大，永远为两个中性原子的态，或者是永远是两个离子的态。这样说来十分抽象，但是本质上就是其波函数不随核坐标变化而变化，一个严格的定义为透热态的非绝热耦合为0(甚至很多时候简化为$\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\phi_j\rangle=0$)。
-        在电荷转移中的图像更加清晰，如果电荷转移发生在两个分子间，透热态通常定为电荷局域在第一个分子上的态和局域在第二个分子上的态，而真实的态(电荷分散在两个分子上，也就是绝热态)是两个透热态的线性组合。
+        根据Troy Van Voorhis在他那篇著名的综述\footnote{Annu. Rev. Phys. Chem. 2010. 61:149–170: The Diabatic Picture of Electron Transfer, Reaction Barriers, and Molecular Dynamics}中的说法，绝热态定义为BO近似下的哈密顿量的本征态，也就是说在BO近似下解定态Schr\"odinger方程(电子结构计算)得到的波函数就是绝热态，即$\hat{H}|\phi_i\rangle=E_i|\phi_i\rangle$。而透热态是指不随核坐标(分子构型)变化的态，最常用的就是Troy提到的NaCl的例子，透热态其实是量子化学家们为了理解图像和计算的方便提出的不真实存在的量子态，如不管Na和Cl的距离多大，永远为两个中性原子的态，或者是永远是两个离子的态。这样说来十分抽象，但是本质上就是其波函数不随核坐标变化而变化，一个严格的定义为透热态的非绝热耦合为0(甚至很多时候简化为$\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\phi_j\rangle=0$)。在电荷转移中的图像更加清晰，如果电荷转移发生在两个分子间，透热态通常定为电荷局域在第一个分子上的态和局域在第二个分子上的态，而真实的态(电荷分散在两个分子上，也就是绝热态)是两个透热态的线性组合。
 
-        在实际操作中，绝热态是很容易得到的，因为绝热态是哈密顿量本征态，我们可以用各种电子结构的计算方法得到他们，但是在绝热表象下，两个绝热态之间存在非绝热耦合，势能面间也会有圆锥交叉或者trivial crossing，这几项往往会给动力学计算带来很大难度，因此人们很多时候会希望通过绝热态的线性组合来构建透热态，在透热表象下进行动力学模拟，这个过程称为透热化(diabatization)。透热化的方法非常多，本向导中也不作仔细的展开，但是根据Troy的综述，真正的透热态是难以通过绝热态线性组合得到的，所以很多文章中会使用构建半透热态(quasi-diabatic state)的说法。需要注意，根据非绝热耦合等于零的定义，透热态按照某个固定的系数的线性组合还是透热态，也就是透热态并不是唯一的，这种不唯一性给了量子化学家构建透热态的更大的自由度。这也是目前透热化的方法多种多样的一个原因。
+        动力学的计算既可以在绝热表象下进行，也可以在透热表象下进行，但是很多时候为了节省计算量，我们不会在每个时刻都计算对应的能量与NAC，而是用某种函数对其进行拟合，每到一个分子构型，只需要用拟合函数计算即可。尽管在实际操作中，绝热态是很容易得到的，因为绝热态是哈密顿量本征态，我们可以用各种电子结构的计算方法得到他们，但是在绝热表象下，两个绝热态之间存在非绝热耦合，势能面间也会有圆锥交叉或者trivial crossing，在交叉点处的非绝热耦合是一个奇点，通常很难用函数拟合或作其他处理，因此人们很多时候会希望通过绝热态的线性组合来构建透热态，在透热表象下进行动力学模拟，这个过程称为透热化(diabatization)。透热化的方法非常多，本向导中也不作仔细的展开，但是根据Troy的综述，真正的透热态是难以通过绝热态线性组合得到的，所以很多文章中会使用构建半透热态(quasi-diabatic state)的说法。需要注意，根据非绝热耦合等于零的定义，透热态按照某个固定的系数的线性组合还是透热态，也就是透热态并不是唯一的，这种不唯一性给了量子化学家构建透热态的更大的自由度。这也是目前透热化的方法多种多样的一个原因。
 
-        在透热表象下，由于透热态不是哈密顿量的本征态，所以此时哈密顿量不再是对角矩阵，而是有非零的非对角元，在某些问题(如电荷转移)中，这些非对角元通常被叫做转移积分(transfer integrals)，对角化透热态哈密顿量应该能重新得到绝热态的能量。在透热表象下，可以认为式(\ref{time-depend-coeff})中的$V_{ij}$就是转移积分，所以在某种程度上说，即使透热化并不完全，仍有很小数值的非绝热耦合，只要该项对转移积分是一个小量，对动力学的影响也可以忽略，但是在绝热表象中由于$V_{ij}=0$，因此非绝热耦合即使有些时候较小，仍是十分重要的。
+        在透热表象下，由于透热态不是哈密顿量的本征态，所以此时哈密顿量不再是对角矩阵，而是有非零的非对角元，在某些问题(如电荷转移)中，这些非对角元通常被叫做转移积分(transfer integrals)或者通常称为透热耦合(diabatic couplings, DCs)，对角化透热态哈密顿量应该能重新得到绝热态的能量。在透热表象下，可以认为式(\ref{time-depend-coeff})中的$V_{ij}$就是转移积分，所以在某种程度上说，即使透热化并不完全，仍有很小数值的非绝热耦合，只要该项对转移积分是一个小量，对动力学的影响也可以忽略，但是在绝热表象中由于$V_{ij}=0$，因此非绝热耦合即使有些时候较小，仍是十分重要的。
       \subsection{势间跳跃方法与FSSH}
         势间跳跃(Surface Hopping)方法是一种混合量子经典(Mixed-Quantum-Classical)方法\footnote{需要注意混合量子经典与半经典方法(Semi-Classical)不同，
         前者一般指方法中既有经典部分又有量子部分，后者偏向量子力学做经典近似，演化一个半量子半经典的方程}，它是非绝热动力学中非常常用的一类，尽管很早就有类似的
-        思路，直到1990年John Tully提出了最少跃迁的势间跳跃(Fewest Switch Surface Hopping, FSSH)方法\footnote{The Journal of Chemical Physics 93, 1061(1990): Molecular dynamics with electronic transitions}，在这之后surface hopping方法被大量使用并且一直被发展，王老师课题组的核心研究方向就是SH方法中某些复杂问题的处理以及将其往更大体系更多自由度推广。
+        思路，直到1990年John Tully提出了最少跃迁的势间跳跃(Fewest Switches Surface Hopping, FSSH)方法\footnote{The Journal of Chemical Physics 93, 1061(1990): Molecular dynamics with electronic transitions}，在这之后surface hopping方法被大量使用并且一直被发展，王老师课题组的核心研究方向就是SH方法中某些复杂问题的处理以及将其往更大体系更多自由度推广。
 
         在势间跳跃方法，原子核做经典处理，按照分子动力学的方法运动，但是其感受到的势能是由电子势能而非力场提供，电子的势能是根据电子的Schr\"odinger方程描述的，即电子的运动是量子处理。简单地说，如果读者熟悉分子动力学，那么这套方法理解起来是非常容易的，它的思路非常平凡，即在一个某一个时刻开始，在$dt$的时间间隔内用经典方法演化核的运动，然后计算电子波函数在这个$dt$内的演化，电子势能梯度为原子核的运动提供力，进而演化下一个时刻的原子核运动和电子运动，如此重复，就可以得到非绝热动力学的模拟结果。
 
@@ -911,9 +907,43 @@ Thus the minimal property is established relative to all density functions $n'(\
           \begin{aligned} i \hbar \dot{a}_{k j}=& \sum_{T}\left\{a_{l j}\left[V_{k l}-i \hbar \mathbf{R} \cdot \mathbf{d}_{k l}\right]\right.\\ &-a_{k l}\left[V_{l j}-i \hbar \mathbf{R} \cdot \mathbf{d}_{i j}\right] \} \end{aligned}
           \label{time-de DM}
         \end{equation}
+        我们通常关心的是密度矩阵的对角元，就是总电子波函数在某个势能面上的\textbf{布居}(\textbf{Population})，令上式中的$k=j$我们得到
+        \begin{equation}
+          \dot{a}_{k k}=\sum_{l \neq k} b_{k l}
+        \end{equation}
+        其中
+        \begin{equation}
+          b_{k l}=2 \hbar^{-1} \operatorname{Im}\left(a_{k l}^{*} V_{k l}\right)-2 \operatorname{Re}\left(a_{k l}^{*} \mathbf{R} \cdot \mathbf{d}_{k l}\right)
+          \label{time-de DM diagnol}
+        \end{equation}
+        而$\dot{a}_{k k}$就是势能面$k$上的布居变化，这里我们引入最少跳跃(Fewest Switches, FS)的思想，即在一个时间间隔$\mathrm{d}t$内的布居变化完全由当前态向其他态的跃迁提供，以两个态的体系为例，如果在时间$t$时，假设所有轨迹中电子当前处在1态的轨迹数为$N_1(t)=a_{11}(t)N$，其中$a_{11}$是$t$时刻电子在1态的布居，$N$为总轨迹数。与之类似，我们有$t$时刻处于2态的轨迹数$N_2(t)=a_{22}(t)N$，在很小的时间间隔$\mathrm{d}t$之后，两个布居为$a_{11}(t+\mathrm{d}t)$和$a_{22}(t+\mathrm{d}t)$，不失一般性，我们假设$a_{11}(t)<a_{11}(t+\mathrm{d}t),a_{22}(t)>a_{22}(t+\mathrm{d}t)$，我们就固定这个时间间隔内从态1跃迁到态2的轨迹数为$a_{11}(t+\mathrm{d}t)-a_{11}(t)$，而从态2跃迁到态1的轨迹数为$0$，原则上可以两者各加一个常数，FS的思想等价于固定这个常数为$0$。这样处理之后，我们得到$\dot{a}_{22}=-\dot{a}_{11}=\frac{a_{11}(t)-a_{11}(t+\mathrm{d}t)}{\mathrm{d}t}$，则如下定义的跃迁概率
+        \begin{equation}
+          P_{1\rightarrow2}\equiv\frac{a_{11}(t)-a_{11}(t+\mathrm{d}t)}{a_{11}(t)}=\frac{\dot{a}_{22} \mathrm{d}t }{ a_{11}(t)}
+        \end{equation}
+        如果只有两个能级，将等式(\ref{time-de DM diagnol})代入得到
+        \begin{equation}
+          P_{1\rightarrow2}=\frac{b_{21} \mathrm{d}t }{ a_{11}(t)}
+          \label{hopping probability}
+        \end{equation}
+        上式就是FSSH的核心公式\footnote{细心的读者可能会发现与Tully原文中的分母不完全相同，但是本文的推导更加合理一点，通常也是使用这一套公式，当然，由于$\mathbf{d}t$内密度矩阵几乎不会变化，究竟是用$t$时刻还是$t+\mathbf{d}t$时刻对结果的影响不大。}。FSSH单个轨迹的流程就是先初始化，赋予研究的体系一个初始动能(动量)和位置，然后每个$\mathbf{d}t$内先用经典力学的方法演化原子核的运动，再利用等式(\ref{hopping probability})计算出当前态跃迁到其他态的概率，用随机数的方法判断是否跃迁，同时还要判断跃迁之后是否满足能量守恒，如果满足，则完成跃迁并修正体系原子核运动的速度，不断重复上述过程就得到了动力学演化的结果。
         
       \subsection{鸟瞰SH方法中的特殊问题}
-        本小节将会简要地介绍在SH发展这么多年来，出现的很多问题，包括王老师组学长学姐在这方面的工作的简介，但是由于编者水平有限，只能略作介绍，而王老师课题组的各位
-        学长学姐在这方面有更多可说的内容。
+        本小节将会简要地介绍在SH发展这么多年来，出现的很多问题，包括王老师组学长学姐在这方面的工作的简介，但是由于编者水平有限，只能略作介绍，而王老师课题组的各位学长学姐在这方面有更多可说的内容。
+
+        \paragraph{Trivial Crossing：}在势能面上演化动力学的过程中，势能面通常会有各类的交叉和相互作用，多数可以归为Trivial Crossing或者Avoided Crossing，两者的定义图如下所示
+        \begin{center}
+          \includegraphics[width = 10cm]{fig/crossing.jpg}
+        \end{center}
+        图中表示分子1和2之间有相互作用，当它们的势能面交叉时就会产生Avoided Crossing，1和3之间由于距离较远没有相互作用，但是在能量空间下，它们对应的态可能十分接近，这样使得它们的势能面存在交叉，即为Trivial Crossing。另外，Trival Crossing并非只存在于实空间距离很远的两个分子上，即使在同一个分子中，由于轨道之间没有或者相互作用非常小(比如对称性不同的分子轨道，$\sigma$键和$\pi$键之间)但是能量接近，也是可能发生Trivial Crossing的。
+
+        但是由于电子结构计算是按照能量排序的，所以在发生Trivial Crossing的地方会有能级顺序的错误，误将别处毫不相关的能级作为了当前能级，而且根据等式(\ref{analytical dij})，此处的NAC是无法被描述的，通常会由于数值计算时过大而使得跃迁概率接近1，发生不该发生的跃迁，比如从分子1直接跳到分子3。
+
+        为了处理这类问题，王老师发展了很多相关方法，比如SC-FSS和CC-FSSH，后者把常见的Trivial Crossing进行了分类，每一类都有对应的解决方案，基本已经可以处理此类问题，具体内容可以参阅相关文章\footnote{J. Phys. Chem. Lett., 2014, 5 (4), pp 713–719: A Simple Solution to the Trivial Crossing Problem in Surface Hopping}\footnote{J. Phys. Chem. Lett., 2018, 9 (15), pp 4319–4325: Crossing Classified and Corrected Fewest Switches Surface Hopping}\footnote{J. Chem. Phys. 148, 104106 (2018): An efficient solution to the decoherence enhanced trivial crossing problem in surface hopping}。
+
+        \paragraph{超交换问题：}我们继续用上文中的图，同时联想化学里的过渡态理论，如果只有1态和2态之间、2态和3态之间有相互作用，但是1态和3态之间没有，按照SH方法的处理，如果想从1态到3态必须经过2态，但如果此时2态有较高的能量，高于此时原子核运动的动能，如果跃迁发生，就不满足能量守恒，尽管1态和3态之间的势能差可以被原子核动能满足，由于SH的操作方法，系统是不可能从1态到达3态的。但这并非真实情况，在量子力学中存在隧穿行为，因此实际上体系是会从1态到达3态的，SH这个错误的来源是忽略了原子核的量子效应导致的。当然，这不意味着SH不能处理超交换问题，王老师提出了在Liouville空间下Surface Hopping\footnote{J. Phys. Chem. Lett., 2015, 6 (19), pp 3827–3833: Fewest Switches Surface Hopping in Liouville Space}，可以很好地处理超交换和隧穿的问题。
+
+        \paragraph{退相干：}\footnote{J. Chem. Phys. 134, 244114 (2011): Decoherence and surface hopping: When can averaging over initial conditions help capture the effects of wave packet separation?}The most prominent shortcoming of surface-hopping is that FSSH suffers from the problem of “over-coherence.” To understand how this problem arises, recall that surfacehopping requires equations of motion for both classical nuclear motion and (quantum-mechanical) electronic amplitude propagation. There is an important question here as to whether these equations will always be consistent, in the sense that the electronic state and the nuclear forces correspond correctly to each other. The fully quantum-mechanical Schrodinger equation is, of course, automatically consistent between nuclei and electrons, but semiclassical surfacehopping techniques need not be so. In general, for a swarm of trajectories, FSSH finds consistency by forcing stochastic hops between surfaces so as to match the number of trajectories on each surface with the electronic wavefunction. The result is a set of discontinous classical trajectories and a very reasonable set of populations.
+
+        Now, the FSSH algorithm faces a unique obstacle when a classical nucleus enters a region of configuration space where different surfaces feel very different forces. Ideally, the classical nuclei in FSSH should represent heavy, compact quantum nuclear wavefunctions and these wavefunctions can certainly bifurcate into more than one wave packet on different surfaces, as one would find with exact quantum dynamics or multiple-spawning trajectories.6, 7 While this is clearly the correct physical picture, unfortunately, from the perspective of the electronic degrees of freedom, FSSH does not correctly treat this bifurcation of a nuclear wave packet: instead, the electronic wavefunction is still propagated along the instantaneous nuclear trajectory, as if the electronic amplitudes were unaware that the total wave packet is now breaking apart. In the language of the decoherence literature, the components of the electronic wavefunction on different electronic surfaces always remain coherent. This overcoherence can lead to spurious results for long-time dynamics, especially if nuclei visit more than one distinct region of derivative coupling.
   \end{document} 
 
