@@ -144,18 +144,19 @@
     读者可以在登录之后所在的主目录下先输入ls和回车，看到当前目录下的文件和文件夹，然后输入“mkdir 文件夹名”的方式创建属于自己的文件夹，然后cd自己的文件夹，之后再这个目录
     下进行后续的操作。
     \subsection{使用服务器递交任务}
-    我们的超算集群，简单地说是由很多的CPU(\textbf{节点})构成的，每个CPU有28个\textbf{核}，据说服务器的单核运行效率其实是低于正常个人计算机的，但是优势在计算资源非常多。
-    西溪校区的超算集群主要是王林军老师和洪鑫老师出资，也主要是这两个课题组在使用。王老师占有其中的48个节点，共1344个核。
-    这些节点按照一定的顺序组合成了两个\textbf{队列}，分别为ljcluster和ljtest，前者又可以分为wenchang和quantum，使用ljclustat指令可以看到
-    全组的节点使用情况。尽管是为本科生学习练习使用的账号，ugrs3\_LJ账号仍然有对服务器三个节点的访问权限(即ljtest队列)。
-    我们在服务器上递交任务，就是将自己的程序交给这些核去运算，要实现这个靠的是PBS任务管理系统。
+    我们的超算集群，简单地说是由很多的CPU(\textbf{节点})构成的，每个CPU有28个\textbf{核}，据说服务器的单核运行效率其实是低于正常个人计算机的，但是优势在计算资源非常多。西溪校区的超算集群主要是王林军老师和洪鑫老师出资，也主要是这两个课题组在使用。王老师占有其中的48个节点，共1344个核。这些节点按照一定的顺序组合成了两个\textbf{队列}，分别为ljcluster和ljtest，前者又可以分为wenchang和quantum，使用ljclustat指令可以看到全组的节点使用情况。尽管是为本科生学习练习使用的账号，ugrs3\_LJ账号仍然有对服务器三个节点的访问权限(即ljtest队列)。我们在服务器上递交任务，就是将自己的程序交给这些核去运算，要实现这个靠的是PBS任务管理系统。
     
-    TODO
+    计算集群是由多台高性能服务器节点组成的，需要有一套系统能够为我们的计算任务自动分配资源，当计算资源出错的时候，能够避免将任务分到异常节点上去，当计算资源全部用完的时候我们再提交任务，能够有一个排队机制当之前的计算任务完成后自动将排处于队状态的作业自动运行。这就是PBS作业调度系统的主要作用。一个常见的PBS任务脚本如下图所示
+    \includegraphics[width=10cm]{fig/PBS.jpg}
+    这是一个调用PBS管理系统的脚本文件，里面的每一行都有其对应的意思，前几行为PBS的调度信息相关的指令，-$N$代表作业名，这个脚本的作业名为2butene\_PBE\_0，-$l$为计算分配资源，图中为分配了一个节点，28个核，注意到第四行也是这类，分配了这个任务的最大运行时间为99小时60分钟(100小时)，-$q$代表使用哪个队列，图中即为使用ljtest队列，-$j$的一行代表将标准输出信息(o)错误信息(e)合并输出到文件。接下来是命令行指令，本图中的第一行白色内容为获取本任务所调用的核数，并将这个数赋值给nprocs(在此脚本中此行为多余的，后面并没有用到nprocs)，接下来的两行为打开PBS所在目录(也可以使用绝对目录)和将任务占用的节点信息输出到NODEFILE这个文件中，下面两行为环境变量设置，正常情况下不同任务的环境变量设置是不同的，需要根据任务对应的程序而修改，最后一行为执行命令(python)。需要注意，白色的部分为普通的bash脚本，因此可以根据需要任意添加。
 
+    写完PBS文件之后(本例子中文件名即为PBS，可以按需修改)，只需要执行“qsub PBS”指令就可以将这个脚本递交给PBS系统，而PBS系统负责根据这个脚本的内容为你分配计算资源，进行计算。希望查看自己的任务，可以使用“qstat”指令，可以打出所有正在服务器运行的任务，希望检索特定队列可以用“-a”，希望进行搜索可以在指令后添加额外的grep指令，举例：如果你希望输出所有在ljtest队列上运行的信息带有ugrs3的任务，指令是“qstat -a ljtest |grep ugrs3”。所有任务的后面会有一个status，R代表正在运行，Q代表正在排队等待运行，C代表运行完成(不代表算对，有可能是由于错误退出)，E代表错误退出，H代表被挂起，H的任务即使排队到了资源也不进行计算，先让他之后的任务计算。
+
+    此外，PBS系统还有诸多指令(如常用的qdel和qhold等)，诸多功能，诸多环境变量可以调用，鉴于递交任务实际操作的重要性，这里不再赘述，如果在实际操作过程中希望有更多了解，可以参阅浙江大学西溪校区化学系HPC超算平台介绍(可在超算QQ群的群文件中找到)中的Gridview PBS作业调度使用说明。
+    
     \section{数学基础}
     \subsection{线性代数回顾及变分法}
-    数学基础的第一小节将关注于最基础的数学内容，主要是线性代数的一些知识，由于长时间不用可能有所生疏，
-    我们就在这里作简单的回顾，并且引入变分和线性变分法的概念，熟悉这部分内容的读者可以直接跳过。
+    数学基础的第一小节将关注于最基础的数学内容，主要是线性代数的一些知识，由于长时间不用可能有所生疏，我们就在这里作简单的回顾，并且引入变分和线性变分法的概念，熟悉这部分内容的读者可以直接跳过。
 
     TODO
     \subsection{符号使用}
@@ -904,7 +905,7 @@ Thus the minimal property is established relative to all density functions $n'(\
 
         在等式(\ref{time-depend-coeff})中，我们演化波函数的系数，但是为了方便，我们会使用密度矩阵的演化，在等式(\ref{linear combination})的展开形式下，密度矩阵的矩阵元定义为$a_{kj}=c_k c_j^*$，在这个两边取时间导数并将(\ref{time-depend-coeff})的结果代入，我们就得到了关键性的等式
         \begin{equation}
-          \begin{aligned} i \hbar \dot{a}_{k j}=& \sum_{T}\left\{a_{l j}\left[V_{k l}-i \hbar \mathbf{R} \cdot \mathbf{d}_{k l}\right]\right.\\ &-a_{k l}\left[V_{l j}-i \hbar \mathbf{R} \cdot \mathbf{d}_{i j}\right] \} \end{aligned}
+          \begin{aligned} i \hbar \dot{a}_{k j}=& \sum_{T}\left\{a_{l j}\left[V_{k l}-i \hbar \mathbf{\dot{R}} \cdot \mathbf{d}_{k l}\right]\right.\\ &-a_{k l}\left[V_{l j}-i \hbar \mathbf{\dot{R}} \cdot \mathbf{d}_{i j}\right] \} \end{aligned}
           \label{time-de DM}
         \end{equation}
         我们通常关心的是密度矩阵的对角元，就是总电子波函数在某个势能面上的\textbf{布居}(\textbf{Population})，令上式中的$k=j$我们得到
@@ -913,7 +914,7 @@ Thus the minimal property is established relative to all density functions $n'(\
         \end{equation}
         其中
         \begin{equation}
-          b_{k l}=2 \hbar^{-1} \operatorname{Im}\left(a_{k l}^{*} V_{k l}\right)-2 \operatorname{Re}\left(a_{k l}^{*} \mathbf{R} \cdot \mathbf{d}_{k l}\right)
+          b_{k l}=2 \hbar^{-1} \operatorname{Im}\left(a_{k l}^{*} V_{k l}\right)-2 \operatorname{Re}\left(a_{k l}^{*} \mathbf{\dot{R}} \cdot \mathbf{d}_{k l}\right)
           \label{time-de DM diagnol}
         \end{equation}
         而$\dot{a}_{k k}$就是势能面$k$上的布居变化，这里我们引入最少跳跃(Fewest Switches, FS)的思想，即在一个时间间隔$\mathrm{d}t$内的布居变化完全由当前态向其他态的跃迁提供，以两个态的体系为例，如果在时间$t$时，假设所有轨迹中电子当前处在1态的轨迹数为$N_1(t)=a_{11}(t)N$，其中$a_{11}$是$t$时刻电子在1态的布居，$N$为总轨迹数。与之类似，我们有$t$时刻处于2态的轨迹数$N_2(t)=a_{22}(t)N$，在很小的时间间隔$\mathrm{d}t$之后，两个布居为$a_{11}(t+\mathrm{d}t)$和$a_{22}(t+\mathrm{d}t)$，不失一般性，我们假设$a_{11}(t)<a_{11}(t+\mathrm{d}t),a_{22}(t)>a_{22}(t+\mathrm{d}t)$，我们就固定这个时间间隔内从态1跃迁到态2的轨迹数为$a_{11}(t+\mathrm{d}t)-a_{11}(t)$，而从态2跃迁到态1的轨迹数为$0$，原则上可以两者各加一个常数，FS的思想等价于固定这个常数为$0$。这样处理之后，我们得到$\dot{a}_{22}=-\dot{a}_{11}=\frac{a_{11}(t)-a_{11}(t+\mathrm{d}t)}{\mathrm{d}t}$，则如下定义的跃迁概率
@@ -928,7 +929,7 @@ Thus the minimal property is established relative to all density functions $n'(\
         上式就是FSSH的核心公式\footnote{细心的读者可能会发现与Tully原文中的分母不完全相同，但是本文的推导更加合理一点，通常也是使用这一套公式，当然，由于$\mathbf{d}t$内密度矩阵几乎不会变化，究竟是用$t$时刻还是$t+\mathbf{d}t$时刻对结果的影响不大。}。FSSH单个轨迹的流程就是先初始化，赋予研究的体系一个初始动能(动量)和位置，然后每个$\mathbf{d}t$内先用经典力学的方法演化原子核的运动，再利用等式(\ref{hopping probability})计算出当前态跃迁到其他态的概率，用随机数的方法判断是否跃迁，同时还要判断跃迁之后是否满足能量守恒，如果满足，则完成跃迁并修正体系原子核运动的速度，不断重复上述过程就得到了动力学演化的结果。
         
       \subsection{鸟瞰SH方法中的特殊问题}
-        本小节将会简要地介绍在SH发展这么多年来，出现的很多问题，包括王老师组学长学姐在这方面的工作的简介，但是由于编者水平有限，只能略作介绍，而王老师课题组的各位学长学姐在这方面有更多可说的内容。
+        本小节将会简要地介绍在SH发展这么多年来，出现的很多问题，包括王老师组学长学姐在这方面的工作的简介，但是由于编者水平有限，只能略作介绍，并且有很大概率在细节上理解不全面甚至有错误，而王老师课题组的各位学长学姐在这方面有更多可说的内容。
 
         \paragraph{Trivial Crossing：}在势能面上演化动力学的过程中，势能面通常会有各类的交叉和相互作用，多数可以归为Trivial Crossing或者Avoided Crossing，两者的定义图如下所示
         \begin{center}
@@ -942,8 +943,10 @@ Thus the minimal property is established relative to all density functions $n'(\
 
         \paragraph{超交换问题：}我们继续用上文中的图，同时联想化学里的过渡态理论，如果只有1态和2态之间、2态和3态之间有相互作用，但是1态和3态之间没有，按照SH方法的处理，如果想从1态到3态必须经过2态，但如果此时2态有较高的能量，高于此时原子核运动的动能，如果跃迁发生，就不满足能量守恒，尽管1态和3态之间的势能差可以被原子核动能满足，由于SH的操作方法，系统是不可能从1态到达3态的。但这并非真实情况，在量子力学中存在隧穿行为，因此实际上体系是会从1态到达3态的，SH这个错误的来源是忽略了原子核的量子效应导致的。当然，这不意味着SH不能处理超交换问题，王老师提出了在Liouville空间下Surface Hopping\footnote{J. Phys. Chem. Lett., 2015, 6 (19), pp 3827–3833: Fewest Switches Surface Hopping in Liouville Space}，可以很好地处理超交换和隧穿的问题。
 
-        \paragraph{退相干：}\footnote{J. Chem. Phys. 134, 244114 (2011): Decoherence and surface hopping: When can averaging over initial conditions help capture the effects of wave packet separation?}The most prominent shortcoming of surface-hopping is that FSSH suffers from the problem of “over-coherence.” To understand how this problem arises, recall that surfacehopping requires equations of motion for both classical nuclear motion and (quantum-mechanical) electronic amplitude propagation. There is an important question here as to whether these equations will always be consistent, in the sense that the electronic state and the nuclear forces correspond correctly to each other. The fully quantum-mechanical Schrodinger equation is, of course, automatically consistent between nuclei and electrons, but semiclassical surfacehopping techniques need not be so. In general, for a swarm of trajectories, FSSH finds consistency by forcing stochastic hops between surfaces so as to match the number of trajectories on each surface with the electronic wavefunction. The result is a set of discontinous classical trajectories and a very reasonable set of populations.
+        \paragraph{退相干：}Surface Hopping方法中最大的短板之一就是被称为“过相干(over-coherence)”的现象。为了介绍这种现象，我们先回忆一下FSSH，我们利用运动方程来演化经典的原子核运动和量子的电子演化，这里其实存在一个问题，即使电子的状态和核受力是预先对应好的，但是两者运动的自洽性仍然难以保证。全量子的方法可以保证这个自洽性的存在，SH对原子核的经典处理是过相干现象的缘由。
 
-        Now, the FSSH algorithm faces a unique obstacle when a classical nucleus enters a region of configuration space where different surfaces feel very different forces. Ideally, the classical nuclei in FSSH should represent heavy, compact quantum nuclear wavefunctions and these wavefunctions can certainly bifurcate into more than one wave packet on different surfaces, as one would find with exact quantum dynamics or multiple-spawning trajectories.6, 7 While this is clearly the correct physical picture, unfortunately, from the perspective of the electronic degrees of freedom, FSSH does not correctly treat this bifurcation of a nuclear wave packet: instead, the electronic wavefunction is still propagated along the instantaneous nuclear trajectory, as if the electronic amplitudes were unaware that the total wave packet is now breaking apart. In the language of the decoherence literature, the components of the electronic wavefunction on different electronic surfaces always remain coherent. This overcoherence can lead to spurious results for long-time dynamics, especially if nuclei visit more than one distinct region of derivative coupling.
+        在一个单一的轨迹中，不同电子态的电子的运动是一直耦合在一起的，如果在某些情况下，原子核在两个势能面上的受力相差较大，甚至反向，在真实的全量子演化下，两个势能面上的原子核的波包将会分离，这也将导致电子波函数分离成两个部分，不再耦合在一起，然而原始的FSSH方法是无法处理这种退相干(decoherence\footnote{在王老师课题组的文章中有时称为Branching Correction, BC})现象的。因此正确的退相干策略也是SH方法发展的重要主题。
+        
+        \paragraph{相位修正：}传统的FSSH方法在处理不同势能面的波函数时会有一个相位差的问题。这个问题的来源是当FSSH决定电子要跃迁时，电子是直接跃迁到当前原子核结构下的其他势能面。但是由于势能面的能量不同，其对应的原子核速度不同，以两能级系统举例，如果两个原子核波包同时开始演化，电子一开始位于基态势能面，能量较高的势能面原子核速度较低(这是能量守恒的要求)，因此在电子跃迁时，相同相位对应的激发态还未运动到基态波函数对应的位置，而是在其之前，这要求实际操作电子跃迁时，需要对波函数的相位进行修正(Phase Correction)。
   \end{document} 
 

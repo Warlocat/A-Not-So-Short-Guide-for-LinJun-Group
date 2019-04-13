@@ -3,19 +3,20 @@
 \contentsline {subsection}{\numberline {2.1}连接至服务器}{2}
 \contentsline {subsection}{\numberline {2.2}Linux基本操作}{4}
 \contentsline {subsection}{\numberline {2.3}使用服务器递交任务}{5}
-\contentsline {section}{\numberline {3}数学基础}{5}
-\contentsline {subsection}{\numberline {3.1}线性代数回顾及变分法}{5}
-\contentsline {subsection}{\numberline {3.2}符号使用}{5}
+\contentsline {section}{\numberline {3}数学基础}{6}
+\contentsline {subsection}{\numberline {3.1}线性代数回顾及变分法}{6}
+\contentsline {subsection}{\numberline {3.2}符号使用}{6}
 \contentsline {subsection}{\numberline {3.3}完备基展开}{6}
-\contentsline {subsection}{\numberline {3.4}傅立叶变换}{8}
+\contentsline {subsection}{\numberline {3.4}傅立叶变换}{9}
 \contentsline {section}{\numberline {4}量子力学}{9}
-\contentsline {subsection}{\numberline {4.1}概念总结篇}{9}
-\contentsline {section}{\numberline {5}量子化学-电子结构基础}{16}
-\contentsline {section}{\numberline {6}非绝热动力学与势间跳跃方法}{16}
-\contentsline {subsection}{\numberline {6.1}非绝热耦合}{17}
-\contentsline {subsection}{\numberline {6.2}绝热表象与透热表象}{18}
-\contentsline {subsection}{\numberline {6.3}势间跳跃方法与FSSH}{19}
-\contentsline {subsection}{\numberline {6.4}鸟瞰SH方法中的特殊问题}{20}
-\contentsline {paragraph}{Trivial Crossing：}{20}
-\contentsline {paragraph}{超交换问题：}{21}
-\contentsline {paragraph}{退相干：}{21}
+\contentsline {subsection}{\numberline {4.1}概念总结篇}{10}
+\contentsline {section}{\numberline {5}量子化学-电子结构基础}{17}
+\contentsline {section}{\numberline {6}非绝热动力学与势间跳跃方法}{17}
+\contentsline {subsection}{\numberline {6.1}非绝热耦合}{18}
+\contentsline {subsection}{\numberline {6.2}绝热表象与透热表象}{19}
+\contentsline {subsection}{\numberline {6.3}势间跳跃方法与FSSH}{20}
+\contentsline {subsection}{\numberline {6.4}鸟瞰SH方法中的特殊问题}{21}
+\contentsline {paragraph}{Trivial Crossing：}{21}
+\contentsline {paragraph}{超交换问题：}{22}
+\contentsline {paragraph}{退相干：}{22}
+\contentsline {paragraph}{相位修正：}{22}
