@@ -939,7 +939,7 @@ Thus the minimal property is established relative to all density functions $n'(\
 
         但是由于电子结构计算是按照能量排序的，所以在发生Trivial Crossing的地方会有能级顺序的错误，误将别处毫不相关的能级作为了当前能级，而且根据等式(\ref{analytical dij})，此处的NAC是无法被描述的，通常会由于数值计算时过大而使得跃迁概率接近1，发生不该发生的跃迁，比如从分子1直接跳到分子3。
 
-        为了处理这类问题，王老师发展了很多相关方法，比如SC-FSS和CC-FSSH，后者把常见的Trivial Crossing进行了分类，每一类都有对应的解决方案，基本已经可以处理此类问题，具体内容可以参阅相关文章\footnote{J. Phys. Chem. Lett., 2014, 5 (4), pp 713–719: A Simple Solution to the Trivial Crossing Problem in Surface Hopping}\footnote{J. Phys. Chem. Lett., 2018, 9 (15), pp 4319–4325: Crossing Classified and Corrected Fewest Switches Surface Hopping}\footnote{J. Chem. Phys. 148, 104106 (2018): An efficient solution to the decoherence enhanced trivial crossing problem in surface hopping}。
+        为了处理这类问题，王老师发展了很多相关方法，这也是王老师前几年工作的重心。比如SC-FSS和CC-FSSH，后者把常见的Trivial Crossing进行了分类，每一类都有对应的解决方案，基本已经可以处理此类问题，具体内容可以参阅相关文章\footnote{J. Phys. Chem. Lett., 2014, 5 (4), pp 713–719: A Simple Solution to the Trivial Crossing Problem in Surface Hopping}\footnote{J. Phys. Chem. Lett., 2018, 9 (15), pp 4319–4325: Crossing Classified and Corrected Fewest Switches Surface Hopping}\footnote{J. Chem. Phys. 148, 104106 (2018): An efficient solution to the decoherence enhanced trivial crossing problem in surface hopping}。
 
         \paragraph{超交换问题：}我们继续用上文中的图，同时联想化学里的过渡态理论，如果只有1态和2态之间、2态和3态之间有相互作用，但是1态和3态之间没有，按照SH方法的处理，如果想从1态到3态必须经过2态，但如果此时2态有较高的能量，高于此时原子核运动的动能，如果跃迁发生，就不满足能量守恒，尽管1态和3态之间的势能差可以被原子核动能满足，由于SH的操作方法，系统是不可能从1态到达3态的。但这并非真实情况，在量子力学中存在隧穿行为，因此实际上体系是会从1态到达3态的，SH这个错误的来源是忽略了原子核的量子效应导致的。当然，这不意味着SH不能处理超交换问题，王老师提出了在Liouville空间下Surface Hopping\footnote{J. Phys. Chem. Lett., 2015, 6 (19), pp 3827–3833: Fewest Switches Surface Hopping in Liouville Space}，可以很好地处理超交换和隧穿的问题。
 
