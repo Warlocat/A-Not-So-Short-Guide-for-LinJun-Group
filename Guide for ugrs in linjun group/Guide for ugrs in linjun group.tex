@@ -1,9 +1,11 @@
 %!TEX program = xelatex
 % 使用 ctexart 文类，UTF-8 编码
 \documentclass{article}
+  \usepackage[superscript]{cite}
   \usepackage{xeCJK,indentfirst}
   \usepackage{amsfonts, amsmath, amssymb,amsthm}
   \usepackage{graphicx}
+  \usepackage{subfigure}
   \usepackage[normalem]{ulem}
   \usepackage{listings}
   \usepackage{xcolor} % 定制颜色
@@ -14,14 +16,15 @@
   tabsize=4,
   breaklines=true,               % automatic line breaking only atwhitespace
   captionpos=b,                  % sets the caption-position to bottom
-  commentstyle=\color{mygreen},  % comment style
+  commentstyle=\color{blue},  % comment style
   escapeinside={\%*}{*)},        % if you want to add LaTeX withinyour code
   keywordstyle=\color{black},     % keyword style
   stringstyle=\color{mymauve}\ttfamily,  % string literal style
   frame=single,
   rulesepcolor=\color{red!20!green!20!blue!20},
   % identifierstyle=\color{red},
-  % language=Mathematica,
+  language=Mathematica,
+  alsolanguage=bash,
   }
 
 
@@ -90,28 +93,38 @@
     {\color{red}\textbf{编者建议没有任何Linux基础的同学，这部分内容在课题组内跟随学长学姐真人一对一学习，多数都为操作部分，不实践无法掌握，一方面防止初学者出错而误删他人文件，另一方面限于语言，我们无法在这部分展开完全的从零开始的Linux教程，各位可以主要将其作为参考而非完整教程。}}
 
     \subsection{连接至服务器}
-    王林军老师课题组是使用浙大西溪校区的超级计算机集群来进行日常的工作的，简单地就叫服务器。听起来非常高大上，我们所编写的程序(或者商业软件)在普通计算机上当然也可以运行，只是很多时候
-    需要过分长的时间，还要保持电脑全天开机，基本是不可能的，因此我们需要交给集群处理。
+    王林军老师课题组是使用浙大西溪校区的超级计算机集群来进行日常的工作的，简单地就叫服务器。听起来非常高大上，我们所编写的程序(或者商业软件)在普通计算机上当然也可以运行，只是很多时候需要过分长的时间，还要保持电脑全天开机，基本是不可能的，因此我们需要交给集群处理。
 
     集群计算机的操作系统都是Linux系统，我们需要用自己的个人电脑连接到服务器上，这样可以实现对服务器的远程操作，如果你的个人电脑是Linux或者mac系统，可以直接
-    在终端使用ssh命令登录服务器，但是由于组内工作电脑和多数个人电脑为Windows系统，这一部分我们暂时不作展开，有兴趣的同学可以直接网上搜索。在Windows系统下连接
-    Linux服务器，需要通过一些软件的辅助，比如PuTTY和XSHELL，鉴于后者有不少优势，比如更加新人友好\sout{并且好看}，我们就以后者举例。
+    在终端使用ssh命令登录服务器，但是由于组内工作电脑和多数个人电脑为Windows系统，这一部分我们暂时不作展开，有兴趣的同学可以直接网上搜索。在Windows系统下连接Linux服务器，需要通过一些软件的辅助，比如PuTTY和XSHELL，鉴于后者有不少优势，比如更加新人友好\sout{并且好看}，我们就以后者举例。
 
-    XSHELL目前有官方的中文网站\footnote{https://www.netsarang.com/zh/xshell/}，可以找到学生用的免费版，下载XSHELL和XFTP两个软件，
-    前者是一个在Windows操作系统下实现ssh功能的软件，用于连接远程服务器；后者是实现sftp功能的软件，用于服务器和本地计算机之间的文件传递。
-    这两个软件可以满足在理论计算化学组连接远程服务器的一切需求。安装好之后打开XSHELL，如下图所示新建会话，
-    \begin{center}
-      \includegraphics[width = 10cm]{fig/xshell1.jpg}
-      \includegraphics[width = 8cm]{fig/xshell2.jpg}
-    \end{center}
-    随便起个名字，主机填入10.22.51.200(注意：想要成功连接该IP需要浙大内网：ZJUWLAN、有线网络或者RVPN均可)，端口号默认22，在用户身份验证界面
-    用户名输入ugrs3\_LJ，密码为linjungroup\footnote{这个是专为入门本科生注册的账号，主要供学习使用，毕设或者读研读博正式在组内工作会有新的账号}。
-    此时如果见到类似下图的界面，就代表已经成功登陆进我们的服务器，并处于\textbf{主目录}下。
-    \begin{center}
+    XSHELL目前有官方的中文网站\footnote{https://www.netsarang.com/zh/xshell/}，可以找到学生用的免费版，下载XSHELL和XFTP两个软件，前者是一个在Windows操作系统下实现ssh功能的软件，用于连接远程服务器；后者是实现sftp功能的软件，用于服务器和本地计算机之间的文件传递。
+    这两个软件可以满足在理论计算化学组连接远程服务器的一切需求。安装好之后打开XSHELL，如Figure \ref{Xshell}所示新建会话。
+    \begin{figure}
+      \centering
+      \subfigure[\textbf{\small{XShell6打开之后的默认弹出窗口}}]
+      {
+        \includegraphics[width = 10cm]{fig/xshell1.jpg}
+        \label{XSHELL6打开}
+      }
+      \subfigure[\textbf{\small{XShell6新建会话窗口}}]
+      {
+        \includegraphics[width = 8cm]{fig/xshell2.jpg}
+        \label{XSHELL6新建}
+      }
+      \caption{\textbf{XShell连接服务器}}
+      \label{Xshell}
+    \end{figure}
+    
+    随便起个名字，主机填入10.22.51.200(注意：想要成功连接该IP需要浙大内网：ZJUWLAN、有线网络或者RVPN均可)，端口号默认22，在用户身份验证界面用户名输入ugrs3\_LJ，密码为linjungroup\footnote{这个是专为入门本科生注册的账号，主要供学习使用，毕设或者读研读博正式在组内工作会有新的账号}。此时如果见到类似Figure \ref{登录服务器}的界面，就代表已经成功登陆进我们的服务器，并处于\textbf{主目录}(通常用波浪线~表示)下，在光标左侧显示的内容即当前处于ugrs1\_LJ(这个是编者的账号)和tc6000节点(主节点，或称登录节点)。
+    \begin{figure}
+      \centering
       \includegraphics[width = 10cm]{fig/xshell3.jpg}
-    \end{center}
-    登录服务器之后，就可以按照下一小节的内容进行操作，学习Linux系统的各类指令，和如何在Linux系统下编辑文件，
-    为了安全起见，我们建议每个读者在主目录建立自己的文件夹，然后再自己的文件夹中进行各种操作，避免对他人的文件误操作而造成损失。
+      \caption{\textbf{成功登陆服务器}}
+      \label{登录服务器}
+    \end{figure}
+    
+    登录服务器之后，就可以按照下一小节的内容进行操作，学习Linux系统的各类指令，和如何在Linux系统下编辑文件，为了安全起见，我们建议每个读者在主目录建立自己的文件夹，然后再自己的文件夹中进行各种操作，避免对他人的文件误操作而造成损失。
 
     \subsection{Linux基本操作}
     \begin{description}
@@ -1095,7 +1108,7 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
       \subsection{绝热表象与透热表象}
         本文中所说的绝热(adiabatic)与透热(diabatic)与热学中相关概念并无直接联系，属于量化领域常用的一种表达。绝热是相对于Born–Oppenheimer近似而言的，需要注意由于翻译的问题，请不要混淆非绝热(non-adiabatic)和透热(diabatic)两个概念。
 
-        根据Troy Van Voorhis在他那篇著名的综述\footnote{Annu. Rev. Phys. Chem. 2010. 61:149–170: The Diabatic Picture of Electron Transfer, Reaction Barriers, and Molecular Dynamics}中的说法，绝热态定义为BO近似下的哈密顿量的本征态，也就是说在BO近似下解定态Schr\"odinger方程(电子结构计算)得到的波函数就是绝热态，即$\hat{H}|\phi_i\rangle=E_i|\phi_i\rangle$。而透热态是指不随核坐标(分子构型)变化的态，最常用的就是Troy提到的NaCl的例子，透热态其实是量子化学家们为了理解图像和计算的方便提出的不真实存在的量子态，如不管Na和Cl的距离多大，永远为两个中性原子的态，或者是永远是两个离子的态。这样说来十分抽象，但是本质上就是其波函数不随核坐标变化而变化，一个严格的定义为透热态的非绝热耦合为0(甚至很多时候简化为$\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\phi_j\rangle=0$)。在电荷转移中的图像更加清晰，如果电荷转移发生在两个分子间，透热态通常定为电荷局域在第一个分子上的态和局域在第二个分子上的态，而真实的态(电荷分散在两个分子上，也就是绝热态)是两个透热态的线性组合。
+        根据Troy Van Voorhis在他那篇著名的综述\cite{VanVoorhis2010}中的说法，绝热态定义为BO近似下的哈密顿量的本征态，也就是说在BO近似下解定态Schr\"odinger方程(电子结构计算)得到的波函数就是绝热态，即$\hat{H}|\phi_i\rangle=E_i|\phi_i\rangle$。而透热态是指不随核坐标(分子构型)变化的态，最常用的就是Troy提到的NaCl的例子，透热态其实是量子化学家们为了理解图像和计算的方便提出的不真实存在的量子态，如不管Na和Cl的距离多大，永远为两个中性原子的态，或者是永远是两个离子的态。这样说来十分抽象，但是本质上就是其波函数不随核坐标变化而变化，一个严格的定义为透热态的非绝热耦合为0(甚至很多时候简化为$\frac{\mathrm{d}}{\mathrm{d}\mathbf{R}}|\phi_j\rangle=0$)。在电荷转移中的图像更加清晰，如果电荷转移发生在两个分子间，透热态通常定为电荷局域在第一个分子上的态和局域在第二个分子上的态，而真实的态(电荷分散在两个分子上，也就是绝热态)是两个透热态的线性组合。
 
         动力学的计算既可以在绝热表象下进行，也可以在透热表象下进行，但是很多时候为了节省计算量，我们不会在每个时刻都计算对应的能量与NAC，而是用某种函数对其进行拟合，每到一个分子构型，只需要用拟合函数计算即可。尽管在实际操作中，绝热态是很容易得到的，因为绝热态是哈密顿量本征态，我们可以用各种电子结构的计算方法得到他们，但是在绝热表象下，两个绝热态之间存在非绝热耦合，势能面间也会有圆锥交叉或者trivial crossing，在交叉点处的非绝热耦合是一个奇点，通常很难用函数拟合或作其他处理，因此人们很多时候会希望通过绝热态的线性组合来构建透热态，在透热表象下进行动力学模拟，这个过程称为透热化(diabatization)。透热化的方法非常多，本向导中也不作仔细的展开，但是根据Troy的综述，真正的透热态是难以通过绝热态线性组合得到的，所以很多文章中会使用构建半透热态(quasi-diabatic state)的说法。需要注意，根据非绝热耦合等于零的定义，透热态按照某个固定的系数的线性组合还是透热态，也就是透热态并不是唯一的，这种不唯一性给了量子化学家构建透热态的更大的自由度。这也是目前透热化的方法多种多样的一个原因。
 
@@ -1103,7 +1116,7 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
       \subsection{势间跳跃方法与FSSH}
         势间跳跃(Surface Hopping)方法是一种混合量子经典(Mixed-Quantum-Classical)方法\footnote{需要注意混合量子经典与半经典方法(Semi-Classical)不同，
         前者一般指方法中既有经典部分又有量子部分，后者偏向量子力学做经典近似，演化一个半量子半经典的方程}，它是非绝热动力学中非常常用的一类，尽管很早就有类似的
-        思路，直到1990年John Tully提出了最少跃迁的势间跳跃(Fewest Switches Surface Hopping, FSSH)方法\footnote{The Journal of Chemical Physics 93, 1061(1990): Molecular dynamics with electronic transitions}，在这之后surface hopping方法被大量使用并且一直被发展，王老师课题组的核心研究方向就是SH方法中某些复杂问题的处理以及将其往更大体系更多自由度推广。
+        思路，直到1990年John Tully提出了最少跃迁的势间跳跃(Fewest Switches Surface Hopping, FSSH)方法\cite{Tully1990}，在这之后surface hopping方法被大量使用并且一直被发展，王老师课题组的核心研究方向就是SH方法中某些复杂问题的处理以及将其往更大体系更多自由度推广。
 
         在势间跳跃方法，原子核做经典处理，按照分子动力学的方法运动，但是其感受到的势能是由电子势能而非力场提供，电子的势能是根据电子的Schr\"odinger方程描述的，即电子的运动是量子处理。简单地说，如果读者熟悉分子动力学，那么这套方法理解起来是非常容易的，它的思路非常平凡，即在一个某一个时刻开始，在$dt$的时间间隔内用经典方法演化核的运动，然后计算电子波函数在这个$dt$内的演化，电子势能梯度为原子核的运动提供力，进而演化下一个时刻的原子核运动和电子运动，如此重复，就可以得到非绝热动力学的模拟结果。
 
@@ -1139,17 +1152,20 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
       \subsection{鸟瞰SH方法中的特殊问题}
         本小节将会简要地介绍在SH发展这么多年来，出现的很多问题，包括王老师组学长学姐在这方面的工作的简介，但是由于编者水平有限，只能略作介绍，并且有很大概率在细节上理解不全面甚至有错误，而王老师课题组的各位学长学姐在这方面有更多可说的内容。
 
-        \paragraph{Trivial Crossing：}在势能面上演化动力学的过程中，势能面通常会有各类的交叉和相互作用，多数可以归为Trivial Crossing或者Avoided Crossing，两者的定义图如下所示
-        \begin{center}
-          \includegraphics[width = 10cm]{fig/crossing.jpg}
-        \end{center}
+        \paragraph{Trivial Crossing：}在势能面上演化动力学的过程中，势能面通常会有各类的交叉和相互作用，多数可以归为Trivial Crossing或者Avoided Crossing，两者的定义Figure \ref{two kinds of crossing}所示
+        \begin{figure}
+          \centering
+          \includegraphics[width = 8cm]{fig/crossing.jpg}
+          \caption{\textbf{SH两种Crossing的定义}}
+          \label{two kinds of crossing}
+        \end{figure}
         图中表示分子1和2之间有相互作用，当它们的势能面交叉时就会产生Avoided Crossing，1和3之间由于距离较远没有相互作用，但是在能量空间下，它们对应的态可能十分接近，这样使得它们的势能面存在交叉，即为Trivial Crossing。另外，Trival Crossing并非只存在于实空间距离很远的两个分子上，即使在同一个分子中，由于轨道之间没有或者相互作用非常小(比如对称性不同的分子轨道，$\sigma$键和$\pi$键之间)但是能量接近，也是可能发生Trivial Crossing的。
 
         但是由于电子结构计算是按照能量排序的，所以在发生Trivial Crossing的地方会有能级顺序的错误，误将别处毫不相关的能级作为了当前能级，而且根据等式(\ref{analytical dij})，此处的NAC是无法被描述的，通常会由于数值计算时过大而使得跃迁概率接近1，发生不该发生的跃迁，比如从分子1直接跳到分子3。
 
-        为了处理这类问题，王老师发展了很多相关方法，这也是王老师前几年工作的重心。比如SC-FSS和CC-FSSH，后者把常见的Trivial Crossing进行了分类，每一类都有对应的解决方案，基本已经可以处理此类问题，具体内容可以参阅相关文章\footnote{J. Phys. Chem. Lett., 2014, 5 (4), pp 713–719: A Simple Solution to the Trivial Crossing Problem in Surface Hopping}\footnote{J. Phys. Chem. Lett., 2018, 9 (15), pp 4319–4325: Crossing Classified and Corrected Fewest Switches Surface Hopping}\footnote{J. Chem. Phys. 148, 104106 (2018): An efficient solution to the decoherence enhanced trivial crossing problem in surface hopping}。
+        为了处理这类问题，王老师发展了很多相关方法，这也是王老师前几年工作的重心。比如SC-FSS和CC-FSSH，后者把常见的Trivial Crossing进行了分类，每一类都有对应的解决方案，基本已经可以处理此类问题，具体内容可以参阅相关文章\cite{wang2014simple}\cite{Qiu2018}\cite{Bai2018}。
 
-        \paragraph{超交换问题：}我们继续用上文中的图，同时联想化学里的过渡态理论，如果只有1态和2态之间、2态和3态之间有相互作用，但是1态和3态之间没有，按照SH方法的处理，如果想从1态到3态必须经过2态，但如果此时2态有较高的能量，高于此时原子核运动的动能，如果跃迁发生，就不满足能量守恒，尽管1态和3态之间的势能差可以被原子核动能满足，由于SH的操作方法，系统是不可能从1态到达3态的。但这并非真实情况，在量子力学中存在隧穿行为，因此实际上体系是会从1态到达3态的，SH这个错误的来源是忽略了原子核的量子效应导致的。当然，这不意味着SH不能处理超交换问题，王老师提出了在Liouville空间下Surface Hopping\footnote{J. Phys. Chem. Lett., 2015, 6 (19), pp 3827–3833: Fewest Switches Surface Hopping in Liouville Space}，可以很好地处理超交换和隧穿的问题。
+        \paragraph{超交换问题：}我们继续用上文中的图，同时联想化学里的过渡态理论，如果只有1态和2态之间、2态和3态之间有相互作用，但是1态和3态之间没有，按照SH方法的处理，如果想从1态到3态必须经过2态，但如果此时2态有较高的能量，高于此时原子核运动的动能，如果跃迁发生，就不满足能量守恒，尽管1态和3态之间的势能差可以被原子核动能满足，由于SH的操作方法，系统是不可能从1态到达3态的。但这并非真实情况，在量子力学中存在隧穿行为，因此实际上体系是会从1态到达3态的，SH这个错误的来源是忽略了原子核的量子效应导致的。当然，这不意味着SH不能处理超交换问题，王老师提出了在Liouville空间下Surface Hopping\cite{wang2015fewest}，可以很好地处理超交换和隧穿的问题。
 
         \paragraph{退相干：}Surface Hopping方法中最大的短板之一就是被称为“过相干(over-coherence)”的现象。为了介绍这种现象，我们先回忆一下FSSH，我们利用运动方程来演化经典的原子核运动和量子的电子演化，这里其实存在一个问题，即使电子的状态和核受力是预先对应好的，但是两者运动的自洽性仍然难以保证。全量子的方法可以保证这个自洽性的存在，SH对原子核的经典处理是过相干现象的缘由。
 
@@ -1160,6 +1176,19 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
     \section{全局优化问题}
       全局优化问题其实是个数学问题，简单地说就是有一个复杂的高维函数，我们如何求得其最小值的问题，但是这个数学问题在化学物理等领域都有重要的意义，我们也主要是全局优化算法在我们的问题中的应用。以最常见的也是王老师课题组之前处理的一个例子，如果任意两个原子之间的相互作用势能是LJ势，给定两个原子，可以通过对坐标求导等于0的方式找到这两个原子的最稳定的位置，但是如果是三个原子，事情就会变得麻烦起来，那如果是一千个原子呢？这个问题其实等价于一个三千维的函数的最小值问题，想通过简单的解析方法求解是几乎不可能的。即使人们有强大的计算机，这样的一个问题还是不简单的，尤其是自由度增多时额外增加的计算量更是不可估计的。人们基于各种各样的思路发展了一系列全局优化算法，限于编者水平，在这里我们只能简单介绍其中的几种。
 
+      我们就以分子原子团簇的优化举例子，我们希望优化的函数是体系总能量。我们先介绍一种最简单的思路，那就是梯度下降，即使是高维函数，你总是可以通过数值的方法求解这一点上能量关于某个自由度的导数(梯度)，然后沿着负导数的方向移动，直到达到导数为0为止。这相当于沿着受力的方向一路运动直到达到一个极小值，这种方法的问题也是显然的，就是我们只能达到极小值而非最小值，当自由度非常多时，体系的极小值点可能非常之多，我们一般称这种方法为局部优化，譬如高斯等软件计算分子的最优构型时就是用的类似的思路(当然不是类似LJ势的分子力场的势能，而是量子化学计算的势能)。
 
+      为了尽可能找到极小值，我们需要尽可能搜查整个势能面(直接遍历的计算量是巨大的，但是小体系少自由度情况也可以做)，这意味着我们有时需要反着能量下降的方向运动进而跨过一些势垒区域，但是我们又不需要跨越太大的无意义的势垒，解决这个问题就是利用Monte Carlo模拟中接受分子构型的类似方法，认为有一个所谓的温度存在，即不是能量最低原理，而是满足某种分布。在全局优化问题里，我们不一定采用玻尔兹曼分布型的函数，原则上为了达成目的的任何函数形式都可以。当体系沿着某一个自由度能量升高时，用这个函数来判断是否接受构型。
+
+      上面两个思路是全局优化方法的基础，我们通常是多种思路混合得到最后的算法。正如刚刚说的，全局优化算法里可以用遍历的方法寻找最小值，这是最简单粗暴计算量最大的，另一个极端就是完全取随机构型，然后比较取到的随机构型的能量然后从中选中最小的。显然这两种方法都不是特别靠谱，接下来我们介绍一种常用的也是王老师组处理LJ团簇的方法：\textbf{Basin Hopping}。简单的说，这是一种与MC模拟相类似的方法，核心思路为我先有一个初始的分子构型，然后对其进行局部优化得到一个局部优化的结构和对应的能量。然后在这个构型上每个自由度随机移动一点，从这个随机移动得到的构型再做局部优化，如此反复，直接有足够多的极小值，从中挑出最小的那个。这个方法十分简单有效，其随机移动的思路与MC模拟相仿，甚至目的都是一样的：跨过一些势垒尽可能遍历相空间。而王老师课题组还在这里面加入了很多很多为了节省计算量的功能，具体细节只有仔细看过代码才能理解。但是其中非常关键的一部分就是把绝大多数的优化在离散空间内完成，这样原子间的能量就不用每次都计算，而是把离散空间每个格点距离的能量提前算好保存在一个数组里，以后每次使用时只需要调用数组元素就行了。
+
+      另一类比较火爆的思路就是\textbf{遗传算法}，这是一个借鉴生物遗传进化的非常有趣的算法。我们首先把分子的结构量化定义为一系列变量，称之为基因，最初，生成一系列随机的结构，称为亲代，然后定义一种“进化”，即用他们的能量函数来表征他们的生存优势，经过一次次筛选，只有能量更低的(生存优势更大)的分子会留下。然后这些有优势的分子进行“杂交”，将他们的结构按某种方法进行组合生成新的子代分子，子代的分子之间再按照某种方式进行筛选，留下能量更低的分子，再进行“杂交”，如此反复，最后就能得到能量较低的“进化”之后的分子。
+
+      向生物学习也是全局优化中的常见思路，除了遗传算法之外，现在还有基于蚂蚁寻找食物思路的算法等，不予详细介绍。另外，可以看出，机器学习在这方面也肯定有一定的建树，但是势能面通常过于复杂，简单的机器学习网络可能无法实现。
+
+      当然，全局优化的问题远远不限于分子能量优化上，包括求条件极值，减小误差，拟合等多种问题都可以使用全局优化的思路进行处理，有时候往往能产生有趣的效果。\sout{初一看只有一两个做全局优化的学长学姐，做到最后就会发现，组内一大半的人都在做全局优化}
+
+      \bibliographystyle{unsrt}
+      \bibliography{reference}
   \end{document} 
 

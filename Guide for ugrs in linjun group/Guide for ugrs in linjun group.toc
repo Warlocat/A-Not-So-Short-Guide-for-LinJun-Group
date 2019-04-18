@@ -17,8 +17,8 @@
 \contentsline {subsection}{\numberline {6.2}绝热表象与透热表象}{22}
 \contentsline {subsection}{\numberline {6.3}势间跳跃方法与FSSH}{23}
 \contentsline {subsection}{\numberline {6.4}鸟瞰SH方法中的特殊问题}{24}
-\contentsline {paragraph}{Trivial Crossing：}{25}
+\contentsline {paragraph}{Trivial Crossing：}{24}
 \contentsline {paragraph}{超交换问题：}{25}
-\contentsline {paragraph}{退相干：}{26}
+\contentsline {paragraph}{退相干：}{25}
 \contentsline {paragraph}{相位修正：}{26}
 \contentsline {section}{\numberline {7}全局优化问题}{26}
