@@ -2,7 +2,7 @@
 % 使用 ctexart 文类，UTF-8 编码
 \documentclass{article}
   \usepackage{xeCJK,indentfirst}
-  \usepackage{amsfonts, amsmath, amssymb}
+  \usepackage{amsfonts, amsmath, amssymb,amsthm}
   \usepackage{graphicx}
   \usepackage[normalem]{ulem}
   \usepackage{listings}
@@ -28,7 +28,6 @@
   \newtheorem{theorem}{Theorem}[section]
   \newtheorem{lemma}{Lemma}  
   \newtheorem{definition}{Definition}[section]
-  \newtheorem{proof}{Proof}[section]  
   \numberwithin{equation}{section}
 
   \newcommand{\bra}[1]{\langle #1 |}
@@ -128,16 +127,16 @@
 
       P.S :输入不存在的文件可直接创立该文件；
 
-    vim有一个梗，就是几乎所有的人刚上手的时候都不知道{\textbf 该怎么退出}。在这里面稍微描述一下最基本的使用方法：
+    vim有一个梗，就是几乎所有的人刚上手的时候都不知道\textbf{该怎么退出}。在这里面稍微描述一下最基本的使用方法：
     \begin{description}
       \item[i / Ins] 如果已经打开了某个文本，那么这两个键中的一个能够允许你对文本作出修改。它左下角会显示 ``--INSERT--'' 这样的文段，这说明你处在编辑模式，这时候你按出的大部分操作会如同你使用大部分文本编辑器的时候一样，会完整地呈现在你正在修改的文本上。
-      \item[Esc] 无论你处在何种模式，按了Esc你就能回到正常模式，在该模式下你可以用它自身的快捷键来直接作出一些修改，也可输入命令来完成别的操作（比如{\textbf 退出}）。
+      \item[Esc] 无论你处在何种模式，按了Esc你就能回到正常模式，在该模式下你可以用它自身的快捷键来直接作出一些修改，也可输入命令来完成别的操作（比如\textbf{退出}）。
 
       \item[:q!] 这里`:'表示进行对vim程序自身的命令，`q'是quit，`!'表示强制。也就是输了这个命令并按回车后会强制退出并不保存文件。
 
       \item[:wq] 以此类推，这个表示的是保存并退出。没错，`:w'就是进行保存，并不退出。
     \end{description}
-    好了，现在你也是会用vim的人了！跟我一起喊，\sout{vim天下第一！}
+    好了，现在你也是会用vim的人了\footnote{在服务器输vimtutor回车有惊喜！}！跟我一起喊，\sout{vim天下第一！}
     \item[pwd]
       显示所在目录路径；它会显示所处目录的绝对路径，而这个绝对路径是你在任何别的目录下都能访问的。从该角度出发,事实上别的几乎所有操作都可以指定绝对路径（比如简单的访问，或者复制，或者在程序里面调用/生成文件）。
 
@@ -261,16 +260,16 @@
     \end{quote}
     传热这东西，它满足一个扩散方程
     \begin{equation}
-	    \frac{\partial u}{\partial t} -a^2 (\frac{\partial ^2 u}{\partial x^2 } + \frac{\partial^2 u}{\partial y^2} + \frac{\partial ^2 u}{\partial z^2}  ) = 0
+	    \frac{\partial u}{\partial t} -a^2 (\frac{\partial ^2 u}{\partial x^2 } + \frac{\partial^2 u}{\partial y^2} + \frac{\partial ^2 u}{\partial z^2}  ) = 0.
     \end{equation}
     稳态，也就是它不随时间变化，$\frac{\partial u}{\partial t} = 0$,而这是二维，所以
     \begin{equation}
-	    \frac{\partial ^2 u}{\partial x^2 } + \frac{\partial ^2 u}{\partial y^2 } = 0
+	    \frac{\partial ^2 u}{\partial x^2 } + \frac{\partial ^2 u}{\partial y^2 } = 0.
 	    \label{2Ddiffusion}
     \end{equation}
     先分离变量，设$u=X(x)Y(y)$,代入(\ref{2Ddiffusion})，左右同除以$u$,
     \begin{equation}
-	     \frac{d ^2 X}{X d x^2} = - \frac{d ^2 Y}{Y d y^2} = -k^2 
+	     \frac{d ^2 X}{X d x^2} = - \frac{d ^2 Y}{Y d y^2} = -k^2 .
     \end{equation}
     由于左边只关于$x$,右边只关于$y$,那么它们只能等于一个常数，考虑到在$x$方向上的边界条件（两边为零，不应该是指数型函数），它们应等于一个负数$-k^2$.
     直接解这个常微分方程，得到
@@ -278,26 +277,26 @@
     	\begin{cases}
 		X = A_k\sin{kx} + B_k\cos{kx} \\
 		Y = C_k e^{-kt}
-    	\end{cases}
+    	\end{cases}.
     \end{equation}
     由于这个世界实在不太可能有无穷大的温度，故$Y = e^{kt}$项不考虑。
 
     考虑到$u\big|_{x=0} = u\big|_{x=a} = 0$，$k$应该要满足某种条件才能满足这个，那么事实上
     \begin{equation}
-	    X = A_n \sin{\frac{n\pi x}{a}} , k = \frac{n\pi x}{a}, n \in N_+
+	    X = A_n \sin{\frac{n\pi x}{a}} , k = \frac{n\pi x}{a}, n \in N_+.
     \end{equation}
     由于前面提到的本征值问题，$-k^2$是$X$的常微分方程的本征值，对应本征函数构成完备基，对$Y$也有相应情况，从而$u$可以展开为$XY$的线性组合，即
     \begin{equation}
-	    X = \sum_n A_n \sin{\frac{n\pi x}{a}} e^{- \frac{n\pi y}{a}}
+	    X = \sum_n A_n \sin{\frac{n\pi x}{a}} e^{- \frac{n\pi y}{a}}.
     \end{equation}
     可是……$A_n$怎么确定呀？
     
     就是广义傅立叶级数呀！
     注意到$u\big|_{y=0} = u_0$,有
     \begin{equation}
-	    A_n = \int ^a_0 u_0 \sin{\frac{n\pi x}{a}} \, dx = \frac{a u_0}{n\pi} (1-\cos{n\pi}) 
+	    A_n = \int ^a_0 u_0 \sin{\frac{n\pi x}{a}} \, dx = \frac{a u_0}{n\pi} (1-\cos{n\pi}) .
     \end{equation}
-    于是我们成功地获得了温度分布的解析解!(?)\footnote{当然有些人会觉得级数展开不算解析解。能展开成简单函数求和已经不容易了\sout{饶了我吧}}
+    于是我们成功地获得了温度分布的解析解!(?)\footnote{当然有些人会觉得级数展开不算解析解。能展开成简单函数求和已经不容易了。}
 
     花了这么多篇幅，只是想要说明完备基展开是一个非常重要的内容，它提供了一个解决复杂的微分方程问题的方法\footnote{其实线性代数里的本征值和本征向量也有同样的性质。}。同时它从某种角度上已经道明了量子力学的一个重要的点：
     \begin{center}
@@ -309,21 +308,19 @@
     我们先用曾经描述的量子力学符号来说说这个完备基。对于某个完备的特征值集$\{\lambda_n\}$和特征向量集$\{| e_i \rangle \}$，我们认为特征向量集已经正交归一\footnote{即不同的两个特征向量之间相互正交，且每个向量模为1（即\sout{自交}自己与自己的内积为1）。你可能还记得存在多重特征根的情况，此时你或许也记得这个特征根对应多个特征向量，它们并不一定需要正交。那么你想想就能明白，你能通过某些奇技淫巧让它们互相之间变得正交并仍旧是特征向量（比如大名鼎鼎的Gram-Schmidt 正交化）。}，那么有定理
     \begin{theorem}
 	\begin{equation}
-		\sum \ket{e_i}\bra{e_i} = 1 \, / \, \int dq' \, \ket{q'}\bra{q'} = 1
+		\sum \ket{e_i}\bra{e_i} = 1 \, / \, \int dq' \, \ket{q'}\bra{q'} = 1.
 	\end{equation}
     \end{theorem}
 
-    \sout{编者自我检讨：写的太快了}
-
     $| e_i \rangle \langle e_i | $是一个全新的操作，事实上它其实就是一个算符。为什么呢？因为你可以看到，
     \begin{equation}
-	    (| e_i \rangle \langle e_i | ) | \xi \rangle = | e_i \rangle \langle e_i | \xi \rangle = \langle e_i | \xi \rangle | e_i \rangle  
+	    (| e_i \rangle \langle e_i | ) | \xi \rangle = | e_i \rangle \langle e_i | \xi \rangle = \langle e_i | \xi \rangle | e_i \rangle  .
     \end{equation}
     这是由于$ \langle e_i | \xi \rangle $是一个数，所以它可以游荡在任何地方（向量可以非常自然地乘上任何一个数而不需要管顺序）。也就是我作用于$| \xi \rangle $然后获得了一个新的向量，那么它就是一个算符。
 
     $1$是沿用了Dirac大佬的写法\footnote{编者表示被Dirac虐得越多\sout{对Dirac越爱得深沉}}，就是表示单位算符（或者单位矩阵），作用后得到原来的结果，即
     \begin{equation}
-    	1 | \xi \rangle = | \xi \rangle 
+    	1 | \xi \rangle = | \xi \rangle .
     \end{equation}
     所以上面的定理就是在说我把特征向量按照那种方式组合求和后它就会变成单位算符。
 
@@ -331,13 +328,13 @@
     	证明思路：验证其对完备基中任意向量都成立$\Rightarrow$空间内任意向量皆成立
 
 \begin{equation}
-	\sum_i \ket{e_i}\bracket{e_i}{e_j} = \sum_i\ket{e_i} \delta_{ij} = \ket{e_j}
+	\sum_i \ket{e_i}\bracket{e_i}{e_j} = \sum_i\ket{e_i} \delta_{ij} = \ket{e_j}.
 \end{equation}
 从而说明该算符对所有特征向量都满足自身为单位算符。
 
 利用展开的唯一性(即一个向量只有一种方式展开/系数组是唯一的)，得到
 \begin{equation}
-\ket{\psi} = \sum c_i \ket{e_i} \Rightarrow c_i = \bracket{e_i}{\psi}
+\ket{\psi} = \sum c_i \ket{e_i} \Rightarrow c_i = \bracket{e_i}{\psi}.
 \end{equation}
 因此对所有向量皆满足自身为单位算符。
     \end{proof}
@@ -351,7 +348,7 @@
     \begin{equation}
 	    \int \delta(x) \, dx = 1 
     \end{equation}
-    由此可以说明，
+    它还有这些性质，
     \begin{align}
 \delta(-x) & = \delta(x) \\
 x\delta(x) & = 0 \\
@@ -369,7 +366,185 @@ f(x) \delta(x-a) &=  f(a)\delta(x-a)\\
       ——李睿，谈傅立叶变换时
     \end{flushright}
   \end{quote}     
-  咕咕……咕咕咕……
+  还记得傅立叶级数嘛？它长这样：
+  \begin{theorem}
+  当一个有界函数在$[-l,l]$可积时，该函数可展开为：
+  \begin{equation}
+    f(x) = \sum_k a_k \cos{\omega_k x} + b_k \sin{\omega_k x}.
+  \end{equation}
+  其中，
+  \begin{equation} 
+\begin{cases}
+  a_k = \frac{1}{\delta_k l}\int _{-l} ^l f(\xi) \cos{\omega_k} \xi \, d\xi \\
+  b_k =  \frac{1}{l} \int _{-l} ^l f(\xi) \sin{\omega_k \xi} \, d\xi 
+\end{cases}
+.
+\end{equation}
+其中
+\begin{equation}
+\omega_k = \frac{k \pi}{l}.
+\end{equation}
+以及
+\begin{equation}
+  \delta_k =
+  \begin{cases}
+  1, \quad k = 0 \\
+  2, \quad k \neq 0 
+  \end{cases}
+  .
+\end{equation}
+ \end{theorem}
+
+我们刚刚描述过完备基展开，而且$\sin{\frac{k \pi}{l} x}$和$\cos{\frac{k \pi}{l} x}$恰好是 $f''(x) + \lambda f(x) = 0$的解，所以它们在$[-l,l]$上构成了完备基，而且它们互相之间是正交的。在这里值得一提的是，$\sin{\frac{k \pi}{l} x}$满足了\textbf{第一类齐次边界条件}，即在边界上函数值为零，而$\cos{\frac{k \pi}{l} x}$满足了\textbf{第二类齐次边界条件}，即在边界上的一阶导为零，这允许我们在各类边界条件下研究一个物理问题。同时从某种意义上，我们可以说
+\begin{center}
+\textbf{边界条件导致了特征值的分立。}
+\end{center}
+比如在氢原子模型的解里，我们事实上引入了一些“自然边界条件”：在球坐标下的函数必须要满足
+\begin{equation}
+f(r,\theta, \phi) = f(r,\theta, \phi + 2\pi)
+\end{equation}
+这引发了角向的特征值分立，也就是\textbf{磁量子数的分立}。
+
+而我们认为波函数在空间的任何一个点都是不发散的，因此在$\theta$方向上必须要展开成多项式而非无穷级数，而$\phi$方向的方程使它必须要符合连属Legendre多项式的形式\footnote{详细讨论还是见任何一本数学物理方法的书。}。同时波函数在全空间下是绝对可积的（因为我们已经定义了波函数的内积——它必须是在Hilbert空间下的），所以在无穷远处它必须收敛于零，这使得径向函数必须满足球Bessel函数的形式。所以从某种角度而言，\textbf{量子力学的能级分立是由于量子力学是使用一个偏微分方程描述且存在边界条件的}。
+
+如果我们想要展开的是一个全实数域的函数呢？令$l \to \infty$,我们发现它转换为一个积分，
+\begin{equation}
+  f(x) = \int _0 ^\infty A(\omega) \cos{\omega x} \, d\omega + \int _0 ^\infty B(\omega) \sin{\omega x} \, dx  
+.
+\end{equation}
+而系数为
+\begin{equation}
+\begin{cases}
+  A(\omega) = \frac{1}{\pi} \int ^\infty _{-\infty} f(\xi) \cos{\omega \xi} \, d\xi \\
+  B(\omega) = \frac{1}{\pi} \int ^\infty _{-\infty} f(\xi) \sin{\omega \xi}\, d\xi 
+\end{cases}
+.
+\end{equation}
+
+我们对它们进行改装，便转化为了复数域中的傅立叶变换以及对应的傅立叶逆变换，即
+\begin{equation}
+F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx} \, dx 
+.
+\end{equation}
+以及
+\begin{equation}
+  \mathcal{F}^{-1} [F(k)] = \int_{-\infty} ^\infty F(k) e^{ikx} \, dk
+\end{equation}
+ 这便是一般意义下的傅立叶变换\footnote{其实也有不少地方把那个系数$\frac{1}{2\pi}$分摊在正变换与逆变换上。}。我们从完备基上也可以理解，事实上傅立叶变换就是对$e^{-ikx}$进行展开，从而转化为频谱信息。
+
+我们还能够引入各种定理，
+\begin{theorem}
+\begin{equation}
+  \mathcal{F}[f'(x)] = ik F(k)
+  \end{equation}
+\end{theorem}
+\begin{proof}
+\begin{align*}
+  \mathcal{F}[f'(x)] &=\frac{1}{2\pi}\int ^\infty_\infty f'(x) e^{-ik x} \, dx \\
+         &= \frac{1}{2\pi}\left[ f(x) e^{-ik x} \right] ^\infty _{-\infty} - \frac{1}{2\pi}\int ^\infty _{-\infty} f(x) \left[ e^{-ik x} \right] ' \, dx 
+\end{align*}
+傅立叶变换要求原函数在整个空间上绝对可积，从而有$\lim_{x\to \pm \infty} f(x) = 0$,所以
+\[
+  \mathcal{F}[f'(x)] = - \frac{1}{2\pi}\int ^\infty_{-\infty} f(x) \left[ e^{-ik x} \right] '  \, dx = ik F(k) 
+.\] 
+\end{proof}
+\begin{theorem}
+\begin{equation}
+  \mathcal{F}[f(x-x_0)] = e^{-ikx_0} F(k)
+\end{equation}
+\end{theorem}
+\begin{proof}
+  \[
+    \mathcal{F}[f(x-x_0)] =\frac{1}{2\pi} e^{-ikx_0}\int ^\infty_{-infty} f(x-x_0) e^{-ik(x-x_0)} \, d(x-x_0) = e^{-ikx_0} F(k)
+  .\] 
+\end{proof}
+\begin{theorem}
+  \begin{equation}
+    \mathcal{F}[f_1(x) * f_2(x)] = 2\pi F_1(k)F_2(k)
+  \end{equation}
+\end{theorem}
+\begin{proof}
+  \[
+    \mathcal{F}[f_1*f_2] = \frac{1}{2\pi}\int ^\infty_{-\infty} \left[ \int ^\infty_{-\infty} f_1(\xi) f_2(x-\xi) \, d\xi   \right] e^{-ikx} \, dx 
+  .\] 
+  交换积分次序，
+  \[
+    \mathcal{F}[f_1*f_2] = \frac{1}{2\pi} \int ^\infty _{-\infty} f_1(\xi) \left( \int ^\infty_{-\infty} f_2(x-\xi) e^{-ik x} \, dx  \right) \, d\xi 
+  .\] 
+  利用延迟定理，
+  \[
+    \mathcal{F}[f_1 * f_2] = \frac{1}{2\pi} \int ^\infty_{-\infty} f_1(\xi) e^{-k\xi} \, d\xi \cdot 2\pi F_2(k) = 2\pi F_1(k)F_2(k)
+  .\] 
+\end{proof}
+
+当然傅立叶变换不只是在一维上。我们对三维空间$\mathbf{r}$也可以做傅立叶变换，
+\[
+  F(\mathbf{k}) = \frac{1}{(2\pi)^{\frac{3}{2}}} \iiint f(\mathbf{r})  e^{-i\mathbf{k}\cdot\mathbf{r}  } \, d\mathbf{r} 
+.\] 
+
+傅立叶变换的一个非常有价值的特点是可以把导数转换为一个常数相乘，从而极大地简化方程。比如无界空间下的扩散问题，
+\[
+  u_t-a^2u_{xx} = 0
+.\] 
+初始条件：
+\[
+  u\big|_{t=0} = \phi(x)
+.\] 
+傅立叶变换再逆变换就能回到原来的样子，
+\[
+  u(x,t) = \int \mathcal{F}[u] e^{ikx} \, dk = \mathcal{F}^{-1}[\mathcal{F}[u]]
+.\] 
+对$x$做Fourier Transform,
+\[
+  \mathcal{F}[u](k,t) = \frac{1}{2\pi} \int u(x,t) e^{-ikx} \, dx 
+.\] 
+原方程便转换为
+\[
+\begin{cases}
+  \mathcal{F}[u_t] + a^2 k^2 \mathcal{F}[u] = 0 \\
+  \mathcal{F}[u]\big|_{t=0} = \mathcal{F}[\phi]
+\end{cases}
+.\] 
+\[
+  \Rightarrow \mathcal{F}[u] = \mathcal{F}[\phi] e^{-k^2 a^2 t}
+.\] 
+\[
+  u = \mathcal{F}^{-1} [\mathcal{F}[\phi] e^{-k^2a^2 t}]
+.\] 
+有
+\[
+  \mathcal{F}[f_1 * f_2] = 2\pi \mathcal{F}[f_1] \mathcal{F} [f_2]
+.\] 
+故
+\[
+  u = \frac{1}{2\pi} \phi * \mathcal{F}^{-1} e^{-k^2 a^2 t} 
+.\] 
+当然也可以直接套定义，
+\[
+  u = \int_{-\infty} ^\infty \mathcal{F}[\phi] e^{-k^2 a^2 t} e^{ikx} \, dk 
+.\] 
+\begin{align*}
+  u &= \frac{1}{2\pi}\int \int \phi(\xi) e^{-ik\xi} \, d\xi e^{ikx}  \, dk\\
+    &=\frac{1}{2\pi} \int \phi(\xi) \int e^{-k^2 a^2 t} e^{-ik(x-\xi)} \, dk  \, d\xi \\
+    &=\sqrt{\frac{\pi}{a^2 t}}\frac{1}{2\pi} \int \phi(\xi) e^{-\frac{(x-\xi)^2}{4a^2 t}} \, d\xi\\
+    &=\frac{1}{2\pi} \phi(x) * \sqrt{\frac{\pi}{a^2 t}} e^{-\frac{x^2}{4 a^2 t}}
+\end{align*}
+其中，有一步是做配方，
+\[
+  e^{-k^2a^2 t} e^{ik (x-\xi)} = e^{-a^2 t (k-\frac{i (x-\xi)}{2a^2 t})^2} e^{-\frac{(x-\xi)^2}{4a^2 t}}
+.\] 
+注意在积分该式时存在积分路径不在实轴的问题，但事实上构造回路后由于回路积分为零，故可以直接化为在实轴上的积分，从而解得最终解。
+
+傅立叶变换实现了函数在实空间和像空间之间的相互转换，而一些算符在两个空间会发生转变（如导数算符转换为常数相乘），使问题能够简化。一个经典的实例就是，
+\begin{center}
+实空间的波函数在动量空间下的完备基展开就是傅立叶变换。
+\end{center}
+当然傅立叶变换的意义不止于此，它还代表了信号和频谱之间的转换关系，使其成为信号分析的基础。
+
+薛定谔方程是什么呢？它或许是玄学，它也可能只是一个线性代数的延伸点，它也可能只是一个简单的扩散方程。你可以构建好的完备基来展开对这个体系的描述，你也可以着眼于它的偏微分方程的性质进行求解（比如用格林函数（传播子），比如用傅立叶变换）。这也就是量子力学存在很多学派的原因：量子力学的描述是多种多样的。
+
+王林军老师组存在一个一脉单传（\sout{而且马上就要断了香火}）的项目，也就是SMD（旧为PS-QHD —— Phase-Space Quantum Hamiltonian Dynamics）。Moyal得到他的体系便是充分利用了傅立叶变换的这些性质，留给后面叙述。
+
 
   \section{量子力学}
   本指南默认入门者对量子力学最基础的部分有一定的理解，因此不会从Schr\"odinger方程入手，也不会涉及五大基本假设。另外，本指南也不涉及高深内容，只有在电子结构部分会从实用的角度简单介绍电子(费米子)的二次量子化。如果你需要量子力学的基础知识，暂时可以参阅各类量子力学教材，但是各类书籍难度差别巨大，我们为初学者推荐Griffiths的量子力学导论，基本看过基础理论部分就已经能满足我们的多数需求。另外，可以参见Levine量子化学中的量子力学基础部分，推导详实。为了方便，我们第一小节为快速概念检索。
@@ -861,7 +1036,7 @@ f(x) \delta(x-a) &=  f(a)\delta(x-a)\\
   \begin{equation}
   \varepsilon_v[\Psi']=\int v(\textbf{r})n'(\textbf{r})d\textbf{r}+F[n']>\varepsilon_v[\Psi]
   \end{equation}
-  Thus the minimal property is established relative to all density functions $n'(\textbf{r})$ associated with some other external potential $v'(\textbf{r})$.\cite{PhysRev.136.B864}
+  Thus the minimal property is established relative to all density functions $n'(\textbf{r})$ associated with some other external potential $v'(\textbf{r})$.
   \end{proof}
 
   \section{非绝热动力学与势间跳跃方法}
