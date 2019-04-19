@@ -7,18 +7,18 @@
 \contentsline {subsection}{\numberline {3.1}线性代数回顾及变分法}{6}
 \contentsline {subsection}{\numberline {3.2}符号使用}{6}
 \contentsline {subsection}{\numberline {3.3}完备基展开}{7}
-\contentsline {subsection}{\numberline {3.4}傅立叶变换}{9}
+\contentsline {subsection}{\numberline {3.4}傅立叶变换}{10}
 \contentsline {section}{\numberline {4}量子力学}{13}
 \contentsline {subsection}{\numberline {4.1}快速概念检索}{13}
-\contentsline {section}{\numberline {5}量子化学-电子结构基础}{16}
-\contentsline {subsection}{\numberline {5.1}快速概念检索}{16}
+\contentsline {section}{\numberline {5}量子化学-电子结构基础}{17}
+\contentsline {subsection}{\numberline {5.1}快速概念检索}{17}
 \contentsline {section}{\numberline {6}非绝热动力学与势间跳跃方法}{21}
-\contentsline {subsection}{\numberline {6.1}非绝热耦合}{21}
-\contentsline {subsection}{\numberline {6.2}绝热表象与透热表象}{22}
-\contentsline {subsection}{\numberline {6.3}势间跳跃方法与FSSH}{23}
-\contentsline {subsection}{\numberline {6.4}鸟瞰SH方法中的特殊问题}{24}
-\contentsline {paragraph}{Trivial Crossing：}{24}
-\contentsline {paragraph}{超交换问题：}{25}
-\contentsline {paragraph}{退相干：}{25}
+\contentsline {subsection}{\numberline {6.1}非绝热耦合}{22}
+\contentsline {subsection}{\numberline {6.2}绝热表象与透热表象}{23}
+\contentsline {subsection}{\numberline {6.3}势间跳跃方法与FSSH}{24}
+\contentsline {subsection}{\numberline {6.4}鸟瞰SH方法中的特殊问题}{25}
+\contentsline {paragraph}{Trivial Crossing：}{25}
+\contentsline {paragraph}{超交换问题：}{26}
+\contentsline {paragraph}{退相干：}{26}
 \contentsline {paragraph}{相位修正：}{26}
 \contentsline {section}{\numberline {7}全局优化问题}{26}
