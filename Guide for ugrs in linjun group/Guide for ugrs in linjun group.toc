@@ -22,3 +22,6 @@
 \contentsline {paragraph}{退相干：}{25}
 \contentsline {paragraph}{相位修正：}{26}
 \contentsline {section}{\numberline {7}全局优化问题}{26}
+\contentsline {section}{\numberline {8}PS-QHD}{27}
+\contentsline {subsection}{\numberline {8.1}相空间Ehrenfest定理}{28}
+\contentsline {subsection}{\numberline {8.2}相空间分布函数}{29}
