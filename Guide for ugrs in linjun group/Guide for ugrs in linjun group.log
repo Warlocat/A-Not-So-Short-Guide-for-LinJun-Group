@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2018.7.31)  19 APR 2019 09:07
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2018.7.31)  19 APR 2019 11:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -7,19 +7,20 @@ entering extended mode
 (d:/git_projects/Guide-for-ugrs-in-linjun-group/Guide for ugrs in linjun group/Guide for ugrs in linjun group.tex
 LaTeX2e <2018-04-01> patch level 2
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
-(d:/texlive/2018/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(d:/texlive/2018/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+(d:/texlive/2018/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
+(d:/texlive/2018/texmf-dist/tex/latex/base/bk12.clo
+File: bk12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count80
-\c@section=\count81
-\c@subsection=\count82
-\c@subsubsection=\count83
-\c@paragraph=\count84
-\c@subparagraph=\count85
-\c@figure=\count86
-\c@table=\count87
+\c@chapter=\count81
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@subparagraph=\count86
+\c@figure=\count87
+\c@table=\count88
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
@@ -31,18 +32,18 @@ Package: cite 2015/02/27  v 5.5
 Package: expl3 2018/03/05 L3 programming layer (loader) 
  (d:/texlive/2018/texmf-dist/tex/latex/l3kernel/expl3-code.tex
 Package: expl3 2018/03/05 L3 programming layer (code)
-\c_max_int=\count88
-\l_tmpa_int=\count89
-\l_tmpb_int=\count90
-\g_tmpa_int=\count91
-\g_tmpb_int=\count92
-\g__intarray_font_int=\count93
-\g__prg_map_int=\count94
-\c_log_iow=\count95
-\l_iow_line_count_int=\count96
-\l__iow_line_target_int=\count97
-\l__iow_one_indent_int=\count98
-\l__iow_indent_int=\count99
+\c_max_int=\count89
+\l_tmpa_int=\count90
+\l_tmpb_int=\count91
+\g_tmpa_int=\count92
+\g_tmpb_int=\count93
+\g__intarray_font_int=\count94
+\g__prg_map_int=\count95
+\c_log_iow=\count96
+\l_iow_line_count_int=\count97
+\l__iow_line_target_int=\count98
+\l__iow_one_indent_int=\count99
+\l__iow_indent_int=\count100
 \c_zero_dim=\dimen103
 \c_max_dim=\dimen104
 \l_tmpa_dim=\dimen105
@@ -61,72 +62,72 @@ Package: expl3 2018/03/05 L3 programming layer (code)
 \l_tmpb_muskip=\muskip13
 \g_tmpa_muskip=\muskip14
 \g_tmpb_muskip=\muskip15
-\l_keys_choice_int=\count100
-\c__fp_leading_shift_int=\count101
-\c__fp_middle_shift_int=\count102
-\c__fp_trailing_shift_int=\count103
-\c__fp_big_leading_shift_int=\count104
-\c__fp_big_middle_shift_int=\count105
-\c__fp_big_trailing_shift_int=\count106
-\c__fp_Bigg_leading_shift_int=\count107
-\c__fp_Bigg_middle_shift_int=\count108
-\c__fp_Bigg_trailing_shift_int=\count109
-\l__sort_length_int=\count110
-\l__sort_min_int=\count111
-\l__sort_top_int=\count112
-\l__sort_max_int=\count113
-\l__sort_true_max_int=\count114
-\l__sort_block_int=\count115
-\l__sort_begin_int=\count116
-\l__sort_end_int=\count117
-\l__sort_A_int=\count118
-\l__sort_B_int=\count119
-\l__sort_C_int=\count120
-\l__tl_build_start_index_int=\count121
-\l__tl_build_index_int=\count122
-\l__tl_analysis_normal_int=\count123
-\l__tl_analysis_index_int=\count124
-\l__tl_analysis_nesting_int=\count125
-\l__tl_analysis_type_int=\count126
-\l__regex_internal_a_int=\count127
-\l__regex_internal_b_int=\count128
-\l__regex_internal_c_int=\count129
-\l__regex_balance_int=\count130
-\l__regex_group_level_int=\count131
-\l__regex_mode_int=\count132
-\c__regex_cs_in_class_mode_int=\count133
-\c__regex_cs_mode_int=\count134
-\l__regex_catcodes_int=\count135
-\l__regex_default_catcodes_int=\count136
-\c__regex_catcode_L_int=\count137
-\c__regex_catcode_O_int=\count138
-\c__regex_catcode_A_int=\count139
-\c__regex_all_catcodes_int=\count140
-\l__regex_show_lines_int=\count141
-\l__regex_min_state_int=\count142
-\l__regex_max_state_int=\count143
-\l__regex_left_state_int=\count144
-\l__regex_right_state_int=\count145
-\l__regex_capturing_group_int=\count146
-\l__regex_min_pos_int=\count147
-\l__regex_max_pos_int=\count148
-\l__regex_curr_pos_int=\count149
-\l__regex_start_pos_int=\count150
-\l__regex_success_pos_int=\count151
-\l__regex_curr_char_int=\count152
-\l__regex_curr_catcode_int=\count153
-\l__regex_last_char_int=\count154
-\l__regex_case_changed_char_int=\count155
-\l__regex_curr_state_int=\count156
-\l__regex_step_int=\count157
-\l__regex_min_active_int=\count158
-\l__regex_max_active_int=\count159
-\l__regex_replacement_csnames_int=\count160
-\l__regex_match_count_int=\count161
-\l__regex_min_submatch_int=\count162
-\l__regex_submatch_int=\count163
-\l__regex_zeroth_submatch_int=\count164
-\g__regex_trace_regex_int=\count165
+\l_keys_choice_int=\count101
+\c__fp_leading_shift_int=\count102
+\c__fp_middle_shift_int=\count103
+\c__fp_trailing_shift_int=\count104
+\c__fp_big_leading_shift_int=\count105
+\c__fp_big_middle_shift_int=\count106
+\c__fp_big_trailing_shift_int=\count107
+\c__fp_Bigg_leading_shift_int=\count108
+\c__fp_Bigg_middle_shift_int=\count109
+\c__fp_Bigg_trailing_shift_int=\count110
+\l__sort_length_int=\count111
+\l__sort_min_int=\count112
+\l__sort_top_int=\count113
+\l__sort_max_int=\count114
+\l__sort_true_max_int=\count115
+\l__sort_block_int=\count116
+\l__sort_begin_int=\count117
+\l__sort_end_int=\count118
+\l__sort_A_int=\count119
+\l__sort_B_int=\count120
+\l__sort_C_int=\count121
+\l__tl_build_start_index_int=\count122
+\l__tl_build_index_int=\count123
+\l__tl_analysis_normal_int=\count124
+\l__tl_analysis_index_int=\count125
+\l__tl_analysis_nesting_int=\count126
+\l__tl_analysis_type_int=\count127
+\l__regex_internal_a_int=\count128
+\l__regex_internal_b_int=\count129
+\l__regex_internal_c_int=\count130
+\l__regex_balance_int=\count131
+\l__regex_group_level_int=\count132
+\l__regex_mode_int=\count133
+\c__regex_cs_in_class_mode_int=\count134
+\c__regex_cs_mode_int=\count135
+\l__regex_catcodes_int=\count136
+\l__regex_default_catcodes_int=\count137
+\c__regex_catcode_L_int=\count138
+\c__regex_catcode_O_int=\count139
+\c__regex_catcode_A_int=\count140
+\c__regex_all_catcodes_int=\count141
+\l__regex_show_lines_int=\count142
+\l__regex_min_state_int=\count143
+\l__regex_max_state_int=\count144
+\l__regex_left_state_int=\count145
+\l__regex_right_state_int=\count146
+\l__regex_capturing_group_int=\count147
+\l__regex_min_pos_int=\count148
+\l__regex_max_pos_int=\count149
+\l__regex_curr_pos_int=\count150
+\l__regex_start_pos_int=\count151
+\l__regex_success_pos_int=\count152
+\l__regex_curr_char_int=\count153
+\l__regex_curr_catcode_int=\count154
+\l__regex_last_char_int=\count155
+\l__regex_case_changed_char_int=\count156
+\l__regex_curr_state_int=\count157
+\l__regex_step_int=\count158
+\l__regex_min_active_int=\count159
+\l__regex_max_active_int=\count160
+\l__regex_replacement_csnames_int=\count161
+\l__regex_match_count_int=\count162
+\l__regex_min_submatch_int=\count163
+\l__regex_submatch_int=\count164
+\l__regex_zeroth_submatch_int=\count165
+\g__regex_trace_regex_int=\count166
 \c_empty_box=\box26
 \l_tmpa_box=\box27
 \l_tmpb_box=\box28
@@ -169,26 +170,26 @@ Package: expl3 2018/03/05 L3 programming layer (code)
 \l__coffin_scaled_width_dim=\dimen133
 ) (d:/texlive/2018/texmf-dist/tex/latex/l3kernel/l3xdvipdfmx.def
 File: l3xdvidpfmx.def 2017/03/18 v L3 Experimental driver: xdvipdfmx
-\g__driver_image_int=\count166
+\g__driver_image_int=\count167
 ))
 Package: xeCJK 2018/04/07 v3.7.0 Typesetting CJK scripts with XeLaTeX
  (d:/texlive/2018/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty
 Package: xtemplate 2018/02/21 L3 Experimental prototype document functions
 \l__xtemplate_tmp_dim=\dimen134
-\l__xtemplate_tmp_int=\count167
+\l__xtemplate_tmp_int=\count168
 \l__xtemplate_tmp_muskip=\muskip16
 \l__xtemplate_tmp_skip=\skip49
 ) (d:/texlive/2018/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2018/02/21 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count168
-\g__xparse_grabber_int=\count169
-\l__xparse_m_args_int=\count170
-\l__xparse_mandatory_args_int=\count171
-\l__xparse_v_nesting_int=\count172
+\l__xparse_current_arg_int=\count169
+\g__xparse_grabber_int=\count170
+\l__xparse_m_args_int=\count171
+\l__xparse_mandatory_args_int=\count172
+\l__xparse_v_nesting_int=\count173
 ) (d:/texlive/2018/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
 Package: l3keys2e 2018/02/21 LaTeX2e option processing using LaTeX3 keys
 )
-\l__xeCJK_tmp_int=\count173
+\l__xeCJK_tmp_int=\count174
 \l__xeCJK_tmp_box=\box41
 \l__xeCJK_tmp_dim=\dimen135
 \l__xeCJK_tmp_skip=\skip50
@@ -197,9 +198,9 @@ Package: l3keys2e 2018/02/21 LaTeX2e option processing using LaTeX3 keys
 . 
 . Defining command \xeCJKShipoutHook with sig. '' on line 150.
 .................................................
-\g__xeCJK_space_factor_int=\count174
-\l__xeCJK_begin_int=\count175
-\l__xeCJK_end_int=\count176
+\g__xeCJK_space_factor_int=\count175
+\l__xeCJK_begin_int=\count176
+\l__xeCJK_end_int=\count177
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
@@ -246,7 +247,7 @@ Package: l3keys2e 2018/02/21 LaTeX2e option processing using LaTeX3 keys
 . Defining command \xeCJKResetCharClass with sig. '' on line 670.
 .................................................
 \l__xeCJK_last_skip=\skip51
-\g__xeCJK_node_int=\count177
+\g__xeCJK_node_int=\count178
 \c__xeCJK_CJK_node_dim=\dimen136
 \c__xeCJK_CJK-space_node_dim=\dimen137
 \c__xeCJK_default_node_dim=\dimen138
@@ -256,7 +257,7 @@ Package: l3keys2e 2018/02/21 LaTeX2e option processing using LaTeX3 keys
 \l__xeCJK_ccglue_skip=\skip52
 \l__xeCJK_ecglue_skip=\skip53
 \l__xeCJK_punct_kern_skip=\skip54
-\l__xeCJK_last_penalty_int=\count178
+\l__xeCJK_last_penalty_int=\count179
 \l__xeCJK_last_bound_dim=\dimen142
 \l__xeCJK_last_kern_dim=\dimen143
 .................................................
@@ -264,7 +265,7 @@ Package: l3keys2e 2018/02/21 LaTeX2e option processing using LaTeX3 keys
 . 
 . Defining command \xeCJKnobreak with sig. '' on line 1889.
 .................................................
-\l__xeCJK_widow_penalty_int=\count179
+\l__xeCJK_widow_penalty_int=\count180
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
@@ -332,7 +333,7 @@ Package: l3keys2e 2018/02/21 LaTeX2e option processing using LaTeX3 keys
 . 
 . Defining command \setCJKfallbackfamilyfont with sig. 'mom' on line 3059.
 .................................................
-\g__xeCJK_family_int=\count180
+\g__xeCJK_family_int=\count181
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
@@ -394,9 +395,9 @@ Package: l3keys2e 2018/02/21 LaTeX2e option processing using LaTeX3 keys
 . 
 . Defining command \setCJKmathfont with sig. 'om' on line 3870.
 .................................................
-\l__xeCJK_fam_int=\count181
-\g__xeCJK_fam_allocation_int=\count182
-\l__xeCJK_verb_case_int=\count183
+\l__xeCJK_fam_int=\count182
+\g__xeCJK_fam_allocation_int=\count183
+\l__xeCJK_verb_case_int=\count184
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
@@ -412,14 +413,14 @@ Package: l3keys2e 2018/02/21 LaTeX2e option processing using LaTeX3 keys
 Package: fontspec 2017/11/09 v2.6g Font selection for XeLaTeX and LuaLaTeX
  (d:/texlive/2018/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
 Package: fontspec-xetex 2017/11/09 v2.6g Font selection for XeLaTeX and LuaLaTeX
-\l__fontspec_script_int=\count184
-\l__fontspec_language_int=\count185
-\l__fontspec_strnum_int=\count186
-\l__fontspec_tmp_int=\count187
-\l__fontspec_em_int=\count188
-\l__fontspec_emdef_int=\count189
-\l__fontspec_strong_int=\count190
-\l__fontspec_strongdef_int=\count191
+\l__fontspec_script_int=\count185
+\l__fontspec_language_int=\count186
+\l__fontspec_strnum_int=\count187
+\l__fontspec_tmp_int=\count188
+\l__fontspec_em_int=\count189
+\l__fontspec_emdef_int=\count190
+\l__fontspec_strong_int=\count191
+\l__fontspec_strongdef_int=\count192
 \l__fontspec_tmpa_dim=\dimen163
 \l__fontspec_tmpb_dim=\dimen164
 \l__fontspec_tmpc_dim=\dimen165
@@ -717,13 +718,13 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 ) (d:/texlive/2018/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count192
+\inf@bad=\count193
 LaTeX Info: Redefining \frac on input line 213.
-\uproot@=\count193
-\leftroot@=\count194
+\uproot@=\count194
+\leftroot@=\count195
 LaTeX Info: Redefining \overline on input line 375.
-\classnum@=\count195
-\DOTSCASE@=\count196
+\classnum@=\count196
+\DOTSCASE@=\count197
 LaTeX Info: Redefining \ldots on input line 472.
 LaTeX Info: Redefining \dots on input line 475.
 LaTeX Info: Redefining \cdots on input line 596.
@@ -732,15 +733,15 @@ LaTeX Info: Redefining \cdots on input line 596.
 \big@size=\dimen168
 LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
-\macc@depth=\count197
-\c@MaxMatrixCols=\count198
+\macc@depth=\count198
+\c@MaxMatrixCols=\count199
 \dotsspace@=\muskip17
-\c@parentequation=\count199
-\dspbrk@lvl=\count266
+\c@parentequation=\count266
+\dspbrk@lvl=\count267
 \tag@help=\toks16
-\row@=\count267
-\column@=\count268
-\maxfields@=\count269
+\row@=\count268
+\column@=\count269
+\maxfields@=\count270
 \andhelp@=\toks17
 \eqnshift@=\dimen169
 \alignsep@=\dimen170
@@ -793,10 +794,10 @@ Package: subfigure 2002/03/15 v2.1.5 subfigure package
 \subfigbottomskip=\skip64
 \subfigcapmargin=\dimen178
 \subfiglabelskip=\skip65
-\c@subfigure=\count270
-\c@lofdepth=\count271
-\c@subtable=\count272
-\c@lotdepth=\count273
+\c@subfigure=\count271
+\c@lofdepth=\count272
+\c@subtable=\count273
+\c@lotdepth=\count274
 
 ****************************************
 * Local config file subfigure.cfg used *
@@ -810,28 +811,28 @@ Package: subfigure 2002/03/15 v2.1.5 subfigure package
 \UL@skip=\skip68
 \UL@hook=\toks27
 \UL@height=\dimen179
-\UL@pe=\count274
+\UL@pe=\count275
 \UL@pixel=\dimen180
 \ULC@box=\box46
 Package: ulem 2012/05/18
 \ULdepth=\dimen181
 ) (d:/texlive/2018/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count275
+\lst@mode=\count276
 \lst@gtempboxa=\box47
 \lst@token=\toks28
-\lst@length=\count276
+\lst@length=\count277
 \lst@currlwidth=\dimen182
-\lst@column=\count277
-\lst@pos=\count278
+\lst@column=\count278
+\lst@pos=\count279
 \lst@lostspace=\dimen183
 \lst@width=\dimen184
-\lst@newlines=\count279
-\lst@lineno=\count280
+\lst@newlines=\count280
+\lst@lineno=\count281
 \lst@maxwidth=\dimen185
  (d:/texlive/2018/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count281
-\lst@skipnumbers=\count282
+\c@lstnumber=\count282
+\lst@skipnumbers=\count283
 \lst@framebox=\box48
 ) (d:/texlive/2018/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2015/06/04 1.6 listings configuration
@@ -862,9 +863,9 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) (d:/texlive/2018/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-\c@theorem=\count283
-\c@lemma=\count284
-\c@definition=\count285
+\c@theorem=\count284
+\c@lemma=\count285
+\c@definition=\count286
 
 *************************************************
 * xeCJK warning: "fandol"
@@ -877,7 +878,7 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 * 
 * Font 'FandolSong-Regular' does not contain script 'CJK'.
 *************************************************
-\g__fontspec_family_FandolSong-Regular_int=\count286
+\g__fontspec_family_FandolSong-Regular_int=\count287
 .................................................
 . fontspec info: "defining-font"
 . 
@@ -903,7 +904,7 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 )) (d:/texlive/2018/texmf-dist/tex/latex/cjk/texinput/CJKfntef.sty
 Package: CJKfntef 2015/04/18 4.8.4
 \CJK@fntefSkip=\skip69
-\CJK@nest=\count287
+\CJK@nest=\count288
 \CJK@fntefDimen=\dimen186
 \CJK@underdotBox=\box49
 \CJK@ULbox=\box50
@@ -972,10 +973,9 @@ Package: CJKfntef 2015/04/18 4.8.4
 \c__xeCJK_filll_skip=\skip71
 ) (d:/texlive/2018/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty
 Package: xeCJK-listings 2018/04/07 v3.7.0 xeCJK patch file for listings
-\l__xeCJK_listings_max_char_int=\count288
-\l__xeCJK_listings_flag_int=\count289
-)
-No file "Guide for ugrs in linjun group".aux.
+\l__xeCJK_listings_max_char_int=\count289
+\l__xeCJK_listings_flag_int=\count290
+) (./Guide for ugrs in linjun group.aux)
 \openout1 = `"Guide for ugrs in linjun group.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
@@ -1049,42 +1049,52 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  OT1/cmss/bx/n --> TU/lmss/bx/n on input line 64.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 64.
-\c@lstlisting=\count290
+\c@lstlisting=\count291
 LaTeX Font Info:    Try loading font information for U+msa on input line 65.
-(d:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
+ (d:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 65.
  (d:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-No file "Guide for ugrs in linjun group".toc.
+) [1
+
+
+] (./Guide for ugrs in linjun group.toc)
 \tf@toc=\write3
 \openout3 = `"Guide for ugrs in linjun group.toc"'.
 
-[1
+ [1
+
+] (./Guide for ugrs in linjun group.toc)
+\tf@toc=\write4
+\openout4 = `"Guide for ugrs in linjun group.toc"'.
+
+ [2
+
+] [1
+
 
 ]
-
-LaTeX Warning: Reference `Xshell' on page 2 undefined on input line 102.
-
+Chapter 1.
 File: fig/xshell1.jpg Graphic file (type bmp)
 <fig/xshell1.jpg>
 File: fig/xshell2.jpg Graphic file (type bmp)
 <fig/xshell2.jpg>
-[2]
+[2
 
-LaTeX Warning: Reference `登录服务器' on page 3 undefined on input line 119.
-
+]
 File: fig/xshell3.jpg Graphic file (type bmp)
 <fig/xshell3.jpg>
-[3] [4]
+LaTeX Font Info:    Font shape `TU/FandolSong-Regular(0)/m/sl' in size <12> not available
+(Font)              Font shape `TU/FandolSong-Regular(0)/m/it' tried instead on input line 142.
+ [3] [4] [5]
 *************************************************
 * fontspec warning: "script-not-exist"
 * 
 * Font 'FandolFang-Regular' does not contain script 'CJK'.
 *************************************************
-\g__fontspec_family_FandolFang-Regular_int=\count291
+\g__fontspec_family_FandolFang-Regular_int=\count292
 .................................................
 . fontspec info: "defining-font"
 . 
@@ -1096,73 +1106,85 @@ File: fig/xshell3.jpg Graphic file (type bmp)
 . - 'normal' (m/n) with NFSS spec.: <->"[FandolFang-Regular.otf]/OT"
 . - 'small caps'  (m/sc) with NFSS spec.: 
 .................................................
-[5] [6] [7]
+[6] [7]
+Chapter 2.
+[8
 
-LaTeX Warning: Reference `2Ddiffusion' on page 8 undefined on input line 299.
+] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19]
+Chapter 3.
+[20
 
-[8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20]
+] [21] [22] [23] [24]
+Chapter 4.
 
-LaTeX Warning: Reference `ueq1' on page 21 undefined on input line 1033.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
+ [25
 
-LaTeX Warning: Reference `ueq2' on page 21 undefined on input line 1033.
+] [26]
+Overfull \hbox (2.77031pt too wide) in paragraph at lines 974--975
+[]\TU/FandolSong-Regular(0)/m/n/12 如 \TU/lmr/m/n/12 aug-cc-pVDZ, aug-cc-pVTZ, aug-cc-pVQZ, aug-cc-pV5Z... 
+ []
 
+[27] [28] [29] [30]
 
-LaTeX Warning: Citation `PhysRev.136.B864' on page 21 undefined on input line 1068.
+LaTeX Warning: Citation `PhysRev.136.B864' on page 31 undefined on input line 1154.
 
-[21] [22]
+[31]
+Chapter 5.
 
-LaTeX Warning: Reference `numerical dij' on page 23 undefined on input line 1115.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
+ [32
 
-LaTeX Warning: Citation `VanVoorhis2010' on page 23 undefined on input line 1127.
+] [33]
 
+LaTeX Warning: Citation `VanVoorhis2010' on page 34 undefined on input line 1213.
 
-LaTeX Warning: Reference `time-depend-coeff' on page 23 undefined on input line 1131.
+[34]
 
-
-LaTeX Warning: Citation `Tully1990' on page 23 undefined on input line 1135.
-
-[23]
-
-LaTeX Warning: Reference `time-depend-coeff' on page 24 undefined on input line 1143.
-
-
-LaTeX Warning: Reference `linear combination' on page 24 undefined on input line 1143.
-
-
-LaTeX Warning: Reference `time-depend-coeff' on page 24 undefined on input line 1143.
-
-
-LaTeX Warning: Reference `time-de DM diagnol' on page 24 undefined on input line 1161.
-
-[24]
-
-LaTeX Warning: Reference `hopping probability' on page 25 undefined on input line 1166.
+LaTeX Warning: Citation `Tully1990' on page 35 undefined on input line 1221.
 
 
-LaTeX Warning: Reference `two kinds of crossing' on page 25 undefined on input line 1171.
+Overfull \hbox (5.6263pt too wide) in paragraph at lines 1219--1222
+[]\TU/FandolSong-Regular(0)/m/n/12 势 间 跳 跃 \TU/lmr/m/n/12 (Surface Hopping) \TU/FandolSong-Regular(0)/m/n/12 方 法 是 一 种 混 合 量 子 经 典 \TU/lmr/m/n/12 (Mixed-Quantum-Classical)
+ []
 
+[35] [36]
 File: fig/crossing.jpg Graphic file (type bmp)
 <fig/crossing.jpg>
 
-LaTeX Warning: Reference `analytical dij' on page 25 undefined on input line 1180.
+
+LaTeX Warning: Citation `wang2014simple' on page 37 undefined on input line 1268.
 
 
-LaTeX Warning: Citation `wang2014simple' on page 25 undefined on input line 1182.
+LaTeX Warning: Citation `Qiu2018' on page 37 undefined on input line 1268.
 
 
-LaTeX Warning: Citation `Qiu2018' on page 25 undefined on input line 1182.
+LaTeX Warning: Citation `Bai2018' on page 37 undefined on input line 1268.
 
 
-LaTeX Warning: Citation `Bai2018' on page 25 undefined on input line 1182.
+LaTeX Warning: Citation `wang2015fewest' on page 37 undefined on input line 1270.
 
 
-LaTeX Warning: Citation `wang2015fewest' on page 25 undefined on input line 1184.
+Underfull \vbox (badness 1325) has occurred while \output is active []
 
-[25] [26] [27] [28] [29]
+ [37] [38]
+Chapter 6.
+[39
+
+] [40]
+Chapter 7.
+[41
+
+] [42]
+Overfull \hbox (31.98012pt too wide) detected at line 1382
+[]
+ []
+
+[43]
 No file "Guide for ugrs in linjun group".bbl.
-[30] (./Guide for ugrs in linjun group.aux)
+[44] (./Guide for ugrs in linjun group.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1171,12 +1193,12 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 18281 strings out of 492970
- 406477 string characters out of 6137298
- 644116 words of memory out of 5000000
- 22122 multiletter control sequences out of 15000+600000
- 537018 words of font info for 86 fonts, out of 8000000 for 9000
+ 18356 strings out of 492970
+ 408808 string characters out of 6137298
+ 645636 words of memory out of 5000000
+ 22175 multiletter control sequences out of 15000+600000
+ 538659 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 42i,21n,73p,10561b,3634s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,21n,73p,10561b,3063s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Guide for ugrs in linjun group.pdf (30 pages).
+Output written on Guide for ugrs in linjun group.pdf (47 pages).
