@@ -255,11 +255,11 @@
     \end{theorem}
     并由此引入广义傅里叶级数展开
     \[
-	    \int ^b_a f(x) y_m(x) \, dx = \sum_n \int f_n y_m(x)y_n(x) \, dx = f_m \int y_m(x)^2 dx   
+	    \int ^b_a f(x) y_m(x) \, dx = \sum_n \int^b_a f_n y_m(x)y_n(x) \, dx = f_m \int^b_a y_m(x)^2 dx   
     .\] 
     即
     \[
-	    f_m = \frac{\int ^b_a f(x) y_m(x) \, dx }{\int y_m(x)^2 \, dx }
+	    f_m = \frac{\int ^b_a f(x) y_m(x) \, dx }{\int^b_a y_m(x)^2 \, dx }
     .\] 
     这一套系统非常的重要，它能够直接用来解决球坐标下的稳态问题（使用Legendre函数），柱坐标下的稳态问题和动态演化问题（使用贝塞尔函数），以及球坐标下的时间演化问题（使用球贝塞尔函数），其核心内容就在于使用广义傅立叶级数进行展开得到精确解并同时满足边界条件。
 
@@ -1187,8 +1187,129 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
       向生物学习也是全局优化中的常见思路，除了遗传算法之外，现在还有基于蚂蚁寻找食物思路的算法等，不予详细介绍。另外，可以看出，机器学习在这方面也肯定有一定的建树，但是势能面通常过于复杂，简单的机器学习网络可能无法实现。
 
       当然，全局优化的问题远远不限于分子能量优化上，包括求条件极值，减小误差，拟合等多种问题都可以使用全局优化的思路进行处理，有时候往往能产生有趣的效果。\sout{初一看只有一两个做全局优化的学长学姐，做到最后就会发现，组内一大半的人都在做全局优化}
+      \section{PS-QHD}
+      \begin{enumerate}
+  \item 在更多的化学问题中，电子会发生跃迁，Born-Oppenheimer近似失效，比如光催化反应，光电材料中的电荷传输，无辐射跃迁，生命活动中的光合作用，呼吸作用等，必须使用更普适的非绝热动力学研究。
+
+  \item 非绝热动力学的思想分为两派：追求严格，将电子与原子核做量子化处理；追求效率，将原子核作经典处理。需要在拥有量子效应的基础上保证计算效率。David Manolopoulos 提出的环聚合物方法（ring polimer)是一种可能，并已被John Tully和Frank Huo等人与面间跳跃方法相结合。而该方法只能处理热力学平衡态，但很多化学过程发生在非平衡态。Oleg Prezhdo提出的量子哈密顿动力学（QHD）是另一种可能。
+
+  \item QHD从经典描述出发，逐级添加量子效应修正，添加无穷阶修正即可达到全量子严格解。
+
+  \item QHD用Hilbert空间描述，以一系列算符的期望值作为变量组来描述粒子的运动过程。由于经典力学中确定粒子的运动状态只需要坐标和动量，因此HS-QHD的一阶变量直接对应于经典力学，而高阶变量选择坐标算符和动量算符高阶数的乘积。由于坐标算符和动量算符的不对易，它们的乘积并非Hermite算符，而只有Hermite算符的期望值才是实验可观察的实数值，因此Weyl对称化被引入来保证变量组纯实。
+
+  \item Hilbert空间中任意算符$\hat{A}$期望值随时间的演化遵循Ehrenfest定理：
+  \begin{equation}
+  \frac{d}{dt}\mean{\hat{A}}=\mean{\frac{\partial}{\partial t} \hat{A}}+\mean{\frac{1}{i\hbar}\left[\hat{A},\hat{H}\right]}
+  \end{equation}
+
+  \item HS-QHD的演化方程具有级联方程组形式，即低阶量的含时演化依赖于高阶量的值。我们计算的动力学只能采用有限阶，为使方程组完备只能在计算的有限阶的基础上去近似表达未知的高阶量，从而完成方程组截断，求得参数，通行的近似方法是将高阶中心矩近似为各种可能的低阶中心矩在保持变量的总数及总阶数不变时乘积的叠加，以三阶和四阶为例：
+  \begin{align*}
+  &\mean{(\hat{A}-\mean{\hat{A}})(\hat{B}-\mean{\hat{B}})(\hat{C}-\mean{\hat{C}})}\\
+  \sim & \sum_{\text{轮换求和}}\mean{(\hat{A}-\mean{\hat{A}})(\hat{B}-\mean{\hat{B}})}\mean{(\hat{C}-\mean{\hat{C}})}\\
+  =& 0
+  \end{align*}
+  \begin{align*}
+  &\mean{(\hat{A}-\mean{\hat{A}})(\hat{B}-\mean{\hat{B}})(\hat{C}-\mean{\hat{C}})(\hat{D}-\mean{\hat{D}})}\\
+  \sim & \sum_{\text{轮换求和}}\mean{(\hat{A}-\mean{\hat{A}})(\hat{B}-\mean{\hat{B}})}\mean{(\hat{C}-\mean{\hat{C}})(\hat{D}-\mean{\hat{D}})}
+  \end{align*}\footnote{最后求和展开每一个系数为1，虽然这看起来有点奇怪。}
+
+  问题：
+  \begin{enumerate}
+
+    \item 算符乘法不可交换，存在算子序
+    \item 近似只对中心矩有效，需要转换回变量组，而变量组是对称化的原点矩，导致这一转换复杂冗长，难以卸除通用公式
+
+    \item 不显式地保证高阶收敛性，即不保证睡着中心矩阶数的上升截断误差不断减小直至在无穷阶极限收敛到零。
+
+  \end{enumerate}
+
+
+  \item 量子力学等价表述形式：
+  \begin{itemize}
+    \item Hilbert 空间及其关联的波函数、密度矩阵和力学量算符
+    \item 相空间及其关联的Wigner分布函数和力学量函数
+  \end{itemize}
+
+  \item 相空间表象在研究混合量子经典问题更有优势，在$\hbar \rightarrow 0$的经典极限可直接转换到经典相空间，在$\hbar$越来越重要时量子效应项按照依赖$\hbar$的阶数逐渐发挥作用，符合从经典向量子过度并按精度选择合适描述的思想。自然保证变量组纯实，因为Wigner函数和力学函数都是实函数，故坐标函数和动量函数的乘积仍为实函数，期望值为实数。
+
+  \item 高阶变量除去对应阶的标准差来避免由分布宽度引起的不必要数字膨胀，采用
+  \begin{equation}
+    \mean{\frac{1}{m!n!}\left(\frac{x-\mean{x}}{\sigma_x}\right)^m\left(\frac{p-\mean{p}}{\sigma_p}\right)^n}
+    \end{equation}
+
+  \item 相空间乘法可交换，在采用通行的级联方程组截断方案时将不会遇到算子序问题。由于变量组采用相空间无量纲中心矩，不存在转换回原点矩及对称化问题，对不同变量有共通形式。无穷阶收敛性问题则仍然存在，在采用合适的阶段方案后才能得到解决。  
+\end{enumerate}
+\subsection{相空间Ehrenfest定理}
+\begin{enumerate}
+  \item 相空间Ehrenfest定理：
+  \begin{equation}
+  \frac{d}{dt}\mean{A}=\mean{\frac{\partial}{\partial t} A}+\mean{\left\{\{A,H\}\right\}}
+  =\mean{\frac{\partial}{\partial t} A}+\mean{\left\{\{A,\frac{p^2}{2 m}+V\}\right\}}
+  \end{equation}
+
+  \item $\{\{*,*\}\}$为Moyal括号，定义为
+  \begin{align}
+  \{\{A,H\}\}&\equiv \frac{2}{\hbar}A \sin \left[\frac{\hbar}{2} (\overleftarrow{\partial_x}\overrightarrow{\partial_p}-\overleftarrow{\partial_p}\overrightarrow{\partial_x})\right]H\\
+  &=\{A,H\}+\sum^\infty_{j=1}\frac{(-1)^j}{(2j+1)!}\left(\frac{\hbar}{2}\right)^{2j}A(\overleftarrow{\partial_x}\overrightarrow{\partial_p}-\overleftarrow{\partial_p}\overrightarrow{\partial_x})^{2j+1} H
+  \end{align}
+  偏导数符号的左右箭头代表该偏导数向左或向右作用，$\{*,*\}$为Poisson括号。
+
+  \item 将A替换为变量组，得到演化方程，可以看到，前二阶量的演化中不会出现$\hbar$，是纯经典及准经典项：
+  \begin{equation}
+  \begin{cases}
+  \frac{d}{dt}\mean{x}=\frac{1}{m}\mean{p}\\
+  \frac{d}{dt}\mean{p}=-\mean{\grad V}\\
+  \frac{d}{dt}\sigma_x = \frac{1}{m}\rho \sigma_p\\
+  \frac{d}{dt} \rho = \frac{1}{m}\frac{\sigma_p}{\sigma_x} - \frac{1}{\sigma_p} \mean{(\grad V- \mean{\grad V })\left(\frac{x-\mean{x}}{\sigma_x}\right)}-\left(\frac{1}{\sigma_x}\right)\\
+  \frac{d}{dt}\sigma_p=- \mean{(\grad V-\mean{\grad V })\left(\frac{p-\mean{p}}{\sigma_p}\right)}
+  \end{cases}
+  \end{equation}
+
+  高阶项的$\hbar$依赖性与$A$对$p$和$\grad V$对$x$的非零偏导数有关：\footnote{在这里面为了和指数里面的$m$区分使用$M$来代表质量。}
+  
+
+\end{enumerate}
+\vspace{-0.5cm}
+\begin{align*}
+  &\frac{d}{dt}\mean{\frac{1}{m!n!}\left(\frac{x-\mean{x}}{\sigma_x}\right)^m\left(\frac{x-\mean{x}}{\sigma_x}\right)^n}\\
+  &= \frac{n+1}{M}\frac{\sigma_p}{\sigma_x}\mean{\frac{1}{(m-1)!(n+1)!}\left(\frac{x-\mean{x}}{\sigma_x}\right)^{m-1}\left(\frac{p-\mean{p}}{\sigma_p}\right)^{n+1}}\\
+  &\quad -\frac{1}{\sigma_p m!}\mean{\frac{1}{(n-1)!}\left(\frac{x-\mean{x}}{\sigma_x}\right)^{m}\left(\frac{p-\mean{p}}{\sigma_p}\right)^{n-1}(V'-\mean{V'})}\\
+  &\quad + \sum_{j=1}^{Floor(\frac{n-1}{2})}\frac{(-1)^{j+1}}{(2j+1)!\sigma_p^{2j+1}}\left(\frac{\hbar}{2}\right)^{2j}\frac{1}{m!}\mean{\frac{1}{[n-(2j+1)]!}\left(\frac{x-\mean{x}}{\sigma_x}\right)^{m}\left(\frac{p-\mean{p}}{\sigma_p}\right)^{n-2j-1}V^{2j+1}}\\
+  &\quad - \left(\frac{m}{\sigma_x}\frac{d\sigma_x}{dt}+\frac{n}{\sigma_p}\frac{d\sigma_p}{dt}\right)\mean{\frac{1}{m!n!}\left(\frac{x-\mean{x}}{\sigma_x}\right)^{m}\left(\frac{p-\mean{p}}{\sigma_p}\right)^{n}}
+  \end{align*}
+
+\subsection{相空间分布函数}
+\begin{enumerate}
+  \item 为实现方程组截断，采用类似变分的手段得到相空间分布函数。原则上，相空间分布函数形式可以有多种选择，这里我们选择与我们的变量组形成线性映射的函数空间：
+  \begin{equation}
+  P(x,p)=G(x,p)\sum_{0 \leq i+j \leq N} c_{ij} f_{ij} (x,p)
+  \end{equation}
+  其中$P(x,p)$是相空间分布函数，$G(x,p)$是任意光滑函数，$f_{ij}(x,p)$是任意保证无穷阶完备性的基函数，$N$是我们计算的最高阶PS-QHD变量的阶数，$c_{ij}$是待定参数。待定参数的个数为$1+N(N+3)/2$，与前N阶变量总数加归一化所得的条件个数相同。我们可以通过一个线性方程来求解这些待定参数：
+  \begin{align*}
+  &\sum_{0\leq i+j\leq N}\left[\frac{1}{k!l!}\int G(x,p)c_{ij}f_{ij}(x,p)\left(\frac{x-\mean{x}}{\sigma_x}\right)^{k}\left(\frac{p-\mean{p}}{\sigma_p}\right)^{l}\,dxdp\right]\\
+  &=\mean{\frac{1}{k!l!}\left(\frac{x-\mean{x}}{\sigma_x}\right)^{k}\left(\frac{p-\mean{p}}{\sigma_p}\right)^{l}}
+  \end{align*}
+
+  而后
+  \begin{equation}
+  \mean{A}=\int A(x,p) P(x,p) \, dxdp
+  \end{equation}
+
+  如果$G(x,p)$为高斯函数而$f_{ij}(x,p)$为Hermite多项式，其低阶运动方程与通行的HS-QHD近似截断方法一致：
+  \begin{equation}
+  \begin{cases}
+  G(x,p)=\frac{1}{2\pi \sigma_x\sigma_p\sqrt{1-\rho^2}}e^{-\frac{1}{2(1-\rho^2)}\left[\left(\frac{x-\mean{x}}{\sigma_x}\right)^2-2\rho\left(\frac{x-\mean{x}}{\sigma_x}\right)\left(\frac{p-\mean{p}}{\sigma_p}\right)+\left(\frac{p-\mean{p}}{\sigma_p}\right)^2\right]}\\
+  \sum_{0\leq i+j \leq N}c_{ij}f_{ij}(x,p)=\sum_{0\leq i+j \leq N}\frac{c_{ij}}{i!j!}\left(\frac{x-\mean{x}}{\sigma_x}\right)^{k}\left(\frac{p-\mean{p}}{\sigma_p}\right)^{l}
+  \end{cases}
+  \end{equation}
+\end{enumerate}
+
+
+
 
       \bibliographystyle{unsrt}
       \bibliography{reference}
+
+
   \end{document} 
 
