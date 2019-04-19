@@ -8,6 +8,7 @@
   \usepackage{subfigure}
   \usepackage[normalem]{ulem}
   \usepackage{listings}
+  \usepackage{mathrsfs}
   \usepackage{xcolor} % 定制颜色
   \lstset{
   backgroundcolor=\color{white},      % choose the background color
@@ -230,18 +231,22 @@
     此外，PBS系统还有诸多指令(如常用的qdel和qhold等)，诸多功能，诸多环境变量可以调用，鉴于递交任务实际操作的重要性，这里不再赘述，如果在实际操作过程中希望有更多了解，可以参阅浙江大学西溪校区化学系HPC超算平台介绍(可在超算QQ群的群文件中找到)中的Gridview PBS作业调度使用说明。
     
     \chapter{数学基础}
+
+    本章包含了在王老师课题组可能用到的数学知识，但是并不是所有人所有方向都非常重要，如果对线性代数基础知识和量子力学基础比较熟悉，可以有用到相关知识的时候再回来检索查看，如果不熟悉，还是建议阅读本章内容。当然，本指南不适合完全没学过线性代数的同学，如果想完整学习线性代数请参阅相关教材。
+
     \section{简易数学回顾}
+    
     数学基础的第一小节将关注于最基础的数学内容，主要是线性代数和微积分的一些知识，由于长时间不用可能有所生疏，我们就在这里作简单的回顾。熟悉此节内容的同学可以直接跳过。
 
     \subsection{线性空间，线性映射与矩阵}
 
-    对于矢量空间的数学定义，我们不做仔细讨论，简单地说，我们在某个数的集合$F$上定义了一个非空集合$V$，这个$V$中的元素满足加法交换律，并且对于数乘运算满足结合律，分配律等，而且数乘和加法的运算关于集合$V$是封闭的，我们就称$V$是一个线性空间，或者矢量空间，矢量空间内的元素称为矢量/向量。我们按照定义证明物理中的三维空间矢量是实数域上定义的线性空间，另外我们可以在矢量空间中定义内积和两个矢量的夹角，普适定义不再展开，本指南中将用最朴素的内积和矢量夹角定义方式，在三维下就是我们熟知的矢量模和夹角形式。
+    对于矢量空间的数学定义，我们不做仔细讨论，简单地说，我们在某个数域$F$上定义了一个非空集合$V$，这个$V$中的元素满足加法交换律，对于数乘运算满足结合律，分配律等，而且数乘和加法的运算关于集合$V$是封闭的，我们就称$V$是一个线性空间，或者矢量空间，矢量空间内的元素称为矢量/向量。我们按照定义证明物理中的三维空间矢量是实数域上定义的线性空间，另外我们可以在矢量空间中定义内积和两个矢量的夹角，普适定义不再展开，本指南中将用最朴素的内积和矢量夹角定义方式，在三维下就是我们熟知的矢量模和夹角形式。
 
     对于线性空间中的向量，我们可以做线性组合，对于线性空间中的元素$\left\{\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3,\dots,\mathbf{a}_N\right\}$，如果存在不全为零的系数$\left\{\lambda_i\right\}$使得
     \begin{equation}
       \lambda_1\mathbf{a}_1+\lambda_2\mathbf{a}_2+\cdots+\lambda_N\mathbf{a}_N=\mathbf{0}
     \end{equation}
-    则称这个矢量组$\left\{\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3,\dots,\mathbf{a}_N\right\}$的元素线性相关，否则称为线性无关。线性相关的向量意味着其中一个可以用其他向量的线性组合表示，也就是他们并不是独立的。在一个线性空间中可以找到的最大的线性无关向量组的个数称为这个线性空间的维度，比如在三维空间内我们最多可以找到三个线性无关的矢量，通常选用三个单位正交矢量。需要注意，线性无关不代表正交，二维空间内夹角为1度的两个矢量也是线性无关的。这个最大的线性无关矢量组，就可以作为这个空间的基矢量，线性空间中的任何一个矢量都可以写成基矢量的线性组合。
+    则称这个矢量组$\left\{\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3,\dots,\mathbf{a}_N\right\}$的元素线性相关，否则称为线性无关。线性相关的向量意味着其中一个可以用其他向量的线性组合表示，也就是他们并不是独立的。在一个线性空间中可以找到的最大的线性无关向量组的个数称为这个线性空间的维度，比如在三维空间内我们最多可以找到三个线性无关的矢量，通常选用三个单位正交矢量。需要注意，线性无关不代表正交，二维空间内夹角为1度的两个矢量也是线性无关的\footnote{但是总可以通过Gram-Schmidt正交化或者其他正交化方法从一组线性无关的矢量构建同样个数的正交矢量}。这个最大的线性无关矢量组，就可以作为这个空间的基矢量，线性空间中的任何一个矢量都可以写成基矢量的线性组合。
     
     这个线性组合的系数通常是我们所关心的东西，在一组基矢量$\left\{\vec{e}_i\right\}$下，这个线性空间的任何向量都可以表示为
     \begin{equation}
@@ -279,12 +284,62 @@
     \end{equation}
     其中$\mathsf{T}$为转置符号，$\mathbf{I}$为单位矩阵，容易证明，满足这样条件的矩阵对应的线性变换是保持矢量模长的。
 
+    \subsection{行列式}
+    行列式在线性代数的书中有多种等价定义，为了与讲解量子化学推导内容的一致性，我们选用排列法的定义，即对于一个方矩阵
+    \begin{equation}
+      \operatorname{det}(\mathbf{A})=|\mathbf{A}|=\left| \begin{array}{ccc}{A_{11}} & {\cdots} & {A_{1 N}} \\ {\vdots} & {} & {\vdots} \\ {A_{N 1}} & {\cdots} & {A_{N N}}\end{array}\right|=\sum_{i=1}^{N !}(-1)^{p_{i}} \mathscr{P}_{i} A_{1i_1} A_{2i_2} \cdots A_{N i_N}
+      \label{determinants defination}
+    \end{equation}
+    其中$\mathscr{P}_i$是排列算符，它的意义是给出一种列指标$1,2,3,\dots,N$的排列，求和就是关于所有的$N!$种排列求和，$p_i$是从自然序排列(1,2,3,\dots,N)出发得到排列$\mathscr{P}_i$所需要的近邻交换操作的个数。看似非常复杂，让我们以$3\times3$矩阵为例说明这个操作是如何实现的。
+
+    对于$3\times3$矩阵的矩阵元乘积$A_{1i_1} A_{2i_2}A_{3i_3}$的排列总有$3!=6$种，即$i_1,i_2,i_3$分别等于$1,2,3$，$1,3,2$，$2,3,1$，$2,1,3$，$3,1,2$和$3,2,1$，接下来就是计算每种排列对应的$p_i$，即从$1,2,3$实现该排列所需要的近邻交换操作的个数，分别是$0,1,2,1,2,3$\footnote{你可能算出来跟我差一个偶数，但根据式(\ref{determinants defination})这不重要}，所以$3\times3$矩阵的行列式计算表达式为
+    \begin{equation}
+      \operatorname{det}(\mathbf{A})=A_{11} A_{22}A_{33}-A_{11} A_{23}A_{32}+A_{12} A_{23}A_{31}-A_{12} A_{21}A_{33}+A_{12} A_{21}A_{32}-A_{1i3} A_{22}A_{31}
+    \end{equation}
+    可以看到与用Laplace展开定义的结果一致。
+
+    矩阵的行列式最重要的一些性质有：如果矩阵不满秩(这个矩阵的每一列或者每一行单独写成一个向量，他们线性相关)，矩阵的行列式为0，矩阵就没有对应的逆矩阵\footnote{矩阵有逆矩阵，等价于行列式不为0，没有逆矩阵的矩阵对应的线性映射也是不可逆的(损失信息)}；$|\mathbf{A B}|=|\mathbf{A}||\mathbf{B}|$；任意交换行列式中的两列(行)，矩阵行列式反号。
+
     \subsection{特征值与特征向量}
     在线性代数课程中，特征值与特征向量可能不被特别重视，\sout{当然主要原因是需要重视的东西太多了，}但是在物理学、工程的诸多应用中，特征值与特征向量几乎是整个线性代数最常用的一块知识点。
-    %另外还有多种重要的矩阵类型，即对称矩阵$\mathbf{A}=\mathbf{A}^{\mathsf{T}}$和反对称矩阵$\mathbf{A}=-\mathbf{A}^{\mathsf{T}}$等，前者满足特征值
+
+    线性代数中定义，如果矩阵$\mathbf{A}$右乘一个向量$\mathbf{X}$恒等于一个数$\lambda$乘以这个向量
+    \begin{equation}
+      \mathbf{AX}=\lambda\mathbf{X}
+      \label{eigen defination}
+    \end{equation}
+    那么向量$\mathbf{X}$称为矩阵$\mathbf{A}$的对应特征值$\lambda$特征向量。如何求解特征值和特征向量其实非常简单，先假设特征向量存在，就有
+    \begin{equation}
+      \mathbf{AX}-\lambda\mathbf{I}\mathbf{X}=(\mathbf{A}-\lambda\mathbf{I})\mathbf{X}=0
+      \label{eigen defination2}
+    \end{equation}
+    当$\mathbf{X}$不是零向量时，要求左边乘以它的矩阵的行列式为0，由此得到
+    \begin{equation}
+      \operatorname{det}(\mathbf{A}-\lambda\mathbf{I})=0
+      \label{eigen equ}
+    \end{equation}
+    就可以求出特征值，将特征值代入(\ref{eigen defination})或(\ref{eigen defination2})就可以求出对应的特征矢量。其实可以看到一个特征值对应的特征矢量构成了一个线性空间，称为特征子空间。
+
+    在应用中，我们经常需要将一个矩阵对角化，即通过线性变换使得矩阵变成对角阵，对角化通常是使用特征值与特征向量的方法。如果$n\times n$矩阵$\mathbf{A}$有n个特征值，对应n个特征向量，\sout{物理里的矩阵性质都很好的，}首先求出矩阵对应的特征值和(模为1)特征向量，将这些特征向量按列向量的形式组合成一个矩阵
+    \begin{equation*}
+      \mathbf{S}\equiv\left[ \begin{array}{lll}{x_{1}} & {\cdots} & {x_{n}}\end{array}\right]
+    \end{equation*}
+    计算矩阵$\mathbf{A}$乘以$\mathbf{S}$
+    \begin{equation}
+      \begin{aligned}
+        \mathbf{A S}=\mathbf{A} \left[ \begin{array}{ccc}{x_{1}} & {\dots} & {x_{n}}\end{array}\right]=\left[ \begin{array}{lll}{\lambda_{1} x_{1}} & {\cdots} & {\lambda_{n} x_{n}}\end{array}\right]=\\ \left[ \begin{array}{ccc}{x_{1}} & {\dots} & {x_{n}}\end{array}\right] \left[ \begin{array}{ccc}{\lambda_{1}} & { } & { } \\ { } & {\ddots} & { } \\ { } & { } & {\lambda_{n}}\end{array}\right]=\mathbf{S }\Lambda
+      \end{aligned}
+    \end{equation}
+    其中$\Lambda$是由矩阵$\mathbf{A}$的n个特征值构成的对角矩阵，所以我们得到
+    \begin{equation}
+      \mathbf{S^{-1}AS}=\Lambda
+    \end{equation}
+    这就得到了一个对角阵。
+
+    什么样的矩阵可以对角化是一个很复杂的问题，我们只给出一个充分条件，实对称矩阵(矩阵和它的转置相等)一定可以在实数范围内对角化得到实数特征值，并且不同特征值对应的特征矢量是正交的。而与之相反的是反对称矩阵(矩阵和它的转置相差负号)，反对称矩阵在实数范围内无法对角化。
     
     \subsection{向复数域推广}
-    接下来做推广，上述矢量空间均为定义在实数域上的，可以不做任何额外修正，完全转化到复数域，因此矩阵元，向量的分量，都可以为复数。在这个意义下，我们习惯将一个矢量写成列的形式，就像式(\ref{column vector})那样。我们定义矩阵和向量的共轭转置，用$\dagger$符号表示
+    接下来做推广，上述矢量空间均为定义在实数域上的，可以不做任何额外修正，完全转化到复数域，矩阵元，向量的分量，都可以为复数。在这个意义下，我们习惯将一个矢量写成列矢量的形式，就像式(\ref{column vector})那样。我们定义矩阵和向量的共轭转置，用$\dagger$符号表示
     \begin{equation}
       \begin{aligned}
         \left(\mathbf{A}^{\dagger}\right)_{i j}=A_{j i}^{*}\\
@@ -296,15 +351,31 @@
       \mathbf{a}^{\dagger} \mathbf{b}=\left(a_{1}^{*} a_{2}^{*} \cdots a_{{M}}^{*}\right) \left( \begin{array}{c}{b_{1}} \\ {b_{2}} \\ {\vdots} \\ {b_{M}}\end{array}\right)=\sum_{i=1}^{M} a_{i}^{*} b_{i}
       \label{inner product in row and column }
     \end{equation}
-    可以看到，同一个矢量的内积$\mathbf{a}=\mathbf{b}$定义的矢量模平方在复数域上刚刚好是每个复数的模的平方和。在复数域下，矩阵原本的很多性质都得到保持，只是简单地向复数域的推广，毕竟实数域是复数域的一部分，向更全的集合的推广往往能得到更加普适的性质。
+    可以看到，$\mathbf{a}=\mathbf{b}$时，我们可以定义的矢量模平方，在复数域上刚刚好是矢量每个元素的模的平方和。在复数域下，矩阵原本的很多性质都得到保持，只是简单地向复数域的推广，毕竟实数域是复数域的一部分，向更全的集合的推广往往能得到更加普适的性质。
 
-    更加普适的一个重要例子就是幺正(unitary)矩阵，是正交矩阵的推广，满足
+    在复数域上有很多特殊的矩阵，比如幺正(unitary)矩阵\footnote{由于翻译问题部分教材称为酉矩阵}，是正交矩阵的推广，满足
     \begin{equation}
       \mathbf{A}\mathbf{A}^{\dagger}=\mathbf{I}
+      \label{unitary def}
     \end{equation}
-    在复数域上保持矢量模不变的线性变换，对应的就是幺正矩阵。
-    
+    在复数域上保持矢量模不变的线性变换，对应的就是幺正矩阵。而实对称矩阵的推广就是厄米矩阵(自伴矩阵)，厄米矩阵定义多种多样，我们取其中最简单的一种，即
+    \begin{equation}
+      \mathbf{A}=\mathbf{A}^{\dagger}
+    \end{equation}
+    可以看出，如果矩阵元都是实数，厄米矩阵就是实对称矩阵。厄米矩阵和实对称矩阵的性质相似：具有实数的特征值，并且不同特征值对应的特征向量正交。
 
+    最后讨论一种特殊的矩阵，正规矩阵，定义为
+    \begin{equation}
+      \mathbf{A}\mathbf{A}^{\dagger}=\mathbf{A}^{\dagger}\mathbf{A}
+    \end{equation}
+    从这个定义看出，厄米矩阵和幺正矩阵都是正规矩阵。我们介绍在复数域上正规矩阵的谱定理，\sout{证明留作习题}
+    \begin{theorem}
+      设我们在复数域上定义线性空间$V(F),F=C$且$\mathbf{A}$是这个线性空间的一个元素，则以下条件等价：\\
+      1.$\mathbf{A}$是正规的；\\
+      2.$V$有一个由$\mathbf{A}$的本征向量构成的正交归一基；\\
+      3.$\mathbf{A}$在$V$的某个正交归一基下是对角矩阵。
+    \end{theorem}
+    
     \section{符号使用}
     在量子力学相关领域，人们使用``左矢''（bra)和``右矢''（ket）来描述一个``状态''。我们可以先简单地认为右矢代表了一个列向量，左矢则代表了一个行向量。它们是这么表示的：
     \[
