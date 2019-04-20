@@ -8,23 +8,24 @@
 \contentsline {subsection}{\numberline {2.1.2}行列式}{10}
 \contentsline {subsection}{\numberline {2.1.3}特征值与特征向量}{10}
 \contentsline {subsection}{\numberline {2.1.4}向复数域推广}{11}
-\contentsline {section}{\numberline {2.2}符号使用}{13}
-\contentsline {section}{\numberline {2.3}完备基展开}{13}
-\contentsline {section}{\numberline {2.4}傅立叶变换}{17}
-\contentsline {chapter}{\numberline {3}量子力学}{22}
-\contentsline {section}{\numberline {3.1}快速概念检索}{22}
-\contentsline {chapter}{\numberline {4}量子化学-电子结构基础}{27}
-\contentsline {section}{\numberline {4.1}快速概念检索}{27}
-\contentsline {chapter}{\numberline {5}非绝热动力学与势间跳跃方法}{34}
-\contentsline {section}{\numberline {5.1}非绝热耦合}{35}
-\contentsline {section}{\numberline {5.2}绝热表象与透热表象}{36}
-\contentsline {section}{\numberline {5.3}势间跳跃方法与FSSH}{37}
-\contentsline {section}{\numberline {5.4}鸟瞰SH方法中的特殊问题}{39}
-\contentsline {paragraph}{Trivial Crossing：}{39}
-\contentsline {paragraph}{超交换问题：}{40}
-\contentsline {paragraph}{退相干：}{40}
-\contentsline {paragraph}{相位修正：}{40}
-\contentsline {chapter}{\numberline {6}全局优化问题}{41}
-\contentsline {chapter}{\numberline {7}相空间-量子哈密顿动力学(PS-QHD)}{43}
-\contentsline {section}{\numberline {7.1}相空间Ehrenfest定理}{45}
-\contentsline {section}{\numberline {7.2}相空间分布函数}{46}
+\contentsline {subsection}{\numberline {2.1.5}向函数空间推广}{13}
+\contentsline {section}{\numberline {2.2}符号使用}{14}
+\contentsline {section}{\numberline {2.3}完备基展开}{14}
+\contentsline {section}{\numberline {2.4}傅立叶变换}{18}
+\contentsline {chapter}{\numberline {3}量子力学}{23}
+\contentsline {section}{\numberline {3.1}快速概念检索}{23}
+\contentsline {chapter}{\numberline {4}量子化学-电子结构基础}{28}
+\contentsline {section}{\numberline {4.1}快速概念检索}{28}
+\contentsline {chapter}{\numberline {5}非绝热动力学与势间跳跃方法}{35}
+\contentsline {section}{\numberline {5.1}非绝热耦合}{36}
+\contentsline {section}{\numberline {5.2}绝热表象与透热表象}{37}
+\contentsline {section}{\numberline {5.3}势间跳跃方法与FSSH}{38}
+\contentsline {section}{\numberline {5.4}鸟瞰SH方法中的特殊问题}{40}
+\contentsline {paragraph}{Trivial Crossing：}{40}
+\contentsline {paragraph}{超交换问题：}{41}
+\contentsline {paragraph}{退相干：}{41}
+\contentsline {paragraph}{相位修正：}{41}
+\contentsline {chapter}{\numberline {6}全局优化问题}{42}
+\contentsline {chapter}{\numberline {7}相空间-量子哈密顿动力学(PS-QHD)}{44}
+\contentsline {section}{\numberline {7.1}相空间Ehrenfest定理}{46}
+\contentsline {section}{\numberline {7.2}相空间分布函数}{47}
