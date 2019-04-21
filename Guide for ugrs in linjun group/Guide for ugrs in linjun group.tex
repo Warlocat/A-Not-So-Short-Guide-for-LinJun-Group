@@ -966,7 +966,7 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
 
   让我们先从纯态开始，纯态就是我们初等量子力学课中所接触的多数量子态，即它对应的波函数可以用某一个力学量的本征态线性展
   \begin{equation}
-    | \Psi \rangle =sum_i c_{i} | \phi_i \rangle
+    | \Psi \rangle =\sum_i c_{i} | \phi_i \rangle
   \end{equation}
   其中$\left\{ | \phi_i \rangle \right\}$是某个可观测量的本征态，是一组完备基。所有可以写成这个完备基的线性组合的波函数对应的体系状态就是纯态，学过量子力学的同学应该知道，所有的波函数都可以写成这组完备基的线性组合，所以纯态其实等价于可以写出对应的波函数的状态。的确，如你所料，混合态就不能写成某个波函数的形式。
 
@@ -985,7 +985,7 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
     \label{DM pure condition}
   \end{equation}
   \begin{equation}
-    \text{tra}(\rho) = \text{tra}(\rho^2) =1 
+    \text{Tr}(\rho) = \text{Tr}(\rho^2) =1 
     \label{DM properties for pure states}
   \end{equation}
   上述三条性质都是显然的，其中$\rho$的迹等于1等价于体系纯态的归一化条件，即系数的模平方和为1。密度矩阵的对角元其实就是体系在被观测时处于某一个状态的概率。在这里需要提醒读者注意的是$\rho^2 = \rho$这个条件，很快我们就会看到这个条件在混合态的时候是不满足的，所以等式(\ref{DM pure condition})又被称为纯态条件。同样，根据纯态条件，我们可以看到体系为纯态时，密度矩阵的特征值只能为0或者1。
@@ -993,7 +993,7 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
   接下来我们来讨论一下，它为什么被称为密度算符。这就涉及到力学量的期望值，如果我们求某个力学量的期望值
   \begin{equation}
     \begin{aligned}
-      \langle\mathcal{O}\rangle=&\langle \Psi | \mathcal{O} | \Psi \rangle=\sum_{b}\sum_{b^\prime} \langle \Psi | b \rangle \langle b | \mathcal{O} | b^\prime \rangle \langle b^\prime | \Psi \rangle=\sum_{b}\sum_{b^\prime} \langle b^\prime | \Psi \rangle \langle \Psi | b \rangle \langle b | \mathcal{O} | b^\prime \rangle \\=&\sum_{b}\sum_{b^\prime}\rho_{b^\prime b}\mathcal{O}_{b b^\prime}=\text{tra}(\rho \mathcal{O})
+      \langle\mathcal{O}\rangle=&\langle \Psi | \mathcal{O} | \Psi \rangle=\sum_{b}\sum_{b^\prime} \langle \Psi | b \rangle \langle b | \mathcal{O} | b^\prime \rangle \langle b^\prime | \Psi \rangle=\sum_{b}\sum_{b^\prime} \langle b^\prime | \Psi \rangle \langle \Psi | b \rangle \langle b | \mathcal{O} | b^\prime \rangle \\=&\sum_{b}\sum_{b^\prime}\rho_{b^\prime b}\mathcal{O}_{b b^\prime}=\text{Tr}(\rho \mathcal{O})
     \end{aligned}
   \end{equation}
   稍微熟悉统计力学的同学就可以看出，得到了与经典的概率密度类似的结果，而且有
@@ -1013,8 +1013,8 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
   
   最后我们不加证明地给出所有混合态和纯态的密度矩阵都拥有的性质：\\
   \begin{center}
-    1.$\text{tra}(\rho)=1$\\
-    2.$\langle\mathcal{O}\rangle=\text{tra}(\rho \mathcal{O})$\\
+    1.$\text{Tr}(\rho)=1$\\
+    2.$\langle\mathcal{O}\rangle=\text{Tr}(\rho \mathcal{O})$\\
     3.$i \hbar \frac{\partial \rho}{\partial t}=-\left[\rho,\hat{H}\right]$\footnote{对于混合态，我们需要假定混合态的组成不随时间变化，只是构成它的纯态在变化，这个假设在体系与外界没有相互作用的时候是合理的}
   \end{center}
   
@@ -1284,11 +1284,11 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
   \end{theorem}
   
   \begin{proof}
-  Since $\Psi$ is a functional of $n(\textbf{r})$, so is evidently the kinetic and interaction energy. We therefore difine 
+  Since $\Psi$ is a functional of $n(\textbf{r})$, so is evidently the kinetic and interaction energy. We therefore define 
   \begin{equation}
   F[n(\textbf{r})] \equiv \bracketl{\Psi}{T+U}{\Psi}
   \end{equation}
-  With its aid we difine, for a given potential $v(\textbf{r})$, the energy functional
+  With its aid we define, for a given potential $v(\textbf{r})$, the energy functional
   \begin{equation}
   E_v[n]\equiv \int v(\textbf{r})n(\textbf{r})d\textbf{r} + F[n]
   \end{equation}
