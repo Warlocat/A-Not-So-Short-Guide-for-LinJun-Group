@@ -960,6 +960,65 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
 
 \end{description}
 
+  \section{密度矩阵与混合态}
+  \label{Density Matrix}
+  本节中，我们将讨论一种初等量子力学课中一般不涉及的，但是本身并不是很难，而且在王老师课题组的推导中常见的内容，即密度矩阵。同时简要介绍纯态与混合态的概念。
+
+  让我们先从纯态开始，纯态就是我们初等量子力学课中所接触的多数量子态，即它对应的波函数可以用某一个力学量的本征态线性展
+  \begin{equation}
+    | \Psi \rangle =sum_i c_{i} | \phi_i \rangle
+  \end{equation}
+  其中$\left\{ | \phi_i \rangle \right\}$是某个可观测量的本征态，是一组完备基。所有可以写成这个完备基的线性组合的波函数对应的体系状态就是纯态，学过量子力学的同学应该知道，所有的波函数都可以写成这组完备基的线性组合，所以纯态其实等价于可以写出对应的波函数的状态。的确，如你所料，混合态就不能写成某个波函数的形式。
+
+  那么对于纯态波函数，密度矩阵(或密度算符的矩阵形式)是很容易定义的，我们通常定义为这个态与自己的外积，我们按照上面等式中的线性组合系数可以写出这个密度矩阵
+  \begin{equation}
+    \rho \equiv | \Psi \rangle \langle \Psi |=\left( \begin{array}{c}{c_{1}} \\ {c_{2}} \\ {\vdots} \\ {c_{N}}\end{array}\right)\left(c_{1}^{*} c_{2}^{*} \cdots c_{{N}}^{*}\right) =\left( \begin{array}{llll}{c_1 c_1^*} & {c_1 c_2^*}&{\dots}&{c_1c_N^*} \\ {c_2 c_1^*} & {c_2c_2^*}&{\dots}&{c_2c_N^*}\\{\vdots}&{\vdots}&{}&{\vdots}\\{c_Nc_1^*}&{c_Nc_2^*}&{\dots}&{c_Nc_N^*}\end{array}\right)
+    \label{DM for pure state}
+  \end{equation}
+  可以看到，这是一个由基函数的线性组合系数构成的矩阵。式中的第一个定义等号是密度算符的定义，定义为态矢量的外积，后面的等号是将其写在了某个算符的表象下，写成了矩阵形式。我们从上式的定义中很容易看到这个矩阵的几个性质：
+  \begin{equation}
+    \rho = \rho ^{\dagger}
+    \label{DM Hermite}
+  \end{equation}
+  \begin{equation}
+    \rho^2 = \rho 
+    \label{DM pure condition}
+  \end{equation}
+  \begin{equation}
+    \text{tra}(\rho) = \text{tra}(\rho^2) =1 
+    \label{DM properties for pure states}
+  \end{equation}
+  上述三条性质都是显然的，其中$\rho$的迹等于1等价于体系纯态的归一化条件，即系数的模平方和为1。密度矩阵的对角元其实就是体系在被观测时处于某一个状态的概率。在这里需要提醒读者注意的是$\rho^2 = \rho$这个条件，很快我们就会看到这个条件在混合态的时候是不满足的，所以等式(\ref{DM pure condition})又被称为纯态条件。同样，根据纯态条件，我们可以看到体系为纯态时，密度矩阵的特征值只能为0或者1。
+
+  接下来我们来讨论一下，它为什么被称为密度算符。这就涉及到力学量的期望值，如果我们求某个力学量的期望值
+  \begin{equation}
+    \begin{aligned}
+      \langle\mathcal{O}\rangle=&\langle \Psi | \mathcal{O} | \Psi \rangle=\sum_{b}\sum_{b^\prime} \langle \Psi | b \rangle \langle b | \mathcal{O} | b^\prime \rangle \langle b^\prime | \Psi \rangle=\sum_{b}\sum_{b^\prime} \langle b^\prime | \Psi \rangle \langle \Psi | b \rangle \langle b | \mathcal{O} | b^\prime \rangle \\=&\sum_{b}\sum_{b^\prime}\rho_{b^\prime b}\mathcal{O}_{b b^\prime}=\text{tra}(\rho \mathcal{O})
+    \end{aligned}
+  \end{equation}
+  稍微熟悉统计力学的同学就可以看出，得到了与经典的概率密度类似的结果，而且有
+  \begin{equation}
+    i \hbar \frac{\partial \rho}{\partial t}=i \hbar \frac{\partial}{\partial t} \left(| \Psi \rangle \langle \Psi |\right)=\hat{H}\rho-\rho\hat{H}=-\left[\rho,\hat{H}\right]
+    \label{Liouville equation}
+  \end{equation}
+  读者可能，上式和海森堡方程非常像，但是差了一个负号，我们提醒大家这两者其实毫无关系。等式(\ref{Liouville equation})中的$\rho$是一个算符，我们并没将其写成矩阵形式，而海森堡方程是表述力学量的矩阵的。如果将对易子换回它的经典对应，上式对应着经典统计理论的Liouville方程，式(\ref{Liouville equation})又称为量子Liouville方程。
+
+  那么什么是混合态呢？限于编者水平有限，以及为了避免可能的误解，在这里不使用Sakurai关于系综的讨论\cite{J.J.Sakurai2010}，这里只做简单讨论，多数情况下王老师课题组也不会遇到(除非你对后面提及的QHD感兴趣)。我们更愿意简单地把混合态称为纯态的叠加，即混合态其实是纯态按照某个布居概率的“非相干混合”(这么说某种程度上是为了避免和纯态中的态叠加概念混淆)。让我们举一个简单的例子，在Stern-Gerlach实验中一束刚刚从炉中飞出的电子，如果要描述这群电子处于的量子态，是无法用一个波函数表示的。简单地说，如果我们对这个态z方向的自旋进行测量，我们一定会得到一半电子自旋向上一半电子自旋向下，但是这不意味着这个态在观测之前可以写成$\frac{1}{\sqrt{2}} | \uparrow \rangle +\frac{1}{\sqrt{2}} | \downarrow \rangle$，这是因为，如果你写成这样，它就变成了$S_z$的本征态的线性组合，这其实是“测量”带来的效果，而非体系本身。换成数学语言角度来说，你完全可以写成$S_x$的线性组合，要知道，这两个态是不一样的，后者只等价于$S_z$本征态的其中一个。
+
+  想要真实地表述这个体系，我们必须使用混合态的概念，即这个态是有一半自旋向上的电子的纯态和一半自旋向下的电子的纯态非相干混合得到的。而在公式表示上，混合态不能写作某个特定的波函数，而是只能用密度矩阵表示，即一半自旋向上的电子的纯态和一半自旋向下的电子的纯态的密度矩阵相加
+  \begin{equation}
+    \rho = \frac{1}{2} | \uparrow \rangle \langle \uparrow |+\frac{1}{2} | \downarrow \rangle \langle \downarrow |=\left(\begin{array}{ll} {\frac{1}{2}}&{0}\\{0}&{\frac{1}{2}} \end{array}\right)
+  \end{equation}
+  可以看到，这个密度矩阵不满足纯态条件(\ref{DM pure condition})，但是迹仍然为1，这个与混合态的概率解释是等价的。而且如果读者感兴趣，可以用一半的x方向自旋向左和自旋向右的纯态进行上述叠加，然后就会得到与上式相同的密度矩阵。这意味着混合态对于这种体系的描述是自恰完备的，刚刚飞出炉子的电子不应该区分自旋的三个方向。
+  
+  最后我们不加证明地给出所有混合态和纯态的密度矩阵都拥有的性质：\\
+  \begin{center}
+    1.$\text{tra}(\rho)=1$\\
+    2.$\langle\mathcal{O}\rangle=\text{tra}(\rho \mathcal{O})$\\
+    3.$i \hbar \frac{\partial \rho}{\partial t}=-\left[\rho,\hat{H}\right]$\footnote{对于混合态，我们需要假定混合态的组成不随时间变化，只是构成它的纯态在变化，这个假设在体系与外界没有相互作用的时候是合理的}
+  \end{center}
+  
+
   \chapter{量子化学-电子结构基础}
     量子化学(电子结构)部分，我们将简要介绍常见的电子结构计算方法，所谓电子结构方法，即求解分子(或者固体)体系的定态Schr\"odinger的方法，大家都知道，多体的SE是难以求得精确的解析结果的，因此量子化学某种程度上也是各类近似方法及其如何一步步逼近精确解的简介，本节会{\color{red}\textbf{简要}}介绍Hartree-Fock理论，DFT理论，post-Hartree-Fock理论(包括组态相关CI，耦合簇方法CC，多组态自洽场方法MCSCF，多体微扰理论等)，编者还在最后加入了简化版的电子(费米子)二次量子化的内容。但是限于篇幅，上述理论的证明几乎全部略去。本节内容与王老师高等物理化学-量子化学课程内容相似。
     
@@ -1244,6 +1303,316 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
   Thus the minimal property is established relative to all density functions $n'(\textbf{r})$ associated with some other external potential $v'(\textbf{r})$.\cite{PhysRev.136.B864}
   \end{proof}
 
+  \section{多电子问题}
+  \section{Hartree-Fock方法}
+  \section{密度泛函理论}
+  \section{post-Hartree-Fock方法}
+  \section{二次量子化}
+  之所以二次量子化的内容不放在量子力学中，是因为从占据数表象重新理解二次量子化是相对浩大的工程，感兴趣的同学可以直接参阅相关的高等量子力学书籍。而之所以放在这里讲，是因为在诸多的量化文献和书籍中使用了二次量子化的语言，尽管在量化领域经常见到产生湮灭算符，但是并没有与二次量子化真实地联系起来，只是用来作为简化表达的一种方式。为了帮助大家看懂相关的公式，我们在电子结构部分从实用的角度简要介绍电子(费米子)的二次量子化语言。本节主要参考(\sout{其实就是翻译了一遍然后调整了几个小地方})\cite{Szabo1989Modern}书中2.4节的内容。
+
+    \subsection{产生湮灭算符及其反对易关系} 
+    我们将向读者说明行列式的各项性质是如何转化为算符的代数性质的，并且由此逐步构建二次量子化的理论框架。我们首先定义产生算符$a_i^{\dagger}$，它与自旋轨道$\chi_i$想关联，它作用在一个任意的Slater行列式$\left|\chi_k\cdots\chi_l\right\rangle$上的作用形式满足
+    \begin{equation}
+        a_i^{\dagger}\left|\chi_k\cdots\chi_l\right\rangle=\left|\chi_i\chi_k\cdots\chi_l\right\rangle
+        \label{creation operator}
+    \end{equation}
+      可以看到产生算符$a_i^{\dagger}$增加了一个处于自旋轨道$\chi_i$的电子，可以想象，算符作用的前后顺序是很重要的\footnote{在这里我们提醒读者不只是算符的符号重要，需要注意右侧Slater行列式自旋轨道的顺序，Szabo的写法为了简化，与其他教材严格的写法不太相同，相差的符号因子就是自旋轨道交换引起的}，因为
+      \begin{equation}
+          a_i^{\dagger}a_j^{\dagger}\left|\chi_k\cdots\chi_l\right\rangle=a_i^{\dagger}
+          \left|\chi_j\chi_k\cdots\chi_l\right\rangle=\left|\chi_i\chi_j\chi_k\cdots\chi_l\right\rangle
+      \end{equation}
+      而
+      \begin{equation}
+          \begin{aligned}
+              a_j^{\dagger}a_i^{\dagger}\left|\chi_k\cdots\chi_l\right\rangle=&a_j^{\dagger}
+              \left|\chi_i\chi_k\cdots\chi_l\right\rangle=\left|\chi_j\chi_i\chi_k\cdots\chi_l\right\rangle\\
+              =&-\left|\chi_i\chi_j\chi_k\cdots\chi_l\right\rangle
+          \end{aligned}
+      \end{equation}
+      上式中最后一个等号利用了波函数反对称的性质。将上面两个式子相加，我们得到
+      \begin{equation}
+          \left(a_i^{\dagger}a_j^{\dagger}+a_j^{\dagger}a_i^{\dagger}\right)
+          \left|\chi_k\cdots\chi_l\right\rangle=0
+      \end{equation}
+      由于$\left|\chi_k\cdots\chi_l\right\rangle$是一个任意的行列式，因此我们得到了如下的关系式
+      \begin{equation}
+          a_i^{\dagger}a_j^{\dagger}+a_j^{\dagger}a_i^{\dagger}=0=\left\{a_i^{\dagger},\ a_j^{\dagger}\right\}
+          \label{anti commutator creation}
+      \end{equation}
+      式中的大括号即反对易子的表示符。因为
+      \begin{equation}
+        a_{i}^{\dagger} a_{j}^{\dagger}=-a_{j}^{\dagger} a_{i}^{\dagger}
+      \end{equation}
+      所以我们在交换两个产生算符时需要改变式子的符号。如果我们令$i=j$，那么就有
+      \begin{equation}
+        a_{i}^{\dagger} a_{i}^{\dagger}=-a_{i}^{\dagger} a_{i}^{\dagger}=0
+      \end{equation}
+      上式表明我们不能在同一个自旋轨道$\chi_i$上产生两个电子(即Pauli不相容原理)，因此
+      \begin{equation}
+          a_1^{\dagger}a_1^{\dagger}\left|\chi_2\chi_3\right\rangle=a_1^{\dagger}\left|\chi_1\chi_2\chi_3\right\rangle=\left|\chi_1\chi_1\chi_2\chi_3\right\rangle=0
+      \end{equation}
+      一个更普遍的形式是
+      \begin{equation}
+        a_{i}^{\dagger} | \chi_{k} \cdots \chi_{l} \rangle=0 \quad \text { if } i \in\{k, \ldots, l\}
+      \end{equation}
+      上式表明我们不能在一个已经有一个电子的自旋轨道$\chi_i$上再创造一个电子。
+      
+      接下来我们引入湮灭算符$a_i$，可以看出它是产生算符$a_i^{\dagger}$的自伴算符(取厄米共轭)(因为$(a_i^{\dagger})^\dagger=a_i$)。与公式(2.190)类似，$a_i$定义为
+      \begin{equation}
+          a_i\left|\chi_i\chi_k\cdots\chi_l\right\rangle=\left|\chi_k\cdots\chi_l\right\rangle
+          \label{annihilation operator}
+      \end{equation}
+      因此，$a_i$湮灭，或者说消灭了一个在自旋轨道$\chi_i$上的电子。有一点需要注意的是我们在这里引入的湮灭算符只能作用在即将湮灭的自旋轨道在总波函数最左边的情况，否则就需要用列交换将其放置到最左边\footnote{这个和编者之前的脚注一致，这个交换就引入了更普适定义的符号因子}。
+      \begin{equation}
+          a_i\left|\chi_k\chi_l\chi_i\right\rangle=-a_i\left|\chi_i\chi_l\chi_k\right\rangle
+          =-\left|\chi_l\chi_k\right\rangle=\left|\chi_k\chi_l\right\rangle
+      \end{equation}
+      
+      问题在于为什么将湮灭算符定义为产生算符的自伴算符呢？可以考虑以下行列式
+      \begin{equation}
+          \left|K\right\rangle=\left|\chi_i\chi_j\right\rangle
+      \end{equation}
+      显然有
+      \begin{equation}
+          \left|K\right\rangle=a_i^\dagger\left|\chi_j\right\rangle
+      \end{equation}
+      将上式取共轭转置
+      \begin{equation}
+          \left\langle K\right|=\left\langle\chi_j\right|(a_i^\dagger)^\dagger=\left\langle\chi_j\right|a_i
+          \label{K a}
+      \end{equation}
+      对上式右乘$\left|K\right\rangle$，得到
+      \begin{equation}
+        \langle K | K\rangle=\left\langle\chi_{j}\left|a_{i}\right| K\right\rangle
+      \end{equation}
+      由于$\left\langle K\right.\left|K\right\rangle=1=\left\langle \chi_j\right.\left|\chi_j\right\rangle$
+      ，只有满足下列条件时我们的理论才是自恰的
+      \begin{equation}
+          a_i\left|K\right\rangle\equiv a_i\left|\chi_i\chi_j\right\rangle=\left|\chi_j\right\rangle
+          \label{a K}
+      \end{equation}
+      这与在(\ref{annihilation operator})中的湮灭算符的定义是一致的。从式(\ref{K a})中我们看到当$a_i$作用于左矢上时它的功能类似于一个产生算符。同样，当$a_i^\dagger$作用于左矢上时它类似于一个湮灭算符。例如(\ref{a K})的共轭转置为
+      \begin{equation}
+          \left\langle K\right|a_i^\dagger=\left\langle\chi_j\right|
+      \end{equation}
+      
+      为了得到湮灭算符所满足的反对易关系，我们取式(\ref{anti commutator creation})的共轭转置，
+      \begin{equation}
+          \left(\mathcal{AB}\right)^\dagger=\mathcal{B}^\dagger\mathcal{A}^\dagger
+      \end{equation}
+      我们得到
+      \begin{equation}
+          a_j a_i+a_i a_j=0=\left\{a_j, a_i\right\}
+          \label{anti commutator annihilation}
+      \end{equation}
+      也就是有
+      \begin{equation}
+          a_i a_j=-a_j a_i
+      \end{equation}
+      我们在交换两个湮灭算符时需要改变式子的符号。同样我们令$i=j$得到
+      \begin{equation}
+          a_i a_i=-a_i a_i=0
+      \end{equation}
+      上式表明我们不能消灭一个电子两次。这个结论使我们不能在一个本来就不占据电子的自旋轨道$\chi_i$上移除电子，即
+      \begin{equation}
+          a_i\left|\chi_k\cdots\chi_l\right\rangle=0\ \ \ \ \mbox{if}\ i\notin
+          \left\{k,\ldots,l\right\}
+      \end{equation}
+      
+      现在剩下的只有产生算符和湮灭算符的交换了。首先考虑算符$a_i a_i^\dagger+a_i^\dagger a_i$
+      作用在一个任意的行列式$\left|\chi_k\cdots\chi_l\right\rangle$上。如果自旋轨道
+      $\chi_i$在这个行列式中没有被占据，那么我们有
+      \begin{equation}
+          \begin{aligned}
+              \left(a_i a_i^\dagger+a_i^\dagger a_i\right)\left|\chi_k\cdots\chi_l\right\rangle
+              =&a_i a_i^\dagger\left|\chi_k\cdots\chi_l\right\rangle\\
+              =&a_i\left|\chi_i\chi_k\cdots\chi_l\right\rangle\\
+              =&\left|\chi_k\cdots\chi_l\right\rangle
+          \end{aligned}
+      \end{equation}
+      另一种可能，如果$\chi_i$已经被占据了，那么有
+      \begin{equation}
+          \begin{aligned}
+              \left(a_i a_i^\dagger+a_i^\dagger a_i\right)\left|\chi_k\cdots\chi_i\cdots\chi_l\right\rangle
+              =&a_i^\dagger a_i\left|\chi_k\cdots\chi_i\cdots\chi_l\right\rangle\\
+              =&-a_i^\dagger a_i\left|\chi_i\cdots\chi_k\cdots\chi_l\right\rangle\\
+              =&-a_i^\dagger\left|\cdots\chi_k\cdots\chi_l\right\rangle\\
+              =&-\left|\chi_i\cdots\chi_k\cdots\chi_l\right\rangle\\
+              =&\left|\chi_k\cdots\chi_i\cdots\chi_l\right\rangle
+          \end{aligned}
+      \end{equation}
+      上面两种情况下我们均得到了和初始相同的波函数，因此就有下列算符关系式
+      \begin{equation}
+          a_i a_i^\dagger+a_i^\dagger a_i=1=\left\{a_i,a_i^\dagger\right\}
+          \label{anti commutator ai ai^dagger}
+      \end{equation}
+      最后，我们再考虑当$i\neq j$时的等式$\left(a_j^\dagger a_i+a_i a_j^\dagger\right)\left|\chi_k\cdots \chi_l\right\rangle$。只有当自旋轨道$\chi_i$在$\left|\chi_k\cdots\chi_l\right\rangle$中存在而$\chi_j$不存在的时候这个表达式才有可能不为0。否则我们会因为$a_j^\dagger$试图产生一个已经存在的电子或者$a_i$试图湮灭一个并不存在的电子而使得式子最终等于0。然而，即使是$i\in\left\{k,\ldots,l\right\}$并且$j\notin\left\{k,\ldots,l\right\}$的情况下，由于波函数的反对称性我们仍然只能得到0。
+      \begin{equation}
+        \begin{aligned}\left(a_{i} a_{j}^{\dagger}+a_{j}^{\dagger} a_{i}\right) | \chi_{k} \cdots \chi_{i} \cdots \chi_{l} \rangle &=-\left(a_{i} a_{j}^{\dagger}+a_{j}^{\dagger} a_{i}\right) | \chi_{i} \cdots \chi_{k} \cdots \chi_{l} \rangle \\ &=-a_{i} | \chi_{j} \chi_{i} \cdots \chi_{k} \cdots \chi_{l} \rangle-a_{j}^{\dagger} | \cdots \chi_{k} \cdots \chi_{l} \rangle \\ &=a_{i} | \chi_{i} \chi_{j} \cdots \chi_{k} \cdots \chi_{l} \rangle-| \chi_{j} \cdots \chi_{k} \cdots \chi_{l} \rangle \\ &=| \chi_{j} \cdots \chi_{k} \cdots \chi_{l} \rangle-| \chi_{j} \cdots \chi_{k} \cdots \chi_{l} \rangle \\ &=0 \end{aligned}
+      \end{equation}
+      因此我们有
+      \begin{equation}
+          a_i a_j^\dagger+a_j^\dagger a_i=0=\left\{a_i,a_j^\dagger\right\}\ \ \ \ i\neq j
+      \end{equation}
+      将上式与(\ref{anti commutator ai ai^dagger})结合，就得到了产生算符和湮灭算符的对易关系
+      \begin{equation}
+          a_i a_j^\dagger+a_j^\dagger a_i=\delta_{ij}=\left\{a_i,a_j^\dagger\right\}
+          \label{anti commutator creation and annihilation}
+      \end{equation}
+      因此，当产生和湮灭算符所用于不同的自旋轨道时，我们可以在改变式子符号的情况下将其交换
+      \begin{equation}
+          a_i a_j^\dagger=-a_j^\dagger a_i \ \ \ \ i\neq j
+      \end{equation}
+      但是，如果两者作用的是同一个自旋轨道，我们有
+      \begin{equation}
+          a_i a_i^\dagger=1-a_i^\dagger a_i
+      \end{equation}
+      
+      所有Slater行列式的性质都已经包含在了上文陈述的产生算符之间(式(\ref{anti commutator creation}))、湮灭算符之间(式(\ref{anti commutator annihilation}))和产生算符与湮灭算符之间(式(\ref{anti commutator creation and annihilation}))的三个反对易关系中。为了用二次量子化的语言重新定义Slater行列式，我们要引入真空态，一般用$\left|\ \right\rangle$表示。真空态代表了一个没有任何电子的状态，它满足归一化条件
+      \begin{equation}
+          \left\langle\right.\left|\ \right\rangle=1
+      \end{equation}
+      并且有以下性质
+      \begin{equation}
+          a_i\left|\ \right\rangle=0=\left\langle\text{\  }\right|a_i^\dagger
+      \end{equation}
+      这是因为真空态是没有任何电子的状态，因此我们不能从中消灭电子。但我们可以用一系列的产生算符作用于真空态以构造任意的电子状态。比如
+      \begin{equation}
+          \left|\chi_i\right\rangle=a_i^\dagger\left|\ \right\rangle
+      \end{equation}
+      或者更普遍意义上的
+      \begin{equation}
+          a_i^\dagger a_k^\dagger\cdots a_l^\dagger\left|\ \right\rangle=\left|\chi_i
+          \chi_k\cdots\chi_l\right\rangle
+      \end{equation}
+      这个关系式就是二次量子化表象\footnote{即占据数表象}下的Slater行列式。任意一个可以由Slater行列式的性质得到的推论都可以仅仅用产生和湮灭算符的这些代数性质推出。
+      
+      如果我们希望计算以下两个行列式的重叠积分
+      \begin{equation}
+          \left|K\right\rangle=\left|\chi_i\chi_j\right\rangle=a_i^\dagger a_j^\dagger\left|\ \right\rangle
+      \end{equation}
+      \begin{equation}
+          \left|L\right\rangle=\left|\chi_k\chi_l\right\rangle=a_k^\dagger a_l^\dagger\left|\ \right\rangle
+      \end{equation}
+      我们当然可以利用行列式的展开，用自旋轨道的正交归一关系计算。在这里，我们用  二次量子化的理论重新计算一下。$|K\rangle$的共轭转置为
+      \begin{equation}
+          \left\langle K\right|=\left\langle\ \right|(a_i^\dagger a_j^\dagger)^\dagger
+          =\left\langle\ \right|a_j a_i
+      \end{equation}
+      我们可以得到
+      \begin{equation}
+          \left\langle K\right|\left.L\right\rangle=\left\langle\ \right|a_j a_i
+          a_k^\dagger a_l^\dagger\left|\ \right\rangle
+      \end{equation}
+      计算这种矩阵的矩阵元的一般方法就是通过反对易关系改变湮灭算符的位置到整个算符的最右边，直到它们直接作用在真空态上为止。让我们从$a_i$入手，因为有
+      \begin{equation}
+          a_i a_k^\dagger=\delta_{ik}-a_k^\dagger a_i
+      \end{equation}
+      我们得到
+      \begin{equation}
+          \begin{aligned}
+              \left\langle K\right|\left.L\right\rangle
+              =&\left\langle\ \right|a_j\left(\delta_{ik}-a_k^\dagger a_i\right)a_l^\dagger\left|\ \right\rangle\\
+              =&\delta_{ik}\left\langle\ \right|a_j a_l^\dagger\left|\ \right\rangle-
+              \left\langle\ \right|a_j a_k^\dagger a_i a_l^\dagger\left|\ \right\rangle
+          \end{aligned}
+      \end{equation}
+      接下来，我们将第一项中的$a_j$和第二项中的$a_i$继续向右移动
+      \begin{equation}
+          \left\langle K\right|\left.L\right\rangle=\delta_{ik}\delta_{jl}\left\langle\ \right|\left.\right\rangle
+          -\delta_{ik} \left\langle\ \right|a_l^\dagger a_j\left|\ \right\rangle
+          -\delta_{il} \left\langle\ \right|a_j a_k^\dagger\left|\ \right\rangle
+          +\left\langle\ \right|a_j a_k^\dagger a_l^\dagger a_i\left|\ \right\rangle
+      \end{equation}
+      第二项和最后一项是湮灭算符作用在真空态上因此为0。最后，再将第三项中的$a_j$右移，得到
+      \begin{equation}
+          \begin{aligned}
+              \left\langle K\right|\left.L\right\rangle=&\delta_{ik}\delta_{jl}\left\langle\ \right|\left.\right\rangle
+              -\delta_{il}\delta_{jk} \left\langle\ \right|\left.\right\rangle
+              +\delta_{il}\left\langle\ \right|a_l^\dagger a_j\left|\ \right\rangle\\
+              =&\delta_{ik}\delta_{jl}-\delta_{il}\delta_{jk} 
+          \end{aligned}
+      \end{equation}
+      上式用到了真空态的归一化性质，与直接展开行列式的结论是一致的。
+      
+    \subsection{二次量子化后的算符与其矩阵元}
+      
+      我们已经证明，我们可以用满足一组反对易关系的产生算符和湮灭算符和新定义的真空态表示出行列式的性质。因此，我们成功找到了一种不依赖于行列式性质就可以构建的满足反对称性的表象。为了能在完全抛弃用行列式构造完整的多电子体系理论，我们必须在产生和湮灭算符的形式下写出单电子算符$\mathcal{O}_1$和双电子算符$\mathcal{O}_2$。如果能实现，我们就可以利用产生和湮灭算符的代数性质来计算这些矩阵的矩阵元。显然，由于是重构，用二次量子化语言写出的算符$\mathcal{O}$的性质必须和之前用行列式表示的性质一致，即其矩阵元$\left\langle K\right|\mathcal{O}\left|L\right\rangle$的计算结果在两种不同表示方法下不变。我们这里不做严格的导出，而是先写下结论，然后举例说明它与之前用行列式构建的算符是相等的。二次量子化下的算符表示为\footnote{考虑到$\langle i j | k l\rangle$在不同地方的定义问题，双电子算符最后两个湮灭算符的符号不同书上可能相反}
+      \begin{equation}
+          \mathcal{O}_1=\sum_{r} \sum_{u}\langle r|\hat{h}| u\rangle \hat{a}_{r}^{\dagger} \hat{a}_{u}
+      \end{equation}
+      \begin{equation}
+        \mathcal{O}_{2}=\frac{1}{2} \sum_{i j k l}\langle i j | k l\rangle a_{i}^{\dagger} a_{j}^{\dagger} a_{l} a_{k}
+      \end{equation}
+      上式很容易推广到n体算符，式中的求和遍历自旋轨道的集合$\left\{\chi_i\right\}$。从上式中可以发现单电子积分和双电子积分显式地出现在表达式里，并且整个计算的结果与电子数无关。二次量子化的一个好处就是它可以在相同的基础上处理不同粒子数的系统，这在处理比如固体的无限大体系中将变得十分方便。
+      
+      为了证明我们之前的基于Slater行列式的推导和二次量子化形式的等价性，我们现在用二次量子化的方法计算Hartree-Fock基态$\left|\Psi_0\right\rangle=\left|\chi_1\cdots\chi_a\chi_b\cdots\chi_N\right\rangle$
+      的能量。
+      \begin{equation}
+            \left\langle \Psi_0\right|\mathcal{O}_1\left|\Psi_0\right\rangle=
+            \sum_{ij}\left\langle i\right| h\left| j\right\rangle\left\langle\Psi_0\right|
+            a_i^\dagger a_j\left|\Psi_0\right\rangle
+      \end{equation}
+      由于$a_i^\dagger$和$a_j$都是试图消灭一个电子($a_j$向右消灭而$a_i^\dagger$向左)，这就使得上式中的$i$和$j$必须属于占据态的集合$\left\{a,b,\ldots\right\}$\footnote{已经占据的自旋轨道标号一般用$a,b,c,\dots$}。因此就有
+      \begin{equation}
+          \left\langle \Psi_0\right|\mathcal{O}_1\left|\Psi_0\right\rangle=
+          \sum_{ab}\left\langle a\right| h\left| b\right\rangle\left\langle\Psi_0\right|
+          a_a^\dagger a_b\left|\Psi_0\right\rangle
+      \end{equation}
+      利用
+      \begin{equation}
+          a_a^\dagger a_b=\delta_{ab}- a_b a_a^\dagger
+      \end{equation}
+      将$a_a^\dagger$移到右边，得到
+      \begin{equation}
+          \left\langle\Psi_0\right|a_a^\dagger a_b\left|\Psi_0\right\rangle=
+          \delta_{ab}\left\langle\Psi_0\right|\left.\Psi_0\right\rangle
+          -\left\langle\Psi_0\right|a_b a_a^\dagger\left|\Psi_0\right\rangle
+      \end{equation}
+      因为右边第二项中$a_a^\dagger$试图在一个在$\left|\Psi_0\right\rangle$中已经存在电子的自旋轨道上创造电子，因此该项为0。又因为$\left\langle\Psi_0\right.\left|\Psi_0\right\rangle=1$
+      我们最终得到
+      \begin{equation}
+          \left\langle \Psi_0\right|\mathcal{O}_1\left|\Psi_0\right\rangle=
+          \sum_{ab}\left\langle a\right| h\left| b\right\rangle\delta_ab=
+          \sum_a\left\langle a\right| h\left| a\right\rangle
+      \end{equation}
+      与我们直接用行列式计算的结果一致。
+      
+      对于双电子算符，我们有
+      \begin{equation}
+          \left\langle \Psi_0\right|\mathcal{O}_2\left|\Psi_0\right\rangle=\frac{1}{2!} \sum_{r} \sum_{s} \sum_{u} \sum_{v}\langle r s|U| u v\rangle \langle \Psi_0|\hat{a}_{r}^{\dagger} \hat{a}_{s}^{\dagger} \hat{a}_{u} \hat{a}_{v}|\Psi_0\rangle
+      \end{equation}
+      跟单电子部分同理，参数$i,j,k,l$也必须是已经占据的自旋轨道集合$\left\{a,b,\ldots\right\}$
+      中的元素。
+      \begin{equation}
+          \left\langle \Psi_0\right|\mathcal{O}_2\left|\Psi_0\right\rangle=
+          \frac{1}{2}\sum_{abcd}\left\langle ab\right.\left|cd\right\rangle
+          \left\langle \Psi_0\right|a_a^\dagger a_b^\dagger a_d a_c \left|\Psi_0\right\rangle
+      \end{equation}
+      像之前一样，我们的处理方法仍然是将$a_a^\dagger$和$a_b^\dagger$右移直到他们直接作用在
+      $\left|\Psi_0\right\rangle$上。
+      \begin{equation}
+          \begin{aligned}
+              \left\langle \Psi_0\right|a_a^\dagger a_b^\dagger a_d a_c \left|\Psi_0\right\rangle
+              =&\delta_{bd}\left\langle\Psi_0\right|a_a^\dagger a_c\left|\Psi_0\right\rangle-
+              \left\langle \Psi_0\right|a_a^\dagger a_d a_b^\dagger a_c \left|\Psi_0\right\rangle\\
+              =&\delta_{bd}\delta_{ac}\left\langle\Psi_0\right.\left|\Psi_0\right\rangle-
+              \delta_{bd}\left\langle\Psi_0\right|a_c a_a^\dagger\left|\Psi_0\right\rangle\\
+              &-\delta_{bc}\left\langle\Psi_0\right|a_a^\dagger a_d\left|\Psi_0\right\rangle
+              +\left\langle \Psi_0\right|a_a^\dagger a_d a_c a_b^\dagger \left|\Psi_0\right\rangle\\
+              =&\delta_{bd}\delta_{ac}-\delta_{bc}\delta_{ad}\left\langle\Psi_0\right.\left|\Psi_0\right\rangle+
+              \delta_{bc}\left\langle\Psi_0\right|a_d a_a^\dagger\left|\Psi_0\right\rangle\\
+              =&\delta_{bd}\delta_{ac}-\delta_{bc}\delta_{ad}
+          \end{aligned}
+      \end{equation}
+      我们最后得到两项，第一项中令$c=a,d=b$，第二项中令$c=b,d=a$
+      \begin{equation}
+          \left\langle \Psi_0\right|\mathcal{O}_2\left|\Psi_0\right\rangle=
+          \frac{1}{2}\sum_{ab}\left(\left\langle ab\right.\left|ab\right\rangle-
+          \left\langle ab\right.\left|ba\right\rangle\right)
+      \end{equation}
+      与用行列式推导的结果也完全一致。
+
   \chapter{非绝热动力学与势间跳跃方法}
     简单的说，量子化学主要分为电子结构理论和动力学，上一大节专注于前者，本节就关注后者，电子结构计算可以给出电子能级的分布，激发态的位置以及其他一系列与之相关的静态性质，而动力学，正如其名，研究电子/原子核在特定情况下随时间的演化，通常化学中的光激发驰豫过程、电荷转移过程、异构化，甚至广义上的所有化学反应都是动力学的范畴。当然很容易想到，动力学的准确性是依赖于电子结构方法的准确性的，随着电子结构理论发展，动力学在研究化学物理等一系列问题中有不可忽视的作用。
 
@@ -1261,7 +1630,7 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
         \begin{equation}
           \frac{\mathrm{d} \hat{\rho}}{\mathrm{d} t}=\frac{-i}{\hbar}[\hat{H}, \hat{\rho}]
         \end{equation}
-        Liouville方程的优点是直接演化密度矩阵(TODO电子结构部分解释)，动力学所关心的问题就是波函数/密度矩阵如何随时间演化，而在一般的量子力学语境中，波函数的演化通常是波函数系数的演化，含时的波函数可以写作不含时基组的线性组合
+        Liouville方程的优点是直接演化密度矩阵\footnote{这个方程很容易被误认成是海森堡方程，但是如果仔细研究就会发现对易子的符号其实略有不同，如果略微熟悉经典统计力学，可以看出该式其实等价于量子力学中的密度矩阵对时间的全导数等于0，就对应经典Liouville方程}，动力学所关心的问题就是波函数/密度矩阵如何随时间演化，而在一般的量子力学语境中，波函数的演化通常是波函数系数的演化，含时的波函数可以写作不含时基组的线性组合
         \begin{equation}
           |\psi(\mathbf{r}, \mathbf{R}, t)\rangle=\sum_{j} c_{j}(t) |\phi_{j}(\mathbf{r} ; \mathbf{R})\rangle
           \label{linear combination}
@@ -1373,6 +1742,8 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
       为了尽可能找到极小值，我们需要尽可能搜查整个势能面(直接遍历的计算量是巨大的，但是小体系少自由度情况也可以做)，这意味着我们有时需要反着能量下降的方向运动进而跨过一些势垒区域，但是我们又不需要跨越太大的无意义的势垒，解决这个问题就是利用Monte Carlo模拟中接受分子构型的类似方法，认为有一个所谓的温度存在，即不是能量最低原理，而是满足某种分布。在全局优化问题里，我们不一定采用玻尔兹曼分布型的函数，原则上为了达成目的的任何函数形式都可以。当体系沿着某一个自由度能量升高时，用这个函数来判断是否接受构型。
 
       上面两个思路是全局优化方法的基础，我们通常是多种思路混合得到最后的算法。正如刚刚说的，全局优化算法里可以用遍历的方法寻找最小值，这是最简单粗暴计算量最大的，另一个极端就是完全取随机构型，然后比较取到的随机构型的能量然后从中选中最小的。显然这两种方法都不是特别靠谱，接下来我们介绍一种常用的也是王老师组处理LJ团簇的方法：\textbf{Basin Hopping}。简单的说，这是一种与MC模拟相类似的方法，核心思路为我先有一个初始的分子构型，然后对其进行局部优化得到一个局部优化的结构和对应的能量。然后在这个构型上每个自由度随机移动一点，从这个随机移动得到的构型再做局部优化，如此反复，直接有足够多的极小值，从中挑出最小的那个。这个方法十分简单有效，其随机移动的思路与MC模拟相仿，甚至目的都是一样的：跨过一些势垒尽可能遍历相空间。而王老师课题组还在这里面加入了很多很多为了节省计算量的功能，具体细节只有仔细看过代码才能理解。但是其中非常关键的一部分就是把绝大多数的优化在离散空间内完成，这样原子间的能量就不用每次都计算，而是把离散空间每个格点距离的能量提前算好保存在一个数组里，以后每次使用时只需要调用数组元素就行了。
+
+      全局优化算法中有一类比较出名的叫做模拟\textbf{退火算法}(Simulate Anneal)。模拟退火是模拟材料合成中的退火步骤，对于分子的能量优化这个问题，在这个系统中有一个温度的概念，这个温度某种程度上相对应着体系的动能。这个算法的核心思路是先升温，使得体系拥有一个较高的动能，这样它在随机变化过程中就可以克服很高的势垒，进而有可能遍历势能面上尽可能多的位置，然后降温(退火)，原本在势能面不同位置的分子动能逐渐减小，他们的运动进而无法跨越势垒，就落到了势能面上的某个极小值位置。如果升温时随机运动的范围已经能遍历了整个势能面，那么在最后所有极小值处寻找分子的结构，就能得到体系的最小值。
 
       另一类比较火爆的思路就是\textbf{遗传算法}，这是一个借鉴生物遗传进化的非常有趣的算法。我们首先把分子的结构量化定义为一系列变量，称之为基因，最初，生成一系列随机的结构，称为亲代，然后定义一种“进化”，即用他们的能量函数来表征他们的生存优势，经过一次次筛选，只有能量更低的(生存优势更大)的分子会留下。然后这些有优势的分子进行“杂交”，将他们的结构按某种方法进行组合生成新的子代分子，子代的分子之间再按照某种方式进行筛选，留下能量更低的分子，再进行“杂交”，如此反复，最后就能得到能量较低的“进化”之后的分子。
 
