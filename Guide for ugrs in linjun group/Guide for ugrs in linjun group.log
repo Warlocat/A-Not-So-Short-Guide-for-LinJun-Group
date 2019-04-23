@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2018.7.31)  21 APR 2019 12:23
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2018.7.31)  24 APR 2019 00:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1172,74 +1172,75 @@ Chapter 2.
 [8
 
 ] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22]
+[23]
 Chapter 3.
-[23
+[24
 
-] [24] [25] [26] [27] [28]
-Underfull \hbox (badness 10000) in paragraph at lines 1014--1015
+] [25] [26] [27] [28] [29] [30] [31] [32]
+Underfull \hbox (badness 10000) in paragraph at lines 1122--1123
 
  []
 
-[29]
+[33]
 Chapter 4.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 5274) has occurred while \output is active []
 
- [30
+ [34
 
 ]
-[31]
-Overfull \hbox (2.77031pt too wide) in paragraph at lines 1123--1124
+[35]
+Overfull \hbox (2.77031pt too wide) in paragraph at lines 1231--1232
 []\TU/FandolSong-Regular(0)/m/n/12 如 \TU/lmr/m/n/12 aug-cc-pVDZ, aug-cc-pVTZ, a
 ug-cc-pVQZ, aug-cc-pV5Z... 
  []
 
-[32] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42] [43]
+[36] [37] [38] [39] [40] [41] [42] [43] [44] [45] [46] [47]
 Chapter 5.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [44
+ [48
 
 ]
-[45] [46]
-Overfull \hbox (5.6263pt too wide) in paragraph at lines 1678--1681
+[49] [50]
+Overfull \hbox (5.6263pt too wide) in paragraph at lines 1786--1787
 []\TU/FandolSong-Regular(0)/m/n/12 势 间 跳 跃 \TU/lmr/m/n/12 (Surface Hopping) \TU
 /FandolSong-Regular(0)/m/n/12 方 法 是 一 种 混 合 量 子 经 典 \TU/lmr/m/n/12 (Mixed-Quant
 um-Classical)
  []
 
-[47] [48]
+[51] [52]
 File: fig/crossing.jpg Graphic file (type bmp)
 <fig/crossing.jpg>
 
 Underfull \vbox (badness 1325) has occurred while \output is active []
 
- [49]
-[50]
+ [53]
+[54]
 Chapter 6.
-[51
+[55
 
-] [52]
+] [56]
 Chapter 7.
-[53
+[57
 
-] [54]
-Overfull \hbox (31.98012pt too wide) detected at line 1843
+] [58]
+Overfull \hbox (31.98012pt too wide) detected at line 1949
 []
  []
 
-[55] (./Guide for ugrs in linjun group.bbl [56]) [57
+[59] (./Guide for ugrs in linjun group.bbl [60]) [61
 
 ]
 (./Guide for ugrs in linjun group.aux) ) 
 Here is how much of TeX's memory you used:
- 18416 strings out of 492970
- 410370 string characters out of 6137298
+ 18422 strings out of 492970
+ 410472 string characters out of 6137298
  645715 words of memory out of 5000000
- 22224 multiletter control sequences out of 15000+600000
+ 22230 multiletter control sequences out of 15000+600000
  539813 words of font info for 111 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  42i,21n,73p,10487b,3063s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Guide for ugrs in linjun group.pdf (61 pages).
+Output written on Guide for ugrs in linjun group.pdf (65 pages).
