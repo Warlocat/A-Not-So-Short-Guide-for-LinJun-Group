@@ -415,9 +415,22 @@
     \section{简易矢量代数}
     鉴于量子力学推导中会出现$\nabla$符号，与之相关的梯度，散度，旋度的概念在物理学中有极为重要的意义，更是广泛出现在各类推导之中，本节将介绍这三个“度”的定义和与之相关的Green公式和Stokes公式。
 
+    如果有一个一元函数$f(x)$，那么这个函数的微分可以写成
+    \begin{equation}
+      \mathrm{d} f = \frac{\mathrm{d} f}{\mathrm{d} x} \mathrm{d}x
+    \end{equation}
+    它的意义明确，当$x$改变$ \mathrm{d}x $时，函数值将改变$ \mathrm{d}f $，两者之间的商就是微商(导数)。但是如果函数是多个变量的呢？比如说我们在空间中有一个温度分布$T(x,y,z)$，如果我们希望描述这个函数随着空间变化的变化量时，我们必须先指定是往空间的哪个方向变化，这样看起来就变得复杂了很多，但是我们仍然有
+    \begin{equation}
+      \mathrm{d}T = \frac{\partial T}{\partial x}\mathrm{d}x  +\frac{\partial T}{\partial y}\mathrm{d}y+\frac{\partial T}{\partial z}\mathrm{d}z
+    \end{equation}
+    上式其实还可以写成矢量点积的形式
+    \begin{equation}
+      \mathrm{d}T = (\frac{\partial T}{\partial x},\frac{\partial T}{\partial y},\frac{\partial T}{\partial z})\cdot(\mathrm{d}x, \mathrm{d}y, \mathrm{d}z)
+    \end{equation}
+
     \section{简易数值计算方法}
-    我们一般将可以直接写出数学表达式的问题称为解析的，与之对应的就是数值的。虽然解析的数学在相当多的方面都有重要意义，但是对于实际的应用来说，尤其是计算机模拟的问题来说，得到解析表达式是极为困难。举个简单的例子，常微分方程，就连本科生课程中给出的例子很多都需要做数值计算才能真正得到结果。而在王老师课题组，由于研究的都是动力学问题，即体系随时间演化，更是需要很多数值拟合，微分积分和数值解微分方程的概念，因此本节中我们将极其简要地介绍相关内容。
-    \subsection{差值与拟合}
+    我们一般将可以直接写出数学表达式的问题称为解析的，与之对应的就是数值的。虽然解析的数学在相当多的方面都有重要意义，但是对于实际的应用来说，尤其是计算机模拟的问题来说，得到解析表达式是极为困难。举个简单的例子，常微分方程，就连本科生课程中给出的例子很多都需要做数值计算才能真正得到结果。而在王老师课题组，由于研究的都是动力学问题，即体系随时间演化，更是需要很多数值拟合，微分积分和数值解微分方程的概念，因此本节中我们将极其简要地介绍相关问题的最基础方法，实际操作中需要较高精度方法请参阅相关书籍。
+    \subsection{插值与拟合}
     \subsection{数值微分和数值积分}
     \subsection{ODE初值问题的数值解法}
 
@@ -528,7 +541,8 @@
 
     $| e_i \rangle \langle e_i | $是一个全新的操作，事实上它其实就是一个算符。为什么呢？因为你可以看到，
     \begin{equation}
-	    (| e_i \rangle \langle e_i | ) | \xi \rangle = | e_i \rangle \langle e_i | \xi \rangle = \langle e_i | \xi \rangle | e_i \rangle  .
+      (| e_i \rangle \langle e_i | ) | \xi \rangle = | e_i \rangle \langle e_i | \xi \rangle = \langle e_i | \xi \rangle | e_i \rangle  .
+      \label{ ket bra }
     \end{equation}
     这是由于$ \langle e_i | \xi \rangle $是一个数，所以它可以游荡在任何地方（向量可以非常自然地乘上任何一个数而不需要管顺序）。也就是我作用于$| \xi \rangle $然后获得了一个新的向量，那么它就是一个算符。
 
@@ -554,7 +568,8 @@
     \end{proof}
     恭喜你发现了\sout{镇站之宝}，展开系数为
     \begin{equation}
-    	c_i = \langle e_i | \psi \rangle 
+      c_i = \langle e_i | \psi \rangle 
+      \label{expansion coeff}
     \end{equation}
     是不是有那么一点感觉？其实就是广义傅立叶级数展开。
 
@@ -983,20 +998,20 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
   \begin{equation}
     \langle i | j\rangle=\delta_{i j} \quad i, j=1,2, \ldots
   \end{equation}
-  量子力学的一个假设为\textbf{量子体系的态由 Hilbert空间中一个相应的归一矢量来表示}。在这里，我们引入一种推导中常用，但是量力课不一定讲的算符，投影算符
+  量子力学的一个假设为\textbf{量子体系的态由 Hilbert空间中一个相应的归一矢量来表示}。在这里，回忆一下数学基础部分中引入的一些表达(从式(\ref{ ket bra })到(\ref{expansion coeff}))，即投影算符及其性质，将会在接下来的几节中有重要用处
   \begin{equation}
     \hat{P}_i= | i \rangle \langle i |
     \label{projection operator}
   \end{equation}
-  其中$ | i \rangle $是完备基的一个基矢量，这个算符作用到任意态矢量上得到
-  \begin{equation}
-    \hat{P}_i | Psi \rangle = | i \rangle \langle i | Psi \rangle =\langle i | Psi \rangle | i \rangle 
-  \end{equation}
-  任意的态矢量经过投影算符会得到投影算符对应的基矢量乘以一个系数，这个系数由内积定义，回忆高中几何中的内积定义，它就是态矢量$| Psi \rangle$在$ | i \rangle $方向的投影。另一个重要的算符是完备正交基的所有投影算符的和$\sum_i | i \rangle \langle i |$，当它作用在任意态矢量上的时候
-  \begin{equation}
-    \sum_i | i \rangle \langle i |Psi \rangle =  \sum_i \langle i |Psi \rangle | i \rangle=  \sum_i c_i | i \rangle
-  \end{equation}
-  相当于把这个态矢量展开到了完备基下，线性组合系数由内积定义，上式右边其实还是态矢量$ |Psi \rangle$，所以这个算符就等于单位算符\footnote{用初等量子力学中矩阵力学的观点，这个算符就是个单位矩阵}
+  % 其中$ | i \rangle $是完备基的一个基矢量，这个算符作用到任意态矢量上得到
+  % \begin{equation}
+  %   \hat{P}_i | \Psi \rangle = | i \rangle \langle i | \Psi \rangle =\langle i | \Psi \rangle | i \rangle 
+  % \end{equation}
+  % 任意的态矢量经过投影算符会得到投影算符对应的基矢量乘以一个系数，这个系数由内积定义，回忆高中几何中的内积定义，它就是态矢量$| \Psi \rangle$在$ | i \rangle $方向的投影。另一个重要的算符是完备正交基的所有投影算符的和$\sum_i | i \rangle \langle i |$，当它作用在任意态矢量上的时候
+  % \begin{equation}
+  %   \sum_i | i \rangle \langle i |\Psi \rangle =  \sum_i \langle i |\Psi \rangle | i \rangle=  \sum_i c_i | i \rangle
+  % \end{equation}
+  % 相当于把这个态矢量展开到了完备基下，线性组合系数由内积定义，上式右边其实还是态矢量$ |\Psi \rangle$，所以这个算符就等于单位算符\footnote{用初等量子力学中矩阵力学的观点，这个算符就是个单位矩阵}
   \begin{equation}
     \sum_i | i \rangle \langle i | = \mathbf{I}
     \label{identical}
@@ -1119,12 +1134,12 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
   \end{equation}
   可以看到，这个密度矩阵不满足纯态条件(\ref{DM pure condition})，但是迹仍然为1，这个与混合态的概率解释是等价的。而且如果读者感兴趣，可以用一半的x方向自旋向左和自旋向右的纯态进行上述叠加，然后就会得到与上式相同的密度矩阵。这意味着混合态对于这种体系的描述是自恰完备的，刚刚飞出炉子的电子不应该区分自旋的三个方向。
   
-  最后我们不加证明地给出所有混合态和纯态的密度矩阵都拥有的性质：\\
-  \begin{center}
-    1.$\text{Tr}(\rho)=1$\\
-    2.$\langle\mathcal{O}\rangle=\text{Tr}(\rho \mathcal{O})$\\
-    3.$i \hbar \frac{\partial \rho}{\partial t}=-\left[\rho,\hat{H}\right]$\footnote{对于混合态，我们需要假定混合态的组成不随时间变化，只是构成它的纯态在变化，这个假设在体系与外界没有相互作用的时候是合理的}
-  \end{center}
+  最后我们不加证明地给出所有混合态和纯态的密度矩阵都拥有的性质\footnote{对于混合态来说，Liouville定理需要假定混合态的组成不随时间变化，只是构成它的纯态在变化，这个假设在体系与外界没有相互作用的时候是合理的}：\\
+  \begin{align*}
+    \text{Tr}(\rho)=&1\\
+    \langle\mathcal{O}\rangle=&\text{Tr}(\rho \mathcal{O})\\
+    i \hbar \frac{\partial \rho}{\partial t}=&-[\rho,\hat{H}]
+  \end{align*}
   
 
   \chapter{量子化学-电子结构基础}
@@ -1782,6 +1797,47 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
         动力学的计算既可以在绝热表象下进行，也可以在透热表象下进行，但是很多时候为了节省计算量，我们不会在每个时刻都计算对应的能量与NAC，而是用某种函数对其进行拟合，每到一个分子构型，只需要用拟合函数计算即可。尽管在实际操作中，绝热态是很容易得到的，因为绝热态是哈密顿量本征态，我们可以用各种电子结构的计算方法得到他们，但是在绝热表象下，两个绝热态之间存在非绝热耦合，势能面间也会有圆锥交叉或者trivial crossing，在交叉点处的非绝热耦合是一个奇点，通常很难用函数拟合或作其他处理，因此人们很多时候会希望通过绝热态的线性组合来构建透热态，在透热表象下进行动力学模拟，这个过程称为透热化(diabatization)。透热化的方法非常多，本向导中也不作仔细的展开，但是根据Troy的综述，真正的透热态是难以通过绝热态线性组合得到的，所以很多文章中会使用构建半透热态(quasi-di`abatic state)的说法。需要注意，根据非绝热耦合等于零的定义，透热态按照某个固定的系数的线性组合还是透热态，也就是透热态并不是唯一的，这种不唯一性给了量子化学家构建透热态的更大的自由度。这也是目前透热化的方法多种多样的一个原因。
 
         在透热表象下，由于透热态不是哈密顿量的本征态，所以此时哈密顿量不再是对角矩阵，而是有非零的非对角元，在某些问题(如电荷转移)中，这些非对角元通常被叫做转移积分(transfer integrals)或者通常称为透热耦合(diabatic couplings, DCs)，对角化透热态哈密顿量应该能重新得到绝热态的能量。在透热表象下，可以认为式(\ref{time-depend-coeff})中的$V_{ij}$就是转移积分，所以在某种程度上说，即使透热化并不完全，仍有很小数值的非绝热耦合，只要该项对转移积分是一个小量，对动力学的影响也可以忽略，但是在绝热表象中由于$V_{ij}=0$，因此非绝热耦合即使有些时候较小，仍是十分重要的。
+      \section{一个经典而有意义的存在——Marcus理论简介}
+        谈到量子动力学，作为化学系的学生，首先可能想到化学反应的动力学，进而联想到经典的碰撞理论，过渡态理论，本节要介绍的Marcus理论，可以认为是经典过渡态理论的一个推广，但显然有更广泛的适用条件。Marcus理论某种程度上是一个模型化的理论，但是其对于处理两个态之间的跃迁转移问题来说还是相当适用的。
+
+        Marcus理论最早是Marcus研究溶液中离子的电荷交换问题引入的\cite{Marcus1993}，这里我们用一种更普适的情况，也就是用两个任意的透热态来讨论这个理论。如果体系要发生从一个透热态到另一个透热态的转变，两个透热态必须有相互作用，如果把这个问题简化成只有一个自由度的势能面，那么两个势能面的形状将很像两个二次函数。因此我们做第一个近似，即两个态的势能面在我们关心的范围内可以由二次函数描述。这个近似某种程度上说比较合理，因为此时的自由度其实是分子的简正坐标，即靠分子振动的能级与电子能级结合完成态之间的跃迁。第二个近似就不那么平凡了，有人称为平移谐振子近似，即体系两个透热态的二次函数的二次项系数相同(即两个分子振动频率相同)。这个近似在处理同种分子的分子间电荷转移时没有问题，因为同个分子同个自由度的振动频率是相同的，但是对于其他体系，这是一个较大的近似。
+        \begin{figure}
+          \centering
+          \includegraphics[width=10cm]{fig/Marcus.jpg}
+          \caption{\textbf{Marcus理论的模型图}}
+          \label{Marcus figure}
+        \end{figure}
+
+        在这样的近似下，我们就能画出一个类似于Figure \ref{Marcus figure}的模型图(原则上，图中的能量其实是自由能)，根据平移谐振子近似，我们可以写出两个透热态势能面的能量
+        \begin{equation*}
+          Y_{a}=E_{a}+\frac{K}{2}\left(X-X_{a}\right)^{2}, Y_{b}=E_{b}+\frac{K}{2}\left(X-X_{b}\right)^{2}
+        \end{equation*}
+        在这里我们定义重整能(Reorganization Energy)：电子从第一个势能面底垂直跃迁到第二个势能面上之后，从这个位置驰豫到第二个势能面的基态需要的能量，即图中的$E_r$\footnote{不同地方定义略有区别，但是为了推出这个公式，都是等价的}。那么重整能的大小也很容易计算
+        \begin{equation*}
+          E_{r}=Y_{2}\left(X_{a}\right)-Y_{2}\left(X_{b}\right)=E_{b}+\frac{K}{2}\left(X_{a}-X_{b}\right)^{2}-E_{b}=\frac{K}{2}\left(X_{a}-X_{b}\right)^{2}
+        \end{equation*}
+        可以看到，图中两个势能面有一个交叉，我们就认为这个交叉点就是从a态到b态过程的过渡态，那么过渡态对应的反应坐标为
+        \begin{equation*}
+          \begin{array}{c}{Y_{a}\left(X_{\mathrm{tr}}\right)=Y_{b}\left(X_{\mathrm{tr}}\right)} \\ {E_{a}+\frac{K}{2}\left(X_{\mathrm{tr}}-X_{a}\right)^{2}=E_{b}+\frac{K}{2}\left(X_{\mathrm{tr}}-X_{b}\right)^{2}} \\ {E_{a}+\frac{K}{2}\left(X^{2}-2 X_{a} X+X_{a}^{2}\right)=E_{b}+\frac{K}{2}\left(X^{2}-2 X_{b} X+X_{b}^{2}\right)} \\ {X_{\mathrm{tr}}=\frac{E_{a}-E_{b}+\frac{K}{2}\left(X_{a}^{2}-X_{b}^{2}\right)}{K\left(X_{a}-X_{b}\right)}}\end{array}
+        \end{equation*}
+        过渡态对应的能量为
+        \begin{equation*}
+          \begin{array}{l}{E\left(X_{\mathrm{tr}}\right)=E_{a}+\frac{K}{2}\left(X_{\mathrm{tr}}-X_{a}\right)^{2}} \\ {=E_{a}+\frac{K}{2} \frac{\left[E_{a}-E_{b}+\frac{K}{2}\left(X_{a}^{2}-X_{b}^{2}\right)-K X_{a}^{2}+K X_{a} X_{b}\right]^{2}}{K^{2}\left(X_{a}-X_{b}\right)^{2}}} \\ {=E_{a}+\frac{K}{2} \frac{\left[E_{a}-E_{b}-K\left(X_{a}-X_{b}\right)^{2} / 2\right]^{2}}{K^{2}\left(X_{a}-X_{b}\right)^{2}}} \\ {\therefore E_{A}=\frac{K}{2} \frac{\left[E_{a}-E_{b}-K\left(X_{a}-X_{b}\right)^{2} / 2\right]^{2}}{K^{2}\left(X_{a}-X_{b}\right)^{2}}=\frac{\left(\Delta E+E_{r}\right)^{2}}{4 E_{r}}}\end{array}
+        \end{equation*}
+        最后得到的$E_A=E\left(X_{\mathrm{tr}}\right)-E_a$是从a态到b态的活化能，$\Delta = E_b-E_a$是反应的反应能变，根据过渡态理论我们得到
+        \begin{equation*}
+          k_{r a t e}=A e^{-\frac{E_{A}}{k T}}=A e^{-\frac{\left(\Delta E+E_{r}\right)^{2}}{4 k T E_{r}}}
+        \end{equation*}
+        这就是Marcus理论的雏形，也是Marcus提出的函数形式，这个指前因子$A$，在透热极限下，是可以通过微扰法来计算推导的，最后的结果是
+        \begin{equation}
+          k=\frac{V^{2}}{\hbar} \sqrt{\frac{\pi}{\lambda k_{\mathrm{B}} T}} \exp \left(-\frac{\left(\lambda+\Delta G^{0}\right)^{2}}{4 \lambda k_{\mathrm{B}} T}\right)
+          \label{Marcus theory}
+        \end{equation}
+        在式(\ref{Marcus theory})中，$V$代表了透热表象下两个态的相互作用(哈密顿量非对角元)，我们按照通用的习惯，将重整能记为$\lambda$，反应的能量变化改为吉布斯自由能变。
+
+        与经典过渡态理论告诉人们的一样，一个态到另一个态的转化，并不是能量下降越多速度越快的，Marcus理论的一个重要结论在于，当一开始$\Delta G^{0}$较大时，转化较慢，随着$\Delta G^{0}$减小，转化速度逐渐加快，这个速度的最大值，就是当$\Delta G^{0} = -\Lambda$时，在这之后，如果继续降低第二个态的能量，这个转化速度反而会下降。$\Delta G^{0}< -\lambda$的区域，通常称为Marcus反转区。
+
+        但是过渡态理论和Marcus理论并非这么简单就结束了，它隐含着丰富的内涵。我们知道电子的运动速度是远快于原子核的，这也是BO近似的来源。在跃迁的理论中，我们会有被称为Franck-Condon原理的理论：电子的跃迁是垂直跃迁，即在势能面上，电子跃迁的瞬间原子核的位置(反应坐标)是不变的。那么问题来了，当体系处于光辐射下，电子跃迁的能量差是由外界辐射能量提供的，但是对没有外界辐射时，电子的能量是由热能，即原子核振动的能量提供的，因此实际上电子跃迁只发生在了两个态上相互作用最大，通常是能量最近的能级(电子能级加核振动能级)附近，所以电子态的跃迁问题其实是一个电子-声子(核振动)耦合的问题。Marcus理论对这个过程中的电-声子耦合的作用浓缩在了一个重整能里，这样的描述显然是充分的。
       \section{势间跳跃方法与FSSH}
         势间跳跃 (Surface Hopping)方法是一种混合量子经典(Mixed-Quantum-Classical)方法\footnote{需要注意混合量子经典与半经典方法(Semi-Classical)不同，前者一般指方法中既有经典部分又有量子部分，后者偏向量子力学做经典近似，演化一个半量子半经典的方程}，它是非绝热动力学中非常常用的一类，尽管很早就有类似的思路，直到1990年John Tully提出了最少跃迁的势间跳跃(Fewest Switches Surface Hopping, FSSH)方法\cite{Tully1990}，在这之后surface hopping方法被大量使用并且一直被发展，王老师课题组的核心研究方向就是SH方法中某些复杂问题的处理以及将其往更大体系更多自由度推广。
 

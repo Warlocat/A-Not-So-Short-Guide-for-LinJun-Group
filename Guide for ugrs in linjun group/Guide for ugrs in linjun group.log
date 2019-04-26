@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2018.7.31)  24 APR 2019 00:26
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2018.7.31)  26 APR 2019 10:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1177,7 +1177,7 @@ Chapter 3.
 [24
 
 ] [25] [26] [27] [28] [29] [30] [31] [32]
-Underfull \hbox (badness 10000) in paragraph at lines 1122--1123
+Underfull \hbox (badness 10000) in paragraph at lines 1137--1138
 
  []
 
@@ -1190,7 +1190,7 @@ Underfull \vbox (badness 5274) has occurred while \output is active []
 
 ]
 [35]
-Overfull \hbox (2.77031pt too wide) in paragraph at lines 1231--1232
+Overfull \hbox (2.77031pt too wide) in paragraph at lines 1246--1247
 []\TU/FandolSong-Regular(0)/m/n/12 如 \TU/lmr/m/n/12 aug-cc-pVDZ, aug-cc-pVTZ, a
 ug-cc-pVQZ, aug-cc-pV5Z... 
  []
@@ -1204,43 +1204,42 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ]
 [49] [50]
-Overfull \hbox (5.6263pt too wide) in paragraph at lines 1786--1787
+File: fig/Marcus.jpg Graphic file (type bmp)
+<fig/Marcus.jpg>
+ [51] [52]
+Overfull \hbox (5.6263pt too wide) in paragraph at lines 1842--1843
 []\TU/FandolSong-Regular(0)/m/n/12 势 间 跳 跃 \TU/lmr/m/n/12 (Surface Hopping) \TU
 /FandolSong-Regular(0)/m/n/12 方 法 是 一 种 混 合 量 子 经 典 \TU/lmr/m/n/12 (Mixed-Quant
 um-Classical)
  []
 
-[51] [52]
+[53] [54]
 File: fig/crossing.jpg Graphic file (type bmp)
 <fig/crossing.jpg>
-
-Underfull \vbox (badness 1325) has occurred while \output is active []
-
- [53]
-[54]
+ [55] [56]
 Chapter 6.
-[55
-
-] [56]
-Chapter 7.
 [57
 
 ] [58]
-Overfull \hbox (31.98012pt too wide) detected at line 1949
+Chapter 7.
+[59
+
+] [60]
+Overfull \hbox (31.98012pt too wide) detected at line 2005
 []
  []
 
-[59] (./Guide for ugrs in linjun group.bbl [60]) [61
+[61] (./Guide for ugrs in linjun group.bbl [62]) [63
 
 ]
 (./Guide for ugrs in linjun group.aux) ) 
 Here is how much of TeX's memory you used:
- 18422 strings out of 492970
- 410472 string characters out of 6137298
+ 18469 strings out of 492970
+ 413498 string characters out of 6137298
  645715 words of memory out of 5000000
- 22230 multiletter control sequences out of 15000+600000
+ 22276 multiletter control sequences out of 15000+600000
  539813 words of font info for 111 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  42i,21n,73p,10487b,3063s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Guide for ugrs in linjun group.pdf (65 pages).
+Output written on Guide for ugrs in linjun group.pdf (67 pages).

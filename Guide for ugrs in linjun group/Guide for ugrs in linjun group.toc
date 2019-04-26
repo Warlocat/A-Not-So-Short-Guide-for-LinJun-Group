@@ -12,7 +12,7 @@
 \contentsline {section}{\numberline {2.2}符号使用}{14}
 \contentsline {section}{\numberline {2.3}简易矢量代数}{14}
 \contentsline {section}{\numberline {2.4}简易数值计算方法}{15}
-\contentsline {subsection}{\numberline {2.4.1}差值与拟合}{15}
+\contentsline {subsection}{\numberline {2.4.1}插值与拟合}{15}
 \contentsline {subsection}{\numberline {2.4.2}数值微分和数值积分}{15}
 \contentsline {subsection}{\numberline {2.4.3}ODE初值问题的数值解法}{15}
 \contentsline {section}{\numberline {2.5}完备基展开}{15}
@@ -35,13 +35,14 @@
 \contentsline {chapter}{\numberline {5}非绝热动力学与势间跳跃方法}{48}
 \contentsline {section}{\numberline {5.1}非绝热耦合}{49}
 \contentsline {section}{\numberline {5.2}绝热表象与透热表象}{50}
-\contentsline {section}{\numberline {5.3}势间跳跃方法与FSSH}{51}
-\contentsline {section}{\numberline {5.4}鸟瞰SH方法中的特殊问题}{53}
-\contentsline {paragraph}{Trivial Crossing：}{53}
-\contentsline {paragraph}{超交换问题：}{54}
-\contentsline {paragraph}{退相干：}{54}
-\contentsline {paragraph}{相位修正：}{54}
-\contentsline {chapter}{\numberline {6}全局优化问题}{55}
-\contentsline {chapter}{\numberline {7}相空间-量子哈密顿动力学(PS-QHD)}{57}
-\contentsline {section}{\numberline {7.1}相空间Ehrenfest定理}{59}
-\contentsline {section}{\numberline {7.2}相空间分布函数}{60}
+\contentsline {section}{\numberline {5.3}一个经典而有意义的存在——Marcus理论简介}{51}
+\contentsline {section}{\numberline {5.4}势间跳跃方法与FSSH}{53}
+\contentsline {section}{\numberline {5.5}鸟瞰SH方法中的特殊问题}{55}
+\contentsline {paragraph}{Trivial Crossing：}{55}
+\contentsline {paragraph}{超交换问题：}{56}
+\contentsline {paragraph}{退相干：}{56}
+\contentsline {paragraph}{相位修正：}{56}
+\contentsline {chapter}{\numberline {6}全局优化问题}{57}
+\contentsline {chapter}{\numberline {7}相空间-量子哈密顿动力学(PS-QHD)}{59}
+\contentsline {section}{\numberline {7.1}相空间Ehrenfest定理}{61}
+\contentsline {section}{\numberline {7.2}相空间分布函数}{62}
