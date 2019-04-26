@@ -1143,7 +1143,7 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
   
 
   \chapter{量子化学-电子结构基础}
-    量子化学(电子结构)部分，我们将简要介绍常见的电子结构计算方法，所谓电子结构方法，即求解分子(或者固体)体系的定态Schr\"odinger的方法，大家都知道，多体的SE是难以求得精确的解析结果的，因此量子化学某种程度上也是各类近似方法及其如何一步步逼近精确解的简介，本节会{\color{red}\textbf{简要}}介绍Hartree-Fock理论，DFT理论，post-Hartree-Fock理论(包括组态相关CI，耦合簇方法CC，多组态自洽场方法MCSCF，多体微扰理论等)，编者还在最后加入了简化版的电子(费米子)二次量子化的内容。但是限于篇幅，上述理论的证明几乎全部略去。本节内容与王老师高等物理化学-量子化学课程内容相似。\footnote{由于王老师课题组对这部分的需求较低，我们在更新上可能会将此章更新后推，但是请相信编者们，咕咕咕是不可能的。}
+    量子化学(电子结构)部分，我们将简要介绍常见的电子结构计算方法，所谓电子结构方法，即求解分子(或者固体)体系的定态Schr\"odinger的方法，大家都知道，多体的SE是难以求得精确的解析结果的，因此量子化学某种程度上也是各类近似方法及其如何一步步逼近精确解的简介，本节会\textbf{简要}介绍基于分子电子结构计算的Hartree-Fock理论，DFT理论，post-Hartree-Fock理论(包括组态相关CI，耦合簇方法CC，多组态自洽场方法MCSCF，多体微扰理论等)，编者还在最后加入了简化版的电子(费米子)二次量子化的内容。限于篇幅，上述理论的证明几乎全部略去，暂时也不涉及关于固体理论的相关计算。本节内容与王老师高等物理化学-量子化学课程内容相似。\footnote{由于王老师课题组对这部分的需求较低，我们在更新上可能会将此章更新后推。}
     
     另外，与量子力学章类似，为了方便，我们第一小节作为快速的概念检索使用。
 
@@ -1426,7 +1426,88 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
   Thus the minimal property is established relative to all density functions $n'(\textbf{r})$ associated with some other external potential $v'(\textbf{r})$.\cite{PhysRev.136.B864}
   \end{proof}
 
-  \section{多电子问题}
+  \section{原子单位制}
+    我们在电子结构部分(以及前后各部分，请读者按照上下文判断我们是否使用了这套单位系统)使用的单位制叫做原子单位制，使用原子单位制将大大简化我们的书写，这套单位系统也不是凭空出现的，为了理解它提出的背景，我们先来看氢原子的Schr\"odinger方程，在国际标准单位制(SI)中，我们可以写出
+    \begin{equation}
+      \left[ - \frac { \hbar ^ { 2 } } { 2 m _ { e } } \nabla ^ { 2 } - \frac { e ^ { 2 } } { 4 \pi \varepsilon _ { 0 } r } \right] \phi = \mathscr { E } \phi
+    \end{equation}
+    其中$\hbar$是普朗克常数除以$2\pi$，$m_e$是电子的质量，$-e$是电子带的电荷。为了把这个方程转化成无量纲的形式，我们令$x,y,z\rightarrow\lambda x',\lambda y',\lambda z'$，然后得到
+    \begin{equation}
+        \left[ - \frac { \hbar ^ { 2 } } { 2 m _ { e } \lambda ^ { 2 } } \nabla ^ { \prime 2 } - \frac { e ^ { 2 } } { 4 \pi \varepsilon _ { 0 } \lambda r ^ { \prime } } \right] \phi ^ { \prime } = \mathscr { E } \phi ^ { \prime }
+        \label{lambda x y z}
+    \end{equation}
+    只要我们让$\lambda$满足下列形式，在动能和势能算符前的常数就可以被拿掉，换成另一个独立的常数
+    \begin{equation}
+        \frac { \hbar ^ { 2 } } { m _ { e } \lambda ^ { 2 } } = \frac { e ^ { 2 } } { 4 \pi \varepsilon _ { 0 } \lambda }\equiv \mathscr { E } _ { a }
+        \label{Hartree defination}
+    \end{equation}
+    这个独立的常数我们定为$ \mathscr { E } _ { a }$，解等式(\ref{Hartree defination})中的$\lambda$可得
+    \begin{equation}
+      \lambda=\frac{4\pi\varepsilon_0\hbar^2}{m_e e^2}=a_0
+      \label{Bohr defination}
+    \end{equation}
+    从这个等式可以看出，$\lambda$就是Bohr半径，我们是将坐标变量除以了这个因子，因此Bohr半径就是单位制下的长度单位，这个单位就叫Bohr，$1 \text{Bohr} = 5.2918 \times 10^{-11} \textrm{m}$。我们将式(\ref{Bohr defination})代入(\ref{lambda x y z})中，再将一堆常数换成$\mathscr{E}_a$
+    \begin{equation}
+      \mathscr { E } _ { a } \left[ - \frac { 1 } { 2 } \nabla ^ { \prime 2 } - \frac { 1 } { r ^ { \prime } } \right] \phi ^ { \prime } = \mathscr { E } \phi ^ { \prime }
+    \end{equation}
+    令$\mathscr{E}^{\prime}=\mathscr{E}/\mathscr{E}_a$，就得到了一个无量纲的方程，所以$\mathscr{E}_a$就是原子单位之下的能量单位，称为Hartree，$1 \text{Hartree} = 4.3598 \times 10^{-18} \textrm{J}$。全部换成原子单位之后，这个无量纲的方程可以写成
+    \begin{equation}
+      \left( - \frac { 1 } { 2 } \nabla ^ { \prime 2 } - \frac { 1 } { r ^ { \prime } } \right) \phi ^ { \prime } = \mathscr { E } ^ { \prime } \phi ^ { \prime }
+    \end{equation}
+    即Schr\"odinger方程的原子单位制形式。解这个方程下的氢原子，得到的基态能量$\mathscr{E}^{\prime}$等于$-0.5$，也就是$-0.5$Hartree。
+
+    除去上文提到的原子单位制长度单位和能量单位，还有诸多，知道其中几个可以互相推导，比如原子单位制电荷量即元电荷，原子单位制质量即电子质量，等等。在原子单位制下，可以导出，很多常数的数值上等于1，比如$ 4 \pi \varepsilon_0$和$\hbar$。另外在这里，列举一些不是国际单位制下的，但是在阅读文献时十分重要的单位的转化关系：原子单位制长度单位等于0.52918埃(Angstr\"oms, \AA)，原子单位制的偶极矩单位(两个距离为$a_0$的单位电荷)等于2.5418德拜(Debyes, D)，原子单位制的能量单位等于27.211电子伏特(eV)或627.51kcal/mole。
+
+    从现在开始我们将丢掉“撇”，所有我们的物理量都将在原子单位下。
+  \section{Born-Oppenheimer近似}
+    Born-Oppenheimer近似(BO近似)是量子化学的核心，几乎所有电子结构计算都必须基于这个近似，它之所以重要，是因为它非常简单，尤其是图像上十分清晰，而且尽管作为一个近似，但是它的物理意义是和现实世界一致的，这是一个“好”的近似。
+
+    一个完整的分子体系，它的哈密顿量包括电子的部分，还有原子核的部分，波函数也应该由电子和原子核一起构成，但是通常来说，这样的量子体系是非常难以处理的，BO近似的引入就是为了解决这个问题。首先，原子核比电子要重很多，它们之间的相互作用却在同一量级(因为都是库仑相互作用)，按照经典力学的理解，电子的运动速度往往是原子核的上千倍，从特征时间上分析，\textbf{电子运动时感受到的原子核的位置其实是不变的，而原子核运动时感受到的电子的作用其实是一个平均化的作用，这就是BO近似核心的两个观点，}我们分别来讨论它们。
+
+    先说第一部分，电子运动时原子核的位置可以认为是不变的。根据这个思想，我们可以在电子运动的特征时间内只研究电子部分的性质，在原子单位制下，有$N$个电子和$M$个原子核的哈密顿量可以写作      
+    \begin{equation}
+      \begin{aligned} \mathscr { H } = & - \sum _ { i = 1 } ^ { N } \frac { 1 } { 2 } \nabla _ { i } ^ { 2 } - \sum _ { A = 1 } ^ { M } \frac { 1 } { 2 M _ { A } } \nabla _ { A } ^ { 2 } - \sum _ { i = 1 } ^ { N } \sum _ { A = 1 } ^ { M } \frac { Z _ { A } } { r _ { i A } } \\ & + \sum _ { i = 1 } ^ { N } \sum _ { j > i } ^ { N } \frac { 1 } { r _ { i j } } + \sum _ { A = 1 } ^ { M } \sum _ { B > A } ^ { M } \frac { Z _ { A } Z _ { B } } { R _ { A B } } \end{aligned}
+      \label{Total Hamiltonian}
+    \end{equation}
+    在BO近似下，当我们只关心电子时，核可以认为是静止的，式(\ref{Total Hamiltonian})第二项为0，最后一项为常数，剩下的部分称为电子哈密顿量(在电子结构计算中，最后的常数项通常也加进电子部分的哈密顿量中)
+    \begin{equation}
+      \mathscr { H } _{el} = - \sum _ { i = 1 } ^ { N } \frac { 1 } { 2 } \nabla _ { i } ^ { 2 } - \sum _ { i = 1 } ^ { N } \sum _ { A = 1 } ^ { M } \frac { Z _ { A } } { r _ { i A } } + \sum _ { i = 1 } ^ { N } \sum _ { j > i } ^ { N } \frac { 1 } { r _ { i j } } + \sum _ { A = 1 } ^ { M } \sum _ { B > A } ^ { M } \frac { Z _ { A } Z _ { B } } { R _ { A B } }
+      \label{electronic Hamiltonian}
+    \end{equation}
+    电子结构的计算通常也就是求解这一部分的定态Schr\"odinger方程
+    \begin{equation}
+      \mathscr { H } _{el}(\mathbf{r,R})\psi_i(\mathbf{r,R}) = \varepsilon_i\psi_i(\mathbf{r,R})
+      \label{electronic static SE}
+    \end{equation}
+    求解这个方程的诸多思路将在下面的几节中给出。到现在为止，BO近似看起来非常平凡且，就是在求解电子部分时扔掉了原子核的动能项，电子结构的教材多数也止步于此。但是需要注意的是，这只是BO近似的第一部分，即电子感受到的核，不要忘记它还有第二部分，也就是核感受到的电子。
+
+    从上面的分析里我们看出，原子核的运动和电子的运动是相对独立的，所以在BO近似下，二者的波函数也可以拆开，而电子波函数的解是一组空间的完备基，可以把实际体系的总体波函数在这个基组下展开，展开系数为一个含有核坐标参数的函数$ \chi_i(\mathbf{R})$
+    \begin{equation}
+      \Psi(\mathbf{r,R})=\sum_{i}\psi_i(\mathbf{r,R}) \chi_i(\mathbf{R})
+    \end{equation}
+    式中的$\chi_i(\mathbf{R})$就是对应电子能级$\psi_i$的原子核波函数，将上式代入到完整哈密顿量(\ref{Total Hamiltonian})的定态Schr\"odinger方程中，为了方便，简化成只有一个原子核和一个电子的情况，并把电子哈密顿量单独写成一项，我们可以得到
+    \begin{equation}
+      \left(- \frac { 1 } { 2 M } \nabla _ {\mathbf{R} } ^ { 2 } +\mathscr { H } _{el} \right)\sum_{j}\psi_j(\mathbf{r,R}) \chi_j(\mathbf{R}) = E\sum_{j}\psi_j(\mathbf{r,R}) \chi_j(\mathbf{R})
+    \end{equation}
+    上式左乘$\psi_i^*$并对电子坐标$\mathbf{r}$全空间积分，利用电子波函数的正交归一性和等式(\ref{electronic static SE})就可以得到
+    \begin{equation}
+      -\frac{1}{2M}\sum_j \left(\int \mathrm{d}\mathbf{r} \psi_i^*(\mathbf{r,R})\nabla _ { \mathbf{R}} ^ { 2 }\psi_j(\mathbf{r,R})\chi_j(\mathbf{R} )\right)+(\varepsilon_i - E)\chi_i(\mathbf{R} ) = 0
+    \end{equation}
+    其中求和号内的积分表达式中梯度用求导的规则展开，上式会进一步演变为
+    \begin{equation}
+      -\frac{1}{2M}\sum_j\left[\left(\int \mathrm{d}\mathbf{r}\psi_i^*\nabla _ { \mathbf{R}}\psi_j \right) \nabla _ { \mathbf{R}}\chi_j + \left(\int \mathrm{d}\mathbf{r}\psi_i^*\nabla _ { \mathbf{R}}^2\psi_j \right)\chi_j \right]+\left(-\frac{\nabla _ { \mathbf{R}}^2}{2M} + \varepsilon_i -E\right)\chi_i = 0
+      \label{nuclear exact SE}
+    \end{equation}
+    一通推导之后，BO近似又出场了，BO近似的第二部分内容，就是等式(\ref{nuclear exact SE})中的求和部分圆括号中的每一项都是0，即
+    \begin{equation}
+      \int \mathrm{d}\mathbf{r}\psi_i^*\nabla _ { \mathbf{R}}\psi_j = \int \mathrm{d}\mathbf{r}\psi_i^*\nabla _ { \mathbf{R}}^2\psi_j = 0
+      \label{BO approximation}
+    \end{equation}
+    上式中等于0的两个式子称为derivative coupling，有时候统称为叫非绝热耦合\footnote{但是多数时候，非绝热耦合只是指一阶导的部分}，等式(\ref{BO approximation})才是BO近似的核心，也是下一章要讨论非绝热(超越BO近似)的动力学中所不能忽略的内容。如果derivative coupling等于0，式(\ref{nuclear exact SE})变为
+    \begin{equation}
+      \left(-\frac{\nabla _ { \mathbf{R}}^2}{2M} + \varepsilon_i\right)\chi_i(\mathbf{R}) = E\chi_i(\mathbf{R})
+    \end{equation}
+    这就是一个非常普通的定态Schr\"odinger方程，只是势能项换成了电子态的能量，现在，这个系数的物理意义就显露出来了，它就是原子核的波函数，原子核感受到的势能就是当前电子态的能量，这就是“原子核运动时感受到的电子的作用其实是一个平均化的作用”这句话的数学表达。
   \section{Hartree-Fock方法}
   \section{密度泛函理论}
   \section{post-Hartree-Fock方法}
@@ -1737,7 +1818,7 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
       与用行列式推导的结果也完全一致。
 
   \chapter{非绝热动力学与势间跳跃方法}
-    简单的说，量子化学主要分为电子结构理论和动力学，上一大节专注于前者，本节就关注后者，电子结构计算可以给出电子能级的分布，激发态的位置以及其他一系列与之相关的静态性质，而动力学，正如其名，研究电子/原子核在特定情况下随时间的演化，通常化学中的光激发驰豫过程、电荷转移过程、异构化，甚至广义上的所有化学反应都是动力学的范畴。当然很容易想到，动力学的准确性是依赖于电子结构方法的准确性的，随着电子结构理论发展，动力学在研究化学物理等一系列问题中有不可忽视的作用。
+    简单的说，量子化学主要分为电子结构理论和动力学，上一章专注于前者，本章就关注后者，电子结构计算可以给出电子能级的分布，激发态的位置以及其他一系列与之相关的静态性质，而动力学，正如其名，研究电子/原子核在特定情况下随时间的演化，通常化学中的光激发驰豫过程、电荷转移过程、异构化，甚至广义上的所有化学反应都是动力学的范畴。当然很容易想到，动力学的准确性是依赖于电子结构方法的准确性的，随着电子结构理论发展，动力学在研究化学物理等一系列问题中有不可忽视的作用。
 
     在Born-Oppenheimer近似下，我们可以针对特定的分子构型(核的位置)计算对应的电子能量，对于不同的核坐标$\mathbf{R}$(习惯上大写表示原子核坐标，小写表示电子坐标)，可以给出一系列电子能量$U=U(\mathbf{R})$，这就是我们通常所说的势能面。需要注意的是，势能面是基于BO近似的结果，这是一切的前提。
     
@@ -1745,7 +1826,7 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
     
     而此类问题又是化学和物理学中广泛存在的问题，为了解决这类动力学问题，必须把原子核和电子的运动一起加进动力学模拟的过程中，这类动力学通常称为非绝热动力学(non-adiabatic coupling)。处理核的运动有多种方式，经典的分子动力学就是只有原子核的运动，不属于非绝热动力学的范畴，但是经典运动是处理原子核的一种方式，另外还可以将原子核的运动也用量子力学求解，进行全量子的非绝热动力学模拟。王林军老师课题组常用的势间跳跃(surface hopping)方法，就是原子核做经典处理，电子做量子处理的一种混合量子经典的非绝热动力学方法。
       \section{非绝热耦合}
-        作为“动力学”下的讨论，我们一定会用到含时Schr\"odinger方程：
+        早在电子结构部分，我们就引入过非绝热耦合(\ref{BO approximation})，现在我们换一种方式导出它。作为“动力学”下的讨论，我们一定会用到含时Schr\"odinger方程：
         \begin{equation}
           i \hbar \frac{\mathrm{d} | \psi \rangle}{\mathrm{d} t}=\hat{H} | \psi \rangle
         \end{equation}
@@ -1797,7 +1878,7 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
         动力学的计算既可以在绝热表象下进行，也可以在透热表象下进行，但是很多时候为了节省计算量，我们不会在每个时刻都计算对应的能量与NAC，而是用某种函数对其进行拟合，每到一个分子构型，只需要用拟合函数计算即可。尽管在实际操作中，绝热态是很容易得到的，因为绝热态是哈密顿量本征态，我们可以用各种电子结构的计算方法得到他们，但是在绝热表象下，两个绝热态之间存在非绝热耦合，势能面间也会有圆锥交叉或者trivial crossing，在交叉点处的非绝热耦合是一个奇点，通常很难用函数拟合或作其他处理，因此人们很多时候会希望通过绝热态的线性组合来构建透热态，在透热表象下进行动力学模拟，这个过程称为透热化(diabatization)。透热化的方法非常多，本向导中也不作仔细的展开，但是根据Troy的综述，真正的透热态是难以通过绝热态线性组合得到的，所以很多文章中会使用构建半透热态(quasi-di`abatic state)的说法。需要注意，根据非绝热耦合等于零的定义，透热态按照某个固定的系数的线性组合还是透热态，也就是透热态并不是唯一的，这种不唯一性给了量子化学家构建透热态的更大的自由度。这也是目前透热化的方法多种多样的一个原因。
 
         在透热表象下，由于透热态不是哈密顿量的本征态，所以此时哈密顿量不再是对角矩阵，而是有非零的非对角元，在某些问题(如电荷转移)中，这些非对角元通常被叫做转移积分(transfer integrals)或者通常称为透热耦合(diabatic couplings, DCs)，对角化透热态哈密顿量应该能重新得到绝热态的能量。在透热表象下，可以认为式(\ref{time-depend-coeff})中的$V_{ij}$就是转移积分，所以在某种程度上说，即使透热化并不完全，仍有很小数值的非绝热耦合，只要该项对转移积分是一个小量，对动力学的影响也可以忽略，但是在绝热表象中由于$V_{ij}=0$，因此非绝热耦合即使有些时候较小，仍是十分重要的。
-      \section{一个经典而有意义的存在——Marcus理论简介}
+      \section{一个经典而有意义的存在：Marcus理论简介}
         谈到量子动力学，作为化学系的学生，首先可能想到化学反应的动力学，进而联想到经典的碰撞理论，过渡态理论，本节要介绍的Marcus理论，可以认为是经典过渡态理论的一个推广，但显然有更广泛的适用条件。Marcus理论某种程度上是一个模型化的理论，但是其对于处理两个态之间的跃迁转移问题来说还是相当适用的。
 
         Marcus理论最早是Marcus研究溶液中离子的电荷交换问题引入的\cite{Marcus1993}，这里我们用一种更普适的情况，也就是用两个任意的透热态来讨论这个理论。如果体系要发生从一个透热态到另一个透热态的转变，两个透热态必须有相互作用，如果把这个问题简化成只有一个自由度的势能面，那么两个势能面的形状将很像两个二次函数。因此我们做第一个近似，即两个态的势能面在我们关心的范围内可以由二次函数描述。这个近似某种程度上说比较合理，因为此时的自由度其实是分子的简正坐标，即靠分子振动的能级与电子能级结合完成态之间的跃迁。第二个近似就不那么平凡了，有人称为平移谐振子近似，即体系两个透热态的二次函数的二次项系数相同(即两个分子振动频率相同)。这个近似在处理同种分子的分子间电荷转移时没有问题，因为同个分子同个自由度的振动频率是相同的，但是对于其他体系，这是一个较大的近似。

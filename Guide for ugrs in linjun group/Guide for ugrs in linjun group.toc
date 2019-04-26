@@ -25,24 +25,25 @@
 \contentsline {section}{\numberline {3.5}密度矩阵与混合态}{31}
 \contentsline {chapter}{\numberline {4}量子化学-电子结构基础}{34}
 \contentsline {section}{\numberline {4.1}快速概念检索}{34}
-\contentsline {section}{\numberline {4.2}多电子问题}{40}
-\contentsline {section}{\numberline {4.3}Hartree-Fock方法}{40}
-\contentsline {section}{\numberline {4.4}密度泛函理论}{40}
-\contentsline {section}{\numberline {4.5}post-Hartree-Fock方法}{40}
-\contentsline {section}{\numberline {4.6}二次量子化}{40}
-\contentsline {subsection}{\numberline {4.6.1}产生湮灭算符及其反对易关系}{41}
-\contentsline {subsection}{\numberline {4.6.2}二次量子化后的算符与其矩阵元}{45}
-\contentsline {chapter}{\numberline {5}非绝热动力学与势间跳跃方法}{48}
-\contentsline {section}{\numberline {5.1}非绝热耦合}{49}
-\contentsline {section}{\numberline {5.2}绝热表象与透热表象}{50}
-\contentsline {section}{\numberline {5.3}一个经典而有意义的存在——Marcus理论简介}{51}
-\contentsline {section}{\numberline {5.4}势间跳跃方法与FSSH}{53}
-\contentsline {section}{\numberline {5.5}鸟瞰SH方法中的特殊问题}{55}
-\contentsline {paragraph}{Trivial Crossing：}{55}
-\contentsline {paragraph}{超交换问题：}{56}
-\contentsline {paragraph}{退相干：}{56}
-\contentsline {paragraph}{相位修正：}{56}
-\contentsline {chapter}{\numberline {6}全局优化问题}{57}
-\contentsline {chapter}{\numberline {7}相空间-量子哈密顿动力学(PS-QHD)}{59}
-\contentsline {section}{\numberline {7.1}相空间Ehrenfest定理}{61}
-\contentsline {section}{\numberline {7.2}相空间分布函数}{62}
+\contentsline {section}{\numberline {4.2}原子单位制}{40}
+\contentsline {section}{\numberline {4.3}Born-Oppenheimer近似}{41}
+\contentsline {section}{\numberline {4.4}Hartree-Fock方法}{43}
+\contentsline {section}{\numberline {4.5}密度泛函理论}{43}
+\contentsline {section}{\numberline {4.6}post-Hartree-Fock方法}{43}
+\contentsline {section}{\numberline {4.7}二次量子化}{43}
+\contentsline {subsection}{\numberline {4.7.1}产生湮灭算符及其反对易关系}{44}
+\contentsline {subsection}{\numberline {4.7.2}二次量子化后的算符与其矩阵元}{48}
+\contentsline {chapter}{\numberline {5}非绝热动力学与势间跳跃方法}{50}
+\contentsline {section}{\numberline {5.1}非绝热耦合}{51}
+\contentsline {section}{\numberline {5.2}绝热表象与透热表象}{52}
+\contentsline {section}{\numberline {5.3}一个经典而有意义的存在：Marcus理论简介}{53}
+\contentsline {section}{\numberline {5.4}势间跳跃方法与FSSH}{55}
+\contentsline {section}{\numberline {5.5}鸟瞰SH方法中的特殊问题}{57}
+\contentsline {paragraph}{Trivial Crossing：}{57}
+\contentsline {paragraph}{超交换问题：}{58}
+\contentsline {paragraph}{退相干：}{58}
+\contentsline {paragraph}{相位修正：}{58}
+\contentsline {chapter}{\numberline {6}全局优化问题}{59}
+\contentsline {chapter}{\numberline {7}相空间-量子哈密顿动力学(PS-QHD)}{61}
+\contentsline {section}{\numberline {7.1}相空间Ehrenfest定理}{63}
+\contentsline {section}{\numberline {7.2}相空间分布函数}{64}
