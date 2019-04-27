@@ -429,11 +429,161 @@
     \end{equation}
 
     \section{简易数值计算方法}
-    我们一般将可以直接写出数学表达式的问题称为解析的，与之对应的就是数值的。虽然解析的数学在相当多的方面都有重要意义，但是对于实际的应用来说，尤其是计算机模拟的问题来说，得到解析表达式是极为困难。举个简单的例子，常微分方程，就连本科生课程中给出的例子很多都需要做数值计算才能真正得到结果。而在王老师课题组，由于研究的都是动力学问题，即体系随时间演化，更是需要很多数值拟合，微分积分和数值解微分方程的概念，因此本节中我们将极其简要地介绍相关问题的最基础方法，实际操作中需要较高精度方法请参阅相关书籍。
-    \subsection{插值与拟合}
-    \subsection{数值微分和数值积分}
-    \subsection{ODE初值问题的数值解法}
+    我们一般将可以直接写出数学表达式的问题称为解析的，与之对应的就是数值的。虽然解析的数学在相当多的方面都有重要意义，但是对于实际的应用来说，尤其是计算机模拟的问题来说，得到解析表达式是极为困难。举个简单的例子，常微分方程，就连本科生课程中给出的例子很多都需要做数值计算才能真正得到结果。而在王老师课题组，由于研究的都是动力学问题，即体系随时间演化，更是需要很多数值拟合，微分积分和数值解微分方程的概念，因此本节中我们将极其简要地介绍相关问题的最基础方法，为了简单，我们都用单变量函数的最简单的数值方法作为例子，实际操作中需要多变量、较高精度方法请参阅相关书籍，这部分只是给读者一个概念，在之后查阅资料过程中不至于\sout{被水淹没}不知所措。
+    \subsection{非线性方程求解}
+      对于线性方程，方程组，如果我们已经确定其有解，则一定可以通过消元法等方法将其求解，最多只是过程繁琐，但是总可以交给计算机去解决，线性方程组更是有各类已有的数学运算库函数来求解，比我们在课本上学到的方法要精确，这也是我们跳过线性方程组求解的原因\footnote{读者在需要这类功能时可以咨询学长学姐相关的MKL库函数使用，本指南不再特别说明。另外，这也是我们不讲述矩阵特征值数值解法的原因。}。对于非线性方程$f(x) = 0$，这件事情是很让人头疼的，因为没有一个严格的普适求解方法，在这里我们介绍最简单的几种数值方法。
 
+      \textbf{二分法：}这是一个非常朴素的方法，相信读者之前就听说过，只要函数连续，那么总可以通过二分的方法从一正一负两个函数值点出发，不断迭代，就能找到其中的解。思路是首先选择一对具有相反函数值的自变量点，取它们的平均值计算函数值$f(\frac{x_i + x_j}{2})$，根据符号相反的一侧选择下一个区域，继续二分，直到两次二分的区间都极小，就可以取最后区间的点作为非线性方程的解。
+
+      \textbf{不动点迭代法：}相信很多读者在学习分析化学1时都用过这个方法，就是将非线性方程$f(x)=0$写成$x = g(x)$的形式，然后选择一个初值$x_0$代入得到$x_1 = g(x_0)$，进而迭代得到$x_2,x_3,\dots$，直到最后两个数相差很小，就可以认为迭代法收敛，收敛的值就是非线性方程的解。我们还相信，读者在学习分析化学1的时候就发现这个方法不总是能收敛的，或者收敛到两个值，不动点迭代法强烈依赖于$g(x)$的性质，具体数学证明不予展开，但是很多时候任意构造的$g(x)$并不能满足收敛性的要求，因此这个方法的适用范围非常局限。
+
+      \textbf{牛顿迭代法：}牛顿迭代法也是迭代求解非线性方程的重要方法，尽管比很多后续方法慢，但是多数情况下，其收敛性可以得到保证，也是正常的求解非线性方程中最一般的方法(前面两个基本没人用)。牛顿迭代法的核心思想是，设方程$f(x)=0$有近似解$x_k$，且$f^{\prime}(x_k)\neq0$，那么真正的解就可以在这个近似解附近展开
+      \begin{equation*}
+        f(x) \approx f\left(x_{k}\right)+f^{\prime}\left(x_{k}\right)\left(x-x_{k}\right)
+      \end{equation*}
+      方程$f(x)=0$就是上式右边等于0，或者写成
+      \begin{equation*}
+        x=x_{k}-\frac{f\left(x_{k}\right)}{f^{\prime}\left(x_{k}\right)}
+      \end{equation*}
+      左边的$x$变成$x_{k+1}$，这个方程就是牛顿迭代法的迭代方程，其几何意义是，对于某个点$x_k$，$x_{k+1}$就等于当前点切线与$y=0$的交点，这样一步步逼近真实解。当读者遇到非线性方程时，可以优先采用牛顿法尝试，非线性方程组也可以从上面的方法进行简单地推广得到。
+
+      鉴于牛顿法有时候收敛速度较慢，后续还有部分加速迭代的算法，这里就不详细展开了。
+    \subsection{插值与拟合}
+      差值与拟合的问题在研究中是非常常见的，这两个问题是极其相似的，他们都来自于我们希望对已有数据的规律进行分析，得到未知数据。比如说，我们通过了实验或者计算的手段，知道了一组自变量$\left\{x_i\right\},i=1,2,\dots,N$和这组自变量对应的函数值$\left\{y_i\right\}$，我们希望用一个函数表示它们之间的关系，进而求出其他没有测量的自变量对应的函数值。根据需要，我们会涉及差值或者拟合的问题，我们将各介绍其中最简单的方法，分别是拉格朗日(Lagrange)差值多项式和最小二乘法。
+
+      之所以称为差值问题，是因为差值函数有一个要求，就是必须经过所有的$(x_i,y_i)$点，即所有的已知数据都严格符合差值多项式，多数情况下，对于一组数据的差值多项式是存在且唯一的，比如两个点确定直线是唯一的，三个点确定抛物线也是唯一的。因此用哪种差值多项式，只是代码实现的难度和速度上的差别，拉格朗日差值多项式就是思路最平凡的一种：对于一组$n+1$个互不相同的差值点$\left\{x_i\right\}_{i=0}^n$，如果能找到一个多项式$\left\{l_{i}(x)\right\}_{i=0}^{n}$，满足
+      \begin{equation}
+        l_{i}\left(x_{j}\right)=\delta_{i j}=\left\{\begin{array}{ll}{1, i=j}  \\ {0, i \neq j} \end{array}\right.\ \ \  \ \ i, j=0,1, \cdots, n
+      \end{equation}
+      那么
+      \begin{equation}
+        L_{n}(x)=\sum_{i=0}^{n} l_{i}(x) f\left(x_{i}\right)
+      \end{equation}
+      就是关于这组差值点的拉格朗日差值多项式。它的思路非常简单，即要求在每个差值点的位置，只有正确差值点对应的函数值不是0，这个思路实现起来也非常容易，只需要
+      \begin{equation}
+        l_{i}(x)=\prod_{j=0, j \neq i}^{n} \frac{x-x_{j}}{x_{i}-x_{j}}=\frac{\left(x-x_{0}\right) \cdots\left(x-x_{i-1}\right)\left(x-x_{i+1}\right) \cdots\left(x-x_{n}\right)}{\left(x_{i}-x_{0}\right) \cdots\left(x_{i}-x_{i-1}\right)\left(x_{i}-x_{i+1}\right) \cdots\left(x_{i}-x_{n}\right)}
+      \end{equation}
+      读者可以自行验证上式满足$\delta_{ij}$的条件，这样拉格郎日插值多项式就可以写成
+      \begin{equation}
+        L_{n}(x)=\sum_{i=0}^{n} l_{i}(x) y_i=\sum_{i=0}^{n}\left(\prod_{j=0, j \neq i}^{n} \frac{x-x_{j}}{x_{i}-x_{j}}\right) y_i
+      \end{equation}
+      上式就满足差值多项式的基本要求。除去拉格朗日差值之外，还有牛顿差值多项式，Hermite差值多项式等，读者可自行查阅。在这里需要提及的是，差值多项式可以分段进行，最简单的是每相邻的两个点用直线表示，或者邻近三个点用二次函数表示，这样的缺点是函数的导数不连续，而且在差值点上导数不存在。如果希望对于差值点，给定函数值和一阶导数值，做这样的差值多项式可以使用样条差值，常用的是三次样条差值多项式，在这里不予展开。
+
+      上面是差值问题，接下来讨论拟合问题。这两者的重要区别就是差值多项式要求必须过已知数据点，但是拟合就不是了，顾名思义，拟合通常是有一个含$n+1$参数的函数$f(a_0,a_1,\dots,a_n,x)$，希望调整这些参数使得这个函数最\textbf{接近}已有数据，就像我们实验课所做的那样。所谓的“接近”，通常用误差函数$\delta(x_i)=f(x_i)-y_i$来表征，其中$y_i$为已知数据，$f(x_i)$是拟合函数在这点给出的值，而整体的误差的评判标准有很多，比如所有点误差函数绝对值求和，或者绝对值中最大的那个，最小二乘法的原则是所有误差函数的平方和最小，即$S=\sum_{i=1}^{m} \delta_{i}^{2}=\sum_{i=1}^{m}\left[\varphi\left(x_{i}\right)-y_{i}\right]^{2}=\min$，因为拟合函数是参数依赖的，所以想实现这个非常简单，只需要这个总误差函数对所有参数的导数等于0
+      \begin{equation}
+        \frac{\partial S}{\partial a_{k}}=0 (k=0,1, \cdots, n)
+        \label{least square}
+      \end{equation}
+      解上式$n+1$个方程就能得到$n+1$个参数值，就得到了最小二乘解。看起来非常简单，最小二乘法的核心难度在于找合适的拟合函数，只有拟合函数合适，这个参数才能较好地匹配，在不知道用什么函数的时候，可以用一组基函数来试，把最终的函数表达式写成一组函数的线性组合，参数就是线性组合系数，这个方法称为线性最小二乘法：在某个函数类$\Phi=\operatorname{span}\left\{\varphi_{0}(x), \varphi_{1}(x), \cdots, \varphi_{n}(x)\right\}$寻找一个函数$\varphi^{*}(x)=a_{0}^{*} \varphi_{0}(x)+a_{1}^{*} \varphi_{1}(x)+\cdots+a_{n}^{*} \varphi_{n}(x)$使其满足
+      \begin{equation}
+        \sum_{i=1}^{m}\left[\varphi^{*}\left(x_{i}\right)-y_{i}\right]^{2}=\min _{\varphi(x) \in \Phi} \sum_{i=1}^{m}\left[\varphi\left(x_{i}\right)-y_{i}\right]^{2}
+      \end{equation}
+      此时的总误差函数为
+      \begin{equation}
+        S\left(a_{0}, a_{1,} \cdots, a_{n}\right)=\sum_{i=1}^{m}\left[\sum_{k=0}^{n} a_{k} \varphi_{k}\left(x_{i}\right)-y_{i}\right]^{2}
+      \end{equation}
+      代入式(\ref{least square})得到
+      \begin{equation}
+        \sum_{i=1}^{m} \varphi_{k}\left(x_{i}\right)\left[a_{0} \varphi_{0}\left(x_{i}\right)+\cdots+a_{n} \varphi_{n}\left(x_{i}\right)-y_{i}\right]=0, k=0,1, \cdots, n
+      \end{equation}
+      即
+      \begin{equation}
+        a_{0} \sum_{i=1}^{m} \varphi_{k}\left(x_{i}\right) \varphi_{0}\left(x_{i}\right)+\cdots+a_{n} \sum_{i=1}^{m} \varphi_{k}\left(x_{i}\right) \varphi_{n}\left(x_{i}\right)=\sum_{i=1}^{m} \varphi_{k}\left(x_{i}\right) y_{i}
+      \end{equation}
+      如果定义这个函数空间的内积为$(h, g)=\sum_{i=1}^{m} h\left(x_{i}\right) g\left(x_{i}\right)$，那么所有偏导可以表达成一个矩阵的形式
+      \begin{equation}
+        \left[ \begin{array}{cccc}{\left(\varphi_{0}, \varphi_{0}\right)} & {\left(\varphi_{0}, \varphi_{1}\right)}&{ \cdots}&{\left(\varphi_{0}, \varphi_{n}\right)} \\ {\left(\varphi_{1}, \varphi_{0}\right)} & {\left(\varphi_{1}, \varphi_{1}\right) } & {\cdots} & {\left(\varphi_{1}, \varphi_{n}\right)} \\ {\vdots} & {\vdots}&{} & {\vdots} \\ {\left(\varphi_{n}, \varphi_{0}\right)} & {\left(\varphi_{n}, \varphi_{1}\right) } & {\cdots} & {\left(\varphi_{n}, \varphi_{n}\right)}\end{array}\right] \left[ \begin{array}{c}{a_{0}} \\ {a_{1}} \\ {\vdots} \\ {a_{n}}\end{array}\right]=\left[ \begin{array}{c}{\left(\varphi_{0}, f\right)} \\ {\left(\varphi_{1}, f\right)} \\ {\vdots} \\ {\left(\varphi_{n}, f\right)}\end{array}\right]
+        \label{linear least square}
+      \end{equation}
+      如果式(\ref{linear least square})有唯一解，线性最小二乘函数就有解。
+
+      如果对于非线性最小二乘法，偏导的方程很可能是非线性方程，通常可以用迭代解方程的方式求解。
+    \subsection{数值微分和数值积分}
+      我们微积分里学过各类的微分和积分的计算，但是对于实际应用来说几乎完全没有用。而数值方法却在微分和积分领域大放异彩。最简单的数值微分和数值积分都是基于插值多项式的，我们从最简单的等距结点的情况说明几种方法。
+
+      数值微分里最简单的就是两点公式和三点公式，两点公式相当于当前点与邻近的结点做两点的插值多项式(直线)，然后用直线的斜率代替在这个点的导数
+      \begin{equation}
+        \begin{aligned} f^{\prime}\left(x_{0}\right) & \approx \frac{f\left(x_{1}\right)-f\left(x_{0}\right)}{h} \\ f^{\prime}\left(x_{1}\right) & \approx \frac{f\left(x_{1}\right)-f\left(x_{0}\right)}{h} \end{aligned}
+      \end{equation}
+      其中$h$是两个点间的距离，两点法的公式非常简单，精度也较低。三点法即插值多项式是一个二次函数，如果有相邻的三点，它们的拉格朗日插值多项式为
+      \begin{equation*}
+        \begin{aligned} P_{2}(x) &=\frac{\left(x-x_{1}\right)\left(x-x_{2}\right)}{\left(x_{0}-x_{1}\right)\left(x_{0}-x_{2}\right)} f\left(x_{0}\right)+\frac{\left(x-x_{0}\right)\left(x-x_{2}\right)}{\left(x_{1}-x_{0}\right)\left(x_{1}-x_{2}\right)} f\left(x_{1}\right) \\ &+\frac{\left(x-x_{0}\right)\left(x-x_{1}\right)}{\left(x_{2}-x_{0}\right)\left(x_{2}-x_{1}\right)} f\left(x_{2}\right) \end{aligned}
+      \end{equation*}
+      对这个式子求导就得到了三点法的一阶导数公式
+      \begin{equation}
+        \left\{\begin{array}{l}{f^{\prime}\left(x_{0}\right) \approx \frac{-3 f\left(x_{0}\right)+4 f\left(x_{1}\right)-f\left(x_{2}\right)}{2 h}} \\ {f^{\prime}\left(x_{1}\right) \approx \frac{f\left(x_{2}\right)-f\left(x_{0}\right)}{2 h}} \\ {f^{\prime}\left(x_{2}\right) \approx \frac{f\left(x_{0}\right)-4 f\left(x_{1}\right)+3 f\left(x_{2}\right)}{2 h}}\end{array}\right.
+      \end{equation}
+      我们通常用中间的那个点，尽管三点法比两点法精度只提高了一级，甚至特殊情况下精度是同一量级，但是三点法结合了当前点之前和之后的信息，往往能有更好的效果。另外，既然三点法是二次函数的插值，就可以求二阶导数
+      \begin{equation}
+        f^{\prime \prime}\left(x_{i}\right) \approx P_{2}^{\prime \prime}\left(x_{i}\right)=\frac{f\left(x_{0}\right)-2 f\left(x_{1}\right)+f\left(x_{2}\right)}{h^{2}}, i=0,1,2
+      \end{equation}
+      除了用拉格朗日插值多项式，也可以用三次样条等方法，然后再求导得到精度更高的数值微分。
+
+      数值积分的思路略有不同，核心思想是用有限个点的求和代替积分，即
+      \begin{equation}
+        \int_{a}^{b} f(x) d x \approx \sum_{k=0}^{n} A_{k} f\left(x_{k}\right)
+      \end{equation}
+      我们介绍普适的牛顿-科茨(Newton-Cotes)公式，在积分区域$[a,b]$上$n$等分，取$x_i=a+ih,\ h=\frac{b-a}{n},\ i =0,1,\dots,n$，采用拉格郎日插值多项式来代表真实的函数，令$x=a+th$，那么积分公式中的系数就可以写作
+      \begin{equation}
+        A_{i}=\int_{a}^{b} l_{i}(x) d x=h \int_{0}^{n}\left(\prod_{j=0 \atop j \neq i}^{n} \frac{t-j}{i-j}\right) d t=(b-a) C_{i}^{(n)}
+      \end{equation}
+      其中定义了
+      \begin{equation}
+        C_{i}^{(n)}=\frac{1}{n} \frac{(-1)^{n-i}}{i !(n-i) !} \int_{0}^{n} \prod_{j=0 \atop j \neq i}^{n}(t-j) ) d t, i=0, \cdots, n
+      \end{equation}
+      我们称
+      \begin{equation}
+        \int_{a}^{b} f(x) d x \approx(b-a) \sum_{i=0}^{n} C_{i}^{(n)} f\left(x_{i}\right)
+      \end{equation}
+      为数值积分的牛顿-科茨公式，这些$C_{i}^{(n)}=$称为牛顿-科茨系数，可以直接在各种书中查到，代入函数值，完成积分。接下来，我们来看牛顿-科茨公式低阶的两个例子。$n=1$时，牛顿-科茨公式退化为梯形公式
+      \begin{equation}
+        \int_{a}^{b} f(x) d x \approx \frac{b-a}{2}[f(a)+f(b)]
+      \end{equation}
+      即函数的积分用它前后两个点构成的梯形面积代替。$n=2$时，退化为辛普森(Simpson)公式，
+      \begin{equation}
+        \int_{a}^{b} f(x) d x \approx \frac{b-a}{6}\left[f(a)+4 f\left(\frac{a+b}{2}\right)+f(b)\right]
+      \end{equation}
+      牛顿-科茨公式只是数值积分的入门方法，精度和速度都有待提高，我们推荐读者自行学习与之相关的龙贝格算法，可在任意一本数值计算的教材上找到。
+
+      插值型积分公式尽管图像简单，但是显然不是最精确的，理论上精度最高的积分公式是高斯型积分公式。TODO
+    \subsection{ODE初值问题的数值解法}
+      既然积分和微分都主要靠数值解法，那么对于实际科研中遇到的常微分方程(ODE)来说，几乎是只能用数值方法求解的。本节介绍最常用的一阶常微分方程初值问题：
+      \begin{equation*}
+        \left\{\begin{array}{l}{y^{\prime}=f(x, y)} \\ {y\left(x_{0}\right)=y_{0}}\end{array}\right.
+      \end{equation*}
+      的数值解法。微分方程组和高阶微分方程求解的思路基本是一致的。
+
+      上文中的初值问题，要求解的其实是一根曲线，它经过初始点$(x_0,y_0)$，并且满足对每一点$x$的导数满足$y^{\prime}=f(x, y)$。要描述这样一根曲线，最容易的办法就是用分段线性的方式，过点$(x_0,y_0)$作曲线斜率为$f(x_0,y_0)$的切线，与$x=x_1$交于$(x_1,y_1)$，用$y_1$作为真实解$y(x_1)$的近似值。这样的方法称为欧拉法，即用下列点代替真实点
+      \begin{equation}
+        \left\{\begin{array}{l}{y_{i+1}=y_{i}+h f\left(x_{i}, y_{i}\right)} \\ {x_{i}=x_{0}+i h, i=0,1,2, \cdots}\end{array}\right.
+      \end{equation}
+      这样就可以从初始点出发求解任意坐标$x$处的函数值，当$h = x_{i+1}-x_i$的值足够小的时候，欧拉法就是足够准确的。欧拉法的几何意义非常明确，即用当前点$x_i$的导数代替$(x_i,x_{i+1})$之间的真实函数的平均导数，也可以理解成对$y(x_{i+1})$点在$y(x_i)$点的泰勒展开，只保留到第一项的结果。
+
+      上文中其实可以看出，欧拉法在$h$稍大一些时，误差就会很大，泰勒展开保留到一阶项是一个及其粗糙的近似。上述欧拉法是用$x_i$和$x_{i+1}$来计算$y(x_{i+1})$的，因此又叫做向前欧拉法，与之对应的就是向后欧拉法
+      \begin{equation}
+        y_{i+1}=y_{i}+h f\left(x_{i+1}, y_{i+1}\right)
+      \end{equation}
+      读者可以看到，想求$y_{i+1}$的话，需要知道它自己的值，因此向后欧拉法中通常用迭代的方式求解$y_{i+1}$。既然有向前和向后，结合我们讲过的梯形公式，自然就可以想到用向前和向后的平均，可以提高精度，这就是改进的欧拉法
+      \begin{equation*}
+        \boldsymbol{y}_{i+1}=\boldsymbol{y}_{i}+\frac{h}{2}\left[f\left(x_{i}, y_{i}\right)+f\left(x_{i+1}, y_{i+1}\right)\right]
+      \end{equation*}
+      加入一个表示迭代次数的上标$(k)$，改进的欧拉方法可以写作
+      \begin{equation}
+        \left\{\begin{array}{l}{y_{i+1}^{(0)}=y_{i}+h f\left(x_{i}, y_{i}\right)} \\ {y_{i+1}^{(k+1)}=y_{i}+\frac{h}{2}\left[f\left(x_{i}, y_{i}\right)+f\left(x_{i+1}, y_{i+1}^{(k)}\right)\right]}\end{array}\right., k=0,1,2, \cdots
+      \end{equation}
+      另外，也可以不用迭代，先用向前欧拉方法预测一个$y_{i+1}^{(0)}$的值，然后直接代入梯形积分公式来得到更精确的$y_{i+1}$值，相当于只做一次迭代，称为改进的欧拉法的预估-校正公式，也是通常实际中使用的改进欧拉方法。
+
+      当然所有在王老师组写过代码的人都会知道，王老师课题组所使用的数值方法称为龙格-库塔法(Runge-Kutta, 简称RK)。RK法的基本思想是用复合函数的值来代替积分的值，简单地说，就是用更多的点的导数的某种加权平均代替这一段上的平均导数，用m个点就称为m阶RK法。可以想象，2阶RK法与改进欧拉方法是等价的\footnote{尽管系数不完全相同，但是精度是相同的}。m阶RK法的通式可以写作
+      \begin{equation}
+        \left\{\begin{array}{l}{y_{i+1}=y_{i}+h\left(\alpha_{1} K_{1}+\alpha_{2} K_{2}+\cdots+\alpha_{m} K_{m}\right)} \\ {K_{1}=f\left(x_{i}, y_{i}\right)} \\ {K_{2}=f\left(x_{i}+\lambda_{2} h, y_{i}+\mu_{2} h K_{1}\right)} \\{\cdots \cdots \cdots }\\ {K_{m}=f\left(x_{i}+\lambda_{m} h, y_{i}+\mu_{m} h K_{m-1}\right)}\end{array}\right.
+        \label{m order RK}
+      \end{equation}
+      这些参数的计算原则，就是让式(\ref{m order RK})中$y_{i+1}$的展开式与$y(x_{i+1})$在$(x_i,y_i)$处的泰勒展开尽可能相同，限于篇幅，我们不做仔细推导，直接给出最常用的4阶RK法(又称作经典RK法)的表达式
+      \begin{equation}
+        \left\{\begin{aligned} y_{i+1} &=y_{i}+\frac{h}{6}\left(K_{1}+2 K_{2}+2 K_{3}+K_{4}\right) \\ K_{1} &=f\left(x_{i}, y_{i}\right) \\ K_{2} &=f\left(x_{i}+\frac{h}{2}, y_{i}+\frac{h}{2} K_{1}\right) \\ K_{3} &=f\left(x_{i}+\frac{h}{2}, y_{i}+\frac{h}{2} K_{2}\right) \\ K_{4} &=f\left(x_{i}+h, y_{i}+h K_{3}\right) \end{aligned}\right.
+        \label{4 order RK}
+      \end{equation}
+      4阶RK法的精度已经较高，已经满足了王老师课题组和多数其他物理工程领域的数值精度要求。
     \section{完备基展开}
     完备基展开是一个非常重要的概念，它直接提供了解决众多微分方程的方法，而解决微分方程是量子力学的至关重要的一个内容。
 
