@@ -1040,7 +1040,7 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
   \end{equation}
   读者可以很容易地证明，厄米算符有两个重要的性质，即本征值都是实数，而且不同本征值对应的本征向量正交，这也是厄米算符谱定理的要求。
 
-  那么对于物理的可观测量来说，我们测量得到的结果，一定是实数，在量子力学里的一个重要假定即\textbf{量子系统的力学量由具有完备本征矢量组的线性厄米算符来表示，对于处于态}$ | Psi \rangle $\textbf{的系统，测量力学量P的预期结果为}$ \langle\psi|\hat P| \psi\rangle$。由于任何一个力学量都有完备正交基，我们可以把体系的态矢量在这个完备正交基下展开
+  那么对于物理的可观测量来说，我们测量得到的结果，一定是实数，在量子力学里的一个重要假定即\textbf{量子系统的力学量由具有完备本征矢量组的线性厄米算符来表示，对于处于态}$ | \Psi \rangle $\textbf{的系统，测量力学量P的预期结果为}$ \langle\psi|\hat P| \psi\rangle$。由于任何一个力学量都有完备正交基，我们可以把体系的态矢量在这个完备正交基下展开
   \begin{equation}
     | \psi \rangle=\sum_{i} \alpha_{i} | i \rangle=\sum_{i}\langle i | \psi\rangle | i \rangle
   \end{equation}
@@ -1048,7 +1048,21 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
   \begin{equation}
     \begin{aligned}\langle\psi|\hat{P}| \psi\rangle &=\langle\psi |\left(\sum_{i} \alpha_{i} \hat{P} | i\rangle\right) \\ &=\sum_{i} \alpha_{i} P_{i}\langle\psi | i\rangle \\ &=\sum_{i}\left|\alpha_{i}\right|^{2} P_{i} \end{aligned}
   \end{equation}
-  并且必须有$\langle\psi | \psi\rangle=\sum_{i}\left|\alpha_{i}\right|^{2}=1$，力学量的本征值即为它的所有可能取的数值，且测量到$P_i$的概率就是$|\alpha_i|^2$
+  并且必须有$\langle\psi | \psi\rangle=\sum_{i}\left|\alpha_{i}\right|^{2}=1$，力学量的本征值即为它的所有可能取的数值，且测量到$P_i$的概率就是$|\alpha_i|^2$.
+
+  力学量算符的一个重要的性质就是它表征了系统的一个可观测量；同时它的另一个重要性质，即特征向量的完备性质，使力学量算符还可以以另一种角度来理解：完备基生成元。
+
+  这么说可能有点 唐 突 ，我们举一个非常经典的例子，即坐标算符\footnote{位置算符？\sout{暴露了某一位编者中文很菜的本质}}。
+
+	  我们对任何一个物质我们总能通过某种手段观测到它的位置，此时我们很容易想象到这个所谓的位置就是一个特征值。此时整个体系状态变为该特征值对应的特征向量，而我们同样可以想像这个特征向量应该具有类似于$\delta (x)$的形状。当然这样的假设存在很多漏洞，比如平方不可积等，但这并不妨碍我们这么想像。我们可以做这么一个伪证，我们有一个波函数 $f(x)$，$\hat{x}$ 的特征值为$x'$，对应特征向量为 $\delta(x-x')$,此时它在这个特征向量的展开为
+	  \[
+		  \int f(x) \delta(x-x') \, dx = f(x')
+	  .\] 
+	  也就是在$x'$对应的函数值。这某种程度上说明了 $f(x)$其实就是 $\delta(x)$ 这样的特征向量的线性组合，而$f(x)$就是对应的系数。因此我们若将$f$理解为一个向量，那么波函数就可以表达为 $\langle x | f \rangle $.
+
+	  然而，从某种角度上，对这些的更好的理解应不拘泥于``它们具体采取了什么样的形式''。我们尝试用狄拉克函数来形象地描绘$\hat{x}$ 的特征向量，但事实上这本身就已经有了循环论证的味道，因为这在某种程度上已经使用了实空间表象。$\hat{x}$ 的特征向量原则上是``不需要采取任何具体的形式''，但它所提供的一个完备基使量子力学能够建立在实空间上进行讨论。
+
+
 
   \section{表象理论}
   量子力学中的表象理论是十分重要的一套形式理论。从另一个角度来说，表象的选择其实是Hilbert空间中基矢量组的选择。我们知道线性空间中的任何一个矢量都可以用一组完备基的线性组合来表示，这就是表象理论。对于量子力学的力学量，每一个力学量算符都对应着一组完备正交基(这是复数域的谱定理的要求)，我们可以把我们关心的量子态写成某个力学量对应本征矢量的线性组合。
@@ -1082,6 +1096,52 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
     L^{\xi}=U L^{\eta} U^{-1}
   \end{equation}
   这就是我们在初量中所熟悉的形式。
+
+
+
+  当然，我们在很多情况下都不得不对我们研究的体系进行表象转换，以达到问题简化的目的。
+
+  我们假设$| \psi \rangle $ 是我们研究的任意一个状态，$\langle x |  $是选取的实空间表象，$\langle x | \psi \rangle $ 便是我们熟悉的波函数的一个表达形式。我们想要从另外的表象中得到它，比如动量表象，那么它便变成
+   \[
+  \langle x | \psi \rangle = \int \langle x | p \rangle \langle p | \psi \rangle  \, dp 
+  .\] 
+  其中$\langle p | \psi \rangle $ 是我们已经知道的，而$\langle x | p \rangle $是我们想要得到的波函数。而整个式子看起来就是一个简单的积分，毕竟$\langle x | p \rangle $ 和$\langle p | \psi \rangle $ 就是数（函数）的形式。那么$\langle x | p \rangle $ 便是这个表象转换的关键，它只依赖于原来的表象和目标表象之间的依赖关系。
+
+  那么如何计算它呢？
+
+我们约定$| p \rangle $ 为算符$\hat{p}$ 的本征态，也就是
+\[
+\hat{p} | p \rangle = p | p \rangle 
+.\] 
+即$p$ 为对应的本征值。我们在实空间下考察它，也就是
+\[
+\langle x | \hat{p} | p \rangle = p \langle x | p \rangle 
+.\] 
+其中利用了$p$ 其实就是一个数的性质。另一方面，$\hat{p}$ 在实空间的表达为
+\begin{equation}
+	\hat{p} = - i \hbar \frac{\partial }{\partial x} 
+\end{equation}
+从而
+\[
+\langle x | \hat{p} | p \rangle = - i\hbar \frac{\partial }{\partial x} \langle x | p \rangle 
+.\] 
+在此处直接表现了$\langle x | p \rangle$ 为$p$ 在实空间作为波函数的形式。从而我们建立了方程
+ \begin{equation}
+	-i\hbar \frac{\partial }{\partial x} \langle x | p \rangle = p \langle x | p \rangle 
+\end{equation} 
+也就是$| p \rangle $ 的波函数形式满足上面的微分方程。它的结果自然就是
+\begin{equation}
+	\langle x | p \rangle = c e^{i\hbar p x}
+\end{equation}
+那么动量空间转化到实空间即为
+\begin{equation}
+	\langle x | \psi \rangle  = \frac{1}{\sqrt{2\pi \hbar}}\int \langle p | \psi \rangle e^{i\hbar x p} \, dp 
+\end{equation}
+其中的系数便是为了满足在变换过程中模保持一致。那么对应地，实空间转化到动量空间为
+\begin{equation}
+	\langle p | \psi \rangle = \frac{1}{\sqrt{2\pi \hbar}} \int \langle x | p \rangle e^{-i\hbar p x} \, dx 
+\end{equation}
+从而我们清晰地看到一个态从实空间的表达形式（波函数）到动量空间的表达形式即为一次傅里叶变换，而反过来则为一次傅里叶逆变换\footnote{ 当然也可以纯粹地从薛定谔方程出发然后将任意波函数理解为一堆平面波的叠加。}。这便是Moyal得到相空间体系下的动力学表达形式的最核心的概念。
 
   \section{密度矩阵与混合态}
   \label{Density Matrix}
