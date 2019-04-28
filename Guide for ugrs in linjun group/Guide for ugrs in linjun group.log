@@ -1337,10 +1337,15 @@ LaTeX Font Info:    Font shape `TU/FandolSong-Regular(0)/m/sl' in size <12> not
 Chapter 2.
 [8
 
-] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22]
-[23]
+] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18]
+
+Package amsmath Warning: Foreign command \atop;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 528.
+
+[19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29]
 Chapter 3.
-[24
+[30
 
 ] [25] [26] [27] [28] [29] [30] [31] [32] [33]
 Underfull \hbox (badness 10000) in paragraph at lines 1197--1198
