@@ -10,6 +10,7 @@
   \usepackage{listings}
   \usepackage{mathrsfs}
   \usepackage{xcolor} % 定制颜色
+  \usepackage[colorlinks=true, unicode=true, linkcolor=red, citecolor=red, filecolor=color, urlcolor=red]{hyperref} % 要放在最后一个
   \lstset{
   backgroundcolor=\color{white},      % choose the background color
   basicstyle=\footnotesize\ttfamily,  % size of fonts used for the code
@@ -60,7 +61,7 @@
   \setlength{\topmargin}{-20mm}
   \renewcommand{\baselinestretch}{1.2}
   \title{王林军老师课题组本科生入门指南}
-  \author{Chaoqun ZHANG-张超群\\Rui LI - 李睿}
+  \author{Chaoqun ZHANG - 张超群\\Rui LI - 李睿\\Kai GU - 顾锴}
   \date{\today}
   \begin{document}
     \maketitle
@@ -113,7 +114,7 @@
     集群计算机的操作系统都是Linux系统，我们需要用自己的个人电脑连接到服务器上，这样可以实现对服务器的远程操作，如果你的个人电脑是Linux或者mac系统，可以直接
     在终端使用ssh命令登录服务器，但是由于组内工作电脑和多数个人电脑为Windows系统，这一部分我们暂时不作展开，有兴趣的同学可以直接网上搜索。在Windows系统下连接Linux服务器，需要通过一些软件的辅助，比如PuTTY和XSHELL，鉴于后者有不少优势，比如更加新人友好\sout{并且好看}，我们就以后者举例。
 
-    XSHELL目前有官方的中文网站\footnote{https://www.netsarang.com/zh/xshell/}，可以找到学生用的免费版，下载XSHELL和XFTP两个软件，前者是一个在Windows操作系统下实现ssh功能的软件，用于连接远程服务器；后者是实现sftp功能的软件，用于服务器和本地计算机之间的文件传递。
+    XSHELL目前有官方的\href{https://www.netsarang.com/zh/xshell/}{中文网站}，可以找到学生用的免费版，下载XSHELL和XFTP两个软件，前者是一个在Windows操作系统下实现ssh功能的软件，用于连接远程服务器；后者是实现sftp功能的软件，用于服务器和本地计算机之间的文件传递。
     这两个软件可以满足在理论计算化学组连接远程服务器的一切需求。安装好之后打开XSHELL，如Figure \ref{Xshell}所示新建会话。
     \begin{figure}
       \centering
@@ -1202,7 +1203,7 @@ F(k) =  \mathcal{F} [f(x)] = \frac{1}{2\pi}\int_{-\infty}^{\infty} f(x) e^{-ikx}
 
   力学量算符的一个重要的性质就是它表征了系统的一个可观测量；同时它的另一个重要性质，即特征向量的完备性质，使力学量算符还可以以另一种角度来理解：完备基生成元。
 
-  这么说可能有点 唐 突 ，我们举一个非常经典的例子，即坐标算符\footnote{位置算符？\sout{暴露了某一位编者中文很菜的本质}}。
+  这么说可能有点 唐 突 \sout{恶 臭}，我们举一个非常经典的例子，即坐标算符\footnote{位置算符？\sout{暴露了某一位编者中文很菜的本质}}。
 
 	  我们对任何一个物质我们总能通过某种手段观测到它的位置，此时我们很容易想象到这个所谓的位置就是一个特征值。此时整个体系状态变为该特征值对应的特征向量，而我们同样可以想像这个特征向量应该具有类似于$\delta (x)$的形状。当然这样的假设存在很多漏洞，比如平方不可积等，但这并不妨碍我们这么想像。我们可以做这么一个伪证，我们有一个波函数 $f(x)$，$\hat{x}$ 的特征值为$x'$，对应特征向量为 $\delta(x-x')$,此时它在这个特征向量的展开为
 	  \[
