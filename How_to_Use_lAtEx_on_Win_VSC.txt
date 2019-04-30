@@ -1,0 +1,9 @@
+如何在VS Code中集成LaTeX：
+
+安装TexLive、VS Code、VS Code拓展-LaTex Workshop
+
+如何编译：（在win powershell下）
+1.xelatex.exe 文件名.tex #文件名用单引号，其中的空格用双引号
+2.bibtex.exe 文件名.aux #编译参考文献
+3.xelatex.exe 文件名.tex #如果出现warning，执行下一步
+4.xelatex.exe 文件名.tex
