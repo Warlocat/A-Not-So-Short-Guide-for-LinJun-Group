@@ -12,4 +12,4 @@ By 求化1501 张超群 & 求化1601 李睿 & 求化1501 顾锴
 
 希望阅读该指南的同学可以选择clone整个repository然后自行编译Latex
 
-如果你不熟悉Github或者Latex的操作，只希望下载一个pdf，请点击上方的Ralease，我们在那里提供了各个版本的pdf下载。
+如果你不熟悉Github或者Latex的操作，只希望下载一个pdf，请点击上方的Release，我们在那里提供了各个版本的pdf下载。
