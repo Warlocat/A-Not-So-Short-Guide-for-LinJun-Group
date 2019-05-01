@@ -7,6 +7,8 @@
   \usepackage{amsfonts, amsmath, amssymb,amsthm}
   \usepackage{graphicx}
   \usepackage{subfigure}
+  \usepackage[centering]{geometry}
+  \geometry{top=25.4mm, bottom=25.4mm, left=25.4mm, right=25.4mm}
   \usepackage[normalem]{ulem}
   \usepackage{listings}
   \usepackage{mathrsfs}
@@ -61,7 +63,6 @@
   \setlength{\textwidth}{155mm}
   \setlength{\oddsidemargin}{0mm}
   \setlength{\evensidemargin}{0mm}
-  \setlength{\topmargin}{-20mm}
   \renewcommand{\baselinestretch}{1.2}
   \title{王林军老师课题组本科生入门指南}
   \author{Chaoqun ZHANG - 张超群\\Rui LI - 李睿\\Kai GU - 顾锴}
@@ -419,20 +420,185 @@
           当然这么说可能很难有感觉这些到底是什么东西，让我们再换一种方式来表达。算符，变换，这些东西实则上都代表了类似于函数的概念，也就是传进去一个东西，传出去另一个东西，这两个东西可以相等，可以完全不是同一类。而左矢和右矢则代表了可以传进去的``参量''，并经过算符作用后得到了另一个左矢或右矢。比如一个关于$x$的函数$f(x)$，经过求导算符$\frac{\ud }{\ud x} $作用后得到它的导函数$f'(x)$，实则上也没有脱离这样的描述体系\footnote{从而为Dirac说明海森堡的矩阵力学和薛定谔的波动力学是等价表述做好了铺垫。}。
 
         \section{简易矢量代数}
-          鉴于量子力学推导中会出现$\nabla$符号，与之相关的梯度，散度，旋度的概念在物理学中有极为重要的意义，更是广泛出现在各类推导之中，本节将介绍这三个“度”的定义和与之相关的Green公式和Stokes公式。
+          矢量和标量是两个非常直观的物理量的存在方式，这个从物理的发展历史中便可以充分看出。矢量和标量让人们最先拥有了对``线性''这个概念的最原始的认识，而张量这个概念的引入某种程度上使``线性''这个概念达到了非常高的理论化水平。从某种程度上，张量代表了所有具有线性的元素。\footnote{仅限一家之言，实际情况可能并非如此。}在量子力学中也无法避免对高阶张量进行分析的情况\footnote{但实际上在初等量子力学中并不会涉及矢量代数，或者张量分析的内容，只有进入相对论量子力学才有必要引入这些东西。那为什么要写这些呢？没错\sout{是主编催稿}}。
 
-          如果有一个一元函数$f(x)$，那么这个函数的微分可以写成
+          在开始讲述之前，我们先引入爱因斯坦求和约定。在矢量代数中，当一个字母成对出现后，即默认对这个字母遍历的所有情况进行求和。而在张量分析中，若一个上指标和一个下指标成对出现，那么进行遍历求和。
+
+          为更详细地描述该约定，我们假设存在两个向量$\mathbf{A} = (A_x, A_y, A_z), \, \mathbf{B} = (B_x,B_y,B_z)$.此时我们可以使用$A_i$及 $B_i$来直接代表这两个向量，因为 $i$没有重复出现，说明它是``灵活的''，也就是它对能够遍历的所有情况都成立。那么求和约定怎么弄呢？其实很简单，
+           \[
+             A_i B_i \equiv (A_x, A_y, A_z) \cdot (B_x,B_y,B_z)  = \sum_{i=x,y,z} A_iB_i
+          .\] 
+          那么很容易联想，
+          \[
+            A_i A_i = |\mathbf{A}|^2
+          .\] 
+          那$A_i B_j$呢？ $i,j$都是没有成对出现的，说明它们都是灵活的，可以遍历所有情况，那么这个玩意儿应该出现9个元素。没错，它某种程度上就代表了一个矩阵。更准确地说，它代表了一个并矢。用矩阵来表示，
+          \[
+          A_i B_j \equiv 
+          \begin{pmatrix}
+            A_x B_x & A_x B_y & A_x B_z \\
+            A_y B_x & A_y B_y & A_y B_z \\
+            A_z B_x & A_z B_y & A_z B_z 
+          \end{pmatrix}
+          .\] 
+          那么你很容易想象，
           \begin{equation}
-            \ud f = \frac{\ud f}{\ud x} \ud x
+            \mathrm{Tr}(A_i B_j) = A_iB_i.
           \end{equation}
-          它的意义明确，当$x$改变$ \ud x $时，函数值将改变$ \ud f $，两者之间的商就是微商(导数)。但是如果函数是多个变量的呢？比如说我们在空间中有一个温度分布$T(x,y,z)$，如果我们希望描述这个函数随着空间变化的变化量时，我们必须先指定是往空间的哪个方向变化，这样看起来就变得复杂了很多，但是我们仍然有
+
+          矢量的一个比较重要的性质便是向量是受旋转矩阵控制的。旋转矩阵$R$(或$R_{ij}$)作为正交矩阵，满足
+          \[
+          R^T R = E
+          .\]
+          它代表了对向量的旋转，也可以是向量在一个空间的表述转换到了另一个空间的表述，同时保持各个向量之间的内积保持不变。它表达起来为
+          \[
+            A_i' B_i' = A_j R_{ji} R_{ij} B_j = A_j B_j
+          .\] 
+          其中$A_i',\,B_i'$表示为新坐标下的向量表示。我们可以清晰地看到旋转矩阵的正交性质在保持向量内积中起到的作用。我们可以从这一点出发，若某个量是受旋转矩阵控制的，那么它是一个矢量。
+
+          旋转矩阵其实便代表了一个二阶张量：它存在两个指标，这两个指标之间是独立的。我们还可以从并矢得到灵感，在字母上多标箭头来表达高阶张量\footnote{为什么不写出来？\sout{编者\LaTeX 能力太差}}。特别地，二阶张量还可以用$\overleftrightarrow{T}$来表示。
+
+          当然旋转矩阵也并不是只能作用于矢量。我们从并矢可以很容易联想到，高阶张量某种程度上代表了多个向量的笛卡尔积，那么若要对它进行旋转也就意味着对每一个向量进行旋转，而互相之间的旋转可以是独立的。从而我们可以写成
+          \[
+            T_{i_1i_2...i_n}' = R_{i_1j_1} R_{i_2j_2} ... R_{i_n j_n} T_{j_1j_2....j_n}
+          .\] 
+          从旋转矩阵我们也看到了张量的一个重要的性质：高阶张量可以代表对低阶张量的线性变换。这也说明了高阶张量多个指标的作用：这些指标可以自由地与别的张量的指标进行结合，``发动''爱因斯坦求和约定。
+
+          向量之间还有叉乘的形式\footnote{叉乘仅限于三维情况。}，我们可以将其表达为：
+          \[
+            \mathbf{A} \times \mathbf{B} = \varepsilon_{ijk} \mathbf{e}_i A_j B_k
+          .\] 
+          其中$\mathbf{e}_i$便表达了基向量。$\varepsilon_{ijk}$表达的是若 $i,j,k$的顺序为``正序''，也就是从最开始的正序列通过偶数次元素得到的序列时，其值为1，若为``倒序''为 $-1$，若存在重复数字则为零。\footnote{没错其实就是行列式的求值方法。}
+
+          由此可以出发证明一个非常有用的公式：
           \begin{equation}
-            \ud T = \frac{\partial T}{\partial x}\ud x+\frac{\partial T}{\partial y}\ud y+\frac{\partial T}{\partial z}\ud z
-          \end{equation}
-          上式其实还可以写成矢量点积的形式
+            \mathbf{A}\times (\mathbf{B}\times \mathbf{C}) = (\mathbf{A} \cdot \mathbf{C}) \mathbf{B} - (\mathbf{A} \cdot \mathbf{B}) \mathbf{C}
+          \end{equation} 
+          我们可以这么出发：
+          \begin{align*}
+            \mathbf{A} \times (\mathbf{B} \times \mathbf{C}) &= \mathbf{e}_i \varepsilon_{ijk} A_j (\mathbf{B} \times \mathbf{C})_k \\
+                                &= \mathbf{e}_i \varepsilon_{ijk} \varepsilon{kmn} A_j B_m C_n \\
+                                &= \mathbf{e}_i B_iA_j C_j - \mathbf{e}_i C_i A_j B_j
+          \end{align*}
+          其中利用了
           \begin{equation}
-            \ud T = (\frac{\partial T}{\partial x},\frac{\partial T}{\partial y},\frac{\partial T}{\partial z})\cdot(\ud x, \ud y, \ud z)
+            \varepsilon_{ijk}\varepsilon{kmn} = \varepsilon_{kij} \varepsilon{kmn} = \delta_{im} \delta_{jn} - \delta_{in}\delta_{jm}
+          \end{equation} 
+          我们可以这么想这个公式：由于$i,j,k,m,n$都是取三个坐标元，保持$k$一致后其余的指标的选择是非常有限的，然后就能很容易想明白上式是如何推出来的。
+
+          梯度算符是在矢量代数中比较重要的算符，但它也并不神秘，它其实就代表了向各个维度求一阶导的``向量''。比如
+          \[
+            \nabla f = \left( \frac{\partial f}{\partial x} ,\frac{\partial f}{\partial y} ,\frac{\partial f}{\partial z}  \right) \equiv \frac{\partial f}{\partial x_i} \equiv \partial_i f
+          .\] 
+          那么与此对应，求一个向量的散度也很容易：
+          \[
+            \nabla \cdot \mathbf{A} = \partial_i A_i 
+          .\] 
+          旋度也很简单：
+          \[
+            \nabla \times \mathbf{A} = \varepsilon_{ijk} \mathbf{e}_i \partial_j A_k
+          .\] 
+          但这些东西能够延伸的内容是非常丰富的。比如对$\mathbf{r} = (x,y,z)$及单位矩阵$\overleftrightarrow{I}$，有
+          \begin{align}
+            &\nabla \cdot \mathbf{r} = 3 \\
+            &\nabla \times \mathbf{r} = 0 \\
+            &\nabla \times (\nabla f) = 0 \\
+            &\nabla \frac{1}{|\mathbf{r}-\mathbf{r}'|} = \frac{- \mathbf{e}(\mathbf{r}-\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|^2} = - \nabla' \frac{1}{|\mathbf{r}-\mathbf{r}'|} \\
+            &\nabla\cdot(\mathbf{A}\mathbf{r}\mathbf{r}) = (\nabla \cdot \mathbf{A})\mathbf{r}\mathbf{r} + \mathbf{A} \mathbf{r}+ \mathbf{r}\mathbf{A} \\
+            &\nabla\times(r^n \mathbf{r}) = 0 
+          \end{align}
+          读者有兴趣可以自行证明。
+
+          张量分析在矢量代数的基础上考虑了坐标系自身的影响，比如，这个坐标系的各个基向量之间是不互相正交的。此时向量之间的内积自然就不能简单地利用向量系数的相乘。为了方便地搞定这个事情，张量分析使用了``协变张量''和``逆变张量''的概念。``协变张量''是我们所熟悉的张量，而``逆变张量''则代表了与它相对应的另一种张量\footnote{\sout{好了好了我知道我中文很菜}}。
+
+          比如我们有两个基向量$\mathbf{i}_1,\mathbf{i}_2$，他们满足
+          \[
+            \mathbf{i}_1 \cdot \mathbf{i}_1 = \mathbf{i}_2 \cdot \mathbf{i}_2 = 1, \quad \mathbf{i}_1 \cdot \mathbf{i}_2 = \cos{\varphi}
+          .\] 
+          甚至还不止于此，我们有两个非归一的基向量
+          \[
+          \mathbf{g}_1 = | \mathbf{g}_1| \mathbf{i}_1, \mathbf{g}_2 = |\mathbf{g}_2| \mathbf{i}_2
+          .\] 
+          此时两个向量$\mathbf{P},\mathbf{Q}$ 的内积直接写起来是非常复杂的。但我们可以通过代数方程构建这两个基向量对应的逆变基矢量$\mathbf{g}^1,\mathbf{g}^2$，使
+          \[
+            \mathbf{g}^1 \cdot \mathbf{g}_2  = 0, \quad \mathbf{g}^1 \cdot \mathbf{g}_1 = \mathbf{g}^2 \cdot \mathbf{g}_2 = 1 
+          .\] 
+          也就是
+          \[
+          \mathbf{g}^i \cdot \mathbf{g}_j = \delta^i_j
+          .\]
+          我们就可以方便地写出两个向量的内积，
+          \[
+            (\mathbf{P},\mathbf{Q}) = P^i \cdot Q_i
+          .\] 
+          其中上标的向量表示通过逆变基向量线性组合得到的逆变向量，下标为对应的协变向量。
+
+          这样我们就在一定程度上解决了坐标系自身带来的影响。那么对协变向量/逆变向量自然存在对应的线性变换
+          \[
+          \begin{cases}
+            \mathbf{P}_{j'} = \beta^{j'}_i P_i \\
+            \mathbf{P}^{j'} = \beta^{j'}_i P^i
+          \end{cases}
+          .\] 
+          可以很容易地证明
+          \[
+          \beta^j_i \beta^i_k = \delta^j_k
+          .\]
+          同时还需引入 fundamental tensor $g^{ij}$,它某种程度上起到了``抬升指标''的作用，
+           \[
+             P^j = g^{ji} P_i
+          .\] 
+          那么$\beta^{ij}$就是在变换的同时抬升指标的一个算符。
+
+          相对论量子力学引入了狭义相对论中的核心——光速不变原理引入的各种修正。从原点发光，光的传播满足
+          \begin{equation}
+            c^2 t^2 -(x^2 + y^2 + z^2 ) =0
           \end{equation}
+          以不同的参考系来看，由于光速不变，同样会有
+          \begin{equation}
+           c^2 t'^2 -(x'^2 + y'^2 + z'^2)=0
+          \end{equation}
+          从而
+          \begin{equation}
+          c^2 t'^2 -(x'^2 + y'^2 + z'^2) = c^2 t^2 -(x^2 + y^2 + z^2 )
+          \end{equation}
+          定义坐标形式为$(x,y,z,ct)$，建立 Minkowski Space，定义在这个空间的inner product:
+          \begin{equation}
+          \begin{cases}
+            \eta(u,v) = u_0 v_0 - u_1 v_1 - u_2 v_2 - u_3 v_3\\
+            u=\begin{pmatrix}
+            u_0 \\ u_1 \\ u_2 \\u_3
+            \end{pmatrix},
+            v=\begin{pmatrix}
+            v_0 \\ v_1 \\ v_2 \\v_3
+            \end{pmatrix}
+          \end{cases}
+          \end{equation}
+          那么在原参考系下，新参考系下的物理量分别写作为$A,A^*$时，有
+          \begin{equation}
+            \eta(A^*,A^*)=\eta(A,A)
+          \end{equation}
+          在这个情况下原来的张量的一些性质会发生改变——因为内积定义发生了变化。
+
+          那么原来的协变/逆变基向量之间的关系也就发生了改变，
+          \begin{equation}
+            \mathbf{g}^i \cdot \mathbf{g}_j = \delta_{ij} \rightarrow \eta(A_i,A_j) =
+            \begin{cases}
+            1,\quad i=j=0\\
+            -1,\quad i=j\neq 0 \\
+            0,\quad \text{other cases}
+            \end{cases}
+          \end{equation}
+          这个时候的fundamental tensor就需要改为
+          \begin{equation}
+            g^{\mu\nu} =
+            \begin{cases}
+            1,\quad i=j=0\\
+            -1,\quad i=j\neq 0 \\
+            0,\quad \text{other cases}
+            \end{cases}
+          \end{equation}
+          相对论量子力学便基于这样的符号系统展开了包含了狭义相对论修正的量子力学描述。
 
         \section{简易数值计算方法}
           我们一般将可以直接写出数学表达式的问题称为解析的，与之对应的就是数值的。虽然解析的数学在相当多的方面都有重要意义，但是对于实际的应用来说，尤其是计算机模拟的问题来说，得到解析表达式是极为困难。举个简单的例子，常微分方程，就连本科生课程中给出的例子很多都需要做数值计算才能真正得到结果。而在王老师课题组，由于研究的都是动力学问题，即体系随时间演化，更是需要很多数值拟合，微分积分和数值解微分方程的概念，因此本节中我们将极其简要地介绍相关问题的最基础方法，为了简单，我们都用单变量函数的最简单的数值方法作为例子，实际操作中需要多变量、较高精度方法请参阅相关书籍，这部分只是给读者一个概念，在之后查阅资料过程中不至于\sout{被水淹没}不知所措。
