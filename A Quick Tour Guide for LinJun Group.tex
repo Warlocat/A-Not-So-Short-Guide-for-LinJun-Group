@@ -13,6 +13,7 @@
   \usepackage{listings}
   \usepackage{mathrsfs}
   \usepackage{xcolor} % 定制颜色
+  \usepackage{appendix} % 附录
   \usepackage[colorlinks=true, unicode=true, linkcolor=red, citecolor=red, filecolor=color, urlcolor=red]{hyperref} % 要放在最后一个
   \lstset{
     backgroundcolor=\color{white},      % choose the background color
@@ -101,7 +102,7 @@
 
       欢迎进入王林军老师的课题组！无论您是由于何种原因，出于什么目的，来到王林军老师的课题组足以证明了您的勇气！\sout{看，在王林军老师组的都很休闲的}
 
-      由于王林军老师研究比较``底层''的计算化学，所以会对数学、物理、计算机等知识内容会有更高的要求。而历届在王老师做事的本科生们都不止一次地抱怨来王老师的课题组的门槛非常高，而且没有合适的入门指南，使得难度进一步提高（\sout{你会发现你听了一年组会都学不到什么东西}），同时化学系对数理方面的要求实在不敢恭维，从而刚参加王老师的组会的时候会近乎100\%地出现``这是什么/我是谁/我在干什么''的疑惑，因此编者们共同商量，觉得出一份入门指南非常的重要，于是草草编写了这样的一份。
+      由于王林军老师研究比较‘‘底层’’的计算化学，所以会对数学、物理、计算机等知识内容会有更高的要求。而历届在王老师做事的本科生们都不止一次地抱怨来王老师的课题组的门槛非常高，而且没有合适的入门指南，使得难度进一步提高（\sout{你会发现你听了一年组会都学不到什么东西}），同时化学系对数理方面的要求实在不敢恭维，从而刚参加王老师的组会的时候会近乎100\%地出现``这是什么/我是谁/我在干什么''的疑惑，因此编者们共同商量，觉得出一份入门指南非常的重要，于是草草编写了这样的一份。
 
       另外，本组有与之配套的入门训练，但是暂时由于种种原因没有对每个本科生展开，所以在阅读本指南时，也可以花时间接触本组关于代码书写(行星运动)和势间跳跃方法(Tully文章)的基本训练，关于后者我们在指南中略有涉及，但是具体的代码实现还要靠自己的练习才行。由于并非专业科研文章，此指南在参考文献方面会比较欠缺，但是偶尔举出的几篇文章仍然推荐读者阅读相关内容，对理解本指南和王老师课题组的工作都有一定帮助。本指南将主要为王老师组的非绝热动力学方向服务，最后简要介绍一点全局优化的内容，王老师课题组还有其他的研究方向，比如机器学习相关和固体材料性质的计算等，这些内容在本指南中不作专门的讨论。
       
@@ -239,35 +240,51 @@
       
       \chapter{数学基础}
 
-        本章包含了在王老师课题组可能用到的数学知识，但是并不是所有人所有方向都非常重要。阅读此章内容前，我们默认你掌握了基础的数学知识：单变量微积分，多元函数微积分，基础线性代数。如果对线性代数基础知识和量子力学基础比较熟悉，可以有用到相关知识的时候再回来检索查看，如果不熟悉，还是建议阅读本章内容。\textbf{当然，本指南不适合完全没学过线性代数的同学，如果想完整学习线性代数请参阅相关教材。}
+        本章包含了在王老师课题组可能用到的数学知识，但是并不是所有人所有方向都非常重要。阅读此章内容前，我们默认你掌握了基础的数学知识：单变量微积分，多元函数微积分，基础线性代数。如果自认为对此比较熟悉，可以有用到相关知识的时候再回来检索查看，如果不熟悉，还是建议阅读本章内容。对于一部分有一定意义但影响阅读连贯性的内容（例如部分证明及拓展应用），我们会将其列于附录中。\textbf{本指南不适合完全没学过线性代数的同学，如果想完整学习线性代数请参阅相关教材。}
 
         \section{简易数学回顾}
       
           数学基础的第一小节将关注于最基础的数学内容，主要是线性代数和微积分的一些知识，由于长时间不用可能有所生疏，我们就在这里作简单的回顾。熟悉此节内容的同学可以直接跳过。
 
+          \subsection{复数及复变函数基础}
+
+            {\color{red}{\textbf{以下内容针对对于复数及复变函数非常不熟悉的读者，更深入的内容将在后面出现。}}}\\
+            复数是实数的拓展。让我们先回顾一下从小到大的数学的学习，来看一下我们（也是整个人类）是怎么认识数的。\\
+            首先认识的是正整数，正整数$\mathbb{Z}^+$对加法封闭\footnote{本节中，封闭的意思是对集合中的数进行某种运算的结果仍然在该集合内。}，但是对于减法就不封闭了，于是人们引入了负整数，组成了对加减法都封闭的整数$\mathbb{Z}$。整数对乘法也封闭，但是对非零除法则不封闭，于是数扩张为了有理数$\mathbb{Q}$。有理数对加减乘除都封闭，但是对于例如对角线长度、圆的周长之类的问题时就不好解决了，从而引入了无理数\sout{以及各种测度}$\mathbb{R}$。到目前为止看起来可以告一段落，但是，当人们求解实系数代数方程的时候，发现其根不一定是实数，从而引入了虚数，组成了复数$\mathbb{C}$。简单的说，数的扩充是为了更高级的运算，而复数的意思是对代数方程求根封闭。数学王子高数证明了，在复数域上，$N$次方程有$N$个根\footnote{此即为\textbf{代数基本定理}}。\\
+            引入复数的核心就是单位虚数$i$，定义为
+            \begin{equation}
+              i=\sqrt{-1}
+            \end{equation}
+            这个定义想必对于很多人都是平凡的，对其历史不再赘述。一个一般的复数$z$，可以表示为
+            \begin{equation}
+              z=x+iy
+            \end{equation}
+            这称为复数的\textbf{代数式}。其中$x$被称为\textbf{实部}，$y$被称为\textbf{虚部}。\\
+            于是从某种意义上来说，复数可以看成是一个二元有序实数对$(x,y)$。复数的几何表示也自然而然地对应一个二维平面\footnote{即\textbf{复平面}}。
+
           \subsection{线性空间，线性映射与矩阵}
 
-            对于矢量空间的数学定义，我们不做仔细讨论，简单地说，我们在某个数域$F$上定义了一个非空集合$V$，这个$V$中的元素满足加法交换律，对于数乘运算满足结合律，分配律等，而且数乘和加法的运算关于集合$V$是封闭的，我们就称$V$是一个线性空间，或者矢量空间，矢量空间内的元素称为矢量/向量。我们按照定义证明物理中的三维空间矢量是实数域上定义的线性空间，另外我们可以在矢量空间中定义内积和两个矢量的夹角，普适定义不再展开，本指南中将用最朴素的内积和矢量夹角定义方式，在三维下就是我们熟知的矢量模和夹角形式。
+            对于矢量空间的数学定义，我们不做仔细讨论，简单地说，我们在某个数域$\mathbb{F}$\footnote{下文中$\mathbb{F}=\mathbb{R}$或$\mathbb{C}$，不再赘述}上定义了一个非空集合$V$，这个$V$中的元素满足加法交换律，对于数乘运算满足结合律，分配律等，而且数乘和加法的运算关于集合$V$是封闭的，我们就称$V$是一个线性空间，或者矢量空间，矢量空间内的元素称为矢量/向量。我们按照定义证明物理中的三维空间矢量是实数域上定义的线性空间，另外我们可以在矢量空间中定义内积和两个矢量的夹角，普适定义不再展开，本指南中将用最朴素的内积\footnote{$\left\langle a,b\right\rangle=\sum_{i=1}^n{a_i^*\times b_i},\ a,b\in\mathbb{F}^n$}，长度\footnote{矢量$a$的长度$\left\| a\right\|=\sqrt{\left\langle a,a\right\rangle}$}和矢量夹角\footnote{$\theta_{a,b}=cos^{-1}\left(\frac{\left\langle a,b\right\rangle}{\left\| a\right\|\cdot\left\| b\right\|}\right)$}定义方式，在三维实空间下就是我们熟知的矢量模和夹角形式。
 
             对于线性空间中的向量，我们可以做线性组合，对于线性空间中的元素$\left\{\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3,\dots,\mathbf{a}_N\right\}$，如果存在不全为零的系数$\left\{\lambda_i\right\}$使得
             \begin{equation}
               \lambda_1\mathbf{a}_1+\lambda_2\mathbf{a}_2+\cdots+\lambda_N\mathbf{a}_N=\mathbf{0}
             \end{equation}
-            则称这个矢量组$\left\{\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3,\dots,\mathbf{a}_N\right\}$的元素线性相关，否则称为线性无关。线性相关的向量意味着其中一个可以用其他向量的线性组合表示，也就是他们并不是独立的。在一个线性空间中可以找到的最大的线性无关向量组的个数称为这个线性空间的维度，比如在三维空间内我们最多可以找到三个线性无关的矢量，通常选用三个单位正交矢量。需要注意，线性无关不代表正交，二维空间内夹角为1度的两个矢量也是线性无关的\footnote{但是总可以通过Gram-Schmidt正交化或者其他正交化方法从一组线性无关的矢量构建同样个数的正交矢量}。这个最大的线性无关矢量组，就可以作为这个空间的基矢量，线性空间中的任何一个矢量都可以写成基矢量的线性组合。
+            则称这个矢量组$\left\{\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3,\dots,\mathbf{a}_N\right\}$的元素\textbf{线性相关}，否则称为\textbf{线性无关}。线性相关的向量意味着其中一个可以用其他向量的线性组合表示，也就是他们并不是独立的。在一个线性空间中可以找到的最大的线性无关向量组的个数称为这个线性空间的维度，比如在三维空间内我们最多可以找到三个线性无关的矢量，通常选用三个单位正交矢量。需要注意，线性无关不代表正交，二维空间内夹角为1度的两个矢量也是线性无关的\footnote{但是总可以通过Gram-Schmidt正交化或者其他正交化方法从一组线性无关的矢量构建同样个数的正交矢量}。这个最大的线性无关矢量组，就可以作为这个空间的基矢量，线性空间中的任何一个矢量都可以写成基矢量的线性组合。
             
             这个线性组合的系数通常是我们所关心的东西，在一组基矢量$\left\{\vec{e}_i\right\}$下，这个线性空间的任何向量都可以表示为
             \begin{equation}
-              \vec{f}=\sum_i{N}c_i\vec{e}_i
+              \vec{f}=\sum_i^N{c_i\vec{e}_i}
             \end{equation}
             在定义了基矢量之后，我们没有必要每次都把基矢量写出来，因为一组完备的系数组就足够描述这个矢量。我们通常用一个含有N个(空间维度)元素的数组来表示一个矢量，比如说三维空间中的$(c_1,c_2,c_3)$。在这之后，我们可以定义一种映射$\mathcal{O}$，它把线性空间$V_1$内的元素映射到另一个线性空间$V_2$下，并且满足线性性，即
             \begin{equation}
               \mathcal{O}(\lambda\mathbf{a}+\mu\mathbf{b})=\lambda\mathcal{O}(\mathbf{a})+ \mu\mathcal{O}(\mathbf{b})
             \end{equation}
-            则称$\mathcal{O}$是从$V_1$到$V_2$的线性映射，如果$\mathcal{O}$是把一个矢量映射到自己的线性空间，则也称为线性变换。我们知道，如果这个映射对于矢量空间的基矢量定义好了，所有矢量的映射就都定义好了。我们对基矢量中的$\vec{e}_i$做线性变换，由于其仍然位于这个线性空间下，所以变换完的矢量$\mathcal{O}(\vec{e}_i)$可以写成所有基矢量的线性组合：
+            则称$\mathcal{O}$是从$V_1$到$V_2$的\textbf{线性映射}\footnote{也称为\textbf{线性变换}}，如果$\mathcal{O}$是把一个矢量映射到自己的线性空间，则称为\textbf{线性算子}。我们知道，如果这个映射对于矢量空间的基矢量定义好了，所有矢量的映射就都定义好了。我们对基矢量中的$\vec{e}_i$做线性变换，由于其仍然位于这个线性空间下，所以变换完的矢量$\mathcal{O}(\vec{e}_i)$可以写成所有基矢量的线性组合：
             \begin{equation}
               \mathcal{O}(\vec{e}_i)=\sum_j^N  O_{ij}  \vec{e}_j 
             \end{equation}
-            式中的$O_{ij}$可以认为是一个矩阵的矩阵元，这样一个线性变换就和一个矩阵一一对应\footnote{线性变换对应方矩阵，线性映射对应全部矩阵}，而这个映射的逆映射也就与这个矩阵的逆矩阵相对应。同样的，对于一个矩阵
+            式中的$O_{ij}$可以认为是一个矩阵的矩阵元，这样一个线性变换就和一个矩阵一一对应\footnote{线性算子对应方矩阵，线性映射对应全部矩阵}，而这个映射的逆映射也就与这个矩阵的逆矩阵相对应。同样的，对于一个矩阵
             \begin{equation}
               \mathbf{A}=\left( \begin{array}{cccc}{A_{11}} & {A_{12}} & {\cdots} & {A_{1 M}} \\ {A_{21}} & {A_{22}} & {\cdots} & {A_{2 M}} \\ {\vdots} & {\vdots} & { } & {\vdots} \\ {A_{N 1}} & {A_{N 2}} & {\cdots} & {A_{N M}}\end{array}\right)
             \end{equation}
@@ -285,11 +302,11 @@
               \label{linear transformation}
             \end{equation}
 
-            有一种线性变换，它满足在变换前后矢量的模长不变，这个性质保证了原本正交归一的基矢量在变换后是另一组正交归一的基矢量，这个性质在量子力学的表象变换中至关重要，这类变换称为正交变换，正交变换对应的矩阵为正交(orthogonal)矩阵，即满足
+            有一种线性算子，它满足在变换前后矢量的模长不变，这个性质保证了原本正交归一的基矢量在变换后是另一组正交归一的基矢量，这个性质在量子力学的表象变换中至关重要，这类变换称为\textbf{正交(orthogonal)变换}，正交变换对应的矩阵为\textbf{正交矩阵}\footnote{不同书的名称不同，也有称为\textbf{等距同构}}，即满足
             \begin{equation}
               \mathbf{A}\mathbf{A}^{\mathsf{T}}=\mathbf{I}
             \end{equation}
-            其中$\mathsf{T}$为转置符号，$\mathbf{I}$为单位矩阵，容易证明，满足这样条件的矩阵对应的线性变换是保持矢量模长的。
+            其中$\mathsf{T}$为转置符号，$\mathbf{I}$为单位矩阵，容易证明，满足这样条件的矩阵对应的线性变换是保持矢量模长的，证明\sout{留作习题}可见于附录\ref{orthogonal_matrix_properties}\footnote{该部分内容可能需要对复数以及复空间有一定的了解，对此不了解的请先阅读正文的相关章节}。
 
           \subsection{行列式}
             行列式在线性代数的书中有多种等价定义，为了与讲解量子化学推导内容的一致性，我们选用排列法的定义，即对于一个方矩阵
@@ -305,7 +322,7 @@
             \end{equation}
             可以看到与用Laplace展开定义的结果一致。
 
-            矩阵的行列式最重要的一些性质有：如果矩阵不满秩(这个矩阵的每一列或者每一行单独写成一个向量，他们线性相关)，矩阵的行列式为0，矩阵就没有对应的逆矩阵\footnote{矩阵有逆矩阵，等价于行列式不为0，没有逆矩阵的矩阵对应的线性映射也是不可逆的(损失信息)}；$|\mathbf{A B}|=|\mathbf{A}||\mathbf{B}|$；任意交换行列式中的两列(行)，矩阵行列式反号。
+            矩阵的行列式最重要的一些性质有：如果矩阵不满秩(这个矩阵的每一列或者每一行单独写成一个向量，他们线性相关)，矩阵的行列式为0，矩阵就没有对应的逆矩阵\footnote{矩阵有逆矩阵，等价于行列式不为0，没有逆矩阵的矩阵对应的线性映射也是不可逆的(损失信息)}；$\left|\mathbf{A B}\right|=\left|\mathbf{A}\right|\left|\mathbf{B}\right|$；任意交换行列式中的两列(行)，矩阵行列式反号。
 
           \subsection{特征值与特征向量}
             在线性代数课程中，特征值与特征向量可能不被特别重视，\sout{当然主要原因是需要重视的东西太多了，}但是在物理学、工程的诸多应用中，特征值与特征向量几乎是整个线性代数最常用的一块知识点。
@@ -2491,6 +2508,81 @@
             \end{equation}
         \end{enumerate}
 
+    \newpage
+    \appendix
+    \appendixname
+    \addappheadtotoc
+      \renewcommand\thesection{\Alph{section}}
+      \section{正交矩阵的性质及证明}
+        \label{orthogonal_matrix_properties}
+        这部分内容参考\cite{linear_algebra_done_right}。
+        \begin{theorem}
+          对于$V$上的线性算子$S$，以下条件等价：\\
+          1.
+            \begin{equation}
+              \forall v\in V, \left\|Sv\right\|=\left\|v\right\|
+            \end{equation}
+            即$S$是正交矩阵\footnote{本附录中采用该方法定义正交矩阵}。\\
+          2.
+            \begin{equation}
+              \forall u,v\in V, \left\langle Su,Sv\right\rangle=\left\langle u,v\right\rangle
+            \end{equation}
+          3. 对于$V$中的正交归一向量组$\{e_1,e_2,\dots,e_n\}$，$\{Se_1,Se_2,\dots,Se_n\}$也是正交归一向量组；\\
+          4.$V$中存在正交归一基$\{e_1,e_2,\dots,e_n\}$，使得$\{Se_1,Se_2,\dots,Se_n\}$也是正交归一基；\\
+          5.
+            \begin{equation}
+              S^\dagger S=I
+            \end{equation}
+          6.
+            \begin{equation}
+              SS^\dagger=I
+            \end{equation}
+          7.
+            \begin{equation}
+              \forall v\in V, \left\|S^\dagger v\right\|=\left\|v\right\|
+            \end{equation}
+          8.$S$是可逆矩阵，且$S^{-1}=S^\dagger$
+        \end{theorem}
+        \begin{proof}
+          首先假设$1$是成立的。对于实空间，易证
+          \begin{equation}
+            \left\langle u,v\right\rangle=\frac{\left\|u+v\right\|^2-\left\|u-v\right\|^2}{4}
+          \end{equation}
+          而对于复空间则有
+          \begin{equation}
+            \left\langle u,v\right\rangle=\frac{\left\|u+v\right\|^2-\left\|u-v\right\|^2+\left\|u+iv\right\|^2i-\left\|u-iv\right\|^2i}{4}
+          \end{equation}
+          即内积可以用长度表示，故而$2$也成立。\\
+          如果$2$成立，那么$S$有内积不变性，那么对于$V$中的正交归一向量组$\{e_1,e_2,\dots,e_n\}$，由于
+          \begin{equation}
+            \left\langle Se_i,Se_j\right\rangle=\left\langle e_i,e_j\right\rangle=\delta_{ij}
+          \end{equation}
+          故而$\{Se_1,Se_2,\dots,Se_n\}$也是正交归一向量组，$3$也成立。\\
+          $3$成立显然有$4$成立。\\
+          假设$4$是成立的，那么令$\{e_1,e_2,\dots,e_n\}$是$V$的正交归一基，且满足$\{Se_1,Se_2,\dots,Se_n\}$也是$V$的正交归一基，则对于$i,j=1,2,\dots,n$,
+          \begin{equation}
+            \label{S_dagger_S_inner_product}
+            \left\langle e_i,e_j\right\rangle=\left\langle Se_i,Se_j\right\rangle=\left\langle S^\dagger Se_i,e_j\right\rangle
+          \end{equation}
+          由于$\forall u,v\in V$可以写作$\{e_1,e_2,\dots,e_n\}$的线性组合，\ref{S_dagger_S_inner_product}暗示了
+          \begin{equation}
+            \left\langle S^\dagger Su,v\right\rangle=\left\langle u,v\right\rangle
+          \end{equation}
+          因此有$S^\dagger S=I$，即$5$成立。\\
+          如果$5$成立，显然$6$成立。\\
+          如果$6$成立，那么
+          \begin{equation}
+            \forall v\in V, \left\|S^\dagger v\right\|^2=\left\langle S^\dagger v,S^\dagger v\right\rangle=\left\langle SS^\dagger v,v\right\rangle=\left\langle v,v\right\rangle=\left\|v\right\|^2
+          \end{equation}
+          所以$S^\dagger$也是正交矩阵，$7$成立。\\
+          如果$7$成立，那么将$S^\dagger$代入从$1$到$5$和$6$的证明过程（并利用$\left(S^\dagger\right)^\dagger=S$），可得$SS^\dagger=I$和$S^\dagger S=I$，即$S^-1=S^\dagger$，$8$成立。\\
+          如果$8$成立，那么$S$是可逆矩阵且$S^-1=S^\dagger$，即$S^\dagger S=I$，则
+          \begin{equation}
+            \left\|Sv\right\|^2=\left\langle Sv,Sv\right\rangle=\left\langle S^\dagger Sv,v\right\rangle=\left\langle v,v\right\rangle=\left\|v\right\|^2
+          \end{equation}
+          即$1$成立。\\
+          于是，我们完成了$1\Rightarrow2\Rightarrow3\Rightarrow4\Rightarrow5\Rightarrow6\Rightarrow7\Rightarrow8\Rightarrow1$的证明，即这些条件等价，证毕。
+        \end{proof}
     \bibliographystyle{unsrt}
     \bibliography{reference}
   \end{document} 
