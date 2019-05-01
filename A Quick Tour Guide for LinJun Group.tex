@@ -951,7 +951,159 @@ A_i B_j \equiv
 	\mathrm{Tr}(A_i B_j) = A_iB_i.
 \end{equation}
 
-在这里我们插播一个旋转矩阵的概念。从某种角度上你还可以这么定义矢量：矢量是受旋转矩阵控制的。
+矢量的一个比较重要的性质便是向量是受旋转矩阵控制的。旋转矩阵$R$(或$R_{ij}$)作为正交矩阵，满足
+\[
+R^T R = E
+.\]
+它代表了对向量的旋转，也可以是向量在一个空间的表述转换到了另一个空间的表述，同时保持各个向量之间的内积保持不变。它表达起来为
+\[
+	A_i' B_i' = A_j R_{ji} R_{ij} B_j = A_j B_j
+.\] 
+其中$A_i',\,B_i'$表示为新坐标下的向量表示。我们可以清晰地看到旋转矩阵的正交性质在保持向量内积中起到的作用。我们可以从这一点出发，若某个量是受旋转矩阵控制的，那么它是一个矢量。
+
+旋转矩阵其实便代表了一个二阶张量：它存在两个指标，这两个指标之间是独立的。我们还可以从并矢得到灵感，在字母上多标箭头来表达高阶张量\footnote{为什么不写出来？\sout{编者\latex 能力太差}}。特别地，二阶张量还可以用$\overleftrightarrow{T}$来表示。
+
+当然旋转矩阵也并不是只能作用于矢量。我们从并矢可以很容易联想到，高阶张量某种程度上代表了多个向量的笛卡尔积，那么若要对它进行旋转也就意味着对每一个向量进行旋转，而互相之间的旋转可以是独立的。从而我们可以写成
+\[
+	T_{i_1i_2...i_n}' = R_{i_1j_1} R_{i_2j_2} ... R_{i_n j_n} T_{j_1j_2....j_n}
+.\] 
+从旋转矩阵我们也看到了张量的一个重要的性质：高阶张量可以代表对低阶张量的线性变换。这也说明了高阶张量多个指标的作用：这些指标可以自由地与别的张量的指标进行结合，``发动''爱因斯坦求和约定。
+
+向量之间还有叉乘的形式\footnote{叉乘仅限于三维情况。}，我们可以将其表达为：
+\[
+	\mathbf{A} \times \mathbf{B} = \varepsilon_{ijk} \mathbf{e}_i A_j B_k
+.\] 
+其中$\mathbf{e}_i$便表达了基向量。$\varepsilon_{ijk}$表达的是若 $i,j,k$的顺序为``正序''，也就是从最开始的正序列通过偶数次元素得到的序列时，其值为1，若为``倒序''为 $-1$，若存在重复数字则为零。\footnote{没错其实就是行列式的求值方法。}
+
+由此可以出发证明一个非常有用的公式：
+\begin{equation}
+	\mathbf{A}\times (\mathbf{B}\times \mathbf{C}) = (\mathbf{A} \cdot \mathbf{C}) \mathbf{B} - (\mathbf{A} \cdot \mathbf{B}) \mathbf{C}
+\end{equation} 
+我们可以这么出发：
+\begin{align*}
+	\mathbf{A} \times (\mathbf{B} \times \mathbf{C}) &= \mathbf{e}_i \varepsilon_{ijk} A_j (\mathbf{B} \times \mathbf{C})_k \\
+							 &= \mathbf{e}_i \varepsilon_{ijk} \varepsilon{kmn} A_j B_m C_n \\
+							 &= \mathbf{e}_i B_iA_j C_j - \mathbf{e}_i C_i A_j B_j
+\end{align*}
+其中利用了
+\begin{equation}
+	\varepsilon_{ijk}\barepsilon{kmn} = \varepsilon_{kij} \varepsilon{kmn} = \delta_{im} \delta_{jn} - \delta_{in}\delta_{jm}
+\end{equation} 
+我们可以这么想这个公式：由于$i,j,k,m,n$都是取三个坐标元，保持$k$一致后其余的指标的选择是非常有限的，然后就能很容易想明白上式是如何推出来的。
+
+梯度算符是在矢量代数中比较重要的算符，但它也并不神秘，它其实就代表了向各个维度求一阶导的``向量''。比如
+\[
+	\nabla f = \left( \frac{\partial f}{\partial x} ,\frac{\partial f}{\partial y} ,\frac{\partial f}{\partial z}  \right) \equiv \frac{\partial f}{\partial x_i} \equiv \partial_i f
+.\] 
+那么与此对应，求一个向量的散度也很容易：
+\[
+	\nabla \cdot \mathbf{A} = \partial_i A_i 
+.\] 
+旋度也很简单：
+\[
+	\nabla \times \mathbf{A} = \varepsilon_{ijk} \mathbf{e}_i \partial_j A_k
+.\] 
+但这些东西能够延伸的内容是非常丰富的。比如对$\mathbf{r} = (x,y,z)$及单位矩阵$\overleftrightarrow{I}$，有
+\begin{align}
+	\nabla \cdot \mathbf{r} = 3 \\
+	\nabla \times \mathbf{r} = 0 \\
+	\nabla \times (\nabla f) = 0 \\
+	\nabla \frac{1}{|\mathbf{r}-\mathbf{r}'|} = \frac{- \mathbf{e}(\mathbf{r}-\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|^2} = - \nabla' \frac{1}{|\mathbf{r}-\mathbf{r}'|} \\
+	\nabla\cdot(\mathbf{A}\mathbf{r}\mathbf{r}) = (\nabla \cdot \mathbf{A})\mathbf{r}\mathbf{r} + \mathbf{A} \mathbf{r}+ \mathbf{r}\mathbf{A} \\
+	\nabla\times(r^n \mathbf{r}) = 0 
+\end{align}
+读者有兴趣可以自行证明。
+
+张量分析在矢量代数的基础上考虑了坐标系自身的影响，比如，这个坐标系的各个基向量之间是不互相正交的。此时向量之间的内积自然就不能简单地利用向量系数的相乘。为了方便地搞定这个事情，张量分析使用了``协变张量''和``逆变张量''的概念。``协变张量''是我们所熟悉的张量，而``逆变张量''则代表了与它相对应的另一种张量\footnote{\sout{好了好了我知道我中文很菜}}。
+
+比如我们有两个基向量$\mathbf{i}_1,\mathbf{i}_2$，他们满足
+\[
+	\mathbf{i}_1 \cdot \mathbf{i}_1 = \mathbf{i}_2 \cdot \mathbf{i}_2 = 1, \quad \mathbf{i}_1 \cdot \mathbf{i}_2 = \cos{\varphi}
+.\] 
+甚至还不止于此，我们有两个非归一的基向量
+\[
+\mathbf{g}_1 = | \mathbf{g}_1| \mathbf{i}_1, \mathbf{g}_2 = |\mathbf{g}_2| \mathbf{i}_2
+.\] 
+此时两个向量$\mathbf{P},\mathbf{Q}$ 的内积直接写起来是非常复杂的。但我们可以通过代数方程构建这两个基向量对应的逆变基矢量$\mathbf{g}^1,\mathbf{g}^2$，使
+\[
+	\mathbf{g}^1 \cdot \mathbf{g}_2  = 0, \quad \mathbf{g}^1 \cdot \mathbf{g}_1 = \mathbf{g}^2 \cdot \mathbf{g}_2 = 1 
+.\] 
+也就是
+\[
+\mathbf{g}^i \cdot \mathbf{g}_j = \delta^i_j
+.\]
+我们就可以方便地写出两个向量的内积，
+\[
+	(\mathbf{P},\mathbf{Q}) = P^i \cdot Q_i
+.\] 
+其中上标的向量表示通过逆变基向量线性组合得到的逆变向量，下标为对应的协变向量。
+
+这样我们就在一定程度上解决了坐标系自身带来的影响。那么对协变向量/逆变向量自然存在对应的线性变换
+\[
+\begin{cases}
+	\mathbf{P}_{j'} = \beta^{j'}_i P_i \\
+	\mathbf{P}^{j'} = \beta^{j'}_i P^i
+\end{cases}
+.\] 
+可以很容易地证明
+\[
+\beta^j_i \beta^i_k = \delta^j_k
+.\]
+同时还需引入 fundamental tensor $g^{ij}$,它某种程度上起到了``抬升指标''的作用，
+ \[
+	 P^j = g^{ji} P_i
+.\] 
+那么$\beta^{ij}$就是在变换的同时抬升指标的一个算符。
+
+相对论量子力学引入了狭义相对论中的核心——光速不变原理引入的各种修正。从原点发光，光的传播满足
+\begin{equation}
+	c^2 t^2 -(x^2 + y^2 + z^2 ) =0
+\end{equation}
+以不同的参考系来看，由于光速不变，同样会有
+\begin{equation}
+ c^2 t'^2 -(x'^2 + y'^2 + z'^2)=0
+\end{equation}
+从而
+\begin{equation}
+c^2 t'^2 -(x'^2 + y'^2 + z'^2) = c^2 t^2 -(x^2 + y^2 + z^2 )
+\end{equation}
+定义坐标形式为$(x,y,z,ct)$，建立 Minkowski Space，定义在这个空间的inner product:
+\begin{equation}
+\begin{cases}
+	\eta(u,v) = u_0 v_0 - u_1 v_1 - u_2 v_2 - u_3 v_3\\
+	u=\begin{pmatrix}
+	u_0 \\ u_1 \\ u_2 \\u_3
+	\end{pmatrix},
+	v=\begin{pmatrix}
+	v_0 \\ v_1 \\ v_2 \\v_3
+	\end{pmatrix}
+\end{cases}
+\end{equation}
+那么在原参考系下，新参考系下的物理量分别写作为$A,A^*$时，有
+\begin{equation}
+	\eta(A*,A*)=\eta(A,A)
+\end{equation}
+在这个情况下原来的张量的一些性质会发生改变——因为内积定义发生了变化。
+
+那么原来的协变/逆变基向量之间的关系也就发生了改变，
+\begin{equation}
+	\mathbf{g}^i \cdot \mathbf{g}_j = \delta_{ij} \rightarrow \eta(A_i,A_j) =
+	\begin{cases}
+	1,\quad i=j=0\\
+	-1,\quad i=j\neq 0 \\
+	0,\quad \text{other cases}
+	\end{cases}
+\end{equation}
+这个时候的fundamental tensor就需要改为
+\begin{equation}
+	g^{\mu\nu} =
+	\begin{cases}
+	1,\quad i=j=0\\
+	-1,\quad i=j\neq 0 \\
+	0,\quad \text{other cases}
+	\end{cases}
+\end{equation}
+相对论量子力学便基于这样的符号系统展开了包含了狭义相对论修正的量子力学描述。
   \chapter{量子力学}
   本指南默认入门者对量子力学最基础的部分有一定的理解，因此不会从Schr\"odinger方程入手，也不会涉及五大基本假设。另外，本指南也不涉及高深内容，只有在电子结构部分会从实用的角度简单介绍电子(费米子)的二次量子化。如果你需要量子力学的基础知识，暂时可以参阅各类量子力学教材，但是各类书籍难度差别巨大，我们为初学者推荐Griffiths的量子力学导论，基本看过基础理论部分就已经能满足我们的多数需求。另外，可以参见Levine量子化学中的量子力学基础部分，推导详实。为了方便，我们第一小节为快速概念检索。
 
