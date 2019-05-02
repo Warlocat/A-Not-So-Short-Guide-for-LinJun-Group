@@ -14,7 +14,7 @@
   \usepackage{mathrsfs}
   \usepackage{xcolor} % 定制颜色
   \usepackage{appendix} % 附录
-  \usepackage{physics}
+  \usepackage{physics} % http://mirrors.huaweicloud.com/repository/toolkit/CTAN/macros/latex/contrib/physics/physics.pdf
   \usepackage[colorlinks=true, unicode=true, linkcolor=red, citecolor=red, filecolor=red, urlcolor=red]{hyperref} % 要放在最后一个
   \lstset{
     backgroundcolor=\color{white},      % choose the background color
@@ -759,7 +759,7 @@
           相对论量子力学便基于这样的符号系统展开了包含了狭义相对论修正的量子力学描述。
 
         \section{简易数值计算方法}
-          我们一般将可以直接写出数学表达式的问题称为解析的，与之对应的就是数值的。虽然解析的数学在相当多的方面都有重要意义，但是对于实际的应用来说，尤其是计算机模拟的问题来说，得到解析表达式是极为困难。举个简单的例子，常微分方程，就连本科生课程中给出的例子很多都需要做数值计算才能真正得到结果。而在王老师课题组，由于研究的都是动力学问题，即体系随时间演化，更是需要很多数值拟合，微分积分和数值解微分方程的概念，因此本节中我们将极其简要地介绍相关问题的最基础方法，为了简单，我们都用单变量函数的最简单的数值方法作为例子，实际操作中需要多变量、较高精度方法请参阅相关书籍\cite{numerical_calc_methods}，这部分只是给读者一个概念，在之后查阅资料过程中不至于\sout{被水淹没}不知所措。
+          我们一般将可以直接写出数学表达式的问题称为解析的，与之对应的就是数值的。虽然解析的数学在相当多的方面都有重要意义，但是对于实际的应用来说，尤其是计算机模拟的问题来说，得到解析表达式是极为困难。举个简单的例子，常微分方程，就连本科生课程中给出的例子很多都需要做数值计算才能真正得到结果。而在王老师课题组，由于研究的都是动力学问题，即体系随时间演化，更是需要很多数值拟合，微分积分和数值解微分方程的概念，因此本节中我们将极其简要地介绍相关问题的最基础方法，为了简单，我们都用单变量函数的最简单的数值方法作为例子，实际操作中需要多变量、较高精度方法请参阅相关书籍\cite{numerical_calc_methods}及其它，这部分只是给读者一个概念，在之后查阅资料过程中不至于\sout{被水淹没}不知所措。
           \subsection{非线性方程求解}
             对于线性方程，方程组，如果我们已经确定其有解，则一定可以通过消元法等方法将其求解，最多只是过程繁琐，但是总可以交给计算机去解决，线性方程组更是有各类已有的数学运算库函数来求解，比我们在课本上学到的方法要精确，这也是我们跳过线性方程组求解的原因\footnote{读者在需要这类功能时可以咨询学长学姐相关的MKL库函数使用，本指南不再特别说明。另外，这也是我们不讲述矩阵特征值数值解法的原因。}。对于非线性方程$f\qty(x) = 0$，这件事情是很让人头疼的，因为没有一个严格的普适求解方法，在这里我们介绍最简单的几种数值方法。
 
@@ -779,202 +779,225 @@
 
             鉴于牛顿法有时候收敛速度较慢，我们也可以使用一些加速迭代的算法，此处不详细展开，感兴趣的读者可以阅读相关文献专著。
           \subsection{插值与拟合}
-            差值与拟合的问题在研究中是非常常见的，这两个问题是极其相似的，他们都来自于我们希望对已有数据的规律进行分析，得到未知数据。比如说，我们通过了实验或者计算的手段，知道了一组自变量$\left\{x_i\right\},i=1,2,\dots,N$和这组自变量对应的函数值$\left\{y_i\right\}$，我们希望用一个函数表示它们之间的关系，进而求出其他没有测量的自变量对应的函数值。根据需要，我们会涉及差值或者拟合的问题，我们将各介绍其中最简单的方法，分别是拉格朗日(Lagrange)差值多项式和最小二乘法。
+            插值与拟合的问题在研究中是非常常见的，这两个问题是极其相似的，他们都来自于我们希望对已有数据的规律进行分析，得到未知数据。比如说，我们通过了实验或者计算的手段，知道了一组自变量$\qty{x_i},i=1,2,\dots,N$和这组自变量对应的函数值$\qty{y_i}$，我们希望用一个函数表示它们之间的关系，进而求出其他没有测量的自变量对应的函数值。根据需要，我们会涉及插值或者拟合的问题，我们将各介绍其中最简单的方法，分别是拉格朗日(Lagrange)插值多项式和最小二乘法。
 
-            之所以称为差值问题，是因为差值函数有一个要求，就是必须经过所有的$(x_i,y_i)$点，即所有的已知数据都严格符合差值多项式，多数情况下，对于一组数据的差值多项式是存在且唯一的，比如两个点确定直线是唯一的，三个点确定抛物线也是唯一的。因此用哪种差值多项式，只是代码实现的难度和速度上的差别，拉格朗日差值多项式就是思路最平凡的一种：对于一组$n+1$个互不相同的差值点$\left\{x_i\right\}_{i=0}^n$，如果能找到一个多项式$\left\{l_{i}(x)\right\}_{i=0}^{n}$，满足
+            之所以称为插值问题，是因为插值函数有一个要求，就是必须经过所有的$\qty(x_i,y_i)$点，即所有的已知数据都严格符合插值多项式，多数情况下，对于一组数据的插值多项式是存在且唯一的，比如两个点确定直线是唯一的，三个点确定抛物线也是唯一的。因此用哪种插值多项式，只是代码实现的难度和速度上的差别，拉格朗日插值多项式就是思路最平凡的一种：对于一组$n+1$个互不相同的插值点$\qty{x_i}_{i=0}^n$，如果能找到一个多项式$\qty{l_{i}\qty(x)}_{i=0}^{n}$，满足
             \begin{equation}
-              l_{i}\left(x_{j}\right)=\delta_{i j}=\left\{\begin{array}{ll}
-                {1, i=j} \\
-                {0, i \neq j} 
-              \end{array}\right.\ \ \ \ \ i, j=0,1, \cdots, n
+              l_{i}\qty(x_{j})=\delta_{i j}=\begin{cases}
+                1, i=j \\
+                0, i \neq j 
+              \end{cases}\ \ \ \ \ i, j=0,1, \cdots, n
             \end{equation}
             那么
             \begin{equation}
-              L_{n}(x)=\sum_{i=0}^{n} l_{i}(x) f\left(x_{i}\right)
+              L_{n}\qty(x)=\sum_{i=0}^{n}{l_{i}\qty(x) f\qty(x_{i})}
             \end{equation}
-            就是关于这组差值点的拉格朗日差值多项式。它的思路非常简单，即要求在每个差值点的位置，只有正确差值点对应的函数值不是0，这个思路实现起来也非常容易，只需要
+            就是关于这组插值点的拉格朗日插值多项式。它的思路非常简单，即要求在每个插值点的位置，只有正确插值点对应的函数值不是0，这个思路实现起来也非常容易，只需要
             \begin{equation}
-              l_{i}(x)=\prod_{j=0, j \neq i}^{n} \frac{x-x_{j}}{x_{i}-x_{j}}=\frac{\left(x-x_{0}\right) \cdots\left(x-x_{i-1}\right)\left(x-x_{i+1}\right) \cdots\left(x-x_{n}\right)}{\left(x_{i}-x_{0}\right) \cdots\left(x_{i}-x_{i-1}\right)\left(x_{i}-x_{i+1}\right) \cdots\left(x_{i}-x_{n}\right)}
+              l_{i}(x)=\prod_{j=0, j \neq i}^n{\frac{x-x_j}{x_i-x_j}}=\frac{\qty(x-x_0)\cdots\qty(x-x_{i-1})\qty(x-x_{i+1})\cdots\qty(x-x_{n})}{qty(x_{i}-x_0)\cdots\qty(x_i-x_{i-1})\qty(x_i-x_{i+1})\cdots\qty(x_i-x_{n})}
             \end{equation}
             读者可以自行验证上式满足$\delta_{ij}$的条件，这样拉格郎日插值多项式就可以写成
             \begin{equation}
-              L_{n}(x)=\sum_{i=0}^{n} l_{i}(x) y_i=\sum_{i=0}^{n}\left(\prod_{j=0, j \neq i}^{n} \frac{x-x_{j}}{x_{i}-x_{j}}\right) y_i
+              L_{n}\qty(x)=\sum_{i=0}^n{l_{i}\qty(x) y_i}=\sum_{i=0}^{n}{\qty(\prod_{j=0, j \neq i}^n \frac{x-x_j}{x_i-x_j}) y_i}
             \end{equation}
-            上式就满足差值多项式的基本要求。除去拉格朗日差值之外，还有牛顿差值多项式，Hermite差值多项式等，读者可自行查阅。在这里需要提及的是，差值多项式可以分段进行，最简单的是每相邻的两个点用直线表示，或者邻近三个点用二次函数表示，这样的缺点是函数的导数不连续，而且在差值点上导数不存在。如果希望对于差值点，给定函数值和一阶导数值，做这样的差值多项式可以使用样条差值，常用的是三次样条差值多项式，在这里不予展开。
+            上式就满足插值多项式的基本要求。除去拉格朗日插值之外，还有牛顿插值多项式，Hermite插值多项式等，读者可自行查阅。这些插值多项式的出发点不同，但是最终结果是一致的，读者也可自行验证。
+            
+            在这里需要提及的是，插值多项式可以分段进行，最简单的是每相邻的两个点用直线表示，或者邻近三个点用二次函数表示，这样的缺点是函数的导数不连续，而且在插值点上导数不存在。如果希望对于插值点，给定函数值和一阶导数值，做这样的插值多项式可以使用样条插值，常用的是三次样条插值多项式，在这里不予展开。
 
-            上面是差值问题，接下来讨论拟合问题。这两者的重要区别就是差值多项式要求必须过已知数据点，但是拟合就不是了，顾名思义，拟合通常是有一个含$n+1$参数的函数$f(a_0,a_1,\dots,a_n,x)$，希望调整这些参数使得这个函数最\textbf{接近}已有数据，就像我们实验课所做的那样。所谓的“接近”，通常用误差函数$\delta(x_i)=f(x_i)-y_i$来表征，其中$y_i$为已知数据，$f(x_i)$是拟合函数在这点给出的值，而整体的误差的评判标准有很多，比如所有点误差函数绝对值求和，或者绝对值中最大的那个，最小二乘法的原则是所有误差函数的平方和最小，即$S=\sum_{i=1}^{m} \delta_{i}^{2}=\sum_{i=1}^{m}\left[\varphi\left(x_{i}\right)-y_{i}\right]^{2}=\min$，因为拟合函数是参数依赖的，所以想实现这个非常简单，只需要这个总误差函数对所有参数的导数等于0
+            上面是插值问题，接下来讨论拟合问题。这两者的重要区别就是插值多项式要求必须过已知数据点，但是拟合就不是了，顾名思义，拟合通常是有一个含$n+1$参数的函数$f\qty(x;a_0,a_1,\dots,a_n)$，希望调整这些参数使得这个函数最\textbf{接近}已有数据，就像我们实验课所做的那样。所谓的“接近”，通常用误差函数$\delta\qty(x_i)=f\qty(x_i)-y_i$来表征，其中$y_i$为已知数据，$f\qty(x_i)$是拟合函数在这点给出的值，而整体的误差的评判标准有很多，比如所有点误差函数绝对值求和，或者绝对值中最大的那个，最小二乘法的原则是所有误差函数的平方和最小，即$S=\sum_{i=1}^m{\delta_i^2}=\sum_{i=1}^m{\qty[f\qty(x_{i})-y_{i}]^{2}}=\min$。正如上所述，一般采用的拟合函数都是参数依赖的，所以想实现这个非常简单，只需要这个总误差函数对所有参数的导数等于0
             \begin{equation}
-              \frac{\partial S}{\partial a_{k}}=0 (k=0,1, \cdots, n)
+              \pdv{S}{a_k}=0\ \qty(k=0,1, \cdots, n)
               \label{least square}
             \end{equation}
-            解上式$n+1$个方程就能得到$n+1$个参数值，就得到了最小二乘解。看起来非常简单，最小二乘法的核心难度在于找合适的拟合函数，只有拟合函数合适，这个参数才能较好地匹配，在不知道用什么函数的时候，可以用一组基函数来试，把最终的函数表达式写成一组函数的线性组合，参数就是线性组合系数，这个方法称为线性最小二乘法：在某个函数类$\Phi=\operatorname{span}\left\{\varphi_{0}(x), \varphi_{1}(x), \cdots, \varphi_{n}(x)\right\}$寻找一个函数$\varphi^{*}(x)=a_{0}^{*} \varphi_{0}(x)+a_{1}^{*} \varphi_{1}(x)+\cdots+a_{n}^{*} \varphi_{n}(x)$使其满足
+            解上式$n+1$个方程就能得到$n+1$个参数值，就得到了最小二乘解。看起来非常简单，最小二乘法的核心难度在于找合适的拟合函数，只有拟合函数合适，这个参数才能较好地匹配，在不知道用什么函数的时候，可以用一组基函数来试，把最终的函数表达式写成一组函数的线性组合，参数就是线性组合系数，这个方法称为线性最小二乘法：在某个函数类$\Phi=\operatorname{span}\qty{\varphi_0\qty(x),\varphi_1\qty(x),\cdots,\varphi_n\qty(x)}$寻找一个函数$\varphi^*\qty(x)=a_0^*\varphi_0\qty(x)+a_1^* \varphi_1\qty(x)+\cdots+a_n^*\varphi_n\qty(x)$使其满足
             \begin{equation}
-              \sum_{i=1}^{m}\left[\varphi^{*}\left(x_{i}\right)-y_{i}\right]^{2}=\min _{\varphi(x) \in \Phi} \sum_{i=1}^{m}\left[\varphi\left(x_{i}\right)-y_{i}\right]^{2}
+              \sum_{i=1}^m{\qty[\varphi^*\qty(x_i)-y_i]^2}=\min_{\varphi\qty(x) \in \Phi}\sum_{i=1}^m{\qty[\varphi\qty(x_i)-y_i]^2}
             \end{equation}
             此时的总误差函数为
             \begin{equation}
-              S\left(a_{0}, a_{1,} \cdots, a_{n}\right)=\sum_{i=1}^{m}\left[\sum_{k=0}^{n} a_{k} \varphi_{k}\left(x_{i}\right)-y_{i}\right]^{2}
+              S\qty(a_0,a_1,\cdots,a_n)=\sum_{i=1}^m{\qty[\sum_{k=0}^n{a_k\varphi_k\qty(x_i)}-y_i]^2}
             \end{equation}
             代入式(\ref{least square})得到
             \begin{equation}
-              \sum_{i=1}^{m} \varphi_{k}\left(x_{i}\right)\left[a_{0} \varphi_{0}\left(x_{i}\right)+\cdots+a_{n} \varphi_{n}\left(x_{i}\right)-y_{i}\right]=0, k=0,1, \cdots, n
+              \sum_{i=1}^m{\varphi_k\qty(x_i)\qty[a_0\varphi_0\qty(x_i)+\cdots+a_n\varphi_n\qty(x_i)-y_i]}=0,\ k=0,1,\cdots,n
             \end{equation}
             即
             \begin{equation}
-              a_{0} \sum_{i=1}^{m} \varphi_{k}\left(x_{i}\right) \varphi_{0}\left(x_{i}\right)+\cdots+a_{n} \sum_{i=1}^{m} \varphi_{k}\left(x_{i}\right) \varphi_{n}\left(x_{i}\right)=\sum_{i=1}^{m} \varphi_{k}\left(x_{i}\right) y_{i}
+              a_0\sum_{i=1}^m{\varphi_k\qty(x_i)\varphi_0\qty(x_i)}+\cdots+a_n\sum_{i=1}^m{\varphi_k\qty(x_i)\varphi_n\qty(x_i)}=\sum_{i=1}^m{\varphi_k\qty(x_i)y_i}
             \end{equation}
-            如果定义这个函数空间的内积为$(h, g)=\sum_{i=1}^{m} h\left(x_{i}\right) g\left(x_{i}\right)$，那么所有偏导可以表达成一个矩阵的形式
+            如果定义这个函数空间的内积为$\mean{h,g}=\sum_{i=1}^m{h\qty(x_i)g\qty(x_i)}$，那么所有偏导可以表达成一个矩阵的形式
             \begin{equation}
-              \left[\begin{array}{cccc}
-                {\left(\varphi_{0}, \varphi_{0}\right)} & {\left(\varphi_{0}, \varphi_{1}\right)}&{ \cdots}&{\left(\varphi_{0}, \varphi_{n}\right)} \\
-                {\left(\varphi_{1}, \varphi_{0}\right)} & {\left(\varphi_{1}, \varphi_{1}\right) } & {\cdots} & {\left(\varphi_{1}, \varphi_{n}\right)} \\
-                {\vdots} & {\vdots}&{} & {\vdots} \\
-                {\left(\varphi_{n}, \varphi_{0}\right)} & {\left(\varphi_{n}, \varphi_{1}\right) } & {\cdots} & {\left(\varphi_{n}, \varphi_{n}\right)}
-              \end{array}\right] \left[\begin{array}{c}
-                {a_{0}} \\
-                {a_{1}} \\
-                {\vdots} \\
-                {a_{n}}
-              \end{array}\right]=\left[\begin{array}{c}
-                {\left(\varphi_{0}, f\right)} \\
-                {\left(\varphi_{1}, f\right)} \\
-                {\vdots} \\
-                {\left(\varphi_{n}, f\right)}
-              \end{array}\right]
+              \mqty[
+                \mean{\varphi_0,\varphi_0}&\mean{\varphi_0,\varphi_1}&\cdots&\mean{\varphi_0,\varphi_n}\\
+                \mean{\varphi_1,\varphi_0}&\mean{\varphi_1,\varphi_1}&\cdots&\mean{\varphi_1,\varphi_n}\\
+                \vdots&\vdots&\ddots&\vdots\\
+                \mean{\varphi_n,\varphi_0}&\mean{\varphi_n,\varphi_1}&\cdots&\mean{\varphi_n,\varphi_n}
+              ]\mqty[
+                a_0\\
+                a_1\\
+                \vdots\\
+                a_n
+              ]=\mqty[
+                \mean{\varphi_0,f}\\
+                \mean{\varphi_1,f}\\
+                \vdots\\
+                \mean{\varphi_n,f}
+              ]
               \label{linear least square}
             \end{equation}
             如果式(\ref{linear least square})有唯一解，线性最小二乘函数就有解。
 
             如果对于非线性最小二乘法，偏导的方程很可能是非线性方程，通常可以用迭代解方程的方式求解。
+
+            此外还有必要提到的是条件极值问题。这类问题一般结合最小二乘法形成条件最小二乘，即满足最小二乘误差$S=\sum_{i=0}^m{\qty[f\qty(x_i)-y_i]^2}$最小的同时，需要满足一系列独立的条件，通常写作$g_j\qty(x_1,x_2,\dots,x_n)=0,j=1,2,\dots,r$。对于这样的问题，我们一般采用\textbf{拉格朗日乘因子法}\footnote{Lagrange Multiplier Method, LMM}求解。具体做法如下：将总误差函数$S$写作
+            \begin{equation}
+              S=\sum_{i=0}^m{\qty[f\qty(x_i;a_1,a_2,\cdots,a_n)-y_i]^2}+\sum_{j=0}^r{\lambda_j g_j\qty(x_1,x_2,\dots,x_m)}
+            \end{equation}
+            此时，$c_i$和$\lambda_j$都是参数。如果希望修正之后的总误差最小，则需要对这些参数的偏导数均为零，即
+            \begin{equation}
+              \begin{cases}
+                \pdv{S}{a_i}=0,\ i=1,2,\dots,n\\
+                \pdv{S}{\lambda_j}=0,\ j=1,2,\dots,r
+              \end{cases}
+            \end{equation}
+            此时得到的误差即为满足条件的最小误差，证明略去。
+
+            条件最小二乘方法应用于许多实际的问题，感兴趣的读者可以阅读第\ref{phase_space_dynamics}章。
+
           \subsection{数值微分和数值积分}
+            \label{numerical_differential_integral}
             我们微积分里学过各类的微分和积分的计算，但是对于实际应用来说几乎完全没有用。而数值方法却在微分和积分领域大放异彩。最简单的数值微分和数值积分都是基于插值多项式的，我们从最简单的等距结点的情况说明几种方法。
 
             数值微分里最简单的就是两点公式和三点公式，两点公式相当于当前点与邻近的结点做两点的插值多项式(直线)，然后用直线的斜率代替在这个点的导数
             \begin{equation}
               \begin{aligned}
-                f^{\prime}\left(x_{0}\right) & \approx \frac{f\left(x_{1}\right)-f\left(x_{0}\right)}{h} \\
-                f^{\prime}\left(x_{1}\right) & \approx \frac{f\left(x_{1}\right)-f\left(x_{0}\right)}{h}
+                f'\qty(x_0)&\approx&\frac{f\qty(x_1)-f\qty(x_0)}{h}\\
+                f'\qty(x_1)&\approx&\frac{f\qty(x_1)-f\qty(x_0)}{h}
               \end{aligned}
             \end{equation}
-            其中$h$是两个点间的距离，两点法的公式非常简单，精度也较低。三点法即插值多项式是一个二次函数，如果有相邻的三点，它们的拉格朗日插值多项式为
+            其中$h=x_1-x_0$是两个点间的距离。
+            
+            两点法的公式非常简单，精度也较低。而在三点法中，插值多项式是一个二次函数。如果有等间距的三点，相邻两点的距离为$h$，它们的拉格朗日插值多项式为
             \begin{equation*}
               \begin{aligned}
-                P_{2}(x) &=\frac{\left(x-x_{1}\right)\left(x-x_{2}\right)}{\left(x_{0}-x_{1}\right)\left(x_{0}-x_{2}\right)} f\left(x_{0}\right)+\frac{\left(x-x_{0}\right)\left(x-x_{2}\right)}{\left(x_{1}-x_{0}\right)\left(x_{1}-x_{2}\right)} f\left(x_{1}\right) \\
-                &+\frac{\left(x-x_{0}\right)\left(x-x_{1}\right)}{\left(x_{2}-x_{0}\right)\left(x_{2}-x_{1}\right)} f\left(x_{2}\right)
+                P_2\qty(x)&=\frac{qty(x-x_1)\qty(x-x_2)}{\qty(x_0-x_1)\qty(x_0-x_2)}f\qty(x_0)+\frac{\qty(x-x_0)\qty(x-x_2)}{\qty(x_1-x_0)\qty(x_1-x_2)}f\qty(x_1) \\
+                &+\frac{\qty(x-x_0)\qty(x-x_1)}{\qty(x_2-x_0)\qty(x_2-x_1)}f\qty(x_2)
               \end{aligned}
             \end{equation*}
             对这个式子求导就得到了三点法的一阶导数公式
             \begin{equation}
-              \left\{\begin{array}{l}
-                {f^{\prime}\left(x_{0}\right) \approx \frac{-3 f\left(x_{0}\right)+4 f\left(x_{1}\right)-f\left(x_{2}\right)}{2 h}} \\
-                {f^{\prime}\left(x_{1}\right) \approx \frac{f\left(x_{2}\right)-f\left(x_{0}\right)}{2 h}} \\
-                {f^{\prime}\left(x_{2}\right) \approx \frac{f\left(x_{0}\right)-4 f\left(x_{1}\right)+3 f\left(x_{2}\right)}{2 h}}
-              \end{array}\right.
+              \begin{cases}
+                f'\qty(x_0)\approx\frac{-3f\qty(x_0)+4f\qty(x_1)-f\qty(x_2)}{2h} \\
+                f'\qty(x_1)\approx\frac{f\qty(x_2)-f\qty(x_0)}{2h} \\
+                f'\qty(x_2)\approx\frac{f\qty(x_0)-4f\qty(x_1)+3f\qty(x_2)}{2h}
+              \end{cases}
             \end{equation}
             我们通常用中间的那个点，尽管三点法比两点法精度只提高了一级，甚至特殊情况下精度是同一量级，但是三点法结合了当前点之前和之后的信息，往往能有更好的效果。另外，既然三点法是二次函数的插值，就可以求二阶导数
             \begin{equation}
-              f^{\prime \prime}\left(x_{i}\right) \approx P_{2}^{\prime \prime}\left(x_{i}\right)=\frac{f\left(x_{0}\right)-2 f\left(x_{1}\right)+f\left(x_{2}\right)}{h^{2}}, i=0,1,2
+              f''\qty(x_i)\approx P''_2\qty(x_i)=\frac{f\qty(x_0)-2f\qty(x_1)+f\qty(x_2)}{h^2}, i=0,1,2
             \end{equation}
-            除了用拉格朗日插值多项式，也可以用三次样条等方法，然后再求导得到精度更高的数值微分。
+            除了用拉格朗日插值多项式，也可以用三次样条等方法插值，然后再求导得到精度更高的数值微分。
 
             数值积分的思路略有不同，核心思想是用有限个点的求和代替积分，即
             \begin{equation}
-              \int_{a}^{b} f(x) \ud x \approx \sum_{k=0}^{n} A_{k} f\left(x_{k}\right)
+              \int_a^b{f\qty(x)\dd{x}}\approx\sum_{k=0}^n{A_k f\qty(x_k)}
             \end{equation}
-            我们介绍普适的牛顿-科茨(Newton-Cotes)公式，在积分区域$[a,b]$上$n$等分，取$x_i=a+ih,\ h=\frac{b-a}{n},\ i =0,1,\dots,n$，采用拉格郎日插值多项式来代表真实的函数，令$x=a+th$，那么积分公式中的系数就可以写作
+            我们介绍普适的牛顿-科茨(Newton-Cotes)公式，在积分区域$\qty[a,b]$上$n$等分，取$x_i=a+ih,\ h=\frac{b-a}{n},\ i=0,1,\dots,n$，采用拉格朗日插值多项式来代表真实的函数，令$x=a+th$，那么积分公式中的系数就可以写作
             \begin{equation}
-              A_{i}=\int_{a}^{b} l_{i}(x) \ud x=h \int_{0}^{n}\left(\prod_{j=0 \atop j \neq i}^{n} \frac{t-j}{i-j}\right) \ud t=(b-a) C_{i}^{(n)}
+              A_i=\int_a^b{l_i\qty(x)\dd{x}}=h\int_0^n{\qty(\prod_{j=0 \atop j \neq i}^n{\frac{t-j}{i-j}}) \dd{t}}=\qty(b-a) C_i^\qty(n)
             \end{equation}
             其中定义了
             \begin{equation}
-              C_{i}^{(n)}=\frac{1}{n} \frac{(-1)^{n-i}}{i !(n-i) !} \int_{0}^{n} \prod_{j=0 \atop j \neq i}^{n}(t-j) ) \ud t, i=0, \cdots, n
+              C_i^\qty(n)=\frac{1}{n} \frac{\qty(-1)^{n-i}}{i !\qty(n-i) !} \int_0^n{\prod_{j=0 \atop j \neq i}^n{\qty(t-j)}\dd{t}},\ i=0,\cdots,n
             \end{equation}
             我们称
             \begin{equation}
-              \int_{a}^{b} f(x) \ud x \approx(b-a) \sum_{i=0}^{n} C_{i}^{(n)} f\left(x_{i}\right)
+              \int_a^b{f\qty(x)\dd{x}}\approx\qty(b-a)\sum_{i=0}^n{C_i^\qty(n)f\qty(x_i)}
             \end{equation}
-            为数值积分的牛顿-科茨公式，这些$C_{i}^{(n)}=$称为牛顿-科茨系数，可以直接在各种书中查到，代入函数值，完成积分。接下来，我们来看牛顿-科茨公式低阶的两个例子。$n=1$时，牛顿-科茨公式退化为梯形公式
+            为数值积分的牛顿-科茨公式，这些$C_i^\qty(n)$称为牛顿-科茨系数，可以直接在各种书中查到，代入函数值，完成积分。接下来，我们来看牛顿-科茨公式低阶的两个例子。$n=1$时，牛顿-科茨公式退化为梯形公式
             \begin{equation}
-              \int_{a}^{b} f(x) \ud x \approx \frac{b-a}{2}[f(a)+f(b)]
+              \int_a^b{f\qty(x)\dd{x}}\approx\frac{b-a}{2}\qty[f\qty(a)+f\qty(b)]
             \end{equation}
-            即函数的积分用它前后两个点构成的梯形面积代替。$n=2$时，退化为辛普森(Simpson)公式，
+            即函数的积分用它前后两个点构成的梯形面积代替。$n=2$时，退化为辛普森(Simpson)公式\footnote{在几何学上也称为拟柱体公式，对计算各种物体的体积很有用}，
             \begin{equation}
-              \int_{a}^{b} f(x) \ud x \approx \frac{b-a}{6}\left[f(a)+4 f\left(\frac{a+b}{2}\right)+f(b)\right]
+              \int_a^b{f\qty(x)\dd{x}}\approx\frac{b-a}{6}\qty[f\qty(a)+4f\qty(\frac{a+b}{2})+f\qty(b)]
             \end{equation}
             牛顿-科茨公式只是数值积分的入门方法，精度和速度都有待提高，我们推荐读者自行学习与之相关的龙贝格算法，可在任意一本数值计算的教材上找到。
 
-            插值型积分公式尽管图像简单，但是显然不是最精确的，理论上精度最高的积分公式是高斯型积分公式。TODO
+            插值型积分公式尽管图像简单，但是显然不是最精确的，理论上精度最高的积分公式是高斯型积分公式。高斯型积分公式的特点在于，对于已知数值点的选择不再是简单的等距取点，而遵循一定的策略以追求更高的数值精度，各点的权重也有所不同。想要对此进一步了解的读者请移步相关专著如\cite{numerical_calc_methods}，此处不再赘述。
+
           \subsection{ODE初值问题的数值解法}
             既然积分和微分都主要靠数值解法，那么对于实际科研中遇到的常微分方程(ODE)来说，几乎是只能用数值方法求解的。本节介绍最常用的一阶常微分方程初值问题：
             \begin{equation*}
-              \left\{\begin{array}{l}
-                {y^{\prime}=f(x, y)} \\
-                {y\left(x_{0}\right)=y_{0}}
-              \end{array}\right.
+              \begin{cases}
+                y'=f\qty(x,y)\\
+                y\qty(x_0)=y_0
+              \end{cases}
             \end{equation*}
             的数值解法。微分方程组和高阶微分方程求解的思路基本是一致的。
 
-            上文中的初值问题，要求解的其实是一根曲线，它经过初始点$(x_0,y_0)$，并且满足对每一点$x$的导数满足$y^{\prime}=f(x, y)$。要描述这样一根曲线，最容易的办法就是用分段线性的方式，过点$(x_0,y_0)$作曲线斜率为$f(x_0,y_0)$的切线，与$x=x_1$交于$(x_1,y_1)$，用$y_1$作为真实解$y(x_1)$的近似值。这样的方法称为欧拉法，即用下列点代替真实点
+            上文中的初值问题，要求解的其实是一根曲线，它经过初始点$\qty(x_0,y_0)$，并且满足对每一点$x$的导数满足$y'=f\qty(x,y)$。要描述这样一根曲线，最容易的办法就是用分段线性的方式，过点$\qty(x_0,y_0)$作曲线斜率为$f\qty(x_0,y_0)$的切线，与$x=x_1$交于$\qty(x_1,y_1)$，用$y_1$作为真实解$y\qty(x_1)$的近似值。这样的方法称为欧拉法，即用下列点代替真实点
             \begin{equation}
-              \left\{\begin{array}{l}
-                {y_{i+1}=y_{i}+h f\left(x_{i}, y_{i}\right)} \\
-                {x_{i}=x_{0}+i h, i=0,1,2, \cdots}
-              \end{array}\right.
+              \begin{cases}
+                y_{i+1}=y_i+hf\qty(x_i, y_i)\\
+                x_i=x_0+ih,\ i=0,1,2,\cdots
+              \end{cases}
             \end{equation}
-            这样就可以从初始点出发求解任意坐标$x$处的函数值，当$h = x_{i+1}-x_i$的值足够小的时候，欧拉法就是足够准确的。欧拉法的几何意义非常明确，即用当前点$x_i$的导数代替$(x_i,x_{i+1})$之间的真实函数的平均导数，也可以理解成对$y(x_{i+1})$点在$y(x_i)$点的泰勒展开，只保留到第一项的结果。
+            这样就可以从初始点出发求解任意坐标$x$处的函数值，当$h=x_{i+1}-x_i$的值足够小的时候，欧拉法就是足够准确的。欧拉法的几何意义非常明确，即用当前点$x_i$的导数代替$\qty(x_i,x_{i+1})$之间的真实函数的平均导数，也可以理解成对$y\qty(x_{i+1})$点在$y\qty(x_i)$点的泰勒展开，只保留到第一项的结果。
 
-            上文中其实可以看出，欧拉法在$h$稍大一些时，误差就会很大，泰勒展开保留到一阶项是一个及其粗糙的近似。上述欧拉法是用$x_i$和$x_{i+1}$来计算$y(x_{i+1})$的，因此又叫做向前欧拉法，与之对应的就是向后欧拉法
+            上文中其实可以看出，欧拉法在$h$稍大一些时，误差就会很大，泰勒展开保留到一阶项是一个及其粗糙的近似。上述欧拉法是用$x_i$和$x_{i+1}$来计算$y\qty(x_{i+1})$的，因此又叫做向前欧拉法，与之对应的就是向后欧拉法
             \begin{equation}
-              y_{i+1}=y_{i}+h f\left(x_{i+1}, y_{i+1}\right)
+              y_{i+1}=y_i+hf\qty(x_{i+1}, y_{i+1})
             \end{equation}
-            读者可以看到，想求$y_{i+1}$的话，需要知道它自己的值，因此向后欧拉法中通常用迭代的方式求解$y_{i+1}$。既然有向前和向后，结合我们讲过的梯形公式，自然就可以想到用向前和向后的平均，可以提高精度，这就是改进的欧拉法
+            读者可以看到，想求$y_{i+1}$的话，需要知道它自己的值，因此向后欧拉法中通常用迭代的方式求解$y_{i+1}$。既然有向前和向后，结合之前在\ref{numerical_differential_integral}节提到过的梯形公式，自然就可以想到用向前和向后的平均，可以提高精度，这就是改进的欧拉法
             \begin{equation*}
-              y_{i+1}=y_{i}+\frac{h}{2}\left[f\left(x_{i}, y_{i}\right)+f\left(x_{i+1}, y_{i+1}\right)\right]
+              y_{i+1}=y_i+\frac{h}{2}\qty[f\qty(x_i,y_i)+f\qty(x_{i+1},y_{i+1})]
             \end{equation*}
-            加入一个表示迭代次数的上标$(k)$，改进的欧拉方法可以写作
+            加入一个表示迭代次数的上标$^\qty(k)$，改进的欧拉方法可以写作
             \begin{equation}
-              \left\{\begin{array}{l}
-                {y_{i+1}^{(0)}=y_{i}+h f\left(x_{i}, y_{i}\right)} \\
-                {y_{i+1}^{(k+1)}=y_{i}+\frac{h}{2}\left[f\left(x_{i}, y_{i}\right)+f\left(x_{i+1}, y_{i+1}^{(k)}\right)\right]}
-              \end{array}\right., k=0,1,2, \cdots
+              \begin{cases}
+                y_{i+1}^\qty(0)=y_i+hf\qty(x_i,y_i)\\
+                y_{i+1}^\qty(k+1)=y_i+\frac{h}{2}\qty[f\qty(x_i,y_i)+f\qty(x_{i+1},y_{i+1}^\qty(k))]
+              \end{cases},\ k=0,1,2,\cdots
             \end{equation}
-            另外，也可以不用迭代，先用向前欧拉方法预测一个$y_{i+1}^{(0)}$的值，然后直接代入梯形积分公式来得到更精确的$y_{i+1}$值，相当于只做一次迭代，称为改进的欧拉法的预估-校正公式，也是通常实际中使用的改进欧拉方法。
+            另外，也可以不用迭代，先用向前欧拉方法预测一个$y_{i+1}^\qty(0)$的值，然后直接代入梯形积分公式来得到更精确的$y_{i+1}$值，相当于只做一次迭代，称为改进的欧拉法的预估-校正公式，也是通常实际中使用的改进欧拉方法。
 
             当然所有在王老师组写过代码的人都会知道，王老师课题组所使用的数值方法称为龙格-库塔法(Runge-Kutta, 简称RK)。RK法的基本思想是用复合函数的值来代替积分的值，简单地说，就是用更多的点的导数的某种加权平均代替这一段上的平均导数，用m个点就称为m阶RK法。可以想象，2阶RK法与改进欧拉方法是等价的\footnote{尽管系数不完全相同，但是精度是相同的}。m阶RK法的通式可以写作
             \begin{equation}
-              \left\{\begin{array}{l}
-                {y_{i+1}=y_{i}+h\left(\alpha_{1} K_{1}+\alpha_{2} K_{2}+\cdots+\alpha_{m} K_{m}\right)} \\
-                {K_{1}=f\left(x_{i}, y_{i}\right)} \\
-                {K_{2}=f\left(x_{i}+\lambda_{2} h, y_{i}+\mu_{2} h K_{1}\right)} \\
-                {\cdots \cdots \cdots } \\
-                {K_{m}=f\left(x_{i}+\lambda_{m} h, y_{i}+\mu_{m} h K_{m-1}\right)}
-              \end{array}\right.
+              \begin{cases}
+                y_{i+1}=y_i+h\qty(\alpha_1 K_1+\alpha_2 K_2+\cdots+\alpha_m K_m)\\
+                K_1=f\qty(x_i, y_i)\\
+                K_2=f\qty(x_i+\lambda_2 h, y_i+\mu_2 h K_1)\\
+                \cdots\cdots\cdots\\
+                K_m=f\qty(x_i+\lambda_m h, y_i+\mu_m h K_{m-1})
+              \end{cases}
               \label{m order RK}
             \end{equation}
-            这些参数的计算原则，就是让式(\ref{m order RK})中$y_{i+1}$的展开式与$y(x_{i+1})$在$(x_i,y_i)$处的泰勒展开尽可能相同，限于篇幅，我们不做仔细推导，直接给出最常用的4阶RK法(又称作经典RK法)的表达式
+            这些参数的计算原则，就是让式(\ref{m order RK})中$y_{i+1}$的展开式与$y\qty(x_{i+1})$在$\qty(x_i,y_i)$处的泰勒展开尽可能相同，限于篇幅，我们不做仔细推导，直接给出最常用的4阶RK法(又称作经典RK法)的表达式
             \begin{equation}
-              \left\{\begin{aligned}
-                y_{i+1} &=y_{i}+\frac{h}{6}\left(K_{1}+2 K_{2}+2 K_{3}+K_{4}\right) \\
-                K_{1} &=f\left(x_{i}, y_{i}\right) \\
-                K_{2} &=f\left(x_{i}+\frac{h}{2}, y_{i}+\frac{h}{2} K_{1}\right) \\
-                K_{3} &=f\left(x_{i}+\frac{h}{2}, y_{i}+\frac{h}{2} K_{2}\right) \\
-                K_{4} &=f\left(x_{i}+h, y_{i}+h K_{3}\right)
-              \end{aligned}\right.
+              \begin{cases}
+                y_{i+1}=y_i+\frac{h}{6}\qty(K_1+2K_2+2K_3+K_4)\\
+                K_1=f\qty(x_i,y_i)\\
+                K_2=f\qty(x_i+\frac{h}{2},y_i+\frac{h}{2}K_1) \\
+                K_3=f\qty(x_i+\frac{h}{2},y_i+\frac{h}{2}K_2) \\
+                K_4=f\qty(x_i+h, y_i+hK_3)
+              \end{cases}
               \label{4 order RK}
             \end{equation}
             4阶RK法的精度已经较高，已经满足了王老师课题组和多数其他物理工程领域的数值精度要求。
+
         \section{完备基展开}
           完备基展开是一个非常重要的概念，它直接提供了解决众多微分方程的方法，而解决微分方程是量子力学的至关重要的一个内容。
 
           “完备”一词说明某一个基组的完备性，也就是我只要通过这个基组的线性组合就能完整描述我所研究的空间中的所有向量。我用$\hat{x}$,$\hat{y}$,$\hat{z}$三个基向量就能完整描述三维空间里的所有向量，我用${x^n}$便能描述一维的所有函数，我用${\sin{nx},\cos{nx}}$就能描述有限空间内的函数/周期性函数，这些都构成了所谓的完备基。
 
-          在这里请允许编者引入施图姆-刘维尔型方程和对应本征值问题。
+          它有什么用呢？让我们来介绍一下Sturm-Liouville本征值问题。其在物理学上非常重要，包括经典力学中的传热和传质等问题，以及量子力学各种体系的求解都可以用这一套理论来处理。其中一个应用可见附录\ref{sturm_Liouville_eigenvalue_problem_application}。
           \begin{theorem}
             对形如
             \begin{equation}
-              \frac{\ud }{\ud x} \left[ k(x) \frac{\ud y}{\ud x} \right] -q(x)y + \lambda \rho(x) y = 0 \quad (a\leqslant x \leqslant b)
+              \dv{x}\qty[k\qty(x)\dv{y}{x}]-q\qty(x)y +\lambda\rho\qty(x)y=0 \quad (a\leqslant x \leqslant b)
             \end{equation}
-            的方程，若$k(x),k'(x),q(x)$ 连续或最多以$x=a$ 和$x=b$ 为一阶极点\footnote{也就是最低项为$\frac{1}{x}$ 项。}，则
+            的方程，若$k\qty(x),k'\qty(x),q\qty(x)$ 连续或最多以$x=a$ 和$x=b$ 为一阶极点\footnote{也就是最低项为$\frac{1}{x}$ 项。}，则
             \begin{enumerate}
               \item 存在无穷多个本征值
                 \begin{equation*}
@@ -982,77 +1005,29 @@
                 \end{equation*} 
                 相应地有无限多个本征函数
                 \begin{equation*}
-                  y_1(x),y_2(x),y_3(x),...
+                  y_1\qty(x),y_2\qty(x),y_3\qty(x),...
                 \end{equation*}
                 这些本征函数的排列持续正好使节点个数依次增多（即函数值为零的点的个数）。
               \item 所有本征值 $\lambda_n \geqslant 0$,
-              \item 相应于不同本征值$\lambda_m$ 和 $\lambda_n$的本征函数$y_m(x)$和$y_n(x)$在区间$[a,b]$上带权重$\rho(x)$正交，即
+              \item 相应于不同本征值$\lambda_m$ 和 $\lambda_n$的本征函数$y_m\qty(x)$和$y_n\qty(x)$在区间$[a,b]$上带权重$\rho(x)$正交，即
                 \begin{equation}
-                  \int ^b_a y_m(x) y_n(x) \rho(x) \, \ud x = 0 
+                  \int^b_a{y_m\qty(x)y_n\qty(x)\rho\qty(x)\dd{x}}=\delta_{mn} 
                 \end{equation}
-              \item 本征函数族$y_1(x),y_2(x),y_3(x)...$是完备的，即函数$f(x)$如具有连续一阶导数和分段连续二阶导数，且满足本征函数族所满足的边界条件，就可以展   开为绝对且一致收敛的级数
+              \item 本征函数族$y_1\qty(x),y_2\qty(x),y_3\qty(x)...$是完备的，即函数$f\qty(x)$如具有连续一阶导数和分段连续二阶导数，且满足本征函数族所满足的边界条件，就可以展   开为绝对且一致收敛的级数
                 \begin{equation*}
-                  f(x) = \sum_n f_n y_n(x)
+                  f\qty(x) = \sum_n{f_n y_n\qty(x)}
                 \end{equation*}
             \end{enumerate}
           \end{theorem}
           并由此引入广义傅里叶级数展开
           \begin{equation*}
-            \int ^b_a f(x) y_m(x) \, \ud x = \sum_n \int^b_a f_n y_m(x)y_n(x) \, \ud x = f_m \int^b_a y_m(x)^2 \ud x 
+            \int^b_a{f\qty(x)y_m\qty(x)\dd{x}} =\sum_n{\int^b_a{f_n y_m\qty(x)y_n\qty(x)\dd{x}}}= f_m\int^b_a{y_m\qty(x)^2\dd{x}} 
           \end{equation*} 
           即
           \begin{equation*}
-            f_m = \frac{\int ^b_a f(x) y_m(x) \, \ud x }{\int^b_a y_m(x)^2 \, \ud x }
+            f_m=\frac{\int^b_a{f\qty(x)y_m\qty(x)\dd{x}}}{\int^b_a{y_m\qty(x)^2\dd{x}}}
           \end{equation*} 
-          这一套系统非常的重要，它能够直接用来解决球坐标下的稳态问题（使用Legendre函数），柱坐标下的稳态问题和动态演化问题（使用贝塞尔函数），以及球坐标下的时间演化问题（使用球贝塞尔函数），其核心内容就在于使用广义傅立叶级数进行展开得到精确解并同时满足边界条件。
-
-          没什么感觉？在这里举一个非常典型的例子，二维传热稳态问题，
-          \begin{quote}
-            均匀的薄板占据区域$0<x<a,0<y<\infty$,边界上的温度
-            \begin{equation*}
-              u\big|_{x=0} = 0, u\big|_{x=a} = 0, u\big|_{y=0} = u_0, \lim_{y \to \infty} u =0
-            \end{equation*} 
-            求解板的稳定温度分布。
-          \end{quote}
-          传热这东西，它满足一个扩散方程
-          \begin{equation}
-            \frac{\partial u}{\partial t} -a^2 (\frac{\partial ^2 u}{\partial x^2 } + \frac{\partial^2 u}{\partial y^2} + \frac{\partial ^2 u}{\partial z^2}  ) = 0.
-          \end{equation}
-          稳态，也就是它不随时间变化，$\frac{\partial u}{\partial t} = 0$,而这是二维，所以
-          \begin{equation}
-            \frac{\partial ^2 u}{\partial x^2 } + \frac{\partial ^2 u}{\partial y^2 } = 0.
-            \label{2Ddiffusion}
-          \end{equation}
-          先分离变量，设$u=X(x)Y(y)$,代入(\ref{2Ddiffusion})，左右同除以$u$,
-          \begin{equation}
-            \frac{\ud ^2 X}{X \ud x^2} = - \frac{\ud ^2 Y}{Y \ud y^2} = -k^2 .
-          \end{equation}
-          由于左边只关于$x$,右边只关于$y$,那么它们只能等于一个常数，考虑到在$x$方向上的边界条件（两边为零，不应该是指数型函数），它们应等于一个负数$-k^2$.
-          直接解这个常微分方程，得到
-          \begin{equation}
-            \begin{cases}
-              X = A_k\sin{kx} + B_k\cos{kx} \\
-              Y = C_k e^{-kt}
-            \end{cases}.
-          \end{equation}
-          由于这个世界实在不太可能有无穷大的温度，故$Y = e^{kt}$项不考虑。
-
-          考虑到$u\big|_{x=0} = u\big|_{x=a} = 0$，$k$应该要满足某种条件才能满足这个，那么事实上
-          \begin{equation}
-            X = A_n \sin{\frac{n\pi x}{a}} , k = \frac{n\pi x}{a}, n \in N_+.
-          \end{equation}
-          由于前面提到的本征值问题，$-k^2$是$X$的常微分方程的本征值，对应本征函数构成完备基，对$Y$也有相应情况，从而$u$可以展开为$XY$的线性组合，即
-          \begin{equation}
-            X = \sum_n A_n \sin{\frac{n\pi x}{a}} e^{- \frac{n\pi y}{a}}.
-          \end{equation}
-          可是……$A_n$怎么确定呀？
-          
-          就是广义傅立叶级数呀！
-          注意到$u\big|_{y=0} = u_0$,有
-          \begin{equation}
-            A_n = \int ^a_0 u_0 \sin{\frac{n\pi x}{a}} \, \ud x = \frac{a u_0}{n\pi} (1-\cos{n\pi}) .
-          \end{equation}
-          于是我们成功地获得了温度分布的解析解!(?)\footnote{当然有些人会觉得级数展开不算解析解。能展开成简单函数求和已经不容易了。}
+          这一套系统非常的重要，它能够直接用来解决球坐标下的稳态问题，柱坐标下的稳态问题和动态演化问题，以及球坐标下的时间演化问题\footnote{分别使用Legendre函数、Bessel函数和球Bessel函数}，其核心内容就在于使用广义傅立叶级数进行展开得到精确解并同时满足边界条件。
 
           花了这么多篇幅，只是想要说明完备基展开是一个非常重要的内容，它提供了一个解决复杂的微分方程问题的方法\footnote{其实线性代数里的本征值和本征向量也有同样的性质。}。同时它从某种角度上已经道明了量子力学的一个重要的点：
           \begin{center}
@@ -2608,6 +2583,7 @@
         最后需要提醒读者，全局优化的问题远远不限于分子能量优化上，包括求条件极值，减小误差，拟合等多种问题都可以使用全局优化的思路进行处理，有时候往往能产生有趣的效果。\sout{初一看只有一两个做全局优化的学长学姐，做到最后就会发现，组内一大半的人都在做全局优化}
 
     \chapter{相空间-量子哈密顿动力学(PS-QHD)}
+      \label{phase_space_dynamics}
       \begin{enumerate}
         \item 在更多的化学问题中，电子会发生跃迁，Born-Oppenheimer近似失效，比如光催化反应，光电材料中的电荷传输，无辐射跃迁，生命活动中的光合作用，呼吸作用等，必须使用更普适的非绝热动力学研究。
 
@@ -2732,31 +2708,33 @@
         \label{orthogonal_matrix_properties}
         这部分内容参考\cite{linear_algebra_done_right}。
         \begin{theorem}
-          对于$V$上的线性算子$S$，以下条件等价：\\
-          1.
-            \begin{equation}
-              \forall v\in V, \left\|Sv\right\|=\left\|v\right\|
-            \end{equation}
-            即$S$是正交矩阵\footnote{本附录中采用该方法定义正交矩阵}。\\
-          2.
-            \begin{equation}
-              \forall u,v\in V, \left\langle Su,Sv\right\rangle=\left\langle u,v\right\rangle
-            \end{equation}
-          3. 对于$V$中的正交归一向量组$\{e_1,e_2,\dots,e_n\}$，$\{Se_1,Se_2,\dots,Se_n\}$也是正交归一向量组；\\
-          4.$V$中存在正交归一基$\{e_1,e_2,\dots,e_n\}$，使得$\{Se_1,Se_2,\dots,Se_n\}$也是正交归一基；\\
-          5.
-            \begin{equation}
-              S^\dagger S=I
-            \end{equation}
-          6.
-            \begin{equation}
-              SS^\dagger=I
-            \end{equation}
-          7.
-            \begin{equation}
-              \forall v\in V, \left\|S^\dagger v\right\|=\left\|v\right\|
-            \end{equation}
-          8.$S$是可逆矩阵，且$S^{-1}=S^\dagger$
+          对于$V$上的线性算子$S$，以下条件等价：
+          \begin{enumerate}
+            \item
+              \begin{equation}
+                \forall v\in V, \left\|Sv\right\|=\left\|v\right\|
+              \end{equation}
+              即$S$是正交矩阵\footnote{本附录中采用该方法定义正交矩阵}。
+            \item
+              \begin{equation}
+                \forall u,v\in V, \left\langle Su,Sv\right\rangle=\left\langle u,v\right\rangle
+              \end{equation}
+            \item 对于$V$中的正交归一向量组$\{e_1,e_2,\dots,e_n\}$，$\{Se_1,Se_2,\dots,Se_n\}$也是正交归一向量组；
+            \item $V$中存在正交归一基$\{e_1,e_2,\dots,e_n\}$，使得$\{Se_1,Se_2,\dots,Se_n\}$也是正交归一基；
+            \item
+              \begin{equation}
+                S^\dagger S=I
+              \end{equation}
+            \item 
+              \begin{equation}
+                SS^\dagger=I
+              \end{equation}
+            \item
+              \begin{equation}
+                \forall v\in V, \left\|S^\dagger v\right\|=\left\|v\right\|
+              \end{equation}
+            \item $S$是可逆矩阵，且$S^{-1}=S^\dagger$
+          \end{enumerate}
         \end{theorem}
         \begin{proof}
           首先假设$1$是成立的。对于实空间，易证
@@ -2790,8 +2768,8 @@
             \forall v\in V, \left\|S^\dagger v\right\|^2=\left\langle S^\dagger v,S^\dagger v\right\rangle=\left\langle SS^\dagger v,v\right\rangle=\left\langle v,v\right\rangle=\left\|v\right\|^2
           \end{equation}
           所以$S^\dagger$也是正交矩阵，$7$成立。\\
-          如果$7$成立，那么将$S^\dagger$代入从$1$到$5$和$6$的证明过程（并利用$\left(S^\dagger\right)^\dagger=S$），可得$SS^\dagger=I$和$S^\dagger S=I$，即$S^-1=S^\dagger$，$8$成立。\\
-          如果$8$成立，那么$S$是可逆矩阵且$S^-1=S^\dagger$，即$S^\dagger S=I$，则
+          如果$7$成立，那么将$S^\dagger$代入从$1$到$5$和$6$的证明过程（并利用$\left(S^\dagger\right)^\dagger=S$），可得$SS^\dagger=I$和$S^\dagger S=I$，即$S^{-1}=S^\dagger$，$8$成立。\\
+          如果$8$成立，那么$S$是可逆矩阵且$S^{-1}=S^\dagger$，即$S^\dagger S=I$，则
           \begin{equation}
             \left\|Sv\right\|^2=\left\langle Sv,Sv\right\rangle=\left\langle S^\dagger Sv,v\right\rangle=\left\langle v,v\right\rangle=\left\|v\right\|^2
           \end{equation}
@@ -2805,10 +2783,12 @@
 
         谱定理可以分为复谱定理和实谱定理，分别对应复内积空间和实内积空间，下面分别给出并证明复谱定理，感兴趣的读者可自证实谱定理。
         \begin{theorem} 复谱定理\\
-          假设$T$是复内积空间$V$上的线性算子，则以下条件等价：\\
-          1. $T$是正规算子；\\
-          2. $T$的本征向量构成$V$的正交归一基；\\
-          3. 存在$V$的一组正交归一基，使得$T$在该基下是对角矩阵。
+          假设$T$是复内积空间$V$上的线性算子，则以下条件等价：
+          \begin{enumerate}
+            \item $T$是正规算子；
+            \item $T$的本征向量构成$V$的正交归一基；
+            \item 存在$V$的一组正交归一基，使得$T$在该基下是对角矩阵。
+          \end{enumerate}
         \end{theorem}
         \begin{proof}
           $2$和$3$的等价是显然的。如果$T$的特征向量是$V$的正交归一基，那么$T$在其特征向量下是对角的；如果$T$在$V$的某组正交归一基下是对角的，那么对角元即为对应基向量的特征值，这些基向量也自然是$T$的特征向量。以下证明$3$和$1$的等价性。\\
@@ -2830,17 +2810,17 @@
               \vb*{0}=\qty(a_0I+a_1T+a_2T^2+\dots+a_nT^n)v=c\qty(T-\lambda_1I)\qty(T-\lambda_2I)\dots\qty(T-\lambda_mI)v,\ c\in\mathbb{C}
             \end{equation}
             由于$v\neq\vb{0}$，故而上式必有括号非零，即$T$有本征值，$T$有本征向量。\\
-            取$T$的本征向量$v_1$，令$U=\text{span}\qty(v_1)$，则$U$是$T$的不变子空间且$\dim U=1$。\\
+            取$T$的本征向量$v_1$，令$U=\operatorname{span}\qty(v_1)$，则$U$是$T$的不变子空间且$\dim U=1$。\\
             这时，对于$V$除$U$以外的部分$V/U$，其也构成了$V$的不变子空间且$\dim V/U=n-1$，因此根据归纳法，$V/U$有一组基$\qty{v_2,v_3,\dots,v_n}$使得$T$在该基上是上三角矩阵，或者说，
             \begin{equation}
-              Tv_j\in\text{span}\qty(v_2,v_3,\dots,v_j)\subset\qty(v_1,v_2,\dots,v_j), j=2,3,\dots,n
+              Tv_j\in\operatorname{span}\qty(v_2,v_3,\dots,v_j)\subset\qty(v_1,v_2,\dots,v_j), j=2,3,\dots,n
             \end{equation}
-            由于$Tv_1=\lambda v_1\in\text{span}\qty(v_1)$，显然也符合上式，因此
+            由于$Tv_1=\lambda v_1\in\operatorname{span}\qty(v_1)$，显然也符合上式，因此
             \begin{equation}
-              Tv_j\in\text{span}\qty(v_2,v_3,\dots,v_j)\subset\qty(v_1,v_2,\dots,v_j), j=1,2,\dots,n
+              Tv_j\in\operatorname{span}\qty(v_2,v_3,\dots,v_j)\subset\qty(v_1,v_2,\dots,v_j), j=1,2,\dots,n
             \end{equation}
             所以$T$在这组基$\qty(v_1,v_2,\dots,v_n)$下是上三角矩阵。\\
-            对这组基做Gram-Schmidt正交化得到一组新的正交归一基$\qty(e_1,e_2,\dots,e_n)$，则有$\text{span}\qty(v_1,v_2,\dots,v_j)=\text{span}\qty(e_1,e_2,\dots,e_j), j=1,2,\dots,n$，故而$T$在这组正交归一基下是上三角矩阵，Schur定理得证。
+            对这组基做Gram-Schmidt正交化得到一组新的正交归一基$\qty(e_1,e_2,\dots,e_n)$，则有$\operatorname{span}\qty(v_1,v_2,\dots,v_j)=\operatorname{span}\qty(e_1,e_2,\dots,e_j), j=1,2,\dots,n$，故而$T$在这组正交归一基下是上三角矩阵，Schur定理得证。
           \end{proof}
           回到谱定理的证明上。由Schur定理，对于某组正交归一基$\qty(e_1,e_2,\dots,e_n)$，$T$的矩阵形式为
           \begin{equation}
@@ -2869,10 +2849,12 @@
           总而言之，$2\Leftrightarrow3\Leftrightarrow1$，三个条件相互等价，证毕。
         \end{proof}
         \begin{theorem} 实谱定理
-          假设$T$是实内积空间$V$上的线性算子，则以下条件等价：\\
-          1. $T$是厄密的（或者说，实对称矩阵）；\\
-          2. $T$的本征向量构成$V$的正交归一基；\\
-          3. 存在$V$的一组正交归一基，使得$T$在该基下是对角矩阵。
+          假设$T$是实内积空间$V$上的线性算子，则以下条件等价：
+          \begin{enumerate}
+            \item $T$是厄密的（或者说，是实对称矩阵）；
+            \item $T$的本征向量构成$V$的正交归一基；
+            \item 存在$V$的一组正交归一基，使得$T$在该基下是对角矩阵。
+          \end{enumerate}
         \end{theorem}
         证明从略。
 
@@ -2883,6 +2865,56 @@
           \div{\qty(\vb*{a}\vb*{r}\vb*{r})} = \qty(\div{\vb*{a}})\vb*{r}\vb*{r} + \vb*{a} \vb*{r}+ \vb*{r}\vb*{a}
         \end{equation}
 
+      \section{Sturm-Liouville本征值问题的一个应用}
+        \label{sturm_Liouville_eigenvalue_problem_application}
+        在这里举一个非常典型的例子，二维传热稳态问题\footnote{\sout{但是在化学上用处不大}}，
+        \begin{quote}
+          均匀的薄板占据区域$0<x<a,0<y<\infty$,边界上的温度
+          \begin{equation*}
+            \eval{u}_{x=0}=0,\ \eval{u}_{x=a}=0,\ \eval{u}_{y=0}=u_0,\ \lim_{y\to\infty}u=0
+          \end{equation*} 
+          求解板的稳定温度分布。
+        \end{quote}
+        传热这东西，它满足一个扩散方程
+        \begin{equation}
+          \pdv{u}{t}-a^2\qty(\pdv[2]{u}{x}+\pdv[2]{u}{y}+\pdv[2]{u}{z})=0.
+        \end{equation}
+        稳态，也就是它不随时间变化，$\pdv{u}{t}=0$,而这是二维，所以
+        \begin{equation}
+          \pdv[2]{u}{x}+\pdv[2]{u}{y}
+          \label{2Ddiffusion}
+        \end{equation}
+        先分离变量，设$u=X\qty(x)Y\qty(y)$,代入(\ref{2Ddiffusion})，左右同除以$u$,
+        \begin{equation}
+          \frac{1}{X}\dv[2]{X}{x}=-\frac{1}{Y}\dv[2]{Y}{y}=-k^2.
+        \end{equation}
+        由于左边只关于$x$,右边只关于$y$,那么它们只能等于一个常数，考虑到在$x$方向上的边界条件（两边为零，不应该是指数型函数），它们应等于一个负数$-k^2$.
+        直接解这个常微分方程，得到
+        \begin{equation}
+          \begin{cases}
+            X = A_k\sin{kx} + B_k\cos{kx} \\
+            Y = C_k e^{-kt}
+          \end{cases}.
+        \end{equation}
+        由于这个世界实在不太可能有无穷大的温度，故$Y = e^{kt}$项不考虑。
+
+        考虑到$\eval{u}_{x=0}=\eval{u}_{x=a}=0$，$k$应该要满足某种条件才能满足这个，那么事实上
+        \begin{equation}
+          X = A_n \sin{\frac{n\pi x}{a}} , k = \frac{n\pi x}{a}, n \in\mathbb{N}^+.
+        \end{equation}
+        由于前面提到的本征值问题，$-k^2$是$X$的常微分方程的本征值，对应本征函数构成完备基，对$Y$也有相应情况，从而$u$可以展开为$XY$的线性组合，即
+        \begin{equation}
+          X = \sum_n{A_n \sin{\frac{n\pi x}{a}} e^{- \frac{n\pi y}{a}}}.
+        \end{equation}
+        可是……$A_n$怎么确定呀？
+        
+        就是广义傅立叶级数呀！
+        注意到$\eval{u}|_{y=0} = u_0$,有
+        \begin{equation}
+          A_n = \int^a_0{u_0 \sin{\frac{n\pi x}{a}}\dd{x}}=\frac{a u_0}{n\pi}\qty(1-\cos{n\pi}) .
+        \end{equation}
+        于是我们成功地获得了温度分布的解析解!(?)\footnote{当然有些人会觉得级数展开不算解析解。能展开成简单函数求和已经不容易了。}
+        
     \bibliographystyle{unsrt}
     \bibliography{reference}
   \end{document} 
