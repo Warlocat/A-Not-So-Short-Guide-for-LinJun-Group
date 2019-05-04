@@ -2914,7 +2914,273 @@
           A_n = \int^a_0{u_0 \sin{\frac{n\pi x}{a}}\dd{x}}=\frac{a u_0}{n\pi}\qty(1-\cos{n\pi}) .
         \end{equation}
         于是我们成功地获得了温度分布的解析解!(?)\footnote{当然有些人会觉得级数展开不算解析解。能展开成简单函数求和已经不容易了。}
-        
+
+      \section{拉普拉斯积分变换}
+        \begin{equation}
+          F(t) = 
+          \begin{cases}
+            f(t),\quad t>0 \\
+            0, \quad t<0
+          \end{cases}
+        .
+        \end{equation} 
+        \begin{equation}
+          G(t) =
+          \begin{cases}
+          f(t)e^{-\sigma t}, \quad t>0 \,(\sigma > 0) \\
+          0, \quad t<0
+          \end{cases}
+        .
+        \end{equation} 
+        对$G(t)$做Fourier Transform,
+        \begin{equation}
+          \mathcal{F}[G] = \frac{1}{2\pi} \int _{-\infty}^{\infty}G(t) e^{-i\omega t} \, \mathrm{d}t = \frac{1}{2\pi} \int _0^\infty e^{-(\sigma + i \omega) t)} \, \mathrm{d}t  
+        .
+        \end{equation} 
+        引入拉普拉斯变换，
+        \begin{equation}
+        \begin{cases}
+          p = \sigma + i \omega \\
+          \mathcal{L}[f] = \overline{f}(p) = \int f(t) e^{-pt} \, \mathrm{d}t 
+        \end{cases}
+        .
+        \end{equation} 
+        \begin{equation}
+          f(t)e^{-\sigma t} = G(t) = \int _{-\infty} ^ {\infty} e^{i\omega t} \, \mathrm{d}\omega 
+        .
+        \end{equation} 
+        或
+        \begin{equation}
+          f(t) = \int_{-\infty}^{\infty} \overline{f}(p) e^{pt} \mathrm{d}\omega
+        .
+        \end{equation} 
+        做变换，
+        \begin{equation}
+        \begin{cases}
+          p = \sigma + i \omega \\
+          \mathrm{d}p = i\mathrm{d}\omega
+        \end{cases}
+        .
+        \end{equation}
+        从而
+        \begin{equation}
+          f(t) = \frac{1}{2\pi i} \int ^{\sigma + i \omega} _{\sigma - i \infty} \overline{f}(p) e^{p t} \, \mathrm{d}p 
+        .
+        \end{equation} 
+        \begin{equation}
+          \mathcal{L}[f'(t)] = \int ^\infty _0 e^{-pt} \, \mathrm{d}f(t) = f(t)e^{-pt} \bigg|^\infty_0 - \int ^\infty_0 f(t) \, \mathrm{d}e^{-pt} = -f(0) + p \overline{f}(p)   
+        .
+        \end{equation}
+        \begin{equation}
+          \mathcal{L}[t^n f(t)] = \int _0^\infty t^n f(t) e^{-pt} \, dt = \left( \frac{d }{d p}  \right) ^n \int_0 ^\infty f(t) e^{-pt} \, dt = (-1)^n \frac{d ^n}{d p^n} \overline{f}(p)  
+        .
+        \end{equation}
+        \begin{equation}
+          \mathcal{L}[f(t)e^{-\lambda t}] = \int _0^\infty f(t) e^{-\lambda t}  e^{-pt}\, dt = \overline{f}(p+\lambda) 
+        .
+        \end{equation} 
+
+      \section{Legendre 函数}
+        \subsection{轴对称球函数}
+          满足的微分形式为
+          \begin{equation}
+            (1-x^2) \frac{\mathrm{d}^2 y}{\mathrm{d}x^2} -2x \frac{\mathrm{d} y}{\mathrm{d} x} +\left[ l(l+1) - \frac{m^2}{1-x^2} \right] y = 0
+          .
+          \end{equation} 
+          \begin{equation}
+            P_l (x) = \sum_{k=0} ^{[\frac{l}{2} ]} (-1)^k \frac{(2l-2k)!}{2^l k! (l-k)! (l-2k)!} x^{l-2k}
+          .
+          \end{equation} 
+          或罗德里格斯公式
+          \begin{equation}
+            P_l(x) = \frac{1}{2^l l!} \frac{\mathrm{d} ^l}{\mathrm{d} x^l} (x^2 -1 )^l
+          .
+          \end{equation} 
+          或施列夫利积分
+          \begin{equation}
+            P_l(x) = \frac{1}{2\pi i} \frac{1}{2^l } \oint_C \frac{(z^2-1)^l}{(z-x)^{l+1}} \mathrm{d}z
+          .
+          \end{equation} 
+          对应结果
+          \begin{equation}
+            P_l(\cos(\theta)) = \frac{1}{\pi} \int _0^\pi [\cos{\theta} + i \sin{\theta}(\cos{\psi})^l] \, \mathrm{d}\psi 
+          .
+          \end{equation} 
+          Legendre的正交性
+          \begin{equation}
+            \int _{-1}^1 P_a(x) P_b(x) \, dx = \frac{2}{2a+1} \delta_{ab} 
+          .
+          \end{equation} 
+          对球坐标系展开，且与角向无关的泊松方程，
+          \begin{equation}
+            u = \sum_{l=0} ^ \infty \left( A_l r^l + B_l \frac{1}{r^{l+1}}  \right) P_l (\cos{\theta})
+          .
+          \end{equation} 
+
+          母函数:
+          \begin{equation}
+            \begin{cases}
+              \frac{1}{\sqrt{1-2r\cos{\theta} + r^2}} = \sum _{l=0}^\infty r^l P_l (\cos{\theta}) \quad (r<1)\\
+              \frac{1}{\sqrt{1-2r\cos{\theta} + r^2}} = \sum _{l=0} ^{\infty} \frac{1}{r^{l+1}} P_l (\cos{\theta}) (r>1)
+              \end{cases}
+          .
+          \end{equation} 
+
+          递推公式：
+          \begin{equation}
+            (k+1) P_{k+1} (x) - (2k+1) x P_k(x) + kP_{k-1} (x) = 0
+          .
+          \end{equation}
+          证明方式：对母函数的$r$求导，然后将母函数求导项转化成为原来的母函数，调整后得到结果。
+          \begin{equation}
+            P_k (x) = P_{k+1}' (x) - 2 x P_k'(x) + P_{k-1}' (x)
+          .
+          \end{equation} 
+          证明方式：对母函数$x$求导。
+          \begin{equation}
+            (2k+1) P_k (x)   = P_{k+1}'(x) - P_{k-1}'(x)
+          .
+          \end{equation} 
+          \begin{equation}
+            P_{k+1}'(x) = (k+1) P_k(x) + xP_k' (x)
+          .
+          \end{equation} 
+          \begin{equation}
+            kP_k(x) = xP_k'(x) - P_{k-1}'(x)
+          .
+          \end{equation} 
+          \begin{equation}
+            (x^2 -1) P_k'(x) = kx P_k(x) - kP_{k-1} (x)
+          .
+          \end{equation} 
+          比如可以利用这个递推公式计算
+          \begin{equation}
+            \int _{-1}^1 \frac{1}{2k+1 } x P_k (x) P_l(x) \, dx 
+          .
+          \end{equation} 
+          就是将$x P_k (x)$ 转换成为 $P_n(x)$ 然后利用正交性搞定。
+
+          \subsection{连属勒让德函数}
+          \begin{equation}
+            P_l^m (x) = \frac{(1-x^2)^{\frac{m}{2}}}{2^l l!} \frac{\mathrm{d} ^{l+m}}{\mathrm{d} x^{l+m}}  (x^2-1)^l
+          .
+          \end{equation} 
+          \begin{equation}
+            P_l^{-m} (x) = \frac{(1-x^2) ^{-\frac{m}{2}}}{2^l l! } \frac{\mathrm{d} ^{l-m}}{\mathrm{d} dx^{l-m}} (x^2-1)^l
+          .
+          \end{equation} 
+          然后有
+          \begin{equation}
+            P_l^{-m} (x) = (-1)^m \frac{(l-m)!}{(l+m)!} p_l^M(x)
+          .
+          \end{equation} 
+          正交性：
+          \begin{equation}
+            \int _{-1}^1 P_a^m(x) P_b^m(x)  \, dx  =  \frac{2(l+m)!}{(l-m)! (2l+1)}
+          .
+          \end{equation} 
+          P.S: 球谐函数的时候不同m 直接通过$ \sin{m\phi} \cos{m\phi} $ 进行正交。
+           
+      \section{柱函数}
+          贝塞尔方程:
+          \begin{equation}
+            x^2 \frac{\mathrm{d} ^2 R}{\mathrm{d} x^2 } + x \frac{\mathrm{d} R }{\mathrm{d} x}  + (x^2 - m^2) R =0
+          .
+          \end{equation} 
+          虚宗量贝塞尔方程:
+          \begin{equation}
+            x^2 \frac{\mathrm{d} ^2 R}{\mathrm{d} x^2} + x \frac{\mathrm{d} R}{\mathrm{d} x}  - (x^2 + m^2) R = 0
+          .
+          \end{equation} 
+
+          所以原则上$J_\nu (x)$ 和 $J_{-\nu} (x)$都是上面的解，但对于整数 $m$阶，有
+           \begin{equation}
+             J_{-m} (x) = (-1)^m J_mx)
+          .
+          \end{equation} 
+          此时解应该为
+           \begin{equation}
+             y(x) = C_1 J_m(x) + C_2 N_m(x)
+          .
+          \end{equation} 
+          但在满足边界条件（比如在某一领域内需保证连续）便可以舍弃诺伊曼函数而只保留贝塞尔函数。
+
+
+          贝塞尔函数的正交性：
+          \begin{equation}
+            \int _0^ {\rho_0} J_m(\sqrt{\mu_n} \rho) J_m (\sqrt{\mu_l} \rho) \rho \mathrm{d} \rho = 
+            \delta_{nl}\begin{cases}
+              \frac{1}{2}(\rho_0)^2 [J_{m+1}(\sqrt{\mu_n^{m}} \rho_0)]^2 \quad \text{第一类边界条件} \\
+                \frac{1}{2}\left( \rho_0^2 -\frac{m^2}{\mu_n^{m}} \right) [J_m (\sqrt{\mu_n^{m}} \rho_0)]^2 \quad \text{第二类边界条件}\\
+                \frac{1}{2}\left(\rho_0^2 - \frac{m^2}{\mu_n^{m}} + \frac{\rho^2 _0}{\mu_n^m H}\right) [J_m (\sqrt{\mu_n^m} \rho_0)]^2 \quad \text{第三类边界条件}
+                \end{cases}
+          .
+          \end{equation} 
+
+          存在性质
+          \begin{equation}
+          \begin{cases}
+            \frac{d }{d x} [x^\nu J_\nu (x) ] = x^\nu J_{\nu-1} (x) \\
+            \frac{d }{d x} [J_\nu (x) /x^\nu] = -J_{\nu-1} (x) /x^\nu  
+          \end{cases}
+          .
+          \end{equation} 
+          从而有递推公式
+          \begin{equation}
+          \begin{cases}
+            Z_\nu'(x) - \nu Z_\nu(x) /x = - Z_{\nu+1} (x) \\
+            Z_\nu'(x) + \nu Z_\nu(x) /x = Z_{\nu-1} (x) \\
+            Z_{\nu-1} (x) - Z_{\nu+1} (x) = 2Z_\nu'(x) \\
+            Z_{\nu+1} (x) - 2\nu Z_\nu(x) / x + Z_{\nu-1} (x) = 0
+          \end{cases}
+          .
+          \end{equation} 
+
+        \subsection{球贝塞尔函数}
+          满足方程为
+          \begin{equation}
+            r^2 \frac{\mathrm{d} ^2R}{\mathrm{d} r^2} + 2r \frac{\mathrm{d} R}{\mathrm{d} r}  + [k^2r^2-l(l+1)] R = 0 
+          .
+          \end{equation}
+          通过配方以及变量代换，
+           \begin{equation}
+             x = kr , R(r) = \sqrt{\frac{\pi}{2x}} y(x) 
+          .
+          \end{equation} 
+          得到
+           \begin{equation}
+             x^2\frac{\mathrm{d} ^2y}{\mathrm{d} x^2}  + x \frac{\mathrm{d} y}{\mathrm{d} x}  + \left[ x^2 - \left( l+\frac{1}{2} \right) ^2 \right] y = 0
+          .
+          \end{equation} 
+          $k=0$时退化成 $r^l,r^{-l+1}$ ，也就是稳态下的泊松方程。若不是，上面的解为半整数阶的贝塞尔函数，从而引入球贝塞尔函数，
+          \begin{equation}
+            j_l(x) = \sqrt{\frac{\pi}{2x}} J_{l+\frac{1}{2}}(x), \quad j_{-l} (x) = \sqrt{\frac{\pi}{2x}}J_{-l+\frac{1}{2}} (x)
+          .
+          \end{equation}
+          对球诺伊曼函数以及球汉克尔函数类似。
+
+          同样可以利用以前贝塞尔函数的递推公式，可以得到
+          \begin{equation}
+            z_{l+1}(x) = \frac{2 l +1}{x} z_l - z_{l-1}
+          .
+          \end{equation} 
+          由于半整数阶的贝塞尔函数的神奇的性质，球贝塞尔函数可以用三角函数来表达，
+          \begin{align}
+            &j_0(x) = \frac{\sin{x}}{x} \\
+            &j_1(x) = \frac{\sin{x} - x \cos{x}}{x^2} \\
+            &n_0(x) = -\frac{\cos{x}}{x} \\
+            &n_1(x) = -\frac{\cos{x} + x\sin{x}}{x^2}
+          \end{align}
+          正交性:
+          \begin{equation}
+            \int _0^{r_0} j_l(k_m r) j_l(k_n r) \, r^2dr =N_m^2 \delta_{mn} 
+          .
+          \end{equation} 
+          \begin{equation}
+            N_m^2=\frac{\pi}{2k_m} \int ^{r_0}_0 [ J_{l+\frac{1}{2}}(k_mr)]  r\,\mathrm{d}r 
+          .
+          \end{equation} 
+          
     \bibliographystyle{unsrt}
     \bibliography{reference}
   \end{document} 
