@@ -1723,7 +1723,7 @@
     
 
     \chapter{量子化学-电子结构基础}
-      量子化学(电子结构)部分，我们将简要介绍常见的电子结构计算方法，所谓电子结构方法，即求解分子(或者固体)体系的定态\sch 的方法，大家都知道，多体的SE是难以求得精确的解析结果的，因此量子化学某种程度上也是各类近似方法及其如何一步步逼近精确解的简介，本节会\textbf{简要}介绍基于分子电子结构计算的Hartree-Fock理论，DFT理论，post-Hartree-Fock理论(包括组态相关CI，耦合簇方法CC，多组态自洽场方法MCSCF，多体微扰理论等)，编者还在最后加入了简化版的电子(费米子)二次量子化的内容。限于篇幅，上述理论的证明几乎全部略去，暂时也不涉及关于固体理论的相关计算。本节内容与王老师高等物理化学-量子化学课程内容相似。\footnote{由于王老师课题组对这部分的需求较低，我们在更新上可能会将此章更新后推。}
+      量子化学(电子结构)部分，我们将简要介绍常见的电子结构计算方法，所谓电子结构方法，即求解分子(或者固体)体系的定态\sch 方程的方法，大家都知道，多体的SE是难以求得精确的解析结果的，因此量子化学某种程度上也是各类近似方法及其如何一步步逼近精确解的简介，本节会\textbf{简要}介绍基于分子电子结构计算的Hartree-Fock理论，DFT理论，post-Hartree-Fock理论(包括组态相关CI，耦合簇方法CC，多组态自洽场方法MCSCF，多体微扰理论等)，编者还在最后加入了简化版的电子(费米子)二次量子化的内容。限于篇幅，上述理论的证明几乎全部略去，暂时也不涉及关于固体理论的相关计算。本节内容与王老师高等物理化学-量子化学课程内容相似，并且参考了非常多经典电子结构教材的内容。
       
       另外，与量子力学章类似，为了方便，我们第一小节作为快速的概念检索使用。
 
@@ -2052,8 +2052,64 @@
         \end{equation}
         这就是一个非常普通的定态\sch 方程，只是势能项换成了电子态的能量，现在，这个系数的物理意义就显露出来了，它就是原子核的波函数，原子核感受到的势能就是当前电子态的能量，这就是“原子核运动时感受到的电子的作用其实是一个平均化的作用”这句话的数学表达。
       \section{Hartree-Fock方法}
-      \section{密度泛函理论}
+        Hartree-Fock方法是量子化学的基础和开端，一般涉及到Hartree理论和HF理论计算单分子问题，就已经进入到了量子化学的领域。同时，几乎所有更高精度的电子结构方法都是以HF方法为基础，或者直接从HF方法的结果出发的，因此HF方法的正确理解关系到整个电子结构理论框架的理解。在各种教材中，讲解HF理论的方法有很多种，鉴于电子结构方法前后的完整性，我们选用了其中一种，即跳过Hartree理论直接介绍Slater行列式以及其对应的多电子波函数。读者若发现本指南的逻辑与一些书籍相左，请根据各自的框架理解。
+        \subsection{单电子波函数}
+          我们定义求解一个单电子的定态\sch 方程得到的波函数称为单电子波函数，或者称为轨道。在分子的电子结构理论中，我们通常描述的是分子轨道，基分子基于单电子哈密顿量求解得到的轨道，用于描述分子中的一个电子的性质。简单地说，可以以氢分子离子为例，体系中只有一个单电子，解出的哈密顿量本征态就是氢分子离子的分子轨道。
+          
+          多数情况下，我们求解的是一个不含自旋的哈密顿量，此时解得的波函数只含有空间坐标$\psi_i(\mathbf{r})$，它的模平方代表了这个轨道在空间某个点的概率密度，这样的单电子波函数称为\textbf{空间轨道}(spatial orbital)。显然这组空间轨道需要满足正交归一性，即
+          \begin{equation}
+            \int d \mathbf{r} \psi_{i}^{*}(\mathbf{r}) \psi_{j}(\mathbf{r})=\delta_{i j}
+          \end{equation}
+          但是我们知道，所有的电子都是有自旋分量的，假设自旋空间的变量为$\omega$，对于电子，自旋部分只可能有两种，自旋为$+\frac{1}{2}$和$-\frac{1}{2}$，分别即为$\alpha(\omega)$和$\beta (\omega)$，这两个描述自旋部分的轨道满足正交归一性。想要完整地描述一个电子，需要它的空间部分波函数乘以自旋部分波函数，这样的波函数称为\textbf{自旋轨道}。为了前后的一致性，我们以希腊字母$\chi$代表自旋轨道，即
+          \begin{equation}
+            \chi(\mathbf{x})=\left\{\begin{array}{c}{\psi(\mathbf{r}) \alpha(\omega)} \\ {\text { 或 }} \\ {\psi(\mathbf{r}) \beta(\omega)}\end{array}\right.
+          \end{equation}
+          根据上式，每一个空间轨道可以分别与自旋向上和自旋向下的自旋部分结合，构成两个自旋轨道，因此只要给定$K$个空间轨道，就可以得到$2K$个自旋轨道，容易证明，自旋轨道也满足正交归一性
+          \begin{equation}
+            \int d \mathbf{x} \chi_{i}^{*}(\mathbf{x}) \chi_{j}(\mathbf{x})=\left\langle\chi_{i} | \chi_{j}\right\rangle=\delta_{i j}
+          \end{equation}
+          电子结构的后续部分，通常是基于自旋轨道讲述的。
+        \subsection{多电子波函数}
+          上一节中我们给出了描述单个电子的自旋轨道和空间轨道的定义，那么如果希望写出描述$N$个电子的波函数应该怎么做呢？我们将在介绍post-Hartree-Fock方法的时候完整回答这个问题，现在只对一种极其简单的情况讨论。如果这个体系内的$N$个电子之间没有相互作用，总哈密顿量中只有每个电子的动能和势能，没有电子的库伦斥力，或者说电子之间的相互作用用某种平均的方式转化成了一个有效势能，就像早期使用的电子的屏蔽系数。那么哈密顿量就可以写成单电子哈密顿量的和
+          \begin{equation}
+            \mathscr{H}=\sum_{i=1}^{N} h(i)
+          \end{equation}
+          如果这些单电子哈密顿量相同，它们有一组共同的本征函数组，即
+          \begin{equation}
+            h(i) \chi_{j}\left(\mathbf{x}_{i}\right)=\varepsilon_{j} \chi_{j}\left(\mathbf{x}_{i}\right)
+          \end{equation}
+          非常容易就可以证明，只需要将所有每个电子所处的自旋轨道乘起来，这个乘积就是总电子哈密顿量的本征函数，并且对应的本征能量就等于每个自旋轨道对应的本征能量之和
+          \begin{equation}
+            \Psi^{\mathrm{HP}}\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)=\chi_{i}\left(\mathbf{x}_{1}\right) \chi_{j}\left(\mathbf{x}_{2}\right) \cdots \chi_{k}\left(\mathbf{x}_{N}\right)
+          \end{equation}
+          上式一定满足$\mathscr{H} \Psi^{\mathrm{HP}}=E \Psi^{\mathrm{HP}}$且$E=\varepsilon_{i}+\varepsilon_{j}+\cdots+\varepsilon_{k}$。这样构成的多电子波函数称为\textbf{Hartree积}，这是一种最简单的多电子波函数构建方法，使用Hartree积构建的波函数中每个电子的运动是“不关联”的。以简单的两个电子的情况举例，第一个电子在$\mathbf{x}_{1}$的概率跟第二个电子在$\mathbf{x}_{2}$处的概率是独立的，这意味这它们甚至有几率出现在同一个位置\footnote{当然，我们所说的出现在同一个位置，只是指两个电子坐标相等时，这个点对应波函数的概率密度不为零}，这显然是不符合电子的物理概念的。
+
+          我们期望，电子至少要满足作为费米子的特性，即一个多电子的波函数关于电子坐标的交换必须是反对称的。因此即使哈密顿量可以写成单电子哈密顿量的求和，多电子波函数也不能写成直接乘积的形式，但是只要我们对Hartree积进行恰当的线性组合，它们就能同时满足多电子哈密顿量的本征态和交换反对称性两个性质。对于两个电子的简单情况，两电子波函数可以写作
+          \begin{equation}
+            \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}\right)=2^{-1 / 2}\left(\chi_{i}\left(\mathbf{x}_{1}\right) \chi_{j}\left(\mathbf{x}_{2}\right)-\chi_{j}\left(\mathbf{x}_{1}\right) \chi_{i}\left(\mathbf{x}_{2}\right)\right)
+            \label{Slater 2by2}
+          \end{equation}
+          其中$2^{-1 / 2}$是一个归一化因子，容易证明，上式满足关于电子1和电子2坐标交换反对称性，即$\Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}\right) = -\Psi\left(\mathbf{x}_{2}, \mathbf{x}_{1}\right)$，且仍然是多电子哈密顿量$\mathscr{H}=h(1)+h(2)$的本征态，对应的本征值仍然为$\varepsilon_i + \varepsilon_j$。对一个$N$电子波函数来说，可以写出式(\ref{Slater 2by2})的一个普适推广，即Slater行列式
+          \begin{equation}
+            \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)=(N !)^{-1 / 2} \left| \begin{array}{cccc}{\chi_{i}\left(\mathbf{x}_{1}\right)} & {\chi_{j}\left(\mathbf{x}_{1}\right)} & {\cdots} & {\chi_{k}\left(\mathbf{x}_{1}\right)} \\ {\chi_{i}\left(\mathbf{x}_{2}\right)} & {\chi_{j}\left(\mathbf{x}_{2}\right)} & {\cdots} & {\chi_{k}\left(\mathbf{x}_{2}\right)} \\ {\vdots} & {\vdots} & { } & {\vdots} \\ {\chi_{i}\left(\mathbf{x}_{N}\right)} & {\chi_{j}\left(\mathbf{x}_{N}\right)} & {\ldots} & {\chi_{k}\left(\mathbf{x}_{N}\right)}\end{array}\right|
+            \label{Slater Determinant}
+          \end{equation}
+          可以看出，对于任意两个电子坐标的交换相当于交换Slater行列式中的两行，根据行列式的性质，显然会多出一个负号来满足交换反对称性的要求。而且，如果两个电子处于同一个位置，即$\mathbf{x}_{i}=\mathbf{x}_{j}$，意味这行列式中的两行相同，对应着两个电子占据了完全相同(空间部分相同，自旋也相同)的自旋轨道，行列式就一定为零，因此Slater行列式严格满足反对称性，以及它所要求的Pauli不相容原理。
+          
+          为了方便，我们习惯上把Slater行列式写成一个态矢量的形式，由于我们无法区分哪个电子坐标对应哪个自旋轨道，我们将其写为
+          \begin{equation}
+            \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)=| \chi_{i} \chi_{j} \cdots \chi_{k} \rangle
+            \label{short Slater}
+          \end{equation}
+          其反对称性可以写作
+          \begin{equation}
+            | \cdots \chi_{m} \cdots \chi_{n} \cdots \rangle=-| \cdots \chi_{n} \cdots \chi_{m} \cdots \rangle
+            \label{Slater anti-symm}
+          \end{equation}
+          在这里需要提醒读者的是，Slater行列式相比于Hartree积的优势仅仅是它满足了交换反对称性，即如果两个电子的自旋相同了，它们之间的运动被限制了，使得它们无法同时出现在空间的同一个点。但是对于自旋相反的电子，它们之间仍然是“不关联”的，即它们在空间上分布的概率是独立的。但是Slater行列式保证了电子的反对称性，这一点是极其重要的，或者说，\textbf{用Hartree积描述多电子波函数错误的}。引入Slater行列式后，我们就不需要再讨论所谓“Pauli斥力”的概念，因为它已经被满足了。后文中会引入交换积分，需要提醒，交换积分不是“Pauli斥力”，它只是库伦相互作用对于一个反对称的波函数出现的额外项而已。
+
       \section{post-Hartree-Fock方法}
+      \section{密度泛函理论}
       \section{二次量子化}
         之所以二次量子化的内容不放在量子力学中，是因为从占据数表象重新理解二次量子化是相对浩大的工程，感兴趣的同学可以直接参阅相关的高等量子力学书籍。而之所以放在这里讲，是因为在诸多的量化文献和书籍中使用了二次量子化的语言，尽管在量化领域经常见到产生湮灭算符，但是并没有与二次量子化真实地联系起来，只是用来作为简化表达的一种方式。为了帮助大家看懂相关的公式，我们在电子结构部分从实用的角度简要介绍电子(费米子)的二次量子化语言。本节主要参考(\sout{其实就是翻译了一遍然后调整了几个小地方})\cite{Szabo1989Modern}书中2.4节的内容。
 
