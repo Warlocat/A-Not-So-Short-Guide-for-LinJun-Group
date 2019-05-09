@@ -42,7 +42,8 @@
 
   \newcommand{\bracket}[2]{\langle #1 | #2 \rangle}
   \newcommand{\bracketl}[3]{\left\langle #1 \left| #2 \right| #3 \right\rangle}
-  \newcommand{\func}{\mathrm \,}
+  \newcommand{\func}[1]{\mathrm{#1} \,}
+  \newcommand{\sinc}[1]{\mathrm{sinc} \, (#1)}
   \newcommand{\define}[2]{
     \begin{definition}
       \begin{description}
@@ -649,7 +650,7 @@
           \begin{equation*}
             \curl{\vb*{a}} = \varepsilon_{ijk} \vb*{e}_i \partial_j a_k
           \end{equation*} 
-          但这些东西能够延伸的内容是非常丰富的。比如对$\vb*{r} = (x,y,z)$及单位矩阵$\overleftrightarrow{I}$，有
+          但这些东西能够延伸的内容是非常丰富的。比如对$\vb*{r} = (x,y,z)$，有
           \begin{align}
             &\div{\vb*{r}} = 3 \\
             &\curl{\vb*{r}} = 0 \\
@@ -1205,7 +1206,7 @@
           \end{equation*} 
           利用延迟定理，
           \begin{equation*}
-            \mathcal{F}[f_1 * f_2] = \frac{1}{2\pi} \int ^\infty_{-\infty} f_1(\xi) e^{-k\xi} \, d\xi \cdot 2\pi F_2(k) = 2\pi F_1(k)F_2(k)
+            \mathcal{F}[f_1 * f_2] = \frac{1}{2\pi} \int ^\infty_{-\infty} f_1(\xi) e^{-i k\xi} \, d\xi \cdot 2\pi F_2(k) = 2\pi F_1(k)F_2(k)
           \end{equation*} 
         \end{proof}
 
@@ -2637,6 +2638,174 @@
         向生物学习是全局优化中的常见思路，除了遗传算法之外，现在还有基于蚂蚁寻找食物思路的算法等，不予详细介绍。另外，可以看出，机器学习在这方面也肯定有一定的建树，但是势能面通常过于复杂，简单的机器学习网络可能无法实现。
 
         最后需要提醒读者，全局优化的问题远远不限于分子能量优化上，包括求条件极值，减小误差，拟合等多种问题都可以使用全局优化的思路进行处理，有时候往往能产生有趣的效果。\sout{初一看只有一两个做全局优化的学长学姐，做到最后就会发现，组内一大半的人都在做全局优化}
+
+
+    \chapter{离散变量表象（DVR）}
+      \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth]{fig/DVRtest.eps}
+        \caption{谐振势下的一个典型的DVR结果}
+        \label{DVRresult}
+      \end{figure}
+
+      DVR，即Discrete Variable Representation,是量子力学目前为止最为可靠的数值计算体系特征值/特征向量/动力学演化的方法。它的实现依赖于一个比较特殊的基组，使各类算符以矩阵的形式参与运算，利用成熟的线性代数方法求解。
+
+      我们再来回顾一下完备基展开。我们对于一个可观测量的期望值$\langle \psi | \hat{A} | \psi \rangle $ ，我们期望引入一个正交完备归一的基组来进行展开，由于完备基性质，我们有
+      \begin{equation}
+      	\langle \psi | \hat{A} | \psi \rangle = \sum_i \sum_j \langle \psi | e_i \rangle \langle e_i | \hat{A} | e_j \rangle \langle e_j | \psi \rangle 
+      \end{equation}
+      其中$| e_i \rangle $ 为一个完备基。如果稍微想一想，我们就能够发现它实质上等价于
+      \begin{equation}
+      	\sum_i \sum_j \langle \psi | e_i \rangle \langle e_i | \hat{A} | e_j \rangle \langle e_j | \psi \rangle \equiv \Psi ^\dagger\mathbf{A} \Psi
+      \end{equation}
+      其中$\mathbf{A}, \Psi$分别为矩阵和向量，每个元素为
+      \[
+      	\Psi_i = \langle e_i | \psi \rangle , A_{ij} = \langle e_i | \hat{A} | e_j \rangle 
+      .\] 
+      我们只要选取一个恰当的基组，我们就能够将复杂的偏微分方程问题转化为一个在计算机上更容易实现的线性代数问题。但基组选的不好内积的计算会非常复杂，反而不利于计算机实现。DVR便解决了这样的一个痛点，它的核心内容是
+      \begin{center}
+      	将连续函数格点化（离散化）的同时提供可观测量的期望值。
+      \end{center}
+      我们直接举DVR中最为常用的基组，即sinc 函数基组。sinc 函数定义为
+      \begin{equation}
+      	\mathrm{sinc} \, (x) \equiv \frac{\sin{\pi x}}{\pi x}  
+      \end{equation}
+      而所选用基组为
+      \begin{equation}
+      	\chi_j (x) \equiv \langle x | e_j \rangle = (\Delta x)^{-\frac{1}{2}}\, \sinc{\frac{x - j \Delta x}{\Delta x}} 
+      \end{equation}
+      明眼人一眼就能看出来，它有着神奇的性质
+      \begin{equation}
+      	\chi_i (x_j) = \sqrt{\frac{1}{\Delta x}} \delta_{ij}
+      \end{equation}
+      这正利用了正弦函数在 $n\pi$的节点上为零，而在 $x=0$处 $\sinc{x}$极限为 $1$.
+
+      这能够让波函数离散化非常有用——我们通过选出足够多，足够密的格点，取每个点对应的函数值来代表原来的波函数，从而做到``离散的效果''，
+      \begin{equation}
+      	\psi(x) \sim \sum_i c_i \chi_i (x_i) = \sum_i \sqrt{\Delta x} f(x_i) \chi_i (x) 
+      \end{equation}
+      或
+      \begin{equation}
+      	\langle e_i | \psi \rangle = \sqrt{\Delta x} \,\psi(x_i) 
+      \end{equation}
+      这样我们就完成了第一步：波函数的离散化。
+
+      我们再来看看这个基组是否满足正交归一。但这是一个$\mathrm{sinc}$函数，比较棘手，我们使用傅立叶变换来完成积分工作。
+
+      首先我们来看看$\sinc{x}$的傅立叶变换。
+      \[
+      	\mathcal{F}[\sinc{x}] =  \frac{1}{2\pi}\int \sinc{x} e^{-ikx} \, \mathrm{d}x  = \frac{1}{2\pi} \int \frac{\sin{\pi x}}{\pi x} e^{-ikx} \, \mathrm{d}x 
+      .\]
+      面对这个奇怪的积分的常见方法是让$\sin{x}$转换成 $e^{ix}$.当然这个会牵涉到实部和虚部的问题，我们便尝试通过 $\frac{e^{ix}-e^{-ix}}{2i}$来得到最终结果。不过我们还是先尝试康康$e^{ix}$的情况如何，
+      \[
+      	\int \frac{e^{i\pi x}}{\pi x}e^{-ikx} \, \mathrm{d}x = \int \frac{e^{i(\pi -k) x}}{\pi x} \, \mathrm{d} x
+      .\]
+      于是我们便化简成为如何计算
+      \[
+      	\int \frac{e^{ikx}}{x} \, \mathrm{d}x 
+      .\] 
+      这是一个在实轴上积分的经典老题。由于$x=0$ 处该函数存在一阶奇点\footnote{就是在该点对应阶数为$x^{-1}$的项使其发散。}，我们需要让回路绕过这个点，使整一个复变函数处处可积。若$k>0$，我们取复平面中的下半平面作为回路，挖取那个奇点后平面就没有别的奇点了，因此回路积分为零，而无穷远处由于$e^{ikx}$的``压制''效果为零。因此我们只需考虑挖去那个奇点对应的积分，从而有
+      \begin{equation}
+      	\int \frac{e^{ikx}}{x} \, \mathrm{d}x =  \pi i \, \mathrm{Res}\{\frac{e^{ikx}}{x}\} = \pi i \quad (k>0)
+      \end{equation}
+      $k<0$呢？我们做一个小小的变量代换，
+      \[
+       \int_{-\infty}^{+\infty} \frac{e^{ikx}}{x} \, \mathrm{d}x = \int_{-\infty}^{+\infty} \frac{e^{ikx}}{-x} \, \mathrm{d}(-x) =- \int \frac{e^{i|k|y}}{y} \, \mathrm{d} y   
+      .\] 
+      我们看到了在这个情况下的积分为原来的相反数。这两者结合起来我们就可以把它打包成为sign 函数，即
+      \begin{equation}
+      	\int _{-\infty} ^{+\infty} \frac{e^{ikx}}{x} \, \mathrm{d}x = \pi i \, \mathrm{sign}\,(k) = 
+      	\begin{cases}
+      	 \pi i, \, k>0 \\
+      		0, \, k=0 \\
+      		-\pi i, \, k<0
+      	\end{cases}
+      \end{equation}
+      让$k=0$时 $\mathrm{sign}\,(k)=0$是出于$\frac{1}{x}$ 为奇函数，在实轴上积分结果应为零的考虑。
+
+      利用这个结果，我们就能反过来得出
+      \begin{equation}
+      	\int \frac{e^{i(\pi-k)x}}{\pi x} \, \mathrm{d}x =  i \, \mathrm{sign}\, (\pi-k) 
+      \end{equation}
+      那么自然就有
+      \begin{equation}
+      	\int \frac{e^{i(-\pi-k)x}}{\pi x} \, \mathrm{d}x = - i \,\mathrm{sign}\, (\pi + k) 
+      \end{equation}
+      再把这两个结果结合起来，我们就最终得到了
+      \begin{equation}
+      	\mathcal{F}[\sinc{x}] = \frac{\mathrm{sign}\,(\pi-k)+ \mathrm{sign}\,(\pi+k)}{4 \pi}= \frac{1}{2 \pi}\mathrm{rect}\, (\frac{k}{2\pi}) =
+      	\begin{cases}
+      		 \frac{1}{2\pi}, \, -\pi < k < \pi \\
+      		 0, \, \text{otherwise}
+      	\end{cases}
+      \end{equation}
+      也就是$\sinc{x}$进行傅立叶变换后得到了矩形波！
+
+      我们趁热打铁，继续看原来的基组的内积。
+
+      还记得傅立叶变换的几条定理吗？有一条是把频谱中函数相乘转化为卷积，也就是
+      \begin{equation}
+      	\mathcal{F}[f_1(x) * f_2(x)] = 2\pi F_1(k) F_2(k) 
+      \end{equation}
+      其实对于逆傅立叶变换也成立，也就是
+      \begin{equation}
+      	\mathcal{F}[f_1(x) f_2(x)] = \frac{1}{2\pi} F_1(k) * F_2(k) 
+      \end{equation}
+      那么我们从原来的内积定义出发，
+      \begin{align*}
+      	\langle e_i | e_j \rangle &= \int _{-\infty}^\infty \frac{1}{\Delta x} \sinc{\frac{x- i \Delta x}{\Delta x}} \sinc{\frac{x- j \Delta x}{\Delta x}} \, \mathrm{d}x\\ 
+      				   &= \frac{2\pi}{\Delta x} \mathcal{F}[\sinc{\frac{x - i\Delta x}{\Delta x}} \sinc{\frac{x- j \Delta x}{\Delta x}}] \bigg|_{k=0} \\
+      				   &= \frac{\Delta x}{2\pi} \int e^{- I \xi (i-j) \Delta x} e^{-I k j \Delta x}\mathrm{rect}\, \left( \frac{\xi \Delta x}{2 \pi} \right)  \, \mathrm{rect} \, \left( \frac{(k-\xi) \Delta x}{2 \pi} \right) \, \mathrm{d} \xi \bigg|_{k=0} \\
+      				   &= \frac{\Delta x}{2 \pi} \int _{-\frac{\Delta x}{\pi}} ^{\frac{\Delta x}{\pi}} e^{-I \xi (i-j) \Delta x}  \, \mathrm{d} \xi \\
+      				   &= \sinc{i-j} 
+      \end{align*}
+      从而得到
+      \begin{equation}
+      	\langle e_i | e_j \rangle = \delta_{ij}
+      \end{equation}
+      上面的推导中充分利用了变量代换、延迟定理、\sout{\emph{Mathematica}}等技巧。$I$是为了与 $i$作区分，表示虚数单位。以这个为基础，我们还可以得到
+      \begin{equation*}
+      	\langle e_i | - I \hbar \frac{d}{dx} | e_j \rangle = -i\hbar \left[ e^{-I k i \Delta x} \,\mathrm{rect}\, \left( \frac{k \Delta x}{2 \pi} \right)  \right] * \left( I k e^{- I k i \Delta x} \, \mathrm{rect} \, \left( \frac{k \Delta x }{ 2 \pi} \right)  \right) 
+      \end{equation*}
+      从而
+      \begin{equation}
+      	 \langle e_i | - I \hbar \frac{d}{dx} | e_j \rangle = -\frac{I \hbar (\sin (\pi  (i-j))+\pi  (j-i) \cos (\pi  (i-j)))}{\pi \Delta
+         x (i-j)^2} = 
+        \begin{cases}
+         	0, \, i=j \\
+      	\frac{I\hbar (-1)^{i-j}}{(i-j) \Delta x}
+        \end{cases}
+      \end{equation}
+      进一步地，
+      \begin{equation}
+       	\langle e_i | -\frac{\hbar ^2}{2m} \frac{d^2}{dx ^2} | e_j \rangle = \frac{\hbar^{2}(-1)^{i-j}}{2 m \Delta x^{2}} \begin{cases}{\pi^{2} / 3,} \quad {i=j} \\ {\frac{2}{\left(i-j\right)^{2}},} \quad {i \neq j}\end{cases}
+      \end{equation}
+      这样我们就凑出了动能对应的矩阵。
+
+      位移期望值其实不需要上面这么麻烦，我们可以做一个简单的变换,
+      \[
+      	\int \sinc{\frac{x- i \Delta x}{\Delta x}} x \sinc{\frac{x- j \Delta x}{\Delta x}}\, \mathrm{d} x = \int \sinc{\frac{x- i \Delta x}{x}} (x- \frac{i+j}{2}\Delta x) \sinc{\frac{x-j \Delta x}{x}}\, \mathrm{d}x
+      .\] 
+      利用对称性可以非常方便地得到
+      \[
+      	\langle e_i | x | e_j \rangle = \delta_{ij} j \Delta x
+      .\] 
+       
+      势能和波函数相似，也采用离散化的方式，从而有
+      \begin{equation}
+      	V_ij = \langle e_i | V | e_j \rangle  = \delta_{ij} V(x_i)
+      \end{equation}
+      将这两个矩阵相加，我们就得到了在该基组下的\sout{哈密瓜}哈密顿矩阵。我们已经可以利用这一套东西求出DVR下的能量特征值和对应特征向量。但对于动力学演化，我们还需要一些\sout{微操}技巧。我们将薛定谔方程关于时间也离散化，
+      \[
+      	\hat{H}(t) \psi(x;t) = i \hbar \frac{\partial }{\partial t} \psi(x;t) \Rightarrow (\mathbf{E} \hbar + \frac{i \Delta t}{2} \mathbf{H}(t+\frac{\Delta t}{2})) \psi(t+ \Delta t) = (\mathbf{E} \hbar - \frac{i \Delta t}{2} H(t+\frac{\Delta }{2})) \psi(t)  
+      .\] 
+      这可以从$\frac{\partial }{\partial t} \psi(t) \sim \frac{\psi(t+ \Delta t) - \psi(t-\Delta t)}{2 \Delta t}$ 得到\footnote{而如果用欧拉法近似，会使波函数摸值发散。若有兴趣可自行证明。}。
+
+      将以上方法综合起来便能得到一个完整的DVR程序，比如\url{https://github.com/Walter-Feng/SincDVR}。一个典型模型，谐振势下一个高斯波包的演化的DVR结果如 Figure \ref{DVRresult} 所示。可以看出在一个足够小的时间间隔 dt 下体系能够很好地呈现震荡，而如果\sout{一不小心}选取较大 dt 便会呈现一个阻尼震荡的错误结果。因此虽然DVR能够成为量子力学精确解的``范本''，足够细致的取点和时间演化是结果具有信任度的关键，这也导致了DVR的耗时往往很长。这也部分说明了王老师的课题组大力发展非绝热动力学方法的动力所在——我们确实可以有精确解，但它实在是太慢了。
+
+      DVR其实并不仅限于一维。我们从前面的章节中已能隐约感受到，只要我对每个维度进行这样的基组展开，我们就能够对多维度体系进行模拟。
+
+      如果想更全面地了解DVR，可以看这篇文章\cite{colbert1992novel}。
 
     \chapter{相空间-量子哈密顿动力学(PS-QHD)}
       \label{phase_space_dynamics}
