@@ -1724,7 +1724,7 @@
     
 
     \chapter{量子化学-电子结构基础}
-      量子化学(电子结构)部分，我们将简要介绍常见的电子结构计算方法，所谓电子结构方法，即求解分子(或者固体)体系的定态\sch 方程的方法，大家都知道，多体的SE是难以求得精确的解析结果的，因此量子化学某种程度上也是各类近似方法及其如何一步步逼近精确解的简介，本节会\textbf{简要}介绍基于分子电子结构计算的Hartree-Fock理论，DFT理论，post-Hartree-Fock理论(包括组态相关CI，耦合簇方法CC，多组态自洽场方法MCSCF，多体微扰理论等)，编者还在最后加入了简化版的电子(费米子)二次量子化的内容。限于篇幅，上述理论的证明几乎全部略去，暂时也不涉及关于固体理论的相关计算。本节内容与王老师高等物理化学-量子化学课程内容相似，并且参考了非常多经典电子结构教材的内容。
+      量子化学(电子结构)部分，我们将简要介绍常见的电子结构计算方法，所谓电子结构方法，即求解分子(或者固体)体系的定态\sch 方程的方法，大家都知道，多体的SE是难以求得精确的解析结果的，因此量子化学某种程度上也是各类近似方法及其如何一步步逼近精确解的简介，本节会\textbf{简要}介绍基于分子电子结构计算的各种理论，包括Hartree-Fock方法，post-Hartree-Fock方法和DFT理论，编者还在最后加入了简化版的电子(费米子)二次量子化的内容。限于篇幅，上述理论的证明几乎全部略去，暂时也不涉及关于固体理论的相关计算。本节内容与王老师高等物理化学-量子化学课程内容相似，并且参考了非常多经典电子结构教材的内容。
       
       另外，与量子力学章类似，为了方便，我们第一小节作为快速的概念检索使用。
 
@@ -2052,8 +2052,8 @@
           \left(-\frac{\nabla _ { \vb*{R}}^2}{2M} + \varepsilon_i\right)\chi_i(\vb*{R}) = E\chi_i(\vb*{R})
         \end{equation}
         这就是一个非常普通的定态\sch 方程，只是势能项换成了电子态的能量，现在，这个系数的物理意义就显露出来了，它就是原子核的波函数，原子核感受到的势能就是当前电子态的能量，这就是“原子核运动时感受到的电子的作用其实是一个平均化的作用”这句话的数学表达。
-      \section{Hartree-Fock方法}
-        Hartree-Fock方法是量子化学的基础和开端，一般涉及到Hartree理论和HF理论计算单分子问题，就已经进入到了量子化学的领域。同时，几乎所有更高精度的电子结构方法都是以HF方法为基础，或者直接从HF方法的结果出发的，因此HF方法的正确理解关系到整个电子结构理论框架的理解。在各种教材中，讲解HF理论的方法有很多种，鉴于电子结构方法前后的完整性，我们选用了其中一种，即跳过Hartree理论直接介绍Slater行列式以及其对应的多电子波函数。读者若发现本指南的逻辑与一些书籍相左，请根据各自的框架理解。
+      \section{量子化学的精确解}
+        在介绍量子化学中的各类电子结构方法之前，我们先介绍一下量子化学的最高精度方法，同时也是理解起来最为容易的一种电子结构方法，完全组态相关(Full Configuration Interaction, FCI)，理想状况下FCI方法可以得到量子化学的精确解。
         \subsection{单电子波函数}
           我们定义求解一个单电子的定态\sch 方程得到的波函数称为单电子波函数，或者称为轨道。在分子的电子结构理论中，我们通常描述的是分子轨道，基分子基于单电子哈密顿量求解得到的轨道，用于描述分子中的一个电子的性质。简单地说，可以以氢分子离子为例，体系中只有一个单电子，解出的哈密顿量本征态就是氢分子离子的分子轨道。
           
@@ -2061,7 +2061,7 @@
           \begin{equation}
             \int d \mathbf{r} \psi_{i}^{*}(\mathbf{r}) \psi_{j}(\mathbf{r})=\delta_{i j}
           \end{equation}
-          但是我们知道，所有的电子都是有自旋分量的，假设自旋空间的变量为$\omega$，对于电子，自旋部分只可能有两种，自旋为$+\frac{1}{2}$和$-\frac{1}{2}$，分别即为$\alpha(\omega)$和$\beta (\omega)$，这两个描述自旋部分的轨道满足正交归一性。想要完整地描述一个电子，需要它的空间部分波函数乘以自旋部分波函数，这样的波函数称为\textbf{自旋轨道}。为了前后的一致性，我们以希腊字母$\chi$代表自旋轨道，即
+          但是我们知道，所有的电子都是有自旋分量的，假设自旋空间的变量为$\omega$，对于电子，自旋部分只可能有两种，自旋为$+\frac{1}{2}$和$-\frac{1}{2}$，分别记为$\alpha(\omega)$和$\beta (\omega)$，这两个描述自旋部分的轨道满足正交归一性。想要完整地描述一个电子，需要它的空间部分波函数乘以自旋部分波函数，这样的波函数称为\textbf{自旋轨道}。为了前后的一致性，我们以希腊字母$\chi$代表自旋轨道，即
           \begin{equation}
             \chi(\mathbf{x})=\left\{\begin{array}{c}{\psi(\mathbf{r}) \alpha(\omega)} \\ {\text { 或 }} \\ {\psi(\mathbf{r}) \beta(\omega)}\end{array}\right.
           \end{equation}
@@ -2070,8 +2070,14 @@
             \int d \mathbf{x} \chi_{i}^{*}(\mathbf{x}) \chi_{j}(\mathbf{x})=\left\langle\chi_{i} | \chi_{j}\right\rangle=\delta_{i j}
           \end{equation}
           电子结构的后续部分，通常是基于自旋轨道讲述的。
+
+          当研究分子体系时，我们期望我们所用的单电子波函数会是单电子的定态\sch 方程的解，这个解的空间轨道部分就是化学中常说的分子轨道
+          \begin{equation}
+            h(i) \chi_{j}\left(\mathbf{x}_{i}\right)=\varepsilon_{j} \chi_{j}\left(\mathbf{x}_{i}\right)
+          \end{equation}
+          为了求解这个方程，我们把单电子波函数在一个单电子的完备基下进行展开，这组完备基就是通常所说的原子轨道基组。我们会在稍后的内容中对其作简要介绍，现在，需要读者将我们本节的内容和经典的分子轨道理论做好对应。我们用原子轨道基组作完备基，把整个体系的单电子波函数(分子轨道)写成原子轨道的线性组合，就可以利用线性变分法求解这个线性组合系数，这样就得到了我们接下来要用到的单电子波函数。
         \subsection{多电子波函数}
-          上一节中我们给出了描述单个电子的自旋轨道和空间轨道的定义，那么如果希望写出描述$N$个电子的波函数应该怎么做呢？我们将在介绍post-Hartree-Fock方法的时候完整回答这个问题，现在只对一种极其简单的情况讨论。如果这个体系内的$N$个电子之间没有相互作用，总哈密顿量中只有每个电子的动能和势能，没有电子的库伦斥力，或者说电子之间的相互作用用某种平均的方式转化成了一个有效势能，就像早期使用的电子的屏蔽系数。那么哈密顿量就可以写成单电子哈密顿量的和
+          上一节中我们给出了描述单个电子的自旋轨道和空间轨道的定义，如果希望写出描述$N$个电子的波函数应该怎么做呢？我们稍后再完整回答这个问题，现在只对一种极其简单的情况讨论。如果这个体系内的$N$个电子之间没有相互作用，即总哈密顿量中只有每个电子的动能和势能，没有电子与电子之间的库伦斥力，或者说电子之间的相互作用用某种平均的方式转化成了一个有效势能，就像早期使用的屏蔽系数的方法。在这种情况下，总电子哈密顿量就可以写成单电子哈密顿量的和
           \begin{equation}
             \mathscr{H}=\sum_{i=1}^{N} h(i)
           \end{equation}
@@ -2095,11 +2101,17 @@
             \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)=(N !)^{-1 / 2} \left| \begin{array}{cccc}{\chi_{i}\left(\mathbf{x}_{1}\right)} & {\chi_{j}\left(\mathbf{x}_{1}\right)} & {\cdots} & {\chi_{k}\left(\mathbf{x}_{1}\right)} \\ {\chi_{i}\left(\mathbf{x}_{2}\right)} & {\chi_{j}\left(\mathbf{x}_{2}\right)} & {\cdots} & {\chi_{k}\left(\mathbf{x}_{2}\right)} \\ {\vdots} & {\vdots} & { } & {\vdots} \\ {\chi_{i}\left(\mathbf{x}_{N}\right)} & {\chi_{j}\left(\mathbf{x}_{N}\right)} & {\ldots} & {\chi_{k}\left(\mathbf{x}_{N}\right)}\end{array}\right|
             \label{Slater Determinant}
           \end{equation}
-          可以看出，对于任意两个电子坐标的交换相当于交换Slater行列式中的两行，根据行列式的性质，显然会多出一个负号来满足交换反对称性的要求。而且，如果两个电子处于同一个位置，即$\mathbf{x}_{i}=\mathbf{x}_{j}$，意味这行列式中的两行相同，对应着两个电子占据了完全相同(空间部分相同，自旋也相同)的自旋轨道，行列式就一定为零，因此Slater行列式严格满足反对称性，以及它所要求的Pauli不相容原理。
-          
-          为了方便，我们习惯上把Slater行列式写成一个态矢量的形式，由于我们无法区分哪个电子坐标对应哪个自旋轨道，我们将其写为
+          可以看出，对于任意两个电子坐标的交换相当于交换Slater行列式中的两行，根据行列式的性质，显然会产出一个负号来满足交换反对称性的要求。而且，如果两个电子处于同一个位置，即$\mathbf{x}_{i}=\mathbf{x}_{j}$，意味这行列式中的两行相同，对应着两个电子占据了完全相同(空间部分相同，自旋也相同)的自旋轨道，行列式就一定为零，因此Slater行列式严格满足反对称性，以及它所要求的Pauli不相容原理。
+
+          另外，我们根据行列式的定义式(\ref{determinants defination})，重新写一下Slater行列式的表达式
           \begin{equation}
-            \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)=| \chi_{i} \chi_{j} \cdots \chi_{k} \rangle
+            \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)=(N !)^{-1 / 2} \sum_{n=1}^{N !}(-1)^{p_{n}} \mathscr{P}_{n}\left\{\chi_{i}(1) \chi_{j}(2) \cdots \chi_{k}(N)\right\}
+          \end{equation}
+          这个表达式在推导多电子波函数下的力学量积分时非常有用。
+          
+          为了方便，我们习惯上把Slater行列式写成一个态矢量的形式，由于我们无法区分哪个电子坐标对应哪个自旋轨道，写的时候也通常忽略自旋轨道后面的电子的坐标$\mathbf{x}_i$，我们将其写为
+          \begin{equation}
+            \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)\equiv| \chi_{i} \chi_{j} \cdots \chi_{k} \rangle
             \label{short Slater}
           \end{equation}
           其反对称性可以写作
@@ -2107,10 +2119,35 @@
             | \cdots \chi_{m} \cdots \chi_{n} \cdots \rangle=-| \cdots \chi_{n} \cdots \chi_{m} \cdots \rangle
             \label{Slater anti-symm}
           \end{equation}
-          在这里需要提醒读者的是，Slater行列式相比于Hartree积的优势仅仅是它满足了交换反对称性，即如果两个电子的自旋相同了，它们之间的运动被限制了，使得它们无法同时出现在空间的同一个点。但是对于自旋相反的电子，它们之间仍然是“不关联”的，即它们在空间上分布的概率是独立的。但是Slater行列式保证了电子的反对称性，这一点是极其重要的，或者说，\textbf{用Hartree积描述多电子波函数错误的}。引入Slater行列式后，我们就不需要再讨论所谓“Pauli斥力”的概念，因为它已经被满足了。后文中会引入交换积分，需要提醒，交换积分不是“Pauli斥力”，它只是库伦相互作用对于一个反对称的波函数出现的额外项而已。
+          在这里需要提醒读者的是，Slater行列式相比于Hartree积的优势仅仅是它满足了交换反对称性。用Slater行列式描述波函数时，如果两个电子的自旋相同了，它们之间的运动就会被限制，使得它们无法同时出现在空间的同一个点。但是对于自旋相反的电子，它们之间仍然是“不关联”的，即它们在空间上分布的概率是独立的。但是Slater行列式保证了电子的反对称性，这一点是极其重要的，或者说，\textbf{用Hartree积描述多电子波函数错误的}。由于Slater行列式满足了反对称性的要求，引入Slater行列式后，我们就不需要再讨论所谓“Pauli斥力”的概念，因为它已经被自然地满足了。后文中会引入交换积分，需要提醒，交换积分并不是“Pauli斥力”，它只是库伦相互作用对于一个反对称的波函数出现的额外项而已。
+
+        \subsection{精确波函数}
+          现在我们来回答之前的问题：多电子的波函数应该如何构建。简单来说，如果我们有$K$个原子轨道基函数，原则上说$M$趋向于无穷时这个单电子轨道的基组是完备的。利用这个原子轨道基组我们就可以线性组合出$K$个分子轨道，$2K$个自旋轨道，此时如果我们研究的是一个$N$电子问题，可以刚刚得到的$2K$个自旋轨道中选$N$个构成一个Slater行列式，总共有$\mathrm{C}_{2K}^N$个Slater行列式。每一个行列式我们称作一个组态(Configuration)，敏锐的读者可能一经发现，所有可能的组态原则上是一个多电子波函数完备基！那个“正确”的多电子波函数应该是这$\mathrm{C}_{2K}^N$个Slater行列式的线性组合，总可以通过线性变分法来求解。
+
+          因为我们用所有的组态线性组合成了体系波函数，因此这个求解精确解的方法称为完全组态相关方法(FCI)，如果希望FCI得到的波函数就是体系精确解，必须满足以下两条：
+          \begin{itemize}
+            \item 求解单电子波函数所使用的原子轨道基组是完备的(无穷大的)，$K \rightarrow \infty$；
+            \item 多电子波函数的展开必须包括所有可能的Slater行列式，共有$\mathrm{C}_{2K}^N$个。
+          \end{itemize}
+          \begin{figure}
+            \centering
+            \includegraphics[width = 9cm]{fig/exactsolution.jpg}\\
+            \caption{\textbf{量子化学的精确解}}
+            \label{exact solution}
+          \end{figure}
+          
+          这两点经常用Figure \ref{exact solution}这个图来表示。如果只使用一个组态，也就是之后会讲到的Hartree-Fock近似下，不断地增大原子轨道基组的数目，这个极限称为单电子极限，或者Hartree-Fock极限；而在原子轨道大小固定之后，不断增大所使用的组态的个数，最后引入所有的组态就称为FCI极限。同时满足Hartree-Fock极限和FCI极限的计算结果，就是精确解。
+          
+          尽管计算机已经非常发达，但是实际操作中，第一条暂时不可能实现，当原子轨道基组很大的时候，第二条也很难实现\sout{，好惨啊！}。因此量子化学的精确解，FCI的计算几乎只能适用于非常小的体系\footnote{但是没有那么小，现在已经可以在一个相当大的原子轨道基组的前提下求解$\text{F}_2$的FCI结果。}，但很多时候我们对精度的要求并没有这么高。电子结构的发展，就是引入一系列近似方法，为了用尽可能小的计算量，实现尽可能高的计算精度，来满足各种需求。
+      \section{Hartree-Fock方法}
+        Hartree-Fock方法是量子化学的基础和开端，一旦涉及到使用Hartree理论或Hartree-Fock理论计算单分子(非固体)的问题，就已经进入到了量子化学的领域。同时，几乎所有更高精度的电子结构方法都是以HF方法为基础，或者直接从HF方法的结果出发的，因此HF方法的正确理解关系到整个电子结构理论框架的理解。在各种教材中，讲解HF理论的方法有很多种，鉴于电子结构方法前后的完整性，我们选用了其中一种，即跳过Hartree理论直接介绍Slater行列式以及其对应的多电子波函数。读者若发现本指南的逻辑与一些书籍相左，请根据各自的框架理解。
 
       \section{post-Hartree-Fock方法}
-      \section{密度泛函理论}
+        post-Hartree-Fock方法是指那些以Hartree-Fock方法得到的单电子波函数与Hatree-Fock基态为基础，计算多电子波函数的方法。我们之前介绍的FCI方法其实就是post-Hartree-Fock方法中的一个，本节中我们将简要介绍几种计算体系多电子波函数的post-Hartree-Fock方法，包括多组态相关方法(Configuration Interaction, CI)、多组态自洽场方法(Multiconfigurational Self-Consistent-Field)、簇耦合方法(Coupled Cluster)、微扰方法(Perturbation)等。
+        \subsection{组态相关方法}
+        \subsection{多组态自洽场方法}
+        \subsection{簇耦合方法}
+        \subsection{微扰理论}
       \section{二次量子化}
         之所以二次量子化的内容不放在量子力学中，是因为从占据数表象重新理解二次量子化是相对浩大的工程，感兴趣的同学可以直接参阅相关的高等量子力学书籍。而之所以放在这里讲，是因为在诸多的量化文献和书籍中使用了二次量子化的语言，尽管在量化领域经常见到产生湮灭算符，但是并没有与二次量子化真实地联系起来，只是用来作为简化表达的一种方式。为了帮助大家看懂相关的公式，我们在电子结构部分从实用的角度简要介绍电子(费米子)的二次量子化语言。本节主要参考(\sout{其实就是翻译了一遍然后调整了几个小地方})\cite{Szabo1989Modern}书中2.4节的内容。
 
@@ -2641,12 +2678,6 @@
 
 
     \chapter{离散变量表象（DVR）}
-      \begin{figure}
-        \centering
-        \includegraphics[width=0.8\textwidth]{fig/DVRtest.eps}
-        \caption{谐振势下的一个典型的DVR结果}
-        \label{DVRresult}
-      \end{figure}
 
       DVR，即Discrete Variable Representation,是量子力学目前为止最为可靠的数值计算体系特征值/特征向量/动力学演化的方法。它的实现依赖于一个比较特殊的基组，使各类算符以矩阵的形式参与运算，利用成熟的线性代数方法求解。
 
@@ -2664,13 +2695,13 @@
       .\] 
       我们只要选取一个恰当的基组，我们就能够将复杂的偏微分方程问题转化为一个在计算机上更容易实现的线性代数问题。但基组选的不好内积的计算会非常复杂，反而不利于计算机实现。DVR便解决了这样的一个痛点，它的核心内容是
       \begin{center}
-      	将连续函数格点化（离散化）的同时提供可观测量的期望值。
+      	\textbf{将连续函数格点化（离散化）的同时提供可观测量的期望值。}
       \end{center}
-      我们直接举DVR中最为常用的基组，即sinc 函数基组。sinc 函数定义为
+      所谓离散变量表象，即将原本的波函数在一个对应着离散空间的表象上进行展开，我们举DVR中最为常用的基组为例，首先引入sinc 函数，定义为
       \begin{equation}
       	\mathrm{sinc} \, (x) \equiv \frac{\sin{\pi x}}{\pi x}  
       \end{equation}
-      而所选用基组为
+      对实空间作离散化处理，如果我们关心的体系在某个范围内，我们将其分割成一个一个小格点，格点间距离定义为$\Delta x$，再有$x_i \equiv i\Delta x$，DVR中所选用基组为
       \begin{equation}
       	\chi_j (x) \equiv \langle x | e_j \rangle = (\Delta x)^{-\frac{1}{2}}\, \sinc{\frac{x - j \Delta x}{\Delta x}} 
       \end{equation}
@@ -2797,9 +2828,16 @@
       \end{equation}
       将这两个矩阵相加，我们就得到了在该基组下的\sout{哈密瓜}哈密顿矩阵。我们已经可以利用这一套东西求出DVR下的能量特征值和对应特征向量。但对于动力学演化，我们还需要一些\sout{微操}技巧。我们将薛定谔方程关于时间也离散化，
       \[
-      	\hat{H}(t) \psi(x;t) = i \hbar \frac{\partial }{\partial t} \psi(x;t) \Rightarrow (\mathbf{E} \hbar + \frac{i \Delta t}{2} \mathbf{H}(t+\frac{\Delta t}{2})) \psi(t+ \Delta t) = (\mathbf{E} \hbar - \frac{i \Delta t}{2} H(t+\frac{\Delta }{2})) \psi(t)  
+      	\hat{H}(t) \psi(x;t) = i \hbar \frac{\partial }{\partial t} \psi(x;t) \Rightarrow \left[\mathbf{E} \hbar + \frac{i \Delta t}{2} \mathbf{H}(t+\frac{\Delta t}{2})\right] \psi(t+ \Delta t) = \left[\mathbf{E} \hbar - \frac{i \Delta t}{2} \mathbf{H} (t+\frac{\Delta t}{2})\right] \psi(t)  
       .\] 
-      这可以从$\frac{\partial }{\partial t} \psi(t) \sim \frac{\psi(t+ \Delta t) - \psi(t-\Delta t)}{2 \Delta t}$ 得到\footnote{而如果用欧拉法近似，会使波函数摸值发散。若有兴趣可自行证明。}。
+      这可以从$\frac{\partial }{\partial t} \psi(t) \sim \frac{\psi(t+ \Delta t) - \psi(t-\Delta t)}{2 \Delta t}$ 得到\footnote{而如果用欧拉法近似，会使波函数摸值发散。若有兴趣可自行证明。}，以及$\mathbf{E}$表示单位矩阵。
+
+      \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth]{fig/DVRtest.eps}
+        \caption{谐振势下的一个典型的DVR结果}
+        \label{DVRresult}
+      \end{figure}
 
       将以上方法综合起来便能得到一个完整的DVR程序，比如\url{https://github.com/Walter-Feng/SincDVR}。一个典型模型，谐振势下一个高斯波包的演化的DVR结果如 Figure \ref{DVRresult} 所示。可以看出在一个足够小的时间间隔 dt 下体系能够很好地呈现震荡，而如果\sout{一不小心}选取较大 dt 便会呈现一个阻尼震荡的错误结果。因此虽然DVR能够成为量子力学精确解的``范本''，足够细致的取点和时间演化是结果具有信任度的关键，这也导致了DVR的耗时往往很长。这也部分说明了王老师的课题组大力发展非绝热动力学方法的动力所在——我们确实可以有精确解，但它实在是太慢了。
 
