@@ -237,111 +237,111 @@
 
         此外，PBS系统还有诸多指令(如常用的qdel和qhold等)，诸多功能，诸多环境变量可以调用，鉴于递交任务实际操作的重要性，这里不再赘述，如果在实际操作过程中希望有更多了解，可以参阅浙江大学西溪校区化学系HPC超算平台介绍(可在超算QQ群的群文件中找到)中的Gridview PBS作业调度使用说明。
       
-      \chapter{数学基础}
+    \chapter{数学基础}
 
-        本章包含了在王老师课题组可能用到的数学知识，但是并不是所有人所有方向都非常重要。阅读此章内容前，我们默认你掌握了基础的数学知识：单变量微积分，多元函数微积分，基础线性代数。如果自认为对此比较熟悉，可以有用到相关知识的时候再回来检索查看，如果不熟悉，还是建议阅读本章内容。对于一部分有一定意义但影响阅读连贯性的内容（例如部分证明及拓展应用），我们会将其列于附录中。\textbf{本指南不适合完全没学过线性代数的同学，如果想完整学习线性代数请参阅相关教材。}
+      本章包含了在王老师课题组可能用到的数学知识，但是并不是所有人所有方向都非常重要。阅读此章内容前，我们默认你掌握了基础的数学知识：单变量微积分，多元函数微积分，基础线性代数。如果自认为对此比较熟悉，可以有用到相关知识的时候再回来检索查看，如果不熟悉，还是建议阅读本章内容。对于一部分有一定意义但影响阅读连贯性的内容（例如部分证明及拓展应用），我们会将其列于附录中。\textbf{本指南不适合完全没学过线性代数的同学，如果想完整学习线性代数请参阅相关教材。}
 
-        \section{简易数学回顾}
+      \section{简易数学回顾}
       
-          数学基础的第一小节将关注于最基础的数学内容，主要是线性代数和微积分的一些知识，由于长时间不用可能有所生疏，我们就在这里作简单的回顾。熟悉此节内容的同学可以直接跳过。
+        数学基础的第一小节将关注于最基础的数学内容，主要是线性代数和微积分的一些知识，由于长时间不用可能有所生疏，我们就在这里作简单的回顾。熟悉此节内容的同学可以直接跳过。
 
-          \subsection{复数及复变函数基础}
+        \subsection{复数及复变函数基础}
 
-            相关内容参考\cite{methods_in_math_phys_liang}。
+          相关内容参考\cite{methods_in_math_phys_liang}。
 
-            {\color{red}{\textbf{以下内容针对对于复数及复变函数非常不熟悉的读者，更深入的内容将在后面出现。}}}
+          {\color{red}{\textbf{以下内容针对对于复数及复变函数非常不熟悉的读者，更深入的内容将在后面出现。}}}
             
-            复数是实数的拓展。让我们先回顾一下从小到大的数学的学习，来看一下我们（也是整个人类）是怎么认识数的。
+          复数是实数的拓展。让我们先回顾一下从小到大的数学的学习，来看一下我们（也是整个人类）是怎么认识数的。
             
-            首先认识的是正整数，正整数$\mathbb{Z}^+$对加法封闭\footnote{本节中，封闭的意思是对集合中的数进行某种运算的结果仍然在该集合内。}，但是对于减法就不封闭了，于是人们引入了负整数，组成了对加减法都封闭的整数$\mathbb{Z}$。整数对乘法也封闭，但是对非零除法则不封闭，于是数扩张为了有理数$\mathbb{Q}$。有理数对加减乘除都封闭，但是对于例如对角线长度、圆的周长之类的问题时就不好解决了，从而引入了无理数\sout{以及各种测度}$\mathbb{R}$。到目前为止看起来可以告一段落，但是，当人们求解实系数代数方程的时候，发现其根不一定是实数，从而引入了虚数，组成了复数$\mathbb{C}$。简单的说，数的扩充是为了更高级的运算，而复数的意思是对代数方程求根封闭。数学王子高数证明了，在复数域上，$N$次方程有$N$个根\footnote{此即为\textbf{代数基本定理}}。
+          首先认识的是正整数，正整数$\mathbb{Z}^+$对加法封闭\footnote{本节中，封闭的意思是对集合中的数进行某种运算的结果仍然在该集合内。}，但是对于减法就不封闭了，于是人们引入了负整数，组成了对加减法都封闭的整数$\mathbb{Z}$。整数对乘法也封闭，但是对非零除法则不封闭，于是数扩张为了有理数$\mathbb{Q}$。有理数对加减乘除都封闭，但是对于例如对角线长度、圆的周长之类的问题时就不好解决了，从而引入了无理数\sout{以及各种测度}$\mathbb{R}$。到目前为止看起来可以告一段落，但是，当人们求解实系数代数方程的时候，发现其根不一定是实数，从而引入了虚数，组成了复数$\mathbb{C}$。简单的说，数的扩充是为了更高级的运算，而复数的意思是对代数方程求根封闭。数学王子高数证明了，在复数域上，$N$次方程有$N$个根\footnote{此即为\textbf{代数基本定理}}。
             
-            引入复数的核心就是单位虚数$i$，定义为
-            \begin{equation}
-              i=\sqrt{-1}
-            \end{equation}
-            这个定义想必对于很多人都是平凡的，对其历史不再赘述。一个一般的复数$z$，可以表示为
-            \begin{equation}
-              z=x+iy
-            \end{equation}
-            这称为复数的\textbf{代数式}，其中$x$被称为\textbf{实部}，$y$被称为\textbf{虚部}。
-            \begin{equation}
-              \begin{cases}
-                x&=\Re(z)\\
-                y&=\Im(z)
-              \end{cases}
-            \end{equation}
-            于是从某种意义上来说，复数可以看成是一个二元有序实数对$(x,y)$。复数的几何表示也自然而然地对应一个二维平面\footnote{即\textbf{复平面}}。
+          引入复数的核心就是单位虚数$i$，定义为
+          \begin{equation}
+            i=\sqrt{-1}
+          \end{equation}
+          这个定义想必对于很多人都是平凡的，对其历史不再赘述。一个一般的复数$z$，可以表示为
+          \begin{equation}
+            z=x+iy
+          \end{equation}
+          这称为复数的\textbf{代数式}，其中$x$被称为\textbf{实部}，$y$被称为\textbf{虚部}。
+          \begin{equation}
+            \begin{cases}
+              x&=\Re(z)\\
+              y&=\Im(z)
+            \end{cases}
+          \end{equation}
+          于是从某种意义上来说，复数可以看成是一个二元有序实数对$(x,y)$。复数的几何表示也自然而然地对应一个二维平面\footnote{即\textbf{复平面}}。
 
-            对于每一个$z=x+iy$，存在一个复数$x-iy$。这个复数与原复数实部相同而虚部符号相反，其被称为$z$的共轭复数，记为$z^*$\footnote{也有一些书上采用记号$\bar{z}$}。复数和其共轭复数的乘积必然是实数，对此的证明是平凡的，利用$i$的定义即可。
+          对于每一个$z=x+iy$，存在一个复数$x-iy$。这个复数与原复数实部相同而虚部符号相反，其被称为$z$的共轭复数，记为$z^*$\footnote{也有一些书上采用记号$\bar{z}$}。复数和其共轭复数的乘积必然是实数，对此的证明是平凡的，利用$i$的定义即可。
             
-            复数也可以用极坐标$\rho$和$\phi$来表示。
-            \begin{equation}
-              \begin{cases}
-                \rho&=\sqrt{x^2+y^2}\\
-                \phi&=\arctan(\frac{y}{x})
-              \end{cases}\ \begin{cases}
-                x&=\rho\cos\phi\\
-                y&=\rho\sin\phi
-              \end{cases}
-            \end{equation}
-            则复数可以表示为\textbf{三角式}
-            \begin{equation}
-              z=\rho\qty(\cos\phi+i\sin\phi)
-            \end{equation}
-            或\textbf{指数式}
-            \begin{equation}
-              z=\rho e^{i\phi}
-            \end{equation}
-            其中$\rho$称为复数的\textbf{模}，而$\phi$称为复数的\textbf{辐角}。若$0\leq\phi<2\pi$，则称为\textbf{辐角主值}。
-            \begin{equation}
-              \begin{cases}
-                \rho&=\abs{z}\\
-                \phi&=\arg\qty(z)
-              \end{cases}
-            \end{equation}
-            以下运算结论利用定义即可得到，在此直接给出结论：对于
-            \begin{equation*}
-              \begin{cases}
-                z_1=x_1+iy_1=\rho_1 e^{i\phi_1}\\
-                z_2=x_2+iy_2=\rho_2 e^{i\phi_2}
-              \end{cases}
-            \end{equation*}
-            有
-            \begin{eqnarray}
-              z_1+z_2&=&\qty(x_1+x_2)+i\qty(y_1+y_2)\Rightarrow\abs{z_1+z_2}\leq\abs{z_1}+\abs{z_2}\\
-              z_1-z_2&=&\qty(x_1-x_2)+i\qty(y_1-y_2)\Rightarrow\abs{z_1-z_2}\geq\abs{z_1}-\abs{z_2}\\
-              z_1z_2&=&\qty(x_1x_2-y_1y_2)+i\qty(x_1y_2+x_2y_1)=\rho_1\rho_2 e^{i\qty(\phi_1+\phi_2)}\\
-              \frac{z_1}{z_2}&=&\frac{x_1x_2+y_1y_2}{x_2^2+y_2^2}+i\frac{x_2y_1-x_1y_2}{x_2^2y_2^2}=\frac{\rho_1}{\rho_2}e^{i\qty(\phi_1-\phi_2)}
-            \end{eqnarray}
-            复数减法是加法的逆运算，除法是乘法的逆运算；加法满足交换律、结合律，乘法满足交换律、结合律、分配律，这与实数是一致的。对于$n\in\mathbb{Z},z=\rho e^{i\phi}$，
-            \begin{eqnarray}
-              \label{z_n}
-              z^n=\rho^ne^{in\phi}\\
-              \label{sqrt_n_z}
-              \sqrt[n]{z}=\sqrt[n]{\rho}e^{i\frac{\phi}{n}}
-            \end{eqnarray}
-            对于\ref{z_n}，要注意区别$\abs{z}^2$，$\abs{z^2}$和$z^2$；对于\ref{sqrt_n_z}，注意到由于辐角$\phi$改变$2\pi$之后复数仍然是同一个数，因此原则上$\sqrt[n]{z}$可以有$n$个取值，这是不同于实数开根号的。
+          复数也可以用极坐标$\rho$和$\phi$来表示。
+          \begin{equation}
+            \begin{cases}
+              \rho&=\sqrt{x^2+y^2}\\
+              \phi&=\arctan(\frac{y}{x})
+            \end{cases}\ \begin{cases}
+              x&=\rho\cos\phi\\
+              y&=\rho\sin\phi
+            \end{cases}
+          \end{equation}
+          则复数可以表示为\textbf{三角式}
+          \begin{equation}
+            z=\rho\qty(\cos\phi+i\sin\phi)
+          \end{equation}
+          或\textbf{指数式}
+          \begin{equation}
+            z=\rho e^{i\phi}
+          \end{equation}
+          其中$\rho$称为复数的\textbf{模}，而$\phi$称为复数的\textbf{辐角}。若$0\leq\phi<2\pi$，则称为\textbf{辐角主值}。
+          \begin{equation}
+            \begin{cases}
+              \rho&=\abs{z}\\
+              \phi&=\arg\qty(z)
+            \end{cases}
+          \end{equation}
+          以下运算结论利用定义即可得到，在此直接给出结论：对于
+          \begin{equation*}
+            \begin{cases}
+              z_1=x_1+iy_1=\rho_1 e^{i\phi_1}\\
+              z_2=x_2+iy_2=\rho_2 e^{i\phi_2}
+            \end{cases}
+          \end{equation*}
+          有
+          \begin{eqnarray}
+            z_1+z_2&=&\qty(x_1+x_2)+i\qty(y_1+y_2)\Rightarrow\abs{z_1+z_2}\leq\abs{z_1}+\abs{z_2}\\
+            z_1-z_2&=&\qty(x_1-x_2)+i\qty(y_1-y_2)\Rightarrow\abs{z_1-z_2}\geq\abs{z_1}-\abs{z_2}\\
+            z_1z_2&=&\qty(x_1x_2-y_1y_2)+i\qty(x_1y_2+x_2y_1)=\rho_1\rho_2 e^{i\qty(\phi_1+\phi_2)}\\
+            \frac{z_1}{z_2}&=&\frac{x_1x_2+y_1y_2}{x_2^2+y_2^2}+i\frac{x_2y_1-x_1y_2}{x_2^2y_2^2}=\frac{\rho_1}{\rho_2}e^{i\qty(\phi_1-\phi_2)}
+          \end{eqnarray}
+          复数减法是加法的逆运算，除法是乘法的逆运算；加法满足交换律、结合律，乘法满足交换律、结合律、分配律，这与实数是一致的。对于$n\in\mathbb{Z},z=\rho e^{i\phi}$，
+          \begin{eqnarray}
+            \label{z_n}
+            z^n=\rho^ne^{in\phi}\\
+            \label{sqrt_n_z}
+            \sqrt[n]{z}=\sqrt[n]{\rho}e^{i\frac{\phi}{n}}
+          \end{eqnarray}
+          对于\ref{z_n}，要注意区别$\abs{z}^2$，$\abs{z^2}$和$z^2$；对于\ref{sqrt_n_z}，注意到由于辐角$\phi$改变$2\pi$之后复数仍然是同一个数，因此原则上$\sqrt[n]{z}$可以有$n$个取值，这是不同于实数开根号的。
 
-            下面简要地介绍一下复变函数。对于某一复数集$E$（比如全体复数集$\mathbb{C}$），对于集合中任一复数$z$，按照一定的规律，存在\textbf{一个或多个}复数值$w$与之对应，则称$w$是$z$的函数，该函数称为\textbf{复变函数}，$z$为$w$的\textbf{宗量}\footnote{本质上和实变函数的\textbf{自变量}没有区别}，$E$为定义域，记为
-            \begin{equation}
-              w=f\qty(z),\ z\in E
-            \end{equation}
-            举一些具体而常见的例子。
-            \begin{eqnarray*}
-              f\qty(z)&=&a_0+a_1z^1+a_2z^2+\cdots+a_nz^n,\ n\in\mathbb{Z}^+\\
-              f\qty(z)&=&\frac{a_0+a_1z^1+a_2z^2+\cdots+a_nz^n}{b_0+b_1z^1+b_2z^2+\cdots+b_mz^m},\ m,n\in\mathbb{Z}^+\\
-              f\qty(z)&=&\sqrt{z-a}\\
-              e^z&=&e^xe^{iy}\\
-              \sin z&=&\frac{e^{iz}-e^{-iz}}{2i}\\
-              \cos z&=&\frac{e^{iz}+e^{-iz}}{2}\\
-              \sinh z&=&\frac{e^z-e^{-z}}{2}\\
-              \cosh z&=&\frac{e^z+e^{-z}}{2}\\
-              \ln z&=&\ln(\abs{z}e^{i\arg{z}})=\ln\abs{z}+i\arg\qty(z)\\
-              z^s&=&e^{s\ln z},\ s\in\mathbb{C}
-            \end{eqnarray*}
-            可以看出，$\sin$和$\cos$具有实周期$2\pi$，且其\sout{绝对值}模不再小于等于$1$；$e^z$，$\sinh z$和$\cosh z$具有纯虚周期$2\pi i$；对数函数$\ln z$具有无穷多取值\footnote{和开方可以多值原因相同，即辐角可以任意改变$2\pi$之后复数仍然是同一个数}，且负数的对数在复数域下有意义。
+          下面简要地介绍一下复变函数。对于某一复数集$E$（比如全体复数集$\mathbb{C}$），对于集合中任一复数$z$，按照一定的规律，存在\textbf{一个或多个}复数值$w$与之对应，则称$w$是$z$的函数，该函数称为\textbf{复变函数}，$z$为$w$的\textbf{宗量}\footnote{本质上和实变函数的\textbf{自变量}没有区别}，$E$为定义域，记为
+          \begin{equation}
+            w=f\qty(z),\ z\in E
+          \end{equation}
+          举一些具体而常见的例子。
+          \begin{eqnarray*}
+            f\qty(z)&=&a_0+a_1z^1+a_2z^2+\cdots+a_nz^n,\ n\in\mathbb{Z}^+\\
+            f\qty(z)&=&\frac{a_0+a_1z^1+a_2z^2+\cdots+a_nz^n}{b_0+b_1z^1+b_2z^2+\cdots+b_mz^m},\ m,n\in\mathbb{Z}^+\\
+            f\qty(z)&=&\sqrt{z-a}\\
+            e^z&=&e^xe^{iy}\\
+            \sin z&=&\frac{e^{iz}-e^{-iz}}{2i}\\
+            \cos z&=&\frac{e^{iz}+e^{-iz}}{2}\\
+            \sinh z&=&\frac{e^z-e^{-z}}{2}\\
+            \cosh z&=&\frac{e^z+e^{-z}}{2}\\
+            \ln z&=&\ln(\abs{z}e^{i\arg{z}})=\ln\abs{z}+i\arg\qty(z)\\
+            z^s&=&e^{s\ln z},\ s\in\mathbb{C}
+          \end{eqnarray*}
+          可以看出，$\sin$和$\cos$具有实周期$2\pi$，且其\sout{绝对值}模不再小于等于$1$；$e^z$，$\sinh z$和$\cosh z$具有纯虚周期$2\pi i$；对数函数$\ln z$具有无穷多取值\footnote{和开方可以多值原因相同，即辐角可以任意改变$2\pi$之后复数仍然是同一个数}，且负数的对数在复数域下有意义。
 
-            前述已经提到，复数可以看成二元有序实数对，即$z=\qty(x,y)$，这可以拓展到复变函数上，即将复变函数$f(z)$分为实部和虚部两部分，记为
+        前述已经提到，复数可以看成二元有序实数对，即$z=\qty(x,y)$，这可以拓展到复变函数上，即将复变函数$f(z)$分为实部和虚部两部分，记为
             \begin{equation}
               f\qty(z)=u\qty(x,y)+iv\qty(x,y)
             \end{equation}
@@ -2140,12 +2140,218 @@
           
           尽管计算机已经非常发达，但是实际操作中，第一条暂时不可能实现，当原子轨道基组很大的时候，第二条也很难实现\sout{，好惨啊！}。因此量子化学的精确解，FCI的计算几乎只能适用于非常小的体系\footnote{但是没有那么小，现在已经可以在一个相当大的原子轨道基组的前提下求解$\text{F}_2$的FCI结果。}，但很多时候我们对精度的要求并没有这么高。电子结构的发展，就是引入一系列近似方法，为了用尽可能小的计算量，实现尽可能高的计算精度，来满足各种需求。
       \section{Hartree-Fock方法}
-        Hartree-Fock方法是量子化学的基础和开端，一旦涉及到使用Hartree理论或Hartree-Fock理论计算单分子(非固体)的问题，就已经进入到了量子化学的领域。同时，几乎所有更高精度的电子结构方法都是以HF方法为基础，或者直接从HF方法的结果出发的，因此HF方法的正确理解关系到整个电子结构理论框架的理解。在各种教材中，讲解HF理论的方法有很多种，鉴于电子结构方法前后的完整性，我们选用了其中一种，一个很重要的特殊之处在于我们尽可能使用量子化学家的语言，并且跳过了Hartree理论。读者若发现本指南的逻辑与一些书籍相左，请根据各自的框架理解。
-        \subsection{单行列式的能量}
-          在正式引入Hartree-Fock理论之前，我们首先讨论一个问题，我们如果知道一个N电子的Slater行列式，它由自旋轨道组$\left\{\chi_1, \chi_2,\dots,\chi_N\right\}$构成，那么它的能量期望值是多少？为了回答这个问题，我们首先写下一个BO近似下的多电子哈密顿量
+        Hartree-Fock方法是量子化学的基础和开端，一旦涉及到使用Hartree理论或Hartree-Fock理论计算单分子(非固体)的问题，就已经进入到了量子化学的领域。同时，几乎所有更高精度的电子结构方法都是以HF方法为基础，或者直接从HF方法的结果出发的，因此HF方法的正确理解关系到整个电子结构理论框架的理解。在各种教材中，讲解HF理论的方法有很多种，鉴于电子结构方法前后的完整性，我们选用了其中一种，一个很重要的特殊之处在于我们尽可能使用量子化学家的语言，并且跳过了Hartree理论。这样的写法可能会比较难，因此我们第一小节给出了一个类似结论性质的总结，再在后面几个小节中给出它的来源，以防止读者被数学推导淹没而忘记了我们的目的。
+        
+        读者若发现本指南的逻辑与一些书籍相左，请根据各自的框架理解。
+        \subsection{HF方法概论}
+          上一节中我们已经给出了量子化学的精确解和目前最精确的计算方法，但是我们也提到，FCI方法由于对计算量和内存的巨大需求几乎不可能作为一个普适方法。因此多少年来，量子化学家们一直在寻找合适的\sch 方程的近似解。其中最经典的，就是Hartree-Fock近似。
+
+          这个近似非常平凡，就是只使用一个Slater行列式表述体系。这是因为描述$N$电子体系的最简单的反对称波函数就是只用一个Slater行列式
           \begin{equation}
-            
+            | \Psi_{0} \rangle=| \chi_{1} \chi_{2} \cdots \chi_{N} \rangle
+            \label{HF gs}
           \end{equation}
+          根据变分原理，满足这个函数形式的最好的波函数就是能给出最小的能量期望值的函数，这个能量期望值定义为
+          \begin{equation}
+            E_{0}=\left\langle\Psi_{0}|\mathscr{H}| \Psi_{0}\right\rangle
+            \label{HF energy}
+          \end{equation}
+          其中$\mathscr{H}$是全电子的哈密顿量，而Slater行列式用自旋轨道展开的方法是唯一的，所以上述变分中可变的部分就是自旋轨道的选择。换句话说，HF方法的核心就在于，如何优化一组自旋轨道$\left\{\chi_1,\chi_2,\dots,\chi_N\right\}$，使得由他们构成的Slater行列式(\ref{HF gs})给出最小的能量期望值。
+
+          这之后的几节将会给出，解决这个问题等价于求解一个本征值问题
+          \begin{equation}
+            \hat{f}(\mathbf{x}_i)\chi_a(\mathbf{x}_i) = \varepsilon_a\chi_a(\mathbf{x}_i)
+            \label{HF equation}
+          \end{equation}
+          其中$f(i)$称为Fock算符，它的形式为
+          \begin{equation}
+            f(i)=-\frac{1}{2} \nabla_{i}^{2}-\sum_{A=1}^{M} \frac{Z_{A}}{r_{i A}}+v^{\mathrm{HF}}(i)
+          \end{equation}
+          其中$v^{\mathrm{HF}}(i)$是把电子和电子之间的相互作用处理成了一个等效的平均势能的形式，通常也称为平均场近似，它的形式将会在后面几节中给出严格定义。
+          
+          另外，这个平均势能也可以说是第$i$个电子所感受到的“场”，它的大小其实取决于其他电子的自旋轨道，这是一个令人头大的问题，即Fock算符的形式取决于它的本征函数。因此Hartree-Fock方程(\ref{HF equation})是一个非线性方程，没法简单解出结果，只能用迭代的方法求解。这个迭代求解Hartree-Fock方程的步骤称为自洽场(Self-Cosistent-Field, SCF)方法。
+
+          自洽场方法的基本思想是很简单的，只需要先对自旋轨道有一个初始猜测，就可以计算出每个电子感受到的势能，也就是有了Fock算符的形式，然后就可以解本征值方程(\ref{HF equation}) 得到一组新的自旋轨道。用这组新的自旋轨道，就可以得到新的势能，新的Fock算符，又能得到新的自旋轨道，不断重复这个过程直到完成自洽(计算得到的势能不再变化，前后两次的本征函数相同)。
+          
+          求解这个本征值问题一般需要一组基函数，基函数组$\left\{\phi_i\right\}$越大越完备，自旋轨道展开的可变自由度就越大，能量的期待值(\ref{HF energy})就越小。越来越大的基组将会把Hartree-Fock能量$E_0$越降越低，直到达到一个极限，即上节提到的Hartree-Fock 极限。
+
+          另外，HF近似有时候又被称作单电子近似，但这不意味着HF基态波函数(\ref{HF gs})是一个单电子波函数。所谓单电子近似只是说求解HF方程时，Fock算符只包含了一个电子的信息，电子之间的相互作用变成了平均场，所有电子是等价的，得到的本征值也是单电子的自旋轨道，或者消去自旋部分就是分子轨道。
+          
+          很多时候，由于化学图像清晰，人们经常使用分子轨道来讨论问题，这与后文中提到的Koopmans定理是有密切联系的。但是需要提醒读者的是，分子轨道(单电子轨道)不是量子化学的目的，它只是用于构建多电子波函数的基础。而HF方法的逻辑，也需要注意，并不是优化单电子自旋轨道的能量，而是优化能量最低的$N$个单电子自旋轨道构成的那个多电子波函数(Slater行列式)的能量，尽管很多时候这两者是等价的。
+
+          在推导Hartree-Fock方程之前，我们需要其他的一些基础内容，这些内容将在后面多个部分中用到，我们建议对电子结构方法感兴趣的\sout{或者背上电子结构的锅的}读者认真阅读下列章节。
+          
+        \subsection{单行列式的能量}
+          我们首先讨论一个问题，我们如果知道一个N电子的Slater行列式，它由自旋轨道组$\left\{\chi_1, \chi_2,\dots,\chi_N\right\}$构成，那么它的能量期望值是多少？同样，为了回答这个问题，我们先考虑一个简单的情况，就是两电子问题，读者可以把它想象成$\text{H}_2$中的两个电子，描述这个两电子的波函数是一个二阶的Slater行列式
+          \begin{equation}
+            |\Psi\rangle = |\chi_1 \chi_2\rangle=2^{-1 / 2}\left(\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)-\chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\right)
+          \end{equation}
+          描述两电子体系的，略去原子核之间斥力的BO近似下的哈密顿量为
+          \begin{equation}
+            \begin{aligned} \mathscr{H} &=\left(-\frac{1}{2} \nabla_{1}^{2}-\sum_{A} \frac{Z_{A}}{r_{1 A}}\right)+\left(-\frac{1}{2} \nabla_{2}^{2}-\sum_{A} \frac{Z_{A}}{r_{2 A}}\right)+\frac{1}{r_{12}} \\ &=h(1)+h(2)+\frac{1}{r_{12}} \end{aligned}
+          \end{equation}
+          按照上式的写法，我们用$h(i)$表示只含有第$i$个电子的哈密顿量，通常称为单电子部分。而$\frac{1}{r_{12}}$就是双电子部分。我们分别计算这些项的期望值，首先对$h(1)$我们有
+          \begin{equation}
+            \begin{aligned}
+              \left\langle\Psi|h(1)| \Psi \right\rangle=\int &\mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} \{ \left[2^{-1 / 2}\left(\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)-\chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\right)\right]^{*} \\ 
+              \times& h\left(\mathbf{r}_{1}\right)\left[2^{-1 / 2}\left(\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)-\chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\right)\right] \} \\
+              =\frac{1}{2} \int \mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} [\chi_{1}^{*}\left(\mathbf{x}_{1}\right) \chi_{2}^{*}\left(\mathbf{x}_{2}\right) h\left(\mathbf{r}_{1}\right) &\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)+\chi_{2}^{*}\left(\mathbf{x}_{1}\right) \chi_{1}^{*}\left(\mathbf{x}_{2}\right) h\left(\mathbf{r}_{1}\right) \chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\\
+              -\chi_{1}^{*}\left(\mathbf{x}_{1}\right) \chi_{2}^{*}\left(\mathbf{x}_{2}\right) h\left(\mathbf{r}_{1}\right) \chi_{2}\left(\mathbf{x}_{1}\right) &\chi_{1}\left(\mathbf{x}_{2}\right)-\chi_{2}^{*}\left(\mathbf{x}_{1}\right) \chi_{1}^{*}\left(\mathbf{x}_{2}\right) h\left(\mathbf{r}_{1}\right) \chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right) ]
+            \end{aligned}
+          \end{equation}
+          读者不要被上式的长度吓到，只是一个展开而已，而且由于我们研究的是第一个电子，因此关于$\mathbf{x}_2$的积分可以直接积掉，这样后两项就由于自旋轨道的正交归一性直接等于零。前两项也只剩下对$\mathbf{x}_1$的积分，即
+          \begin{equation}
+            \left\langle\Psi_{0}|h(1)| \Psi_{0}\right\rangle=\frac{1}{2} \int \mathrm{d} \mathbf{x}_{1} \chi_{1}^{*}\left(\mathbf{x}_{1}\right) h\left(\mathbf{r}_{1}\right) \chi_{1}\left(\mathbf{x}_{1}\right)+\frac{1}{2} \int \mathrm{d} \mathbf{x}_{1} \chi_{2}^{*}\left(\mathbf{x}_{1}\right) h\left(\mathbf{r}_{1}\right) \chi_{2}\left(\mathbf{x}_{1}\right)
+          \end{equation}
+          由于积分指标为哑指标，我们计算第二个单电子部分就会发现$\left\langle\Psi_{0}|h(2)| \Psi_{0}\right\rangle=\left\langle\Psi_{0}|h(1)| \Psi_{0}\right\rangle$，因此
+          \begin{equation}
+            \left\langle\Psi\left|h\left(\mathbf{r}_{1}\right) + h\left(\mathbf{r}_{2}\right)\right| \Psi\right\rangle=\int \mathrm{d} \mathbf{x}_{1} \chi_{1}^{*}\left(\mathbf{x}_{1}\right) h\left(\mathbf{r}_{1}\right) \chi_{1}\left(\mathbf{x}_{1}\right)+\int \mathrm{d} \mathbf{x}_{1} \chi_{2}^{*}\left(\mathbf{x}_{1}\right) h\left(\mathbf{r}_{1}\right) \chi_{2}\left(\mathbf{x}_{1}\right)
+          \end{equation}
+          我们引入一种简写的记号来标记单电子积分
+          \begin{equation}
+            [i|h| j]=\langle i|h| j\rangle\equiv \int \mathrm{d} \mathbf{x}_{1} \chi_{i}^{*}\left(\mathbf{x}_{1}\right) h\left(\mathbf{r}_{1}\right) \chi_{j}\left(\mathbf{x}_{1}\right)
+            \label{single electron integral}
+          \end{equation}
+          哈密顿量的单电子部分可以被简写成
+          \begin{equation}
+            \left\langle\Psi\left|h\left(\mathbf{r}_{1}\right) + h\left(\mathbf{r}_{2}\right)\right| \Psi\right\rangle=\sum_{i=1}^{2}[i|h|i]
+          \end{equation}
+
+          接下来计算双电子部分，又是一个很长的公式
+          \begin{equation}
+            \begin{aligned}
+              \langle\Psi|\frac{1}{r_{12}}| \Psi \rangle=\int &\mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} \{ \left[2^{-1 / 2}\left(\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)-\chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\right)\right]^{*} \\ 
+              \times& \frac{1}{r_{12}}\left[2^{-1 / 2}\left(\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)-\chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\right)\right] \} \\
+              =\frac{1}{2} \int \mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} [\chi_{1}^{*}\left(\mathbf{x}_{1}\right) \chi_{2}^{*}\left(\mathbf{x}_{2}\right) \frac{1}{r_{12}}&\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)+\chi_{2}^{*}\left(\mathbf{x}_{1}\right) \chi_{1}^{*}\left(\mathbf{x}_{2}\right) \frac{1}{r_{12}} \chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\\
+              -\chi_{1}^{*}\left(\mathbf{x}_{1}\right) \chi_{2}^{*}\left(\mathbf{x}_{2}\right) \frac{1}{r_{12}} \chi_{2}\left(\mathbf{x}_{1}\right) &\chi_{1}\left(\mathbf{x}_{2}\right)-\chi_{2}^{*}\left(\mathbf{x}_{1}\right) \chi_{1}^{*}\left(\mathbf{x}_{2}\right) \frac{1}{r_{12}} \chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right) ]
+            \end{aligned}
+          \end{equation}
+          因为积分指标都是哑指标，所以我们发现，第一项和第二项相等，第三项和第四项相等
+          \begin{equation}
+            \begin{aligned}\langle\Psi| \frac{1}{r_{12}} | \Psi\rangle=& \int \mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} \chi_{1}^{*}\left(\mathbf{x}_{1}\right) \chi_{2}^{*}\left(\mathbf{x}_{2}\right) r_{12}^{-1} \chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right) \\ &-\int \mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} \chi_{1}^{*}\left(\mathbf{x}_{1}\right) \chi_{2}^{*}\left(\mathbf{x}_{2}\right) r_{12}^{-1} \chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right) \end{aligned}
+          \end{equation}
+          如果我们引入另一种记号，来简记双电子积分
+          \begin{equation}
+            [i j | k l] =\left[\chi_{i} \chi_{j} | \chi_{k} \chi_{l}\right]\equiv\int \mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} \chi_{i}^{*}\left(\mathbf{x}_{1}\right) \chi_{j}\left(\mathbf{x}_{1}\right) r_{12}^{-1} \chi_{{k}}^{*}\left(\mathbf{x}_{2}\right) \chi_{l}\left(\mathbf{x}_{2}\right)
+            \label{double electron integral}
+          \end{equation}
+          需要注意，上式定义中，调整了波函数的位置，算符左边写第一个电子的波函数，右边是第二个电子的波函数，带星的自旋轨道在不带星的左边。如果自旋轨道都是实数，显然上述定义满足如下的对称性
+          \begin{equation}
+            [i j | k l]=[j i | k l]=[i j | l k]=[j i | l k]
+          \end{equation}
+          原本的哈密顿量双电子部分就可以写作
+          \begin{equation}
+            \langle\Psi|\frac{1}{r_{12}}| \Psi \rangle = [11|22] - [12|21]
+          \end{equation}
+          
+          经过这么一大堆折腾，我们终于回答了最初问题的一个最简单的版本，即对于一个两电子体系，一个由$\chi_1, \chi_2$构成的Slater行列式的能量期望值为
+          \begin{equation}
+            \langle \Psi|\mathscr{H}|\Psi\rangle = [1|h|1] + [2|h|2] + [11|22] - [12|21]
+          \end{equation}
+          但是从两电子往多电子的推广是平凡的，对于一个$N$电子的体系，由$\chi_1, \chi_2,\dots,\chi_N$构成的Slater行列式的能量期望值为
+          \begin{equation}
+            \langle \Psi|\mathscr{H}|\Psi\rangle =\sum_{m=1}^N [m|h|m] + \sum_{m=1}^N\sum_{n>m}^N \left([mm|nn] - [mn|nm]\right)
+          \end{equation}
+          根据双电子积分简记符号的定义(\ref{double electron integral})和积分哑指标的特性，容易发现$[mm|nn] = [nn|mm]$和$[mn|nm]=[nm|mn]$，而且当$m=n$时，$[mm|nn] - [mn|nm] = 0$，这三条允许我们去掉求和中的限制条件($n>m$)，只需要在前面加一个$1/2$，对于一个$N$电子的Slater行列式，它的能量期望值我们最终可以写成
+          \begin{equation}
+            \langle \Psi|\mathscr{H}|\Psi\rangle =\sum_{m=1}^N [m|h|m] + \frac{1}{2}\sum_{m=1}^N\sum_{n=1}^N \left([mm|nn] - [mn|nm]\right)
+          \end{equation}
+          上述$N$电子Slater行列式的结果读者可自行推导，与两电子情况差别并不大，核心点在于把跟积分无关的自由度都积分积掉，这样就只剩下了一个两电子问题，可以参照文献\cite{Szabo1989Modern}的2.3.4节。
+        \subsection{单行列式能量期望的变分}
+          按照Hartree-Fock方法的逻辑，我们期望找到一组更好的自旋轨道，使得这组自旋轨道构成的行列式能量最低。这是一种泛函的思想，即从函数形式(自旋轨道)到数(能量)的映射，我们需要变分的思想，这与微积分中学到的极值问题是一样的，我们期望寻找一个函数形式变化的极小值，也就是能量关于自旋轨道的变分等于零的那个点，对应着函数的导数等于零的极值点。
+
+          但是自旋轨道的形式也不能随便变化，比如说它们不管怎么变都要满足正交归一的要求，因此我们要求解的是一个限制条件下的变分。在微积分中，我们求条件极值的方法是拉格朗日乘子法，在变分的框架下也是一样的。我们的限制条件为
+          \begin{equation}
+            \int \mathrm{d} \mathbf{x}_{1} \chi_{a}^{*}(\mathbf{x}_{1}) \chi_{b}(\mathbf{x}_{1})=[a | b]=\delta_{a b}
+          \end{equation}
+          所以我们关于自旋轨道的“拉格朗日乘子法”的泛函形式为
+          \begin{equation}
+            \mathscr{L}\left[\left\{\chi_{a}\right\}\right]=E_{0}\left[\left\{\chi_{a}\right\}\right]-\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a}\left([a | b]-\delta_{a b}\right)
+            \label{Lagrange functional}
+          \end{equation}
+          其中$\varepsilon_{b a}$为拉格朗日乘子，如果我们假定整个泛函为实数，由于$[a | b]=[b | a]^{*}$，所有的拉格朗日乘子必须满足厄米性$\varepsilon_{b a}=\varepsilon_{a b}^{*}$。$E_0$就是单行列式的能量期望值，根据上一节的结论，它的形式为
+          \begin{equation}
+            E_{\mathrm{o}}\left[\left\{\chi_{a}\right\}\right]=\sum_{a=1}^{N}[a|h| a]+\frac{1}{2} \sum_{a=1}^{N} \sum_{b=1}^{N}[a a | b b]-[a b | b a]
+          \end{equation}
+          当自旋轨道的形式变化一点点，即$\chi_{a} \rightarrow \chi_{a}+\delta \chi_{a}$时，要想满足限制条件下的能量最小，泛函(\ref{Lagrange functional})的变分必须为零，
+          \begin{equation}
+            \delta \mathscr{L}=\delta E_{0}-\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a} \delta[a | b]=0
+          \end{equation}
+          变分与求导类似，上述等式的两个部分可以分别写作
+          \begin{equation}
+            \delta[a | b]=\left[\delta \chi_{a} | \chi_{b}\right]+\left[\chi_{a} | \delta \chi_{b}\right]
+            \label{overlap variation}
+          \end{equation}
+          \begin{equation}
+            \begin{aligned}
+              \delta E_{0}=&\sum_{a=1}^{N}\left[\delta \chi_{a}|h| \chi_{a}\right]+\left[\chi_{a}|h| \delta \chi_{a}\right]\\
+              &+\frac{1}{2} \sum_{a=1}^{N} \sum_{b=1}^{N}\left[\delta \chi_{a} \chi_{a} | \chi_{b} \chi_{b}\right]+\left[\chi_{a} \delta \chi_{a} | \chi_{b} \chi_{b}\right]+\left[\chi_{a} \chi_{a} | \delta \chi_{b} \chi_{b}\right]+\left[\chi_{a} \chi_{a} | \chi_{b} \delta{\chi_b}\right]\\
+              &-\frac{1}{2} \sum_{a=1}^{N} \sum_{b=1}^{N}\left[\delta \chi_{a} \chi_{b} | \chi_{b} \chi_{a}\right]+\left[\chi_{a} \delta \chi_{b} | \chi_{b} \chi_{a}\right]+\left[\chi_{a} \chi_{b} | \delta \chi_{b} \chi_{a}\right]+\left[\chi_{a} \chi_{b} | \chi_{b} \delta \chi_a \right]
+            \end{aligned}
+            \label{energy variation}
+          \end{equation}
+          首先看等式(\ref{overlap variation})，根据这种单电子积分符号的定义(\ref{single electron integral})，容易看出第二项是第一项的复共轭。类似的，在等式(\ref{energy variation})中，根据单电子算符和双电子算符的厄米性，第一行的两项互为复共轭，第二和第三行中，第一项和第二项互为复共轭，第三项和第四项分别互为复共轭。不但如此，第二行和第三行中，由于积分指标是哑指标可以交换，因此第一项和第三项相等，第二项和第四项相等，这可以帮助我们消去前面的$1/2$。这样一来，原本的变分的形式就被大大简化了，变为
+          \begin{equation}
+            \begin{aligned}
+              \delta \mathscr{L}=&\sum_{a=1}^{N}\left[\delta \chi_{a}|h| \chi_{a}\right]+\sum_{a=1}^{N} \sum_{b=1}^{N}\left[\delta \chi_{a} \chi_{a} | \chi_{b} \chi_{b}\right]-\left[\delta \chi_{a} \chi_{b} | \chi_{b} \chi_{a}\right]\\
+              &-\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a}\left[\delta \chi_{a} | \chi_{b}\right]+\text{复共轭} = 0
+            \end{aligned}
+          \end{equation}
+          一个数加上自己的复共轭为零，说明它是一个纯虚数或者零，因为我们假定了这个泛函是实数，因此只需要让前一部分等于零。希望读者没有忘记我们引入简化积分的记号，我们将复共轭之前的部分的完全体写出来
+          \begin{equation}
+            \begin{aligned}
+              \sum_{a=1}^{N} \int \mathrm{d} \mathbf{x}_{1} \delta \chi_{a}^{*}(1)\left\{h(1) \chi_{a}(1)+\sum_{b=1}^{N}\left[\left(\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \chi_{b}(2)\right) \chi_{a}(1)-\right.\right. \\ 
+              \left.\left. \left(\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \chi_{a}(2)\right) \chi_{b}(1)\right] -\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}(1)\right\} = 0
+            \end{aligned}
+          \end{equation}
+          由于变分是任意的，所以上式大括号中的部分等于零，稍作整理我们就能写出变分推导的结果：
+          \begin{equation}
+            \begin{aligned}
+              h(1) \chi_{a}(1)+\sum_{b=1}^{N}\left[\left(\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \chi_{b}(2)\right) \chi_{a}(1)-\right. \\ 
+              \left. \left(\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \chi_{a}(2)\right) \chi_{b}(1)\right] =\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}(1)
+            \end{aligned}
+            \label{HF GS energy variation}
+          \end{equation}
+        \subsection{库伦算符、交换算符和Fock算符}
+          我想读者也觉得上一节中最后的式子比较复杂，关键是比较长，所以人们期望引入一些记号才简化书写，有些时候，这些简化的标记也是有物理意义的。我们在这一节将引入两个新算符，并且用它们简化等式(\ref{HF GS energy variation})最后得到Hartree-Fock方程和Fock算符。
+          
+          我们是通过它们对自旋轨道的作用来定义这两个新算符的，首先是库伦算符，它通常用字母$J$或者它的花体表示
+          \begin{equation}
+            \mathscr{J}_{b}(1) \chi_{a}(1)=\left[\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \chi_{b}(2)\right] \chi_{a}(1)
+            \label{Coulomb operator}
+          \end{equation}
+          它的形式非常像一个简单的库伦相互作用，读者仔细看就会发现这就是式(\ref{HF GS energy variation})中括号内对$b$求和的第一项。我们同样希望简单求和的第二项，它的形式没有那么平凡，这是因为它的出现来源于Slater行列式的交换反对称性。我们引入交换算符，它通常用字母$K$或者它的花体表示
+          \begin{equation}
+            \begin{aligned} \mathscr{K}_{b}(1) \chi_{a}(1) &=\left[\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \chi_{a}(2)\right] \chi_{b}(1) \\ &=\left[\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \mathscr{P}_{12} \chi_{b}(2)\right] \chi_{a}(1) \end{aligned}
+            \label{Exchange operator}
+          \end{equation}
+          为了简化，我们\sout{不择手段地}使用了$\mathscr{P}_{12}$，它能交换1电子和2电子的位置。如此一来，我们就可以将等式(\ref{HF GS energy variation})简化成一个写起来比较简单的形式
+          \begin{equation}
+            \left[h(1)+\sum_{b=1}^{N} \mathscr{J}_{b}(1)-\mathscr{K}_{b}(1)\right] \chi_{a}(1)=\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}(1)
+          \end{equation}
+          再进一步，我们定义Fock算符
+          \begin{equation}
+            \hat{f} = h(1)+\sum_{b=1}^{N} \mathscr{J}_{b}(1)-\mathscr{K}_{b}(1)
+            \label{Fock operator}
+          \end{equation}
+          这样就得到了一个看上去非常简单的形式
+          \begin{equation}
+            \hat{f}  \chi_{a} =\sum_{b=1}^{N} \varepsilon_{b a}  \chi_{b} 
+            \label{fake HF equation}
+          \end{equation}
+          这个形式与我们之前给出的Hartree-Fock方程(\ref{HF equation})已经非常相似，只是右侧没有求和。
+
+          熟悉线性代数的读者可以看出，有一个求和号是因为上式中的$\chi_{a}$不是Fock算符的本征态。不出意外地，Fock算符是一个厄米算符，根据复数域上的谱定理，一定可以找到它的一组单位正交的本征态，这样就可以把求和号扔掉了。但是问题在于我们能否做这件事，换句话说，我们利用等式(\ref{fake HF equation})中的$\chi_{a}$线性组合得到的Fock算符的单位正交的本征态，能否仍然保证变分的意义，即组成的行列式能量最低呢？
+          
+          答案是肯定的。读者可以利用幺正算符的性质证明，将一组正交归一的自旋轨道$\left\{\chi_i\right\}$作幺正变换(线性组合)得到新的一组正交归一自旋轨道$\left\{\chi_i^{\prime}\right\}$，两者构成的行列式的能量期望值是相等的，即
+          \begin{equation}
+            \langle\chi_1\chi_2\cdots\chi_N|\mathscr{H}|\chi_1\chi_2\cdots\chi_N\rangle = \langle\chi_1^{\prime}\chi_2^{\prime}\cdots\chi_N^{\prime}|\mathscr{H}|\chi_1^{\prime}\chi_2^{\prime}\cdots\chi_N^{\prime}\rangle
+          \end{equation}
+          所以我们可以利用等式(\ref{Fock operator})中的Fock算符的本征态作为自旋轨道，这样构成的Slater行列式仍然是能量最低的。这样Hartree-Fock方法的推导就结束了，最终得到了一个我们在第一节中就提出的只关于单电子轨道的本征值问题
+          \begin{equation}
+            \hat{f}(\mathbf{x}_i)\chi_a^{\prime}(\mathbf{x}_i) = \varepsilon_a\chi_a^{\prime}(\mathbf{x}_i)
+          \end{equation}
+          此时的Hartree-Fock方程通常被称为Hartree-Fock方程的正则(标准)形式，解得的本征态也称为正则自旋轨道，此后如果再用到这个等式，我们将把撇去掉。当然正如我们在第一节所说的那样，这个本征值问题是非线性问题，只能通过所谓自洽场的方法求解。
 
       \section{post-Hartree-Fock方法}
         post-Hartree-Fock方法是指那些以Hartree-Fock方法得到的单电子波函数与Hatree-Fock基态为基础，计算多电子波函数的方法。我们之前介绍的FCI方法其实就是post-Hartree-Fock方法中的一个，本节中我们将简要介绍几种计算体系多电子波函数的post-Hartree-Fock方法，包括多组态相关方法(Configuration Interaction, CI)、多组态自洽场方法(Multiconfigurational Self-Consistent-Field)、耦合簇方法(Coupled Cluster)、微扰方法(Perturbation)等。
