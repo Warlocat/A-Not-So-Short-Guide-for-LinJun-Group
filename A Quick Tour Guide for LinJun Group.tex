@@ -42,7 +42,8 @@
 
   \newcommand{\bracket}[2]{\langle #1 | #2 \rangle}
   \newcommand{\bracketl}[3]{\left\langle #1 \left| #2 \right| #3 \right\rangle}
-  \newcommand{\func}{\mathrm \,}
+  \newcommand{\func}[1]{\mathrm{#1} \,}
+  \newcommand{\sinc}[1]{\mathrm{sinc} \, (#1)}
   \newcommand{\define}[2]{
     \begin{definition}
       \begin{description}
@@ -241,8 +242,335 @@
       本章包含了在王老师课题组可能用到的数学知识，但是并不是所有人所有方向都非常重要。阅读此章内容前，我们默认你掌握了基础的数学知识：单变量微积分，多元函数微积分，基础线性代数。如果自认为对此比较熟悉，可以有用到相关知识的时候再回来检索查看，如果不熟悉，还是建议阅读本章内容。对于一部分有一定意义但影响阅读连贯性的内容（例如部分证明及拓展应用），我们会将其列于附录中。\textbf{本指南不适合完全没学过线性代数的同学，如果想完整学习线性代数请参阅相关教材。}
 
       \section{简易数学回顾}
-    
+      
         数学基础的第一小节将关注于最基础的数学内容，主要是线性代数和微积分的一些知识，由于长时间不用可能有所生疏，我们就在这里作简单的回顾。熟悉此节内容的同学可以直接跳过。
+
+        \subsection{复数及复变函数基础}
+
+          相关内容参考\cite{methods_in_math_phys_liang}。
+
+          {\color{red}{\textbf{以下内容针对对于复数及复变函数非常不熟悉的读者，更深入的内容将在后面出现。}}}
+            
+          复数是实数的拓展。让我们先回顾一下从小到大的数学的学习，来看一下我们（也是整个人类）是怎么认识数的。
+            
+          首先认识的是正整数，正整数$\mathbb{Z}^+$对加法封闭\footnote{本节中，封闭的意思是对集合中的数进行某种运算的结果仍然在该集合内。}，但是对于减法就不封闭了，于是人们引入了负整数，组成了对加减法都封闭的整数$\mathbb{Z}$。整数对乘法也封闭，但是对非零除法则不封闭，于是数扩张为了有理数$\mathbb{Q}$。有理数对加减乘除都封闭，但是对于例如对角线长度、圆的周长之类的问题时就不好解决了，从而引入了无理数\sout{以及各种测度}$\mathbb{R}$。到目前为止看起来可以告一段落，但是，当人们求解实系数代数方程的时候，发现其根不一定是实数，从而引入了虚数，组成了复数$\mathbb{C}$。简单的说，数的扩充是为了更高级的运算，而复数的意思是对代数方程求根封闭。数学王子高数证明了，在复数域上，$N$次方程有$N$个根\footnote{此即为\textbf{代数基本定理}}。
+            
+          引入复数的核心就是单位虚数$i$，定义为
+          \begin{equation}
+            i=\sqrt{-1}
+          \end{equation}
+          这个定义想必对于很多人都是平凡的，对其历史不再赘述。一个一般的复数$z$，可以表示为
+          \begin{equation}
+            z=x+iy
+          \end{equation}
+          这称为复数的\textbf{代数式}，其中$x$被称为\textbf{实部}，$y$被称为\textbf{虚部}。
+          \begin{equation}
+            \begin{cases}
+              x&=\Re(z)\\
+              y&=\Im(z)
+            \end{cases}
+          \end{equation}
+          于是从某种意义上来说，复数可以看成是一个二元有序实数对$(x,y)$。复数的几何表示也自然而然地对应一个二维平面\footnote{即\textbf{复平面}}。
+
+          对于每一个$z=x+iy$，存在一个复数$x-iy$。这个复数与原复数实部相同而虚部符号相反，其被称为$z$的共轭复数，记为$z^*$\footnote{也有一些书上采用记号$\bar{z}$}。复数和其共轭复数的乘积必然是实数，对此的证明是平凡的，利用$i$的定义即可。
+            
+          复数也可以用极坐标$\rho$和$\phi$来表示。
+          \begin{equation}
+            \begin{cases}
+              \rho&=\sqrt{x^2+y^2}\\
+              \phi&=\arctan(\frac{y}{x})
+            \end{cases}\ \begin{cases}
+              x&=\rho\cos\phi\\
+              y&=\rho\sin\phi
+            \end{cases}
+          \end{equation}
+          则复数可以表示为\textbf{三角式}
+          \begin{equation}
+            z=\rho\qty(\cos\phi+i\sin\phi)
+          \end{equation}
+          或\textbf{指数式}
+          \begin{equation}
+            z=\rho e^{i\phi}
+          \end{equation}
+          其中$\rho$称为复数的\textbf{模}，而$\phi$称为复数的\textbf{辐角}。若$0\leq\phi<2\pi$，则称为\textbf{辐角主值}。
+          \begin{equation}
+            \begin{cases}
+              \rho&=\abs{z}\\
+              \phi&=\arg\qty(z)
+            \end{cases}
+          \end{equation}
+          以下运算结论利用定义即可得到，在此直接给出结论：对于
+          \begin{equation*}
+            \begin{cases}
+              z_1=x_1+iy_1=\rho_1 e^{i\phi_1}\\
+              z_2=x_2+iy_2=\rho_2 e^{i\phi_2}
+            \end{cases}
+          \end{equation*}
+          有
+          \begin{eqnarray}
+            z_1+z_2&=&\qty(x_1+x_2)+i\qty(y_1+y_2)\Rightarrow\abs{z_1+z_2}\leq\abs{z_1}+\abs{z_2}\\
+            z_1-z_2&=&\qty(x_1-x_2)+i\qty(y_1-y_2)\Rightarrow\abs{z_1-z_2}\geq\abs{z_1}-\abs{z_2}\\
+            z_1z_2&=&\qty(x_1x_2-y_1y_2)+i\qty(x_1y_2+x_2y_1)=\rho_1\rho_2 e^{i\qty(\phi_1+\phi_2)}\\
+            \frac{z_1}{z_2}&=&\frac{x_1x_2+y_1y_2}{x_2^2+y_2^2}+i\frac{x_2y_1-x_1y_2}{x_2^2y_2^2}=\frac{\rho_1}{\rho_2}e^{i\qty(\phi_1-\phi_2)}
+          \end{eqnarray}
+          复数减法是加法的逆运算，除法是乘法的逆运算；加法满足交换律、结合律，乘法满足交换律、结合律、分配律，这与实数是一致的。对于$n\in\mathbb{Z},z=\rho e^{i\phi}$，
+          \begin{eqnarray}
+            \label{z_n}
+            z^n=\rho^ne^{in\phi}\\
+            \label{sqrt_n_z}
+            \sqrt[n]{z}=\sqrt[n]{\rho}e^{i\frac{\phi}{n}}
+          \end{eqnarray}
+          对于\ref{z_n}，要注意区别$\abs{z}^2$，$\abs{z^2}$和$z^2$；对于\ref{sqrt_n_z}，注意到由于辐角$\phi$改变$2\pi$之后复数仍然是同一个数，因此原则上$\sqrt[n]{z}$可以有$n$个取值，这是不同于实数开根号的。
+
+          下面简要地介绍一下复变函数。对于某一复数集$E$（比如全体复数集$\mathbb{C}$），对于集合中任一复数$z$，按照一定的规律，存在\textbf{一个或多个}复数值$w$与之对应，则称$w$是$z$的函数，该函数称为\textbf{复变函数}，$z$为$w$的\textbf{宗量}\footnote{本质上和实变函数的\textbf{自变量}没有区别}，$E$为定义域，记为
+          \begin{equation}
+            w=f\qty(z),\ z\in E
+          \end{equation}
+          举一些具体而常见的例子。
+          \begin{eqnarray*}
+            f\qty(z)&=&a_0+a_1z^1+a_2z^2+\cdots+a_nz^n,\ n\in\mathbb{Z}^+\\
+            f\qty(z)&=&\frac{a_0+a_1z^1+a_2z^2+\cdots+a_nz^n}{b_0+b_1z^1+b_2z^2+\cdots+b_mz^m},\ m,n\in\mathbb{Z}^+\\
+            f\qty(z)&=&\sqrt{z-a}\\
+            e^z&=&e^xe^{iy}\\
+            \sin z&=&\frac{e^{iz}-e^{-iz}}{2i}\\
+            \cos z&=&\frac{e^{iz}+e^{-iz}}{2}\\
+            \sinh z&=&\frac{e^z-e^{-z}}{2}\\
+            \cosh z&=&\frac{e^z+e^{-z}}{2}\\
+            \ln z&=&\ln(\abs{z}e^{i\arg{z}})=\ln\abs{z}+i\arg\qty(z)\\
+            z^s&=&e^{s\ln z},\ s\in\mathbb{C}
+          \end{eqnarray*}
+          可以看出，$\sin$和$\cos$具有实周期$2\pi$，且其\sout{绝对值}模不再小于等于$1$；$e^z$，$\sinh z$和$\cosh z$具有纯虚周期$2\pi i$；对数函数$\ln z$具有无穷多取值\footnote{和开方可以多值原因相同，即辐角可以任意改变$2\pi$之后复数仍然是同一个数}，且负数的对数在复数域下有意义。
+
+        前述已经提到，复数可以看成二元有序实数对，即$z=\qty(x,y)$，这可以拓展到复变函数上，即将复变函数$f(z)$分为实部和虚部两部分，记为
+            \begin{equation}
+              f\qty(z)=u\qty(x,y)+iv\qty(x,y)
+            \end{equation}
+            即一对二元实变函数，并且可以适用许多实变函数论的性质\sout{然而本教程并不会涉及相关内容}。但是，我们仍然需要研究完整的复变函数而不是两个孤立的二元实变函数，这一点可以很明显地体现在复变函数的导数上。
+
+            让我们回忆以下多变量微积分的内容。二元实变函数$f(x,y)$只有偏导数$f_x=\pdv{f}{x}$和$f_y=\pdv{f}{y}$，以及全微分$\dd{f}=f_x\dd{x}+f_y\dd{y}$\footnote{让我们暂时忘掉那些小量、邻域之类的鬼东西吧，物理和化学上的函数\textbf{原则上}都是无穷阶可导的光滑函数\sout{,当然，有原则就会有例外}。}。这很好，但是复变函数有更好的，导数：
+            \begin{equation}
+              \dv{f}{z}=f'\qty(z)=\lim_{\Delta z\rightarrow0}{\frac{f\qty(z+\Delta z)-f\qty(z)}{\Delta z}}
+            \end{equation}
+            当然，类似于二元实变函数的极限，我们需要极限存在并且与$\Delta z\rightarrow0$无关。于是，我们就有了一系列很棒的性质。
+            \begin{equation*}
+              \begin{cases}
+                \dv{z}\qty(w_1\pm w_2)=\dv{w_1}{z}\pm\dv{w_2}{z}\\
+                \dv{z}\qty(w_1w_2)=\frac{\ud w_1}{\ud z}w_2+w_1\frac{\ud w_2}{\ud z}\\
+                \dv{z}\qty(\frac{w_1}{w_2})=\frac{w'_1w_2-w_1w'_2}{w_2^2}\\
+                \dv{w}{z}=\qty(\dv{z}{w})^{-1}\\
+                \dv{z}F\qty(w)=\dv{F}{w}\cdot\dv{w}{z}
+              \end{cases}\ \begin{cases}
+                \dv{z}z^n=nz^{n-1},n\in\mathbb{Z}\\
+                \dv{z}e^z=e^z\\
+                \dv{z}\sin z=\cos z\\
+                \dv{z}\cos z=-\sin z\\
+                \dv{z}\ln z=\frac{1}{z}
+              \end{cases}
+            \end{equation*}
+            可以看出，复变函数和实变函数非常类似但是又有区别。
+
+            关于复变函数就暂时介绍到这里，后面会有更加详细而繁难的内容。
+
+          \subsection{线性空间，线性映射与矩阵}
+
+            对于矢量空间的数学定义，我们不做仔细讨论，简单地说，我们在某个数域$\mathbb{F}$\footnote{下文中$\mathbb{F}=\mathbb{R}$或$\mathbb{C}$，不再赘述}上定义了一个非空集合$V$，这个$V$中的元素满足加法交换律，对于数乘运算满足结合律，分配律等，而且数乘和加法的运算关于集合$V$是封闭的，我们就称$V$是一个线性空间，或者矢量空间，矢量空间内的元素称为矢量/向量。我们按照定义证明物理中的三维空间矢量是实数域上定义的线性空间，另外我们可以在矢量空间中定义内积和两个矢量的夹角，普适定义不再展开，本指南中将用最朴素的内积\footnote{$\mean{a,b}=\sum_{i=1}^n{a_i^*\times b_i},\ a,b\in\mathbb{F}^n$}，长度\footnote{矢量$a$的长度$\norm{a}=\sqrt{\mean{a,a}}$}和矢量夹角\footnote{$\theta_{a,b}=\arccos(\frac{\mean{a,b}}{\norm{a}\cdot\norm{b}})$}定义方式，在三维实空间下就是我们熟知的矢量模和夹角形式。
+
+            对于线性空间中的向量，我们可以做线性组合，对于线性空间中的元素$\qty{\vb*{a}_1,\vb*{a}_2,\vb*{a}_3,\dots,\vb*{a}_N}$，如果存在不全为零的系数$\qty{\lambda_i}$使得
+            \begin{equation}
+              \lambda_1\vb*{a}_1+\lambda_2\vb*{a}_2+\cdots+\lambda_N\vb*{a}_N=\vb*{0}
+            \end{equation}
+            则称这个矢量组$\qty{\vb*{a}_1,\vb*{a}_2,\vb*{a}_3,\dots,\vb*{a}_N}$的元素\textbf{线性相关}，否则称为\textbf{线性无关}。线性相关的向量意味着其中一个可以用其他向量的线性组合表示，也就是他们并不是独立的。在一个线性空间中可以找到的最大的线性无关向量组的个数称为这个线性空间的维度，比如在三维空间内我们最多可以找到三个线性无关的矢量，通常选用三个单位正交矢量。需要注意，线性无关不代表正交，二维空间内夹角为1度的两个矢量也是线性无关的\footnote{但是总可以通过Gram-Schmidt正交化或者其他正交化方法从一组线性无关的矢量构建同样个数的正交矢量}。这个最大的线性无关矢量组，就可以作为这个空间的基矢量，线性空间中的任何一个矢量都可以写成基矢量的线性组合。
+            
+            这个线性组合的系数通常是我们所关心的东西，在一组基矢量$\qty{\vec{e}_i}$下，这个线性空间的任何向量都可以表示为
+            \begin{equation}
+              \vec{f}=\sum_i^N{c_i\vec{e}_i}
+            \end{equation}
+            在定义了基矢量之后，我们没有必要每次都把基矢量写出来，因为一组完备的系数组就足够描述这个矢量。我们通常用一个含有N个(空间维度)元素的数组来表示一个矢量，比如说三维空间中的$(c_1,c_2,c_3)$。在这之后，我们可以定义一种映射$\mathcal{O}$，它把线性空间$V_1$内的元素映射到另一个线性空间$V_2$下，并且满足线性性，即
+            \begin{equation}
+              \mathcal{O}\qty(\lambda\vb*{a}+\mu\vb*{b})=\lambda\mathcal{O}\qty(\vb*{a})+ \mu\mathcal{O}\qty(\vb*{b})
+            \end{equation}
+            则称$\mathcal{O}$是从$V_1$到$V_2$的\textbf{线性映射}\footnote{也称为\textbf{线性变换}}，如果$\mathcal{O}$是把一个矢量映射到自己的线性空间，则称为\textbf{线性算子}。我们知道，如果这个映射对于矢量空间的基矢量定义好了，所有矢量的映射就都定义好了。我们对基矢量中的$\vec{e}_i$做线性变换，由于其仍然位于这个线性空间下，所以变换完的矢量$\mathcal{O}(\vec{e}_i)$可以写成所有基矢量的线性组合：
+            \begin{equation}
+              \mathcal{O}(\vec{e}_i)=\sum_j^N{O_{ij}\vec{e}_j}
+            \end{equation}
+            式中的$O_{ij}$可以认为是一个矩阵的矩阵元，这样一个线性变换就和一个矩阵一一对应\footnote{线性算子对应方矩阵，线性映射对应全部矩阵}，而这个映射的逆映射也就与这个矩阵的逆矩阵相对应。同样的，对于一个矩阵
+            \begin{equation}
+              \vb*{A}=\mqty(
+                A_{11} & A_{12} & \cdots & A_{1 M} \\
+                A_{21} & A_{22} & \cdots & A_{2 M} \\
+                \vdots & \vdots & {} & \vdots \\
+                A_{N 1} & A_{N 2} & \cdots & A_{N M}
+              )
+            \end{equation}
+            都对应着一个线性映射，对于一个写成列向量的$M$维矢量
+            \begin{equation}
+              \vb*{a}=\mqty(
+                a_1 \\
+                a_2 \\
+                \vdots \\
+                a_M
+              )
+              \label{column vector}
+            \end{equation}
+            矩阵$\vb*{A}$可以将其转化为一个$N$维矢量$\vb*{b}$
+            \begin{equation}
+              \begin{aligned}
+                \vb*{A} \vb*{a}&=\vb*{b} \\
+                b_i=\sum_{j=1}^M{A_{i j} a_j} &\quad i=1,2, \ldots, N
+              \end{aligned}
+              \label{linear transformation}
+            \end{equation}
+
+            有一种线性算子，它满足在变换前后矢量的模长不变，这个性质保证了原本正交归一的基矢量在变换后是另一组正交归一的基矢量，这个性质在量子力学的表象变换中至关重要，这类变换称为\textbf{正交(orthogonal)变换}，正交变换对应的矩阵为\textbf{正交矩阵}\footnote{不同书的名称不同，也有称为\textbf{等距同构}}，即满足
+            \begin{equation}
+              \vb*{A}\vb*{A}^\mathsf{T}=\vb*{I}
+            \end{equation}
+            其中$^\mathsf{T}$为转置符号，$\vb*{I}$为单位矩阵，容易证明，满足这样条件的矩阵对应的线性变换是保持矢量模长的，证明\sout{留作习题}可见于附录\ref{orthogonal_matrix_properties}\footnote{该部分内容可能需要对复数以及复空间有一定的了解，对此不了解的请先阅读正文的相关章节}。
+
+          \subsection{行列式}
+            行列式在线性代数的书中有多种等价定义，为了与讲解量子化学推导内容的一致性，我们选用排列法的定义，即对于一个方矩阵
+            \begin{equation}
+              \det\qty(\vb*{A})=\abs{\vb*{A}}=\mdet{
+                A_{11} & \cdots & A_{1 N} \\
+                \vdots & {} & \vdots \\
+                A_{N 1} & \cdots & A_{N N}
+              }=\sum_{i=1}^{N !}{\qty(-1)^{p_i} \mathscr{P}_i A_{1i_1} A_{2i_2} \cdots A_{N i_N}}
+              \label{determinants defination}
+            \end{equation}
+            其中$\mathscr{P}_i$是排列算符，它的意义是给出一种列指标$1,2,3,\dots,N$的排列，求和就是关于所有的$N!$种排列求和，$p_i$是从自然序排列(1,2,3,\dots,N)出发得到排列$\mathscr{P}_i$所需要的近邻交换操作的个数。看似非常复杂，让我们以$3\times3$矩阵为例说明这个操作是如何实现的。
+
+            对于$3\times3$矩阵的矩阵元乘积$A_{1i_1} A_{2i_2}A_{3i_3}$的排列总有$3!=6$种，即$i_1,i_2,i_3$分别等于$1,2,3$，$1,3,2$，$2,3,1$，$2,1,3$，$3,1,2$和$3,2,1$，接下来就是计算每种排列对应的$p_i$，即从$1,2,3$实现该排列所需要的近邻交换操作的个数，分别是$0,1,2,1,2,3$\footnote{你可能算出来跟我差一个偶数，但根据式(\ref{determinants defination})这不重要}，所以$3\times3$矩阵的行列式计算表达式为
+            \begin{equation}
+              \det(\vb*{A})=A_{11} A_{22}A_{33}-A_{11} A_{23}A_{32}+A_{12} A_{23}A_{31}-A_{12} A_{21}A_{33}+A_{12} A_{21}A_{32}-A_{13} A_{22}A_{31}
+            \end{equation}
+            可以看到与用Laplace展开定义的结果一致。
+
+            矩阵的行列式最重要的一些性质有：如果矩阵不满秩(这个矩阵的每一列或者每一行单独写成一个向量，他们线性相关)，矩阵的行列式为0，矩阵就没有对应的逆矩阵\footnote{矩阵有逆矩阵，等价于行列式不为0，没有逆矩阵的矩阵对应的线性映射也是不可逆的(损失信息)}；$\abs{\vb*{A B}}=\abs{\vb*{A}}\abs{\vb*{B}}$；任意交换行列式中的两列(行)，矩阵行列式反号。
+
+          \subsection{特征值与特征向量}
+            在线性代数课程中，特征值与特征向量可能不被特别重视，\sout{当然主要原因是需要重视的东西太多了，}但是在物理学、工程的诸多应用中，特征值与特征向量几乎是整个线性代数最常用的一块知识点。
+
+            线性代数中定义，如果矩阵$\vb*{A}$右乘一个向量$\vb*{X}$恒等于一个数$\lambda$乘以这个向量
+            \begin{equation}
+              \vb*{AX}=\lambda\vb*{X}
+              \label{eigen defination}
+            \end{equation}
+            那么向量$\vb*{X}$称为矩阵$\vb*{A}$的对应特征值$\lambda$特征向量。如何求解特征值和特征向量其实非常简单，先假设特征向量存在，就有
+            \begin{equation}
+              \vb*{AX}-\lambda\vb*{I}\vb*{X}=\qty(\vb*{A}-\lambda\vb*{I})\vb*{X}=0
+              \label{eigen defination2}
+            \end{equation}
+            当$\vb*{X}$不是零向量时，要求左边乘以它的矩阵的行列式为0，由此得到
+            \begin{equation}
+              \det\qty(\vb*{A}-\lambda\vb*{I})=0
+              \label{eigen equ}
+            \end{equation}
+            就可以求出特征值，将特征值代入(\ref{eigen defination})或(\ref{eigen defination2})就可以求出对应的特征矢量。其实可以看到一个特征值对应的特征矢量构成了一个线性空间，称为特征子空间。
+
+            在应用中，我们经常需要将一个矩阵对角化，即通过线性变换使得矩阵变成对角阵，对角化通常是使用特征值与特征向量的方法。如果$n\times n$矩阵$\vb*{A}$有$n$个特征值，对应$n$个特征向量，\sout{物理里的矩阵性质都很好的，}首先求出矩阵对应的特征值和(模为1)特征向量，将这些特征向量按列向量的形式组合成一个矩阵
+            \begin{equation*}
+              \vb*{S}\equiv\mqty[x_1 & \cdots & x_n]
+            \end{equation*}
+            计算矩阵$\vb*{A}$乘以$\vb*{S}$
+            \begin{equation}
+              \begin{aligned}
+                \vb*{A S}=\vb*{A}\mqty[x_1 & \dots & x_n]=\mqty[\lambda_1 x_1 & \cdots & \lambda_n x_n]= \\
+                \mqty[x_1 & \dots & x_n] \mqty[
+                  \lambda_1 & {} & {} \\
+                  {} & \ddots & {} \\
+                  {} & {} & \lambda_n
+                ]=\vb*{S }\Lambda
+              \end{aligned}
+            \end{equation}
+            其中$\Lambda$是由矩阵$\vb*{A}$的$n$个特征值构成的对角矩阵，所以我们得到
+            \begin{equation}
+              \vb*{S^{-1}AS}=\Lambda
+            \end{equation}
+            这就得到了一个对角阵。
+
+            什么样的矩阵可以对角化是一个很复杂的问题，我们只给出一个充分条件，实对称矩阵(矩阵和它的转置相等)一定可以在实数范围内对角化得到实数特征值，并且不同特征值对应的特征矢量是正交的\footnote{这是实谱定理的一部分，参考附录\ref{spectral_theorem}}。而与之相反的是反对称矩阵(矩阵和它的转置相差负号)，反对称矩阵在实数范围内无法对角化\footnote{除了极少数反对称矩阵，如矩阵元全是零的零矩阵$\vb*{O}$}。
+      
+          \subsection{向复数域推广}
+            接下来做推广，上述矢量空间均为定义在实数域上的，可以不做任何额外修正，完全转化到复数域，矩阵元，向量的分量，都可以为复数。在这个意义下，我们习惯将一个矢量写成列矢量的形式，就像式(\ref{column vector})那样。我们定义矩阵和向量的共轭转置，用$^\dagger$符号表示
+            \begin{equation}
+              \begin{aligned}
+                \qty(\vb*{A}^\dagger)_{i j}=A_{j i}^* \\
+                \vb*{a}^\dagger=\mqty(a_1^*\ a_2^*\ \cdots\ a_M^*)
+              \end{aligned}
+            \end{equation}
+            在复数域的线性空间内，矢量的内积定义为行矢量和列矢量的乘积
+            \begin{equation}
+              \mean{a,b}=\vb*{a}^\dagger\vb*{b}=\mqty(a_1^*\ a_2^*\ \cdots\ a_M^*) \mqty(
+                b_1 \\
+                b_2 \\
+                \vdots \\
+                b_M
+              )=\sum_{i=1}^M{a_i^* b_i}
+              \label{inner product in row and column }
+            \end{equation}
+            可以看到，$\vb*{a}=\vb*{b}$时，我们可以定义的矢量模平方，在复数域上刚刚好是矢量每个元素的模的平方和。在复数域下，矩阵原本的很多性质都得到保持，只是简单地向复数域的推广，毕竟实数域是复数域的一部分，向更全的集合的推广往往能得到更加普适的性质。
+
+            在复数域上有很多特殊的矩阵，比如\textbf{幺正(unitary)矩阵}\footnote{由于翻译问题部分教材称为\textbf{酉矩阵}}，是正交矩阵的推广，满足
+            \begin{equation}
+              \vb*{A}\vb*{A}^\dagger=\vb*{I}
+              \label{unitary def}
+            \end{equation}
+            在复数域上保持矢量模不变的线性变换，对应的就是幺正矩阵。而实对称矩阵的推广就是\textbf{厄米(Hermite)矩阵}\footnote{也称为\textbf{自伴(self-adjoint)矩阵}}，厄米矩阵定义多种多样，我们取其中最简单的一种，即
+            \begin{equation}
+              \vb*{A}=\vb*{A}^{\dagger}
+            \end{equation}
+            可以看出，如果矩阵元都是实数，厄米矩阵就是实对称矩阵。厄米矩阵和实对称矩阵的性质相似：具有实数的特征值，并且不同特征值对应的特征向量正交。厄密矩阵的另一种定义为\footnote{也是“自伴”这一名称的来源，$\vb*{A}$的伴随矩阵$\vb*{A}^\dagger$的定义为$\mean{u,\vb*{A}v}=\mean{\vb*{A}^\dagger u,v}$}
+            \begin{equation}
+              \mean{u,\vb*{A}v}=\mean{\vb*{A}u,v}
+            \end{equation}
+
+            最后讨论一种特殊的矩阵，正规矩阵，定义为
+            \begin{equation}
+              \vb*{A}\vb*{A}^\dagger=\vb*{A}^\dagger\vb*{A}
+            \end{equation}
+            从这个定义看出，厄米矩阵和幺正矩阵都是正规矩阵。我们介绍在复数域上正规矩阵的谱定理，证明\sout{留作习题}参考附录\ref{spectral_theorem}。
+            \begin{theorem}
+              设我们在复数域上定义线性空间$V(F),F=C$且$\vb*{A}$是这个线性空间的一个线性算子，则以下条件等价：\\
+              1.$\vb*{A}$是正规的；\\
+              2.$V$有一个由$\vb*{A}$的本征向量构成的正交归一基；\\
+              3.$\vb*{A}$在$V$的某个正交归一基下是对角矩阵。
+            \end{theorem}
+
+          \subsection{向函数空间推广}
+            学完线性代数大家都知道，一个线性空间可以由一组基矢量来描述，我们生活的三维空间可以用三个相互正交的单位矢量做展开，看起来都是平凡的。但是线性空间的定义远远不限于通常的“矢量”的空间，你学完现代的时候可能并不会意识到函数空间其实也是线性空间。
+
+            以最简单的多项式为例，首先我们写成一个任意的n阶多项式
+            \begin{equation}
+              P_n(x)=\sum_{i=0}^n{c_i x^i}
+            \end{equation}
+            可以看到，它也是由n个小函数$\qty{1,x,x^2,x^3,\dots,x^n}$线性组合成的，而且如果这个多项式恒等于0的话，我们必须要求每一个系数$c_i$都等于0，如果回忆一下线性无关的定义，我们就会发现这几个函数其实是线性无关的，而且这n个函数已经能表示出任意一个n阶多项式，你可以回顾线性空间的定义，n阶多项式的集合其实是一个n维线性空间，就可以选用$\qty{1,x,x^2,x^3,\dots,x^n}$作为这个线性空间的一个基。
+
+            那么这组基矢量是否正交呢，这就涉及到一个复杂的问题，函数的内积怎么定义，我们上文中其实没有展开内积的定义，我们此处也不深究。矢量的内积通常为对应系数乘积求和，函数的内积通常定义为在某个空间内，两个函数乘积的积分，即
+            \begin{equation}
+              \mean{f,g}=\int_a^b{\dd{x} f\qty(x)g\qty(x)}
+            \end{equation}
+            如果这两个函数是复函数，上式的定义中通常将$f\qty(x)$换为它的复共轭$f^*\qty(x)$，如果取积分是从$-1$到$1$，可以看到上面我给出的这组基是不正交的(当然这不影响他们线性无关)。接下来，我们做一个不那么平凡的推广，那就是任意多项式的集合也是一个线性空间，维数为无穷\footnote{从有限到无穷的推广通常不能这么随意}，有无穷多个函数构成的基矢量组，我们也可以用类似Gram-Schmidt 正交化的方法来定义一组正交基，读者如果有兴趣，可以从我们给出的这组基出发，做Gram-Schmidt 正交化，就会得到勒让德多项式(会相差一个系数，但是系数不影响正交性)。
+
+            同样，很多函数空间，比如全体平方可积函数(函数平方在全空间积分为有限值)的集合，全体连续函数的集合，全体一阶导连续函数的集合等等，都可以构成一个线性空间，当然它们都是无穷维的。我们常见的基函数也有很多种，比如上面提到的勒让德多项式，它虽然复杂，但只是一组多项式而已，如果大家的微积分学的不错，应该会想到，傅里叶级数其实就是把函数在三角函数基上展开，并且求解这个展开系数。
+            
+            波函数通常被说成是一个希尔伯特空间\footnote{编者并不是很确定这个线性空间的严格数学定义，物理上通常就说平方可积的函数的集合是希尔伯特空间}的态矢量，所以有时候它写成函数，有时候又可以用矩阵力学的语言写成一个向量，而最终就会发现，它们是等价的。
+      
+        \section{符号使用}
+          在量子力学相关领域，人们使用“左矢”（bra）和“右矢”（ket）来描述一个“状态”。我们可以先简单地认为右矢代表了一个列向量，左矢则代表了一个行向量。它们是这么表示的：
+          \begin{equation*}
+            \ket{\xi} \rightarrow \text{右矢}, \bra{\xi} \rightarrow \text{左矢}    
+          \end{equation*}
+          我们知道，一个行向量和列向量相乘能够得到一个实数，这也可以理解为两个行向量进行内积的过程，比如两个右矢$\ket{\xi_1}$和$\ket{\xi_2}$，此时它表示为
+          \begin{equation*}
+            \bra{\xi_1}\ket{\xi_2}
+          \end{equation*} 
+          当然量子力学远不止于此，它有可能包括了各种奇奇怪怪的东西，使得它并不能完全用向量来描述，比如在线性代数里我们有时候需要用矩阵，在量子力学里它们统统被概括为算符。算符是作用在矢量上的。如果你学过张量分析/矢量代数，你还可以认为它代表了一个张量。有些人们喜欢用$\hat{Q}$类似这样的形式来表达一个算符（也就是加个帽子），也有些人喜欢用粗体，比如$\vb*{Q}$这样来表达，也有人不加任何东西\footnote{没错就是发明这一套符号系统的\Large{Dirac}大佬。}，只要它“在该在的地方”就可以识别为一个算符。算符放在左矢的右边，或者右矢的左边，或者左矢和右矢的中间，也就是
+          \begin{equation*}
+            \hat{Q}\ket{\xi},\bra{\xi}\hat{Q}, \mel**{\xi_1}{\hat{Q}}{\xi_2}   
+          \end{equation*}
+          到了这里，当然就会出现作用顺序（方向）的问题。不过其实这一套和线性代数非常相像\footnote{事实上这一套就是线性代数——也就是海森堡开发的矩阵力学的核心，量子力学就是线性代数（并不是）}，算符默认是作用在右边的，如果需要作用在左矢，那么对应的算符为原算符的厄米共轭（Hermite Conjugate），用$\hat{Q}^\dagger$来表达。那么某种程度上，左矢代表的是右矢的共轭转置，左矢和右矢相作用得到的是两者的内积。
+
+          当然这么说可能很难有感觉这些到底是什么东西，让我们再换一种方式来表达。算符，变换，这些东西实则上都代表了类似于函数的概念，也就是传进去一个东西，传出去另一个东西，这两个东西可以相等，可以完全不是同一类。而左矢和右矢则代表了可以传进去的“参量”，并经过算符作用后得到了另一个左矢或右矢。比如一个关于$x$的函数$f\qty(x)$，经过求导算符$\dv{x}$作用后得到它的导函数$f'\qty(x)$，实则上也没有脱离这样的描述体系\sout{,从而为Dirac说明海森堡的矩阵力学和薛定谔的波动力学是等价表述做好了铺垫}\footnote{\sout{从数学的角度来说，\textbf{函数}是“数集合到数集合的\textbf{映射}”（回忆一下你的高中数学必修一第一章的内容），那么\textbf{算符}一般认为是“函数到函数的映射”，而常常听到的、令人头大的\textbf{泛函}则是函数到数的映射。}}。
 
         \subsection{复数及复变函数基础}
 
@@ -264,6 +592,60 @@
           \end{equation}
           这称为复数的\textbf{代数式}，其中$x$被称为\textbf{实部}，$y$被称为\textbf{虚部}。
           \begin{equation}
+            \varepsilon_{ijk}\varepsilon_{kmn} = \varepsilon_{kij} \varepsilon_{kmn} = \delta_{im} \delta_{jn} - \delta_{in}\delta_{jm}
+          \end{equation} 
+          我们可以这么想这个公式：由于$i,j,k,m,n$都是取三个坐标元，保持$k$一致后其余的指标的选择是非常有限的，然后就能很容易想明白上式是如何推出来的。
+
+          \textbf{梯度}算符是在矢量代数中比较重要的算符，但它也并不神秘，它其实就代表了向各个维度求一阶导的“向量”。比如
+          \begin{equation*}
+            \grad{f}=\qty(\pdv{f}{x},\pdv{f}{y},\pdv{f}{z})\equiv\pdv{f}{x_i}\equiv\partial_i f
+          \end{equation*} 
+          那么与此对应，求一个向量的\textbf{散度}也很容易：
+          \begin{equation*}
+            \div{\vb*{a}} = \partial_i a_i 
+          \end{equation*} 
+          \textbf{旋度}也很简单：
+          \begin{equation*}
+            \curl{\vb*{a}} = \varepsilon_{ijk} \vb*{e}_i \partial_j a_k
+          \end{equation*} 
+          但这些东西能够延伸的内容是非常丰富的。比如对$\vb*{r} = (x,y,z)$，有
+          \begin{align}
+            &\div{\vb*{r}} = 3 \\
+            &\curl{\vb*{r}} = 0 \\
+            &\curl{(\grad{f})} = 0 \\
+            &\grad{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} = \frac{-\qty(\vb*{r}-\vb*{r}')}{\abs{\vb*{r}-\vb*{r}'}^3} = - \grad'{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} \\
+            &\curl{\qty(r^n \vb*{r})} = 0 
+          \end{align}
+          读者有兴趣可以自行证明。对此感兴趣的读者可进一步阅读附录\ref{tensor_higher}。\\
+
+          {\color{red}{\textbf{Warning: 前方高能！非\sout{战斗人员}相对论量子力学相关读者请迅速撤离！！！}}}
+
+          张量分析在矢量代数的基础上考虑了坐标系自身的影响，比如，这个坐标系的各个基向量之间是不互相正交的。此时向量之间的内积自然就不能简单地利用向量系数的相乘。为了方便地搞定这个事情，张量分析使用了“协变张量”和“逆变张量”的概念。“协变张量”是我们所熟悉的张量，而“逆变张量”则代表了与它相对应的另一种张量\footnote{\sout{好了好了我知道我中文很菜}}。
+
+          比如我们有两个基向量$\vb*{i}_1,\vb*{i}_2$，他们满足
+          \begin{equation*}
+            \vb*{i}_1 \cdot \vb*{i}_1 = \vb*{i}_2 \cdot \vb*{i}_2 = 1, \quad \vb*{i}_1 \cdot \vb*{i}_2 = \cos{\varphi}
+          \end{equation*} 
+          甚至还不止于此，我们有两个非归一的基向量
+          \begin{equation*}
+            \vb*{g}_1 = \abs{\vb*{g}_1} \vb*{i}_1, \vb*{g}_2 = \abs{\vb*{g}_2} \vb*{i}_2
+          \end{equation*} 
+          此时两个向量$\vb*{p},\vb*{q}$ 的内积直接写起来是非常复杂的。但我们可以通过代数方程构建这两个基向量对应的逆变基矢量$\vb*{g}^1,\vb*{g}^2$，使
+          \begin{equation*}
+            \vb*{g}^1 \cdot \vb*{g}_2  = 0, \quad \vb*{g}^1 \cdot \vb*{g}_1 = \vb*{g}^2 \cdot \vb*{g}_2 = 1 
+          \end{equation*} 
+          也就是
+          \begin{equation*}
+            \vb*{g}^i \cdot \vb*{g}_j = \delta^i_j
+          \end{equation*}
+          我们就可以方便地写出两个向量的内积，
+          \begin{equation*}
+            \mean{\vb*{p},\vb*{q}} = p^i \cdot q_i
+          \end{equation*} 
+          其中上标的向量表示通过逆变基向量线性组合得到的逆变向量，下标为对应的协变向量。
+
+          这样我们就在一定程度上解决了坐标系自身带来的影响。那么对协变向量/逆变向量自然存在对应的线性变换
+          \begin{equation*}
             \begin{cases}
               x&=\Re(z)\\
               y&=\Im(z)
@@ -829,7 +1211,7 @@
           \end{equation*} 
           利用延迟定理，
           \begin{equation*}
-            \mathcal{F}[f_1 * f_2] = \frac{1}{2\pi} \int ^\infty_{-\infty} f_1(\xi) e^{-k\xi} \, d\xi \cdot 2\pi F_2(k) = 2\pi F_1(k)F_2(k)
+            \mathcal{F}[f_1 * f_2] = \frac{1}{2\pi} \int ^\infty_{-\infty} f_1(\xi) e^{-i k\xi} \, d\xi \cdot 2\pi F_2(k) = 2\pi F_1(k)F_2(k)
           \end{equation*} 
         \end{proof}
 
@@ -1776,7 +2158,7 @@
     
 
     \chapter{量子化学-电子结构基础}
-      量子化学(电子结构)部分，我们将简要介绍常见的电子结构计算方法，所谓电子结构方法，即求解分子(或者固体)体系的定态\sch 的方法，大家都知道，多体的SE是难以求得精确的解析结果的，因此量子化学某种程度上也是各类近似方法及其如何一步步逼近精确解的简介，本节会\textbf{简要}介绍基于分子电子结构计算的Hartree-Fock理论，DFT理论，post-Hartree-Fock理论(包括组态相关CI，耦合簇方法CC，多组态自洽场方法MCSCF，多体微扰理论等)，编者还在最后加入了简化版的电子(费米子)二次量子化的内容。限于篇幅，上述理论的证明几乎全部略去，暂时也不涉及关于固体理论的相关计算。本节内容与王老师高等物理化学-量子化学课程内容相似。\footnote{由于王老师课题组对这部分的需求较低，我们在更新上可能会将此章更新后推。}
+      量子化学(电子结构)部分，我们将简要介绍常见的电子结构计算方法，所谓电子结构方法，即求解分子(或者固体)体系的定态\sch 方程的方法，大家都知道，多体的SE是难以求得精确的解析结果的，因此量子化学某种程度上也是各类近似方法及其如何一步步逼近精确解的简介，本节会\textbf{简要}介绍基于分子电子结构计算的各种理论，包括Hartree-Fock方法，post-Hartree-Fock方法和DFT理论，编者还在最后加入了简化版的电子(费米子)二次量子化的内容。限于篇幅，上述理论的部分证明被略去，暂时也不涉及关于固体理论的相关计算。本节内容与王老师高等物理化学-量子化学课程内容相似，但是又很多不同，我们也参考了非常多经典电子结构教材的内容。
       
       另外，与量子力学章类似，为了方便，我们第一小节作为快速的概念检索使用。
 
@@ -2104,9 +2486,313 @@
           \left(-\frac{\nabla _ { \vb*{R}}^2}{2M} + \varepsilon_i\right)\chi_i(\vb*{R}) = E\chi_i(\vb*{R})
         \end{equation}
         这就是一个非常普通的定态\sch 方程，只是势能项换成了电子态的能量，现在，这个系数的物理意义就显露出来了，它就是原子核的波函数，原子核感受到的势能就是当前电子态的能量，这就是“原子核运动时感受到的电子的作用其实是一个平均化的作用”这句话的数学表达。
+      \section{量子化学的精确解}
+        在介绍量子化学中的各类电子结构方法之前，我们先介绍一下量子化学的最高精度方法，同时也是理解起来最为容易的一种电子结构方法，完全组态相关(Full Configuration Interaction, FCI)，理想状况下FCI方法可以得到量子化学的精确解。
+        \subsection{单电子波函数}
+          我们定义求解一个单电子的定态\sch 方程得到的波函数称为单电子波函数，或者称为轨道。在分子的电子结构理论中，我们通常描述的是分子轨道，基分子基于单电子哈密顿量求解得到的轨道，用于描述分子中的一个电子的性质。简单地说，可以以氢分子离子为例，体系中只有一个单电子，解出的哈密顿量本征态就是氢分子离子的分子轨道。
+          
+          多数情况下，我们求解的是一个不含自旋的哈密顿量，此时解得的波函数只含有空间坐标$\psi_i(\mathbf{r})$，它的模平方代表了这个轨道在空间某个点的概率密度，这样的单电子波函数称为\textbf{空间轨道}(spatial orbital)。显然这组空间轨道需要满足正交归一性，即
+          \begin{equation}
+            \int d \mathbf{r} \psi_{i}^{*}(\mathbf{r}) \psi_{j}(\mathbf{r})=\delta_{i j}
+          \end{equation}
+          但是我们知道，所有的电子都是有自旋分量的，假设自旋空间的变量为$\omega$，对于电子，自旋部分只可能有两种，自旋为$+\frac{1}{2}$和$-\frac{1}{2}$，分别记为$\alpha(\omega)$和$\beta (\omega)$，这两个描述自旋部分的轨道满足正交归一性。想要完整地描述一个电子，需要它的空间部分波函数乘以自旋部分波函数，这样的波函数称为\textbf{自旋轨道}。为了前后的一致性，我们以希腊字母$\chi$代表自旋轨道，即
+          \begin{equation}
+            \chi(\mathbf{x})=\left\{\begin{array}{c}{\psi(\mathbf{r}) \alpha(\omega)} \\ {\text { 或 }} \\ {\psi(\mathbf{r}) \beta(\omega)}\end{array}\right.
+          \end{equation}
+          根据上式，每一个空间轨道可以分别与自旋向上和自旋向下的自旋部分结合，构成两个自旋轨道，因此只要给定$K$个空间轨道，就可以得到$2K$个自旋轨道，容易证明，自旋轨道也满足正交归一性
+          \begin{equation}
+            \int d \mathbf{x} \chi_{i}^{*}(\mathbf{x}) \chi_{j}(\mathbf{x})=\left\langle\chi_{i} | \chi_{j}\right\rangle=\delta_{i j}
+          \end{equation}
+          电子结构的后续部分，通常是基于自旋轨道讲述的。
+
+          当研究分子体系时，我们期望我们所用的单电子波函数会是单电子的定态\sch 方程的解，这个解的空间轨道部分就是化学中常说的分子轨道
+          \begin{equation}
+            h(i) \chi_{j}\left(\mathbf{x}_{i}\right)=\varepsilon_{j} \chi_{j}\left(\mathbf{x}_{i}\right)
+          \end{equation}
+          为了求解这个方程，我们把单电子波函数在一个单电子的完备基下进行展开，这组完备基就是通常所说的原子轨道基组。我们会在稍后的内容中对其作简要介绍，现在，需要读者将我们本节的内容和经典的分子轨道理论做好对应。我们用原子轨道基组作完备基，把整个体系的单电子波函数(分子轨道)写成原子轨道的线性组合，就可以利用线性变分法求解这个线性组合系数，这样就得到了我们接下来要用到的单电子波函数。
+        \subsection{多电子波函数}
+          上一节中我们给出了描述单个电子的自旋轨道和空间轨道的定义，如果希望写出描述$N$个电子的波函数应该怎么做呢？我们稍后再完整回答这个问题，现在只对一种极其简单的情况讨论。如果这个体系内的$N$个电子之间没有相互作用，即总哈密顿量中只有每个电子的动能和势能，没有电子与电子之间的库伦斥力，或者说电子之间的相互作用用某种平均的方式转化成了一个有效势能，就像早期使用的屏蔽系数的方法。在这种情况下，总电子哈密顿量就可以写成单电子哈密顿量的和
+          \begin{equation}
+            \mathscr{H}=\sum_{i=1}^{N} h(i)
+          \end{equation}
+          如果这些单电子哈密顿量相同，它们有一组共同的本征函数组，即
+          \begin{equation}
+            h(i) \chi_{j}\left(\mathbf{x}_{i}\right)=\varepsilon_{j} \chi_{j}\left(\mathbf{x}_{i}\right)
+          \end{equation}
+          非常容易就可以证明，只需要将所有每个电子所处的自旋轨道乘起来，这个乘积就是总电子哈密顿量的本征函数，并且对应的本征能量就等于每个自旋轨道对应的本征能量之和
+          \begin{equation}
+            \Psi^{\mathrm{HP}}\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)=\chi_{i}\left(\mathbf{x}_{1}\right) \chi_{j}\left(\mathbf{x}_{2}\right) \cdots \chi_{k}\left(\mathbf{x}_{N}\right)
+          \end{equation}
+          上式一定满足$\mathscr{H} \Psi^{\mathrm{HP}}=E \Psi^{\mathrm{HP}}$且$E=\varepsilon_{i}+\varepsilon_{j}+\cdots+\varepsilon_{k}$。这样构成的多电子波函数称为\textbf{Hartree积}，这是一种最简单的多电子波函数构建方法，使用Hartree积构建的波函数中每个电子的运动是“不关联”的。以简单的两个电子的情况举例，第一个电子在$\mathbf{x}_{1}$的概率跟第二个电子在$\mathbf{x}_{2}$处的概率是独立的，这意味这它们甚至有几率出现在同一个位置\footnote{当然，我们所说的出现在同一个位置，只是指两个电子坐标相等时，这个点对应波函数的概率密度不为零}，这显然是不符合电子的物理概念的。
+
+          我们期望，电子至少要满足作为费米子的特性，即一个多电子的波函数关于电子坐标的交换必须是反对称的。因此即使哈密顿量可以写成单电子哈密顿量的求和，多电子波函数也不能写成直接乘积的形式，但是只要我们对Hartree积进行恰当的线性组合，它们就能同时满足多电子哈密顿量的本征态和交换反对称性两个性质。对于两个电子的简单情况，两电子波函数可以写作
+          \begin{equation}
+            \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}\right)=2^{-1 / 2}\left(\chi_{i}\left(\mathbf{x}_{1}\right) \chi_{j}\left(\mathbf{x}_{2}\right)-\chi_{j}\left(\mathbf{x}_{1}\right) \chi_{i}\left(\mathbf{x}_{2}\right)\right)
+            \label{Slater 2by2}
+          \end{equation}
+          其中$2^{-1 / 2}$是一个归一化因子，容易证明，上式满足关于电子1和电子2坐标交换反对称性，即$\Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}\right) = -\Psi\left(\mathbf{x}_{2}, \mathbf{x}_{1}\right)$，且仍然是多电子哈密顿量$\mathscr{H}=h(1)+h(2)$的本征态，对应的本征值仍然为$\varepsilon_i + \varepsilon_j$。对一个$N$电子波函数来说，可以写出式(\ref{Slater 2by2})的一个普适推广，即Slater行列式
+          \begin{equation}
+            \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)=(N !)^{-1 / 2} \left| \begin{array}{cccc}{\chi_{i}\left(\mathbf{x}_{1}\right)} & {\chi_{j}\left(\mathbf{x}_{1}\right)} & {\cdots} & {\chi_{k}\left(\mathbf{x}_{1}\right)} \\ {\chi_{i}\left(\mathbf{x}_{2}\right)} & {\chi_{j}\left(\mathbf{x}_{2}\right)} & {\cdots} & {\chi_{k}\left(\mathbf{x}_{2}\right)} \\ {\vdots} & {\vdots} & { } & {\vdots} \\ {\chi_{i}\left(\mathbf{x}_{N}\right)} & {\chi_{j}\left(\mathbf{x}_{N}\right)} & {\ldots} & {\chi_{k}\left(\mathbf{x}_{N}\right)}\end{array}\right|
+            \label{Slater Determinant}
+          \end{equation}
+          可以看出，对于任意两个电子坐标的交换相当于交换Slater行列式中的两行，根据行列式的性质，显然会产出一个负号来满足交换反对称性的要求。而且，如果两个电子处于同一个位置，即$\mathbf{x}_{i}=\mathbf{x}_{j}$，意味这行列式中的两行相同，对应着两个电子占据了完全相同(空间部分相同，自旋也相同)的自旋轨道，行列式就一定为零，因此Slater行列式严格满足反对称性，以及它所要求的Pauli不相容原理。
+
+          另外，我们根据行列式的定义式(\ref{determinants defination})，重新写一下Slater行列式的表达式
+          \begin{equation}
+            \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)=(N !)^{-1 / 2} \sum_{n=1}^{N !}(-1)^{p_{n}} \mathscr{P}_{n}\left\{\chi_{i}(1) \chi_{j}(2) \cdots \chi_{k}(N)\right\}
+          \end{equation}
+          这个表达式在推导多电子波函数下的力学量积分时非常有用。
+          
+          为了方便，我们习惯上把Slater行列式写成一个态矢量的形式，由于我们无法区分哪个电子坐标对应哪个自旋轨道，写的时候也通常忽略自旋轨道后面的电子的坐标$\mathbf{x}_i$，我们将其写为
+          \begin{equation}
+            \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)\equiv| \chi_{i} \chi_{j} \cdots \chi_{k} \rangle
+            \label{short Slater}
+          \end{equation}
+          其反对称性可以写作
+          \begin{equation}
+            | \cdots \chi_{m} \cdots \chi_{n} \cdots \rangle=-| \cdots \chi_{n} \cdots \chi_{m} \cdots \rangle
+            \label{Slater anti-symm}
+          \end{equation}
+          在这里需要提醒读者的是，Slater行列式相比于Hartree积的优势仅仅是它满足了交换反对称性。用Slater行列式描述波函数时，如果两个电子的自旋相同了，它们之间的运动就会被限制，使得它们无法同时出现在空间的同一个点。但是对于自旋相反的电子，它们之间仍然是“不关联”的，即它们在空间上分布的概率是独立的。但是Slater行列式保证了电子的反对称性，这一点是极其重要的，或者说，\textbf{用Hartree积描述多电子波函数错误的}。由于Slater行列式满足了反对称性的要求，引入Slater行列式后，我们就不需要再讨论所谓“Pauli斥力”的概念，因为它已经被自然地满足了。后文中会引入交换积分，需要提醒，交换积分并不是“Pauli斥力”，它只是库伦相互作用对于一个反对称的波函数出现的额外项而已。
+
+        \subsection{精确波函数}
+          现在我们来回答之前的问题：多电子的波函数应该如何构建。简单来说，如果我们有$K$个原子轨道基函数，原则上说$M$趋向于无穷时这个单电子轨道的基组是完备的。利用这个原子轨道基组我们就可以线性组合出$K$个分子轨道，$2K$个自旋轨道，此时如果我们研究的是一个$N$电子问题，可以刚刚得到的$2K$个自旋轨道中选$N$个构成一个Slater行列式，总共有$\mathrm{C}_{2K}^N$个Slater行列式。每一个行列式我们称作一个组态(Configuration)，敏锐的读者可能一经发现，所有可能的组态原则上是一个多电子波函数完备基！那个“正确”的多电子波函数应该是这$\mathrm{C}_{2K}^N$个Slater行列式的线性组合，总可以通过线性变分法来求解。
+
+          因为我们用所有的组态线性组合成了体系波函数，因此这个求解精确解的方法称为完全组态相关方法(FCI)，如果希望FCI得到的波函数就是体系精确解，必须满足以下两条：
+          \begin{itemize}
+            \item 求解单电子波函数所使用的原子轨道基组是完备的(无穷大的)，$K \rightarrow \infty$；
+            \item 多电子波函数的展开必须包括所有可能的Slater行列式，共有$\mathrm{C}_{2K}^N$个。
+          \end{itemize}
+          \begin{figure}
+            \centering
+            \includegraphics[width = 9cm]{fig/exactsolution.jpg}\\
+            \caption{\textbf{量子化学的精确解}}
+            \label{exact solution}
+          \end{figure}
+          
+          这两点经常用Figure \ref{exact solution}这个图来表示。如果只使用一个组态，也就是之后会讲到的Hartree-Fock近似下，不断地增大原子轨道基组的数目，这个极限称为单电子极限，或者Hartree-Fock极限；而在原子轨道大小固定之后，不断增大所使用的组态的个数，最后引入所有的组态就称为FCI极限。同时满足Hartree-Fock极限和FCI极限的计算结果，就是精确解。
+          
+          尽管计算机已经非常发达，但是实际操作中，第一条暂时不可能实现，当原子轨道基组很大的时候，第二条也很难实现\sout{，好惨啊！}。因此量子化学的精确解，FCI的计算几乎只能适用于非常小的体系\footnote{但是没有那么小，现在已经可以在一个相当大的原子轨道基组的前提下求解$\text{F}_2$的FCI结果。}，但很多时候我们对精度的要求并没有这么高。电子结构的发展，就是引入一系列近似方法，为了用尽可能小的计算量，实现尽可能高的计算精度，来满足各种需求。
       \section{Hartree-Fock方法}
-      \section{密度泛函理论}
+        Hartree-Fock方法是量子化学的基础和开端，一旦涉及到使用Hartree理论或Hartree-Fock理论计算单分子(非固体)的问题，就已经进入到了量子化学的领域。同时，几乎所有更高精度的电子结构方法都是以HF方法为基础，或者直接从HF方法的结果出发的，因此HF方法的正确理解关系到整个电子结构理论框架的理解。在各种教材中，讲解HF理论的方法有很多种，鉴于电子结构方法前后的完整性，我们选用了其中一种，一个很重要的特殊之处在于我们尽可能使用量子化学家的语言，并且跳过了Hartree理论。这样的写法可能会比较难，因此我们第一小节给出了一个类似结论性质的总结，再在后面几个小节中给出它的来源，以防止读者被数学推导淹没而忘记了我们的目的。
+        
+        读者若发现本指南的逻辑与一些书籍相左，请根据各自的框架理解。
+        \subsection{HF方法概论}
+          上一节中我们已经给出了量子化学的精确解和目前最精确的计算方法，但是我们也提到，FCI方法由于对计算量和内存的巨大需求几乎不可能作为一个普适方法。因此多少年来，量子化学家们一直在寻找合适的\sch 方程的近似解。其中最经典的，就是Hartree-Fock近似。
+
+          这个近似非常平凡，就是只使用一个Slater行列式表述体系。这是因为描述$N$电子体系的最简单的反对称波函数就是只用一个Slater行列式
+          \begin{equation}
+            | \Psi_{0} \rangle=| \chi_{1} \chi_{2} \cdots \chi_{N} \rangle
+            \label{HF gs}
+          \end{equation}
+          根据变分原理，满足这个函数形式的最好的波函数就是能给出最小的能量期望值的函数，这个能量期望值定义为
+          \begin{equation}
+            E_{0}=\left\langle\Psi_{0}|\mathscr{H}| \Psi_{0}\right\rangle
+            \label{HF energy}
+          \end{equation}
+          其中$\mathscr{H}$是全电子的哈密顿量，而Slater行列式用自旋轨道展开的方法是唯一的，所以上述变分中可变的部分就是自旋轨道的选择。换句话说，HF方法的核心就在于，如何优化一组自旋轨道$\left\{\chi_1,\chi_2,\dots,\chi_N\right\}$，使得由他们构成的Slater行列式(\ref{HF gs})给出最小的能量期望值。
+
+          这之后的几节将会给出，解决这个问题等价于求解一个本征值问题
+          \begin{equation}
+            \hat{f}(\mathbf{x}_i)\chi_a(\mathbf{x}_i) = \varepsilon_a\chi_a(\mathbf{x}_i)
+            \label{HF equation}
+          \end{equation}
+          其中$f(i)$称为Fock算符，它的形式为
+          \begin{equation}
+            f(i)=-\frac{1}{2} \nabla_{i}^{2}-\sum_{A=1}^{M} \frac{Z_{A}}{r_{i A}}+v^{\mathrm{HF}}(i)
+          \end{equation}
+          其中$v^{\mathrm{HF}}(i)$是把电子和电子之间的相互作用处理成了一个等效的平均势能的形式，通常也称为平均场近似，它的形式将会在后面几节中给出严格定义。
+          
+          另外，这个平均势能也可以说是第$i$个电子所感受到的“场”，它的大小其实取决于其他电子的自旋轨道，这是一个令人头大的问题，即Fock算符的形式取决于它的本征函数。因此Hartree-Fock方程(\ref{HF equation})是一个非线性方程，没法简单解出结果，只能用迭代的方法求解。这个迭代求解Hartree-Fock方程的步骤称为自洽场(Self-Cosistent-Field, SCF)方法。
+
+          自洽场方法的基本思想是很简单的，只需要先对自旋轨道有一个初始猜测，就可以计算出每个电子感受到的势能，也就是有了Fock算符的形式，然后就可以解本征值方程(\ref{HF equation}) 得到一组新的自旋轨道。用这组新的自旋轨道，就可以得到新的势能，新的Fock算符，又能得到新的自旋轨道，不断重复这个过程直到完成自洽(计算得到的势能不再变化，前后两次的本征函数相同)。
+          
+          求解这个本征值问题一般需要一组基函数，基函数组$\left\{\phi_i\right\}$越大越完备，自旋轨道展开的可变自由度就越大，能量的期待值(\ref{HF energy})就越小。越来越大的基组将会把Hartree-Fock能量$E_0$越降越低，直到达到一个极限，即上节提到的Hartree-Fock 极限。
+
+          另外，HF近似有时候又被称作单电子近似，但这不意味着HF基态波函数(\ref{HF gs})是一个单电子波函数。所谓单电子近似只是说求解HF方程时，Fock算符只包含了一个电子的信息，电子之间的相互作用变成了平均场，所有电子是等价的，得到的本征值也是单电子的自旋轨道，或者消去自旋部分就是分子轨道。
+          
+          很多时候，由于化学图像清晰，人们经常使用分子轨道来讨论问题，这与后文中提到的Koopmans定理是有密切联系的。但是需要提醒读者的是，分子轨道(单电子轨道)不是量子化学的目的，它只是用于构建多电子波函数的基础。而HF方法的逻辑，也需要注意，并不是优化单电子自旋轨道的能量，而是优化能量最低的$N$个单电子自旋轨道构成的那个多电子波函数(Slater行列式)的能量，尽管很多时候这两者是等价的。
+
+          在推导Hartree-Fock方程之前，我们需要其他的一些基础内容，这些内容将在后面多个部分中用到，我们建议对电子结构方法感兴趣的\sout{或者背上电子结构的锅的}读者认真阅读下列章节。
+          
+        \subsection{单行列式的能量}
+          我们首先讨论一个问题，我们如果知道一个N电子的Slater行列式，它由自旋轨道组$\left\{\chi_1, \chi_2,\dots,\chi_N\right\}$构成，那么它的能量期望值是多少？同样，为了回答这个问题，我们先考虑一个简单的情况，就是两电子问题，读者可以把它想象成$\text{H}_2$中的两个电子，描述这个两电子的波函数是一个二阶的Slater行列式
+          \begin{equation}
+            |\Psi\rangle = |\chi_1 \chi_2\rangle=2^{-1 / 2}\left(\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)-\chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\right)
+          \end{equation}
+          描述两电子体系的，略去原子核之间斥力的BO近似下的哈密顿量为
+          \begin{equation}
+            \begin{aligned} \mathscr{H} &=\left(-\frac{1}{2} \nabla_{1}^{2}-\sum_{A} \frac{Z_{A}}{r_{1 A}}\right)+\left(-\frac{1}{2} \nabla_{2}^{2}-\sum_{A} \frac{Z_{A}}{r_{2 A}}\right)+\frac{1}{r_{12}} \\ &=h(1)+h(2)+\frac{1}{r_{12}} \end{aligned}
+          \end{equation}
+          按照上式的写法，我们用$h(i)$表示只含有第$i$个电子的哈密顿量，通常称为单电子部分。而$\frac{1}{r_{12}}$就是双电子部分。我们分别计算这些项的期望值，首先对$h(1)$我们有
+          \begin{equation}
+            \begin{aligned}
+              \left\langle\Psi|h(1)| \Psi \right\rangle=\int &\mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} \{ \left[2^{-1 / 2}\left(\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)-\chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\right)\right]^{*} \\ 
+              \times& h\left(\mathbf{r}_{1}\right)\left[2^{-1 / 2}\left(\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)-\chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\right)\right] \} \\
+              =\frac{1}{2} \int \mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} [\chi_{1}^{*}\left(\mathbf{x}_{1}\right) \chi_{2}^{*}\left(\mathbf{x}_{2}\right) h\left(\mathbf{r}_{1}\right) &\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)+\chi_{2}^{*}\left(\mathbf{x}_{1}\right) \chi_{1}^{*}\left(\mathbf{x}_{2}\right) h\left(\mathbf{r}_{1}\right) \chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\\
+              -\chi_{1}^{*}\left(\mathbf{x}_{1}\right) \chi_{2}^{*}\left(\mathbf{x}_{2}\right) h\left(\mathbf{r}_{1}\right) \chi_{2}\left(\mathbf{x}_{1}\right) &\chi_{1}\left(\mathbf{x}_{2}\right)-\chi_{2}^{*}\left(\mathbf{x}_{1}\right) \chi_{1}^{*}\left(\mathbf{x}_{2}\right) h\left(\mathbf{r}_{1}\right) \chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right) ]
+            \end{aligned}
+          \end{equation}
+          读者不要被上式的长度吓到，只是一个展开而已，而且由于我们研究的是第一个电子，因此关于$\mathbf{x}_2$的积分可以直接积掉，这样后两项就由于自旋轨道的正交归一性直接等于零。前两项也只剩下对$\mathbf{x}_1$的积分，即
+          \begin{equation}
+            \left\langle\Psi_{0}|h(1)| \Psi_{0}\right\rangle=\frac{1}{2} \int \mathrm{d} \mathbf{x}_{1} \chi_{1}^{*}\left(\mathbf{x}_{1}\right) h\left(\mathbf{r}_{1}\right) \chi_{1}\left(\mathbf{x}_{1}\right)+\frac{1}{2} \int \mathrm{d} \mathbf{x}_{1} \chi_{2}^{*}\left(\mathbf{x}_{1}\right) h\left(\mathbf{r}_{1}\right) \chi_{2}\left(\mathbf{x}_{1}\right)
+          \end{equation}
+          由于积分指标为哑指标，我们计算第二个单电子部分就会发现$\left\langle\Psi_{0}|h(2)| \Psi_{0}\right\rangle=\left\langle\Psi_{0}|h(1)| \Psi_{0}\right\rangle$，因此
+          \begin{equation}
+            \left\langle\Psi\left|h\left(\mathbf{r}_{1}\right) + h\left(\mathbf{r}_{2}\right)\right| \Psi\right\rangle=\int \mathrm{d} \mathbf{x}_{1} \chi_{1}^{*}\left(\mathbf{x}_{1}\right) h\left(\mathbf{r}_{1}\right) \chi_{1}\left(\mathbf{x}_{1}\right)+\int \mathrm{d} \mathbf{x}_{1} \chi_{2}^{*}\left(\mathbf{x}_{1}\right) h\left(\mathbf{r}_{1}\right) \chi_{2}\left(\mathbf{x}_{1}\right)
+          \end{equation}
+          我们引入一种简写的记号来标记单电子积分
+          \begin{equation}
+            [i|h| j]=\langle i|h| j\rangle\equiv \int \mathrm{d} \mathbf{x}_{1} \chi_{i}^{*}\left(\mathbf{x}_{1}\right) h\left(\mathbf{r}_{1}\right) \chi_{j}\left(\mathbf{x}_{1}\right)
+            \label{single electron integral}
+          \end{equation}
+          哈密顿量的单电子部分可以被简写成
+          \begin{equation}
+            \left\langle\Psi\left|h\left(\mathbf{r}_{1}\right) + h\left(\mathbf{r}_{2}\right)\right| \Psi\right\rangle=\sum_{i=1}^{2}[i|h|i]
+          \end{equation}
+
+          接下来计算双电子部分，又是一个很长的公式
+          \begin{equation}
+            \begin{aligned}
+              \langle\Psi|\frac{1}{r_{12}}| \Psi \rangle=\int &\mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} \{ \left[2^{-1 / 2}\left(\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)-\chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\right)\right]^{*} \\ 
+              \times& \frac{1}{r_{12}}\left[2^{-1 / 2}\left(\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)-\chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\right)\right] \} \\
+              =\frac{1}{2} \int \mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} [\chi_{1}^{*}\left(\mathbf{x}_{1}\right) \chi_{2}^{*}\left(\mathbf{x}_{2}\right) \frac{1}{r_{12}}&\chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right)+\chi_{2}^{*}\left(\mathbf{x}_{1}\right) \chi_{1}^{*}\left(\mathbf{x}_{2}\right) \frac{1}{r_{12}} \chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right)\\
+              -\chi_{1}^{*}\left(\mathbf{x}_{1}\right) \chi_{2}^{*}\left(\mathbf{x}_{2}\right) \frac{1}{r_{12}} \chi_{2}\left(\mathbf{x}_{1}\right) &\chi_{1}\left(\mathbf{x}_{2}\right)-\chi_{2}^{*}\left(\mathbf{x}_{1}\right) \chi_{1}^{*}\left(\mathbf{x}_{2}\right) \frac{1}{r_{12}} \chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right) ]
+            \end{aligned}
+          \end{equation}
+          因为积分指标都是哑指标，所以我们发现，第一项和第二项相等，第三项和第四项相等
+          \begin{equation}
+            \begin{aligned}\langle\Psi| \frac{1}{r_{12}} | \Psi\rangle=& \int \mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} \chi_{1}^{*}\left(\mathbf{x}_{1}\right) \chi_{2}^{*}\left(\mathbf{x}_{2}\right) r_{12}^{-1} \chi_{1}\left(\mathbf{x}_{1}\right) \chi_{2}\left(\mathbf{x}_{2}\right) \\ &-\int \mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} \chi_{1}^{*}\left(\mathbf{x}_{1}\right) \chi_{2}^{*}\left(\mathbf{x}_{2}\right) r_{12}^{-1} \chi_{2}\left(\mathbf{x}_{1}\right) \chi_{1}\left(\mathbf{x}_{2}\right) \end{aligned}
+          \end{equation}
+          如果我们引入另一种记号，来简记双电子积分
+          \begin{equation}
+            [i j | k l] =\left[\chi_{i} \chi_{j} | \chi_{k} \chi_{l}\right]\equiv\int \mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} \chi_{i}^{*}\left(\mathbf{x}_{1}\right) \chi_{j}\left(\mathbf{x}_{1}\right) r_{12}^{-1} \chi_{{k}}^{*}\left(\mathbf{x}_{2}\right) \chi_{l}\left(\mathbf{x}_{2}\right)
+            \label{double electron integral}
+          \end{equation}
+          需要注意，上式定义中，调整了波函数的位置，算符左边写第一个电子的波函数，右边是第二个电子的波函数，带星的自旋轨道在不带星的左边。如果自旋轨道都是实数，显然上述定义满足如下的对称性
+          \begin{equation}
+            [i j | k l]=[j i | k l]=[i j | l k]=[j i | l k]
+          \end{equation}
+          原本的哈密顿量双电子部分就可以写作
+          \begin{equation}
+            \langle\Psi|\frac{1}{r_{12}}| \Psi \rangle = [11|22] - [12|21]
+          \end{equation}
+          
+          经过这么一大堆折腾，我们终于回答了最初问题的一个最简单的版本，即对于一个两电子体系，一个由$\chi_1, \chi_2$构成的Slater行列式的能量期望值为
+          \begin{equation}
+            \langle \Psi|\mathscr{H}|\Psi\rangle = [1|h|1] + [2|h|2] + [11|22] - [12|21]
+          \end{equation}
+          但是从两电子往多电子的推广是平凡的，对于一个$N$电子的体系，由$\chi_1, \chi_2,\dots,\chi_N$构成的Slater行列式的能量期望值为
+          \begin{equation}
+            \langle \Psi|\mathscr{H}|\Psi\rangle =\sum_{m=1}^N [m|h|m] + \sum_{m=1}^N\sum_{n>m}^N \left([mm|nn] - [mn|nm]\right)
+          \end{equation}
+          根据双电子积分简记符号的定义(\ref{double electron integral})和积分哑指标的特性，容易发现$[mm|nn] = [nn|mm]$和$[mn|nm]=[nm|mn]$，而且当$m=n$时，$[mm|nn] - [mn|nm] = 0$，这三条允许我们去掉求和中的限制条件($n>m$)，只需要在前面加一个$1/2$，对于一个$N$电子的Slater行列式，它的能量期望值我们最终可以写成
+          \begin{equation}
+            \langle \Psi|\mathscr{H}|\Psi\rangle =\sum_{m=1}^N [m|h|m] + \frac{1}{2}\sum_{m=1}^N\sum_{n=1}^N \left([mm|nn] - [mn|nm]\right)
+          \end{equation}
+          上述$N$电子Slater行列式的结果读者可自行推导，与两电子情况差别并不大，核心点在于把跟积分无关的自由度都积分积掉，这样就只剩下了一个两电子问题，可以参照文献\cite{Szabo1989Modern}的2.3.4节。
+        \subsection{单行列式能量期望的变分}
+          按照Hartree-Fock方法的逻辑，我们期望找到一组更好的自旋轨道，使得这组自旋轨道构成的行列式能量最低。这是一种泛函的思想，即从函数形式(自旋轨道)到数(能量)的映射，我们需要变分的思想，这与微积分中学到的极值问题是一样的，我们期望寻找一个函数形式变化的极小值，也就是能量关于自旋轨道的变分等于零的那个点，对应着函数的导数等于零的极值点。
+
+          但是自旋轨道的形式也不能随便变化，比如说它们不管怎么变都要满足正交归一的要求，因此我们要求解的是一个限制条件下的变分。在微积分中，我们求条件极值的方法是拉格朗日乘子法，在变分的框架下也是一样的。我们的限制条件为
+          \begin{equation}
+            \int \mathrm{d} \mathbf{x}_{1} \chi_{a}^{*}(\mathbf{x}_{1}) \chi_{b}(\mathbf{x}_{1})=[a | b]=\delta_{a b}
+          \end{equation}
+          所以我们关于自旋轨道的“拉格朗日乘子法”的泛函形式为
+          \begin{equation}
+            \mathscr{L}\left[\left\{\chi_{a}\right\}\right]=E_{0}\left[\left\{\chi_{a}\right\}\right]-\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a}\left([a | b]-\delta_{a b}\right)
+            \label{Lagrange functional}
+          \end{equation}
+          其中$\varepsilon_{b a}$为拉格朗日乘子，如果我们假定整个泛函为实数，由于$[a | b]=[b | a]^{*}$，所有的拉格朗日乘子必须满足厄米性$\varepsilon_{b a}=\varepsilon_{a b}^{*}$。$E_0$就是单行列式的能量期望值，根据上一节的结论，它的形式为
+          \begin{equation}
+            E_{\mathrm{o}}\left[\left\{\chi_{a}\right\}\right]=\sum_{a=1}^{N}[a|h| a]+\frac{1}{2} \sum_{a=1}^{N} \sum_{b=1}^{N}[a a | b b]-[a b | b a]
+          \end{equation}
+          当自旋轨道的形式变化一点点，即$\chi_{a} \rightarrow \chi_{a}+\delta \chi_{a}$时，要想满足限制条件下的能量最小，泛函(\ref{Lagrange functional})的变分必须为零，
+          \begin{equation}
+            \delta \mathscr{L}=\delta E_{0}-\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a} \delta[a | b]=0
+          \end{equation}
+          变分与求导类似，上述等式的两个部分可以分别写作
+          \begin{equation}
+            \delta[a | b]=\left[\delta \chi_{a} | \chi_{b}\right]+\left[\chi_{a} | \delta \chi_{b}\right]
+            \label{overlap variation}
+          \end{equation}
+          \begin{equation}
+            \begin{aligned}
+              \delta E_{0}=&\sum_{a=1}^{N}\left[\delta \chi_{a}|h| \chi_{a}\right]+\left[\chi_{a}|h| \delta \chi_{a}\right]\\
+              &+\frac{1}{2} \sum_{a=1}^{N} \sum_{b=1}^{N}\left[\delta \chi_{a} \chi_{a} | \chi_{b} \chi_{b}\right]+\left[\chi_{a} \delta \chi_{a} | \chi_{b} \chi_{b}\right]+\left[\chi_{a} \chi_{a} | \delta \chi_{b} \chi_{b}\right]+\left[\chi_{a} \chi_{a} | \chi_{b} \delta{\chi_b}\right]\\
+              &-\frac{1}{2} \sum_{a=1}^{N} \sum_{b=1}^{N}\left[\delta \chi_{a} \chi_{b} | \chi_{b} \chi_{a}\right]+\left[\chi_{a} \delta \chi_{b} | \chi_{b} \chi_{a}\right]+\left[\chi_{a} \chi_{b} | \delta \chi_{b} \chi_{a}\right]+\left[\chi_{a} \chi_{b} | \chi_{b} \delta \chi_a \right]
+            \end{aligned}
+            \label{energy variation}
+          \end{equation}
+          首先看等式(\ref{overlap variation})，根据这种单电子积分符号的定义(\ref{single electron integral})，容易看出第二项是第一项的复共轭。类似的，在等式(\ref{energy variation})中，根据单电子算符和双电子算符的厄米性，第一行的两项互为复共轭，第二和第三行中，第一项和第二项互为复共轭，第三项和第四项分别互为复共轭。不但如此，第二行和第三行中，由于积分指标是哑指标可以交换，因此第一项和第三项相等，第二项和第四项相等，这可以帮助我们消去前面的$1/2$。这样一来，原本的变分的形式就被大大简化了，变为
+          \begin{equation}
+            \begin{aligned}
+              \delta \mathscr{L}=&\sum_{a=1}^{N}\left[\delta \chi_{a}|h| \chi_{a}\right]+\sum_{a=1}^{N} \sum_{b=1}^{N}\left[\delta \chi_{a} \chi_{a} | \chi_{b} \chi_{b}\right]-\left[\delta \chi_{a} \chi_{b} | \chi_{b} \chi_{a}\right]\\
+              &-\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a}\left[\delta \chi_{a} | \chi_{b}\right]+\text{复共轭} = 0
+            \end{aligned}
+          \end{equation}
+          一个数加上自己的复共轭为零，说明它是一个纯虚数或者零，因为我们假定了这个泛函是实数，因此只需要让前一部分等于零。希望读者没有忘记我们引入简化积分的记号，我们将复共轭之前的部分的完全体写出来
+          \begin{equation}
+            \begin{aligned}
+              \sum_{a=1}^{N} \int \mathrm{d} \mathbf{x}_{1} \delta \chi_{a}^{*}(1)\left\{h(1) \chi_{a}(1)+\sum_{b=1}^{N}\left[\left(\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \chi_{b}(2)\right) \chi_{a}(1)-\right.\right. \\ 
+              \left.\left. \left(\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \chi_{a}(2)\right) \chi_{b}(1)\right] -\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}(1)\right\} = 0
+            \end{aligned}
+          \end{equation}
+          由于变分是任意的，所以上式大括号中的部分等于零，稍作整理我们就能写出变分推导的结果：
+          \begin{equation}
+            \begin{aligned}
+              h(1) \chi_{a}(1)+\sum_{b=1}^{N}\left[\left(\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \chi_{b}(2)\right) \chi_{a}(1)-\right. \\ 
+              \left. \left(\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \chi_{a}(2)\right) \chi_{b}(1)\right] =\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}(1)
+            \end{aligned}
+            \label{HF GS energy variation}
+          \end{equation}
+        \subsection{库伦算符、交换算符和Fock算符}
+          我想读者也觉得上一节中最后的式子比较复杂，关键是比较长，所以人们期望引入一些记号才简化书写，有些时候，这些简化的标记也是有物理意义的。我们在这一节将引入两个新算符，并且用它们简化等式(\ref{HF GS energy variation})最后得到Hartree-Fock方程和Fock算符。
+          
+          我们是通过它们对自旋轨道的作用来定义这两个新算符的，首先是库伦算符，它通常用字母$J$或者它的花体表示
+          \begin{equation}
+            \mathscr{J}_{b}(1) \chi_{a}(1)=\left[\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \chi_{b}(2)\right] \chi_{a}(1)
+            \label{Coulomb operator}
+          \end{equation}
+          它的形式非常像一个简单的库伦相互作用，读者仔细看就会发现这就是式(\ref{HF GS energy variation})中括号内对$b$求和的第一项。我们同样希望简单求和的第二项，它的形式没有那么平凡，这是因为它的出现来源于Slater行列式的交换反对称性。我们引入交换算符，它通常用字母$K$或者它的花体表示
+          \begin{equation}
+            \begin{aligned} \mathscr{K}_{b}(1) \chi_{a}(1) &=\left[\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \chi_{a}(2)\right] \chi_{b}(1) \\ &=\left[\int \mathrm{d} \mathbf{x}_{2} \chi_{b}^{*}(2) r_{12}^{-1} \mathscr{P}_{12} \chi_{b}(2)\right] \chi_{a}(1) \end{aligned}
+            \label{Exchange operator}
+          \end{equation}
+          为了简化，我们\sout{不择手段地}使用了$\mathscr{P}_{12}$，它能交换1电子和2电子的位置。如此一来，我们就可以将等式(\ref{HF GS energy variation})简化成一个写起来比较简单的形式
+          \begin{equation}
+            \left[h(1)+\sum_{b=1}^{N} \mathscr{J}_{b}(1)-\mathscr{K}_{b}(1)\right] \chi_{a}(1)=\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}(1)
+          \end{equation}
+          再进一步，我们定义Fock算符
+          \begin{equation}
+            \hat{f} = h(1)+\sum_{b=1}^{N} \mathscr{J}_{b}(1)-\mathscr{K}_{b}(1)
+            \label{Fock operator}
+          \end{equation}
+          这样就得到了一个看上去非常简单的形式
+          \begin{equation}
+            \hat{f}  \chi_{a} =\sum_{b=1}^{N} \varepsilon_{b a}  \chi_{b} 
+            \label{fake HF equation}
+          \end{equation}
+          这个形式与我们之前给出的Hartree-Fock方程(\ref{HF equation})已经非常相似，只是右侧没有求和。
+
+          熟悉线性代数的读者可以看出，有一个求和号是因为上式中的$\chi_{a}$不是Fock算符的本征态。不出意外地，Fock算符是一个厄米算符，根据复数域上的谱定理，一定可以找到它的一组单位正交的本征态，这样就可以把求和号扔掉了。但是问题在于我们能否做这件事，换句话说，我们利用等式(\ref{fake HF equation})中的$\chi_{a}$线性组合得到的Fock算符的单位正交的本征态，能否仍然保证变分的意义，即组成的行列式能量最低呢？
+          
+          答案是肯定的。读者可以利用幺正算符的性质证明，将一组正交归一的自旋轨道$\left\{\chi_i\right\}$作幺正变换(线性组合)得到新的一组正交归一自旋轨道$\left\{\chi_i^{\prime}\right\}$，两者构成的行列式的能量期望值是相等的，即
+          \begin{equation}
+            \langle\chi_1\chi_2\cdots\chi_N|\mathscr{H}|\chi_1\chi_2\cdots\chi_N\rangle = \langle\chi_1^{\prime}\chi_2^{\prime}\cdots\chi_N^{\prime}|\mathscr{H}|\chi_1^{\prime}\chi_2^{\prime}\cdots\chi_N^{\prime}\rangle
+          \end{equation}
+          所以我们可以利用等式(\ref{Fock operator})中的Fock算符的本征态作为自旋轨道，这样构成的Slater行列式仍然是能量最低的。这样Hartree-Fock方法的推导就结束了，最终得到了一个我们在第一节中就提出的只关于单电子轨道的本征值问题
+          \begin{equation}
+            \hat{f}(\mathbf{x}_i)\chi_a^{\prime}(\mathbf{x}_i) = \varepsilon_a\chi_a^{\prime}(\mathbf{x}_i)
+          \end{equation}
+          此时的Hartree-Fock方程通常被称为Hartree-Fock方程的正则(标准)形式，解得的本征态也称为正则自旋轨道，此后如果再用到这个等式，我们将把撇去掉。当然正如我们在第一节所说的那样，这个本征值问题是非线性问题，只能通过所谓自洽场的方法求解。
+
       \section{post-Hartree-Fock方法}
+        post-Hartree-Fock方法是指那些以Hartree-Fock方法得到的单电子波函数与Hatree-Fock基态为基础，计算多电子波函数的方法。我们之前介绍的FCI方法其实就是post-Hartree-Fock方法中的一个，本节中我们将简要介绍几种计算体系多电子波函数的post-Hartree-Fock方法，包括多组态相关方法(Configuration Interaction, CI)、多组态自洽场方法(Multiconfigurational Self-Consistent-Field)、耦合簇方法(Coupled Cluster)、微扰方法(Perturbation)等。
+        \subsection{组态相关方法}
+        \subsection{多组态自洽场方法}
+        \subsection{耦合簇方法}
+        \subsection{微扰理论}
       \section{二次量子化}
         之所以二次量子化的内容不放在量子力学中，是因为从占据数表象重新理解二次量子化是相对浩大的工程，感兴趣的同学可以直接参阅相关的高等量子力学书籍。而之所以放在这里讲，是因为在诸多的量化文献和书籍中使用了二次量子化的语言，尽管在量化领域经常见到产生湮灭算符，但是并没有与二次量子化真实地联系起来，只是用来作为简化表达的一种方式。为了帮助大家看懂相关的公式，我们在电子结构部分从实用的角度简要介绍电子(费米子)的二次量子化语言。本节主要参考(\sout{其实就是翻译了一遍然后调整了几个小地方})\cite{Szabo1989Modern}书中2.4节的内容。
 
@@ -2635,6 +3321,175 @@
 
         最后需要提醒读者，全局优化的问题远远不限于分子能量优化上，包括求条件极值，减小误差，拟合等多种问题都可以使用全局优化的思路进行处理，有时候往往能产生有趣的效果。\sout{初一看只有一两个做全局优化的学长学姐，做到最后就会发现，组内一大半的人都在做全局优化}
 
+
+    \chapter{离散变量表象（DVR）}
+
+      DVR，即Discrete Variable Representation,是量子力学目前为止最为可靠的数值计算体系特征值/特征向量/动力学演化的方法。它的实现依赖于一个比较特殊的基组，使各类算符以矩阵的形式参与运算，利用成熟的线性代数方法求解。
+
+      我们再来回顾一下完备基展开。我们对于一个可观测量的期望值$\langle \psi | \hat{A} | \psi \rangle $ ，我们期望引入一个正交完备归一的基组来进行展开，由于完备基性质，我们有
+      \begin{equation}
+      	\langle \psi | \hat{A} | \psi \rangle = \sum_i \sum_j \langle \psi | e_i \rangle \langle e_i | \hat{A} | e_j \rangle \langle e_j | \psi \rangle 
+      \end{equation}
+      其中$| e_i \rangle $ 为一个完备基。如果稍微想一想，我们就能够发现它实质上等价于
+      \begin{equation}
+      	\sum_i \sum_j \langle \psi | e_i \rangle \langle e_i | \hat{A} | e_j \rangle \langle e_j | \psi \rangle \equiv \Psi ^\dagger\mathbf{A} \Psi
+      \end{equation}
+      其中$\mathbf{A}, \Psi$分别为矩阵和向量，每个元素为
+      \[
+      	\Psi_i = \langle e_i | \psi \rangle , A_{ij} = \langle e_i | \hat{A} | e_j \rangle 
+      .\] 
+      我们只要选取一个恰当的基组，我们就能够将复杂的偏微分方程问题转化为一个在计算机上更容易实现的线性代数问题。但基组选的不好内积的计算会非常复杂，反而不利于计算机实现。DVR便解决了这样的一个痛点，它的核心内容是
+      \begin{center}
+      	\textbf{将连续函数格点化（离散化）的同时提供可观测量的期望值。}
+      \end{center}
+      所谓离散变量表象，即将原本的波函数在一个对应着离散空间的表象上进行展开，我们举DVR中最为常用的基组为例，首先引入sinc 函数，定义为
+      \begin{equation}
+      	\mathrm{sinc} \, (x) \equiv \frac{\sin{\pi x}}{\pi x}  
+      \end{equation}
+      对实空间作离散化处理，如果我们关心的体系在某个范围内，我们将其分割成一个一个小格点，格点间距离定义为$\Delta x$，再有$x_i \equiv i\Delta x$，DVR中所选用基组为
+      \begin{equation}
+      	\chi_j (x) \equiv \langle x | e_j \rangle = (\Delta x)^{-\frac{1}{2}}\, \sinc{\frac{x - j \Delta x}{\Delta x}} 
+      \end{equation}
+      明眼人一眼就能看出来，它有着神奇的性质
+      \begin{equation}
+      	\chi_i (x_j) = \sqrt{\frac{1}{\Delta x}} \delta_{ij}
+      \end{equation}
+      这正利用了正弦函数在 $n\pi$的节点上为零，而在 $x=0$处 $\sinc{x}$极限为 $1$.
+
+      这能够让波函数离散化非常有用——我们通过选出足够多，足够密的格点，取每个点对应的函数值来代表原来的波函数，从而做到``离散的效果''，
+      \begin{equation}
+      	\psi(x) \sim \sum_i c_i \chi_i (x_i) = \sum_i \sqrt{\Delta x} f(x_i) \chi_i (x) 
+      \end{equation}
+      或
+      \begin{equation}
+      	\langle e_i | \psi \rangle = \sqrt{\Delta x} \,\psi(x_i) 
+      \end{equation}
+      这样我们就完成了第一步：波函数的离散化。
+
+      我们再来看看这个基组是否满足正交归一。但这是一个$\mathrm{sinc}$函数，比较棘手，我们使用傅立叶变换来完成积分工作。
+
+      首先我们来看看$\sinc{x}$的傅立叶变换。
+      \[
+      	\mathcal{F}[\sinc{x}] =  \frac{1}{2\pi}\int \sinc{x} e^{-ikx} \, \mathrm{d}x  = \frac{1}{2\pi} \int \frac{\sin{\pi x}}{\pi x} e^{-ikx} \, \mathrm{d}x 
+      .\]
+      面对这个奇怪的积分的常见方法是让$\sin{x}$转换成 $e^{ix}$.当然这个会牵涉到实部和虚部的问题，我们便尝试通过 $\frac{e^{ix}-e^{-ix}}{2i}$来得到最终结果。不过我们还是先尝试康康$e^{ix}$的情况如何，
+      \[
+      	\int \frac{e^{i\pi x}}{\pi x}e^{-ikx} \, \mathrm{d}x = \int \frac{e^{i(\pi -k) x}}{\pi x} \, \mathrm{d} x
+      .\]
+      于是我们便化简成为如何计算
+      \[
+      	\int \frac{e^{ikx}}{x} \, \mathrm{d}x 
+      .\] 
+      这是一个在实轴上积分的经典老题。由于$x=0$ 处该函数存在一阶奇点\footnote{就是在该点对应阶数为$x^{-1}$的项使其发散。}，我们需要让回路绕过这个点，使整一个复变函数处处可积。若$k>0$，我们取复平面中的下半平面作为回路，挖取那个奇点后平面就没有别的奇点了，因此回路积分为零，而无穷远处由于$e^{ikx}$的``压制''效果为零。因此我们只需考虑挖去那个奇点对应的积分，从而有
+      \begin{equation}
+      	\int \frac{e^{ikx}}{x} \, \mathrm{d}x =  \pi i \, \mathrm{Res}\{\frac{e^{ikx}}{x}\} = \pi i \quad (k>0)
+      \end{equation}
+      $k<0$呢？我们做一个小小的变量代换，
+      \[
+       \int_{-\infty}^{+\infty} \frac{e^{ikx}}{x} \, \mathrm{d}x = \int_{-\infty}^{+\infty} \frac{e^{ikx}}{-x} \, \mathrm{d}(-x) =- \int \frac{e^{i|k|y}}{y} \, \mathrm{d} y   
+      .\] 
+      我们看到了在这个情况下的积分为原来的相反数。这两者结合起来我们就可以把它打包成为sign 函数，即
+      \begin{equation}
+      	\int _{-\infty} ^{+\infty} \frac{e^{ikx}}{x} \, \mathrm{d}x = \pi i \, \mathrm{sign}\,(k) = 
+      	\begin{cases}
+      	 \pi i, \, k>0 \\
+      		0, \, k=0 \\
+      		-\pi i, \, k<0
+      	\end{cases}
+      \end{equation}
+      让$k=0$时 $\mathrm{sign}\,(k)=0$是出于$\frac{1}{x}$ 为奇函数，在实轴上积分结果应为零的考虑。
+
+      利用这个结果，我们就能反过来得出
+      \begin{equation}
+      	\int \frac{e^{i(\pi-k)x}}{\pi x} \, \mathrm{d}x =  i \, \mathrm{sign}\, (\pi-k) 
+      \end{equation}
+      那么自然就有
+      \begin{equation}
+      	\int \frac{e^{i(-\pi-k)x}}{\pi x} \, \mathrm{d}x = - i \,\mathrm{sign}\, (\pi + k) 
+      \end{equation}
+      再把这两个结果结合起来，我们就最终得到了
+      \begin{equation}
+      	\mathcal{F}[\sinc{x}] = \frac{\mathrm{sign}\,(\pi-k)+ \mathrm{sign}\,(\pi+k)}{4 \pi}= \frac{1}{2 \pi}\mathrm{rect}\, (\frac{k}{2\pi}) =
+      	\begin{cases}
+      		 \frac{1}{2\pi}, \, -\pi < k < \pi \\
+      		 0, \, \text{otherwise}
+      	\end{cases}
+      \end{equation}
+      也就是$\sinc{x}$进行傅立叶变换后得到了矩形波！
+
+      我们趁热打铁，继续看原来的基组的内积。
+
+      还记得傅立叶变换的几条定理吗？有一条是把频谱中函数相乘转化为卷积，也就是
+      \begin{equation}
+      	\mathcal{F}[f_1(x) * f_2(x)] = 2\pi F_1(k) F_2(k) 
+      \end{equation}
+      其实对于逆傅立叶变换也成立，也就是
+      \begin{equation}
+      	\mathcal{F}[f_1(x) f_2(x)] = \frac{1}{2\pi} F_1(k) * F_2(k) 
+      \end{equation}
+      那么我们从原来的内积定义出发，
+      \begin{align*}
+      	\langle e_i | e_j \rangle &= \int _{-\infty}^\infty \frac{1}{\Delta x} \sinc{\frac{x- i \Delta x}{\Delta x}} \sinc{\frac{x- j \Delta x}{\Delta x}} \, \mathrm{d}x\\ 
+      				   &= \frac{2\pi}{\Delta x} \mathcal{F}[\sinc{\frac{x - i\Delta x}{\Delta x}} \sinc{\frac{x- j \Delta x}{\Delta x}}] \bigg|_{k=0} \\
+      				   &= \frac{\Delta x}{2\pi} \int e^{- I \xi (i-j) \Delta x} e^{-I k j \Delta x}\mathrm{rect}\, \left( \frac{\xi \Delta x}{2 \pi} \right)  \, \mathrm{rect} \, \left( \frac{(k-\xi) \Delta x}{2 \pi} \right) \, \mathrm{d} \xi \bigg|_{k=0} \\
+      				   &= \frac{\Delta x}{2 \pi} \int _{-\frac{\Delta x}{\pi}} ^{\frac{\Delta x}{\pi}} e^{-I \xi (i-j) \Delta x}  \, \mathrm{d} \xi \\
+      				   &= \sinc{i-j} 
+      \end{align*}
+      从而得到
+      \begin{equation}
+      	\langle e_i | e_j \rangle = \delta_{ij}
+      \end{equation}
+      上面的推导中充分利用了变量代换、延迟定理、\sout{\emph{Mathematica}}等技巧。$I$是为了与 $i$作区分，表示虚数单位。以这个为基础，我们还可以得到
+      \begin{equation*}
+      	\langle e_i | - I \hbar \frac{d}{dx} | e_j \rangle = -i\hbar \left[ e^{-I k i \Delta x} \,\mathrm{rect}\, \left( \frac{k \Delta x}{2 \pi} \right)  \right] * \left( I k e^{- I k i \Delta x} \, \mathrm{rect} \, \left( \frac{k \Delta x }{ 2 \pi} \right)  \right) 
+      \end{equation*}
+      从而
+      \begin{equation}
+      	 \langle e_i | - I \hbar \frac{d}{dx} | e_j \rangle = -\frac{I \hbar (\sin (\pi  (i-j))+\pi  (j-i) \cos (\pi  (i-j)))}{\pi \Delta
+         x (i-j)^2} = 
+        \begin{cases}
+         	0, \, i=j \\
+      	\frac{I\hbar (-1)^{i-j}}{(i-j) \Delta x}
+        \end{cases}
+      \end{equation}
+      进一步地，
+      \begin{equation}
+       	\langle e_i | -\frac{\hbar ^2}{2m} \frac{d^2}{dx ^2} | e_j \rangle = \frac{\hbar^{2}(-1)^{i-j}}{2 m \Delta x^{2}} \begin{cases}{\pi^{2} / 3,} \quad {i=j} \\ {\frac{2}{\left(i-j\right)^{2}},} \quad {i \neq j}\end{cases}
+      \end{equation}
+      这样我们就凑出了动能对应的矩阵。
+
+      位移期望值其实不需要上面这么麻烦，我们可以做一个简单的变换,
+      \[
+      	\int \sinc{\frac{x- i \Delta x}{\Delta x}} x \sinc{\frac{x- j \Delta x}{\Delta x}}\, \mathrm{d} x = \int \sinc{\frac{x- i \Delta x}{x}} (x- \frac{i+j}{2}\Delta x) \sinc{\frac{x-j \Delta x}{x}}\, \mathrm{d}x
+      .\] 
+      利用对称性可以非常方便地得到
+      \[
+      	\langle e_i | x | e_j \rangle = \delta_{ij} j \Delta x
+      .\] 
+       
+      势能和波函数相似，也采用离散化的方式，从而有
+      \begin{equation}
+      	V_ij = \langle e_i | V | e_j \rangle  = \delta_{ij} V(x_i)
+      \end{equation}
+      将这两个矩阵相加，我们就得到了在该基组下的\sout{哈密瓜}哈密顿矩阵。我们已经可以利用这一套东西求出DVR下的能量特征值和对应特征向量。但对于动力学演化，我们还需要一些\sout{微操}技巧。我们将薛定谔方程关于时间也离散化，
+      \[
+      	\hat{H}(t) \psi(x;t) = i \hbar \frac{\partial }{\partial t} \psi(x;t) \Rightarrow \left[\mathbf{E} \hbar + \frac{i \Delta t}{2} \mathbf{H}(t+\frac{\Delta t}{2})\right] \psi(t+ \Delta t) = \left[\mathbf{E} \hbar - \frac{i \Delta t}{2} \mathbf{H} (t+\frac{\Delta t}{2})\right] \psi(t)  
+      .\] 
+      这可以从$\frac{\partial }{\partial t} \psi(t) \sim \frac{\psi(t+ \Delta t) - \psi(t-\Delta t)}{2 \Delta t}$ 得到\footnote{而如果用欧拉法近似，会使波函数摸值发散。若有兴趣可自行证明。}，以及$\mathbf{E}$表示单位矩阵。
+
+      \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth]{fig/DVRtest.eps}
+        \caption{谐振势下的一个典型的DVR结果}
+        \label{DVRresult}
+      \end{figure}
+
+      将以上方法综合起来便能得到一个完整的DVR程序，比如\url{https://github.com/Walter-Feng/SincDVR}。一个典型模型，谐振势下一个高斯波包的演化的DVR结果如 Figure \ref{DVRresult} 所示。可以看出在一个足够小的时间间隔 dt 下体系能够很好地呈现震荡，而如果\sout{一不小心}选取较大 dt 便会呈现一个阻尼震荡的错误结果。因此虽然DVR能够成为量子力学精确解的``范本''，足够细致的取点和时间演化是结果具有信任度的关键，这也导致了DVR的耗时往往很长。这也部分说明了王老师的课题组大力发展非绝热动力学方法的动力所在——我们确实可以有精确解，但它实在是太慢了。
+
+      DVR其实并不仅限于一维。我们从前面的章节中已能隐约感受到，只要我对每个维度进行这样的基组展开，我们就能够对多维度体系进行模拟。
+
+      如果想更全面地了解DVR，可以看这篇文章\cite{colbert1992novel}。
+
     \chapter{相空间-量子哈密顿动力学(PS-QHD)}
       \label{phase_space_dynamics}
       \begin{enumerate}
@@ -3005,7 +3860,273 @@
           A_n = \int^a_0{u_0 \sin{\frac{n\pi x}{a}}\dd{x}}=\frac{a u_0}{n\pi}\qty(1-\cos{n\pi}) .
         \end{equation}
         于是我们成功地获得了温度分布的解析解!(?)\footnote{当然有些人会觉得级数展开不算解析解。能展开成简单函数求和已经不容易了。}
-        
+
+      \section{拉普拉斯积分变换}
+        \begin{equation}
+          F(t) = 
+          \begin{cases}
+            f(t),\quad t>0 \\
+            0, \quad t<0
+          \end{cases}
+        .
+        \end{equation} 
+        \begin{equation}
+          G(t) =
+          \begin{cases}
+          f(t)e^{-\sigma t}, \quad t>0 \,(\sigma > 0) \\
+          0, \quad t<0
+          \end{cases}
+        .
+        \end{equation} 
+        对$G(t)$做Fourier Transform,
+        \begin{equation}
+          \mathcal{F}[G] = \frac{1}{2\pi} \int _{-\infty}^{\infty}G(t) e^{-i\omega t} \, \mathrm{d}t = \frac{1}{2\pi} \int _0^\infty e^{-(\sigma + i \omega) t)} \, \mathrm{d}t  
+        .
+        \end{equation} 
+        引入拉普拉斯变换，
+        \begin{equation}
+        \begin{cases}
+          p = \sigma + i \omega \\
+          \mathcal{L}[f] = \overline{f}(p) = \int f(t) e^{-pt} \, \mathrm{d}t 
+        \end{cases}
+        .
+        \end{equation} 
+        \begin{equation}
+          f(t)e^{-\sigma t} = G(t) = \int _{-\infty} ^ {\infty} e^{i\omega t} \, \mathrm{d}\omega 
+        .
+        \end{equation} 
+        或
+        \begin{equation}
+          f(t) = \int_{-\infty}^{\infty} \overline{f}(p) e^{pt} \mathrm{d}\omega
+        .
+        \end{equation} 
+        做变换，
+        \begin{equation}
+        \begin{cases}
+          p = \sigma + i \omega \\
+          \mathrm{d}p = i\mathrm{d}\omega
+        \end{cases}
+        .
+        \end{equation}
+        从而
+        \begin{equation}
+          f(t) = \frac{1}{2\pi i} \int ^{\sigma + i \omega} _{\sigma - i \infty} \overline{f}(p) e^{p t} \, \mathrm{d}p 
+        .
+        \end{equation} 
+        \begin{equation}
+          \mathcal{L}[f'(t)] = \int ^\infty _0 e^{-pt} \, \mathrm{d}f(t) = f(t)e^{-pt} \bigg|^\infty_0 - \int ^\infty_0 f(t) \, \mathrm{d}e^{-pt} = -f(0) + p \overline{f}(p)   
+        .
+        \end{equation}
+        \begin{equation}
+          \mathcal{L}[t^n f(t)] = \int _0^\infty t^n f(t) e^{-pt} \, dt = \left( \frac{d }{d p}  \right) ^n \int_0 ^\infty f(t) e^{-pt} \, dt = (-1)^n \frac{d ^n}{d p^n} \overline{f}(p)  
+        .
+        \end{equation}
+        \begin{equation}
+          \mathcal{L}[f(t)e^{-\lambda t}] = \int _0^\infty f(t) e^{-\lambda t}  e^{-pt}\, dt = \overline{f}(p+\lambda) 
+        .
+        \end{equation} 
+
+      \section{Legendre 函数}
+        \subsection{轴对称球函数}
+          满足的微分形式为
+          \begin{equation}
+            (1-x^2) \frac{\mathrm{d}^2 y}{\mathrm{d}x^2} -2x \frac{\mathrm{d} y}{\mathrm{d} x} +\left[ l(l+1) - \frac{m^2}{1-x^2} \right] y = 0
+          .
+          \end{equation} 
+          \begin{equation}
+            P_l (x) = \sum_{k=0} ^{[\frac{l}{2} ]} (-1)^k \frac{(2l-2k)!}{2^l k! (l-k)! (l-2k)!} x^{l-2k}
+          .
+          \end{equation} 
+          或罗德里格斯公式
+          \begin{equation}
+            P_l(x) = \frac{1}{2^l l!} \frac{\mathrm{d} ^l}{\mathrm{d} x^l} (x^2 -1 )^l
+          .
+          \end{equation} 
+          或施列夫利积分
+          \begin{equation}
+            P_l(x) = \frac{1}{2\pi i} \frac{1}{2^l } \oint_C \frac{(z^2-1)^l}{(z-x)^{l+1}} \mathrm{d}z
+          .
+          \end{equation} 
+          对应结果
+          \begin{equation}
+            P_l(\cos(\theta)) = \frac{1}{\pi} \int _0^\pi [\cos{\theta} + i \sin{\theta}(\cos{\psi})^l] \, \mathrm{d}\psi 
+          .
+          \end{equation} 
+          Legendre的正交性
+          \begin{equation}
+            \int _{-1}^1 P_a(x) P_b(x) \, dx = \frac{2}{2a+1} \delta_{ab} 
+          .
+          \end{equation} 
+          对球坐标系展开，且与角向无关的泊松方程，
+          \begin{equation}
+            u = \sum_{l=0} ^ \infty \left( A_l r^l + B_l \frac{1}{r^{l+1}}  \right) P_l (\cos{\theta})
+          .
+          \end{equation} 
+
+          母函数:
+          \begin{equation}
+            \begin{cases}
+              \frac{1}{\sqrt{1-2r\cos{\theta} + r^2}} = \sum _{l=0}^\infty r^l P_l (\cos{\theta}) \quad (r<1)\\
+              \frac{1}{\sqrt{1-2r\cos{\theta} + r^2}} = \sum _{l=0} ^{\infty} \frac{1}{r^{l+1}} P_l (\cos{\theta}) (r>1)
+              \end{cases}
+          .
+          \end{equation} 
+
+          递推公式：
+          \begin{equation}
+            (k+1) P_{k+1} (x) - (2k+1) x P_k(x) + kP_{k-1} (x) = 0
+          .
+          \end{equation}
+          证明方式：对母函数的$r$求导，然后将母函数求导项转化成为原来的母函数，调整后得到结果。
+          \begin{equation}
+            P_k (x) = P_{k+1}' (x) - 2 x P_k'(x) + P_{k-1}' (x)
+          .
+          \end{equation} 
+          证明方式：对母函数$x$求导。
+          \begin{equation}
+            (2k+1) P_k (x)   = P_{k+1}'(x) - P_{k-1}'(x)
+          .
+          \end{equation} 
+          \begin{equation}
+            P_{k+1}'(x) = (k+1) P_k(x) + xP_k' (x)
+          .
+          \end{equation} 
+          \begin{equation}
+            kP_k(x) = xP_k'(x) - P_{k-1}'(x)
+          .
+          \end{equation} 
+          \begin{equation}
+            (x^2 -1) P_k'(x) = kx P_k(x) - kP_{k-1} (x)
+          .
+          \end{equation} 
+          比如可以利用这个递推公式计算
+          \begin{equation}
+            \int _{-1}^1 \frac{1}{2k+1 } x P_k (x) P_l(x) \, dx 
+          .
+          \end{equation} 
+          就是将$x P_k (x)$ 转换成为 $P_n(x)$ 然后利用正交性搞定。
+
+          \subsection{连属勒让德函数}
+          \begin{equation}
+            P_l^m (x) = \frac{(1-x^2)^{\frac{m}{2}}}{2^l l!} \frac{\mathrm{d} ^{l+m}}{\mathrm{d} x^{l+m}}  (x^2-1)^l
+          .
+          \end{equation} 
+          \begin{equation}
+            P_l^{-m} (x) = \frac{(1-x^2) ^{-\frac{m}{2}}}{2^l l! } \frac{\mathrm{d} ^{l-m}}{\mathrm{d} dx^{l-m}} (x^2-1)^l
+          .
+          \end{equation} 
+          然后有
+          \begin{equation}
+            P_l^{-m} (x) = (-1)^m \frac{(l-m)!}{(l+m)!} p_l^M(x)
+          .
+          \end{equation} 
+          正交性：
+          \begin{equation}
+            \int _{-1}^1 P_a^m(x) P_b^m(x)  \, dx  =  \frac{2(l+m)!}{(l-m)! (2l+1)}
+          .
+          \end{equation} 
+          P.S: 球谐函数的时候不同m 直接通过$ \sin{m\phi} \cos{m\phi} $ 进行正交。
+           
+      \section{柱函数}
+          贝塞尔方程:
+          \begin{equation}
+            x^2 \frac{\mathrm{d} ^2 R}{\mathrm{d} x^2 } + x \frac{\mathrm{d} R }{\mathrm{d} x}  + (x^2 - m^2) R =0
+          .
+          \end{equation} 
+          虚宗量贝塞尔方程:
+          \begin{equation}
+            x^2 \frac{\mathrm{d} ^2 R}{\mathrm{d} x^2} + x \frac{\mathrm{d} R}{\mathrm{d} x}  - (x^2 + m^2) R = 0
+          .
+          \end{equation} 
+
+          所以原则上$J_\nu (x)$ 和 $J_{-\nu} (x)$都是上面的解，但对于整数 $m$阶，有
+           \begin{equation}
+             J_{-m} (x) = (-1)^m J_mx)
+          .
+          \end{equation} 
+          此时解应该为
+           \begin{equation}
+             y(x) = C_1 J_m(x) + C_2 N_m(x)
+          .
+          \end{equation} 
+          但在满足边界条件（比如在某一领域内需保证连续）便可以舍弃诺伊曼函数而只保留贝塞尔函数。
+
+
+          贝塞尔函数的正交性：
+          \begin{equation}
+            \int _0^ {\rho_0} J_m(\sqrt{\mu_n} \rho) J_m (\sqrt{\mu_l} \rho) \rho \mathrm{d} \rho = 
+            \delta_{nl}\begin{cases}
+              \frac{1}{2}(\rho_0)^2 [J_{m+1}(\sqrt{\mu_n^{m}} \rho_0)]^2 \quad \text{第一类边界条件} \\
+                \frac{1}{2}\left( \rho_0^2 -\frac{m^2}{\mu_n^{m}} \right) [J_m (\sqrt{\mu_n^{m}} \rho_0)]^2 \quad \text{第二类边界条件}\\
+                \frac{1}{2}\left(\rho_0^2 - \frac{m^2}{\mu_n^{m}} + \frac{\rho^2 _0}{\mu_n^m H}\right) [J_m (\sqrt{\mu_n^m} \rho_0)]^2 \quad \text{第三类边界条件}
+                \end{cases}
+          .
+          \end{equation} 
+
+          存在性质
+          \begin{equation}
+          \begin{cases}
+            \frac{d }{d x} [x^\nu J_\nu (x) ] = x^\nu J_{\nu-1} (x) \\
+            \frac{d }{d x} [J_\nu (x) /x^\nu] = -J_{\nu-1} (x) /x^\nu  
+          \end{cases}
+          .
+          \end{equation} 
+          从而有递推公式
+          \begin{equation}
+          \begin{cases}
+            Z_\nu'(x) - \nu Z_\nu(x) /x = - Z_{\nu+1} (x) \\
+            Z_\nu'(x) + \nu Z_\nu(x) /x = Z_{\nu-1} (x) \\
+            Z_{\nu-1} (x) - Z_{\nu+1} (x) = 2Z_\nu'(x) \\
+            Z_{\nu+1} (x) - 2\nu Z_\nu(x) / x + Z_{\nu-1} (x) = 0
+          \end{cases}
+          .
+          \end{equation} 
+
+        \subsection{球贝塞尔函数}
+          满足方程为
+          \begin{equation}
+            r^2 \frac{\mathrm{d} ^2R}{\mathrm{d} r^2} + 2r \frac{\mathrm{d} R}{\mathrm{d} r}  + [k^2r^2-l(l+1)] R = 0 
+          .
+          \end{equation}
+          通过配方以及变量代换，
+           \begin{equation}
+             x = kr , R(r) = \sqrt{\frac{\pi}{2x}} y(x) 
+          .
+          \end{equation} 
+          得到
+           \begin{equation}
+             x^2\frac{\mathrm{d} ^2y}{\mathrm{d} x^2}  + x \frac{\mathrm{d} y}{\mathrm{d} x}  + \left[ x^2 - \left( l+\frac{1}{2} \right) ^2 \right] y = 0
+          .
+          \end{equation} 
+          $k=0$时退化成 $r^l,r^{-l+1}$ ，也就是稳态下的泊松方程。若不是，上面的解为半整数阶的贝塞尔函数，从而引入球贝塞尔函数，
+          \begin{equation}
+            j_l(x) = \sqrt{\frac{\pi}{2x}} J_{l+\frac{1}{2}}(x), \quad j_{-l} (x) = \sqrt{\frac{\pi}{2x}}J_{-l+\frac{1}{2}} (x)
+          .
+          \end{equation}
+          对球诺伊曼函数以及球汉克尔函数类似。
+
+          同样可以利用以前贝塞尔函数的递推公式，可以得到
+          \begin{equation}
+            z_{l+1}(x) = \frac{2 l +1}{x} z_l - z_{l-1}
+          .
+          \end{equation} 
+          由于半整数阶的贝塞尔函数的神奇的性质，球贝塞尔函数可以用三角函数来表达，
+          \begin{align}
+            &j_0(x) = \frac{\sin{x}}{x} \\
+            &j_1(x) = \frac{\sin{x} - x \cos{x}}{x^2} \\
+            &n_0(x) = -\frac{\cos{x}}{x} \\
+            &n_1(x) = -\frac{\cos{x} + x\sin{x}}{x^2}
+          \end{align}
+          正交性:
+          \begin{equation}
+            \int _0^{r_0} j_l(k_m r) j_l(k_n r) \, r^2dr =N_m^2 \delta_{mn} 
+          .
+          \end{equation} 
+          \begin{equation}
+            N_m^2=\frac{\pi}{2k_m} \int ^{r_0}_0 [ J_{l+\frac{1}{2}}(k_mr)]  r\,\mathrm{d}r 
+          .
+          \end{equation} 
+          
     \bibliographystyle{unsrt}
     \bibliography{reference}
   \end{document} 
