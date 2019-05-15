@@ -897,13 +897,13 @@
         \end{equation}
         它还有这些性质，
         \begin{align}
-          \delta(-x) & = \delta(x) \\
-          x\delta(x) & = 0 \\
-          \delta(a x) & = a^{-1} \delta(x)\\
-          \delta(x^2-a^2) & = \frac{1}{2} a^{-1} {\delta(x-a)+\delta(x+a)} \quad (a>0)\\
-          \int \delta(a-x) \, \delta(x-b) \, \ud x & = \delta(a-b) \\
-          f(x) \delta(x-a) &=  f(a)\delta(x-a)\\
-          \int f(x)x\delta(x) \, \ud x & = 0
+          \delta\qty(-x)&=\delta\qty(x)\\
+          x\delta\qty(x)&=0\\
+          \delta\qty(ax)&=\frac{1}{\abs{a}}\delta\qty(x)\\
+          \delta\qty(x^2-a^2)&=\frac{1}{2\abs{a}}{\delta\qty(x-a)+\delta\qty(x+a)}\quad\qty(a>0)\\
+          \int\limits_\mathbb{R}{\delta\qty(a-x)\delta\qty(x-b)\dd{x}}&=\delta\qty(a-b)\\
+          f\qty(x)\delta\qty(x-a)&=f\qty(a)\delta\qty(x-a)\\
+          \int\limits_\mathbb{R}{f\qty(x)x\delta\qty(x)\dd{x}}&=0
         \end{align}
 
         傅立叶变换实现了函数在实空间和像空间之间的相互转换，而一些算符在两个空间会发生转变（如导数算符转换为常数相乘），使问题能够简化。一个经典的实例就是，
