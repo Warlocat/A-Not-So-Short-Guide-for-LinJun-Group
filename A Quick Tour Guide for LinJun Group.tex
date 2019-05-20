@@ -2702,11 +2702,11 @@
           \end{equation}
           而就像我们在Hartree-Fock近似中做的那样，我们还要优化构成上式中的各个组态的自旋轨道，而自旋轨道的优化等价于将一个幺正算符作用在体系的Slater行列式行列式上，Hartree-Fock基态波函数就可以写为\footnote{该式中我们用了幺正算符的一个特性：任意一个幺正算符都可以写成一个反厄米算符的指数的形式}
           \begin{equation}
-            |\Psi_{HF}\rangle = | 0 \rangle = \exp{-\hat{\kappa}} | 0^{\prime} \rangle
+            |\Psi_{HF}\rangle = | 0 \rangle = \exp(-\hat{\kappa}) | 0^{\prime} \rangle
           \end{equation}
           那么问题变得清晰了起来，如果想同时优化自旋轨道和组态系数，MCSCF方法中的波函数可以写为
           \begin{equation}
-            | \Psi_{MCSCF} \rangle = | \mathbf{\kappa}, \mathbf{C} \rangle=\exp{-\hat{\kappa}} \sum_i C_i | i \rangle
+            | \Psi_{MCSCF} \rangle = | \mathbf{\kappa}, \mathbf{C} \rangle=\exp(-\hat{\kappa}) \sum_i C_i | i \rangle
             \label{MCSCF wavefunction}
           \end{equation}
           而我们要优化的能量就是满足归一性限制下的MCSCF波函数对哈密顿量的期望值：
@@ -2755,11 +2755,11 @@
         \subsection{CC方法概论}
           正如前面说到的，耦合簇方法的核心思想就是以指数的形式引入激发算符，在这个思路下，多电子波函数可以写作
           \begin{equation}
-            | \Psi_{CC} \rangle = \exp{\hat{T}} | \Psi_0 \rangle
+            | \Psi_{CC} \rangle = \exp(\hat{T}) | \Psi_0 \rangle
           \end{equation}
-          其中$ | \Psi_0 \rangle$仍然为Hartree-Fock基态，$\exp{\hat{T}}$是总激发算符的指数形式，其定义与一般的算符或者矩阵的指数形式一致，即
+          其中$ | \Psi_0 \rangle$仍然为Hartree-Fock基态，$\exp(\hat{T})$是总激发算符的指数形式，其定义与一般的算符或者矩阵的指数形式一致，即
           \begin{equation}
-            \exp{\hat{T}} = 1 + \hat{T} + \frac{1}{2!}\hat{T}^2+ \frac{1}{3!}\hat{T}^3 + \cdots
+            \exp(\hat{T}) = 1 + \hat{T} + \frac{1}{2!}\hat{T}^2+ \frac{1}{3!}\hat{T}^3 + \cdots
           \end{equation}
           其中总激发算符是所有可能的激发算符的权重求和，这个权重等价于在CI方法中的组态系数
           \begin{equation}
@@ -2771,10 +2771,102 @@
 
           回到我们最初的出发点，当我们用激发算符的指数形式来构建多电子波函数时，它会遍历所有的激发态。在这个意义上说，CC方法自然满足了尺寸一致性的要求。另外，由于其对激发态的引入是非线性的，所以CC方法对截断的收敛性是非常好的，使用严格的CCSD再加上微扰处理第三阶截断，这样的CC方法称为CCSD(T)，而CCSD(T)方法对基态能量的描述已经拥有非常高的精度，与FCI极限的差已经在化学精度的要求之内，因此又被称为基态计算的“黄金标准”。
 
-          但是，这样的高效率和高精度是有代价的：一方面，实际操作中人们发现，在电子关联非常强的体系内，比如能级简并或者分子离平衡位置非常远(化学反应)的情况，CC方法对电子关联的计算是不如MCSCF方法和MRCI的，
+          但是，这样的高效率和高精度是有代价的：一方面，实际操作中人们发现，在电子关联非常强的体系内，比如能级简并或者分子离平衡位置非常远(化学反应)的情况，CC方法计算电子关联的精确度是不如MCSCF方法和MRCI的(但考虑到计算量也已经非常不错)；另一方面，就是指数形式带来的额外的复杂性，主要是推导上的复杂性也限制了CC的更多推广。
         \subsection{激发算符的指数形式}
-          
+          组态相关方法中，从Hartree-Fock基态到单激发、双激发、多激发再到FCI极限是一个非常平凡的过程，但是簇耦合方法中就略有难度。这一小节我们就是要说明簇耦合方法逻辑的导出，即为什么可以将多电子波函数写成激发算符的指数乘以HF基态的形式，以及CC的截断体现在了哪里。
+
+          我们首先利用激发算符，写出组态相关思路下的FCI的波函数，即等式(\ref{SRCI})
+          \begin{equation}
+            | \Psi_{CI} \rangle = \left(1+\sum_{a,r}\hat{X}_{a}^{r}+\sum_{a<b,r<s}\hat{X}_{ab}^{rs}+\cdots\right) | \Psi_0 \rangle
+          \end{equation}
+          如果读者还记得的话，这里的$\hat{X}$是对应的激发算符乘以一个系数，这个系数就是线性组合系数\footnote{这个式子其实没有归一化}。这是一种比较简单的写法，我们不妨叫它CI写法。那显然，我们表示一个无穷的展开有很多种不同但是等价的表达方法，比如下面这个，之后我们会证明它与耦合簇方法给出的多电子波函数形式等价
+          \begin{equation}
+            |\Psi_{CC}\rangle=\left[\prod_{a,r}\left(1+\hat{X}_{a}^{r}\right)\right]\left[\prod_{a<b, r<s}\left(1+\hat{X}_{ab}^{rs}\right)\right] \cdots|\Psi_{0}\rangle
+          \end{equation}
+          我们暂时管这个写法为CC写法。读者不难发现，上述连乘的形式也可以遍历所有可能的激发态，但是CC与CI写法最大的区别就是，CC写法中，一个行列式可能出现多次，比如说某一个双激发行列式$ | \Psi_{ab}^{rs} \rangle $，它既可以通过$1\times\hat{X}_{ab}^{rs}$产生，又可以通过$\hat{X}_a^r\times\hat{X}_b^s$产生。因此这两种写法中算符$\hat{X}$中的参数是不相等的。准确地说，CI写法中的某个激发行列式对应的参数是CC写法中很多参数相乘再求和的结果。
+
+          现在我们来介绍一个激发算符的性质，那就是对于同一个激发算符$\hat{T}$来说，满足
+          \begin{equation}
+            \hat{T}^n = 0, \; n =2,3,4,\dots
+          \end{equation}
+          这个性质是平凡的，这是因为激发算符对应的自旋轨道，所以激发过一次后，原本的自旋轨道就没有电子了，再激发是不可能的，或者说新的自旋轨道上已经有电子了，再次激发到这个自旋轨道就会由于Pauli不相容原理得到0\footnote{这个是唯象的解释，严格地说，这是因为激发算符可以写成产生算符乘以湮灭算符的形式，由于费米子的产生湮灭算符的反对易性质，这个零的结果是很容易严格证明的}。当这个条件满足时，我们可以在原本的CC写法中添加任意个数的$\hat{X}^n$，对任意一个算符$\hat{X}$，我们有
+          \begin{equation}
+            1+\hat{X}=1+\hat{X}+\frac{1}{2} \hat{X} \hat{X}+\cdots=\exp \left(\hat{X}\right)
+          \end{equation}
+          而且，对于不同指标的激发算符是可对易的，所以原本的CC写法就可以改写为
+          \begin{equation}
+            |\Psi_{CC}\rangle=\exp(\hat{T})|\Psi_{0}\rangle
+          \end{equation}
+          其中
+          \begin{equation}
+            \hat{T} = \hat{T}_1 +\hat{T}_2 +\cdots, \;\;\hat{T}_1 = \sum_{a,r}t_a^r\hat{T}_a^r,\;\;\hat{T}_2 = \sum_{a<b,r<s}t_{ab}^{rs}\hat{T}_{ab}^{rs}
+          \end{equation}
+          这样就得到了我们在上一小节提出的式子，也就回到了CC波函数为什么可以写成指数形式这个问题，而且根据这个推导可以知道，CC在不做截断的情况下可以推到FCI极限。
+
+          那么耦合簇方法的截断到底“截在哪”？我们把指数按照经典的方法展开，然后把得到的激发算符按照单激发、双激发等的方法分类排好，就会得到
+          \begin{equation}
+            \exp(\hat{T}_1 +\hat{T}_2 +\cdots) = 1 + (\hat{T}_1) + (\hat{T}_2 + \frac{1}{2!}\hat{T}_1^2) + (\hat{T}_3 + \hat{T}_2\hat{T}_1 + \frac{1}{3!}\hat{T}_1^3) + \cdots
+          \end{equation}
+          可以看到，如果我们截断到CCSD，那么从三激发态开始，系数的描述就会减少项数，所以尽管任意阶的CC方法都涉及到了所有的激发态，但是对于高阶激发态的描述不完备的。
+
+          一般来说，CC方法的系数求解不是通过变分法推出的，而是利用转化后的定态薛定谔方程
+          \begin{equation}
+            \exp (-\hat{T}) \hat{H} \exp (\hat{T})|\Psi_0\rangle= E_{{CC}}|\Psi_0\rangle
+          \end{equation}
+          左乘一组组态得到的正交性方程求解的
+          \begin{equation}
+            \langle\mu|\exp (-\hat{T}) \hat{H} \exp (\hat{T})| \Psi_0\rangle= 0
+          \end{equation}
+          最后得到的簇耦合方法的基态能量为
+          \begin{equation}
+            E_{{CC}}=\langle\Psi_0|\exp (-\hat{T}) \hat{H} \exp (\hat{T})| \Psi_0\rangle
+          \end{equation}          
       \section{微扰理论}
+        微扰方法作为物理学家的大杀器，自然在量子化学中也大有作为。量子化学的非常多的方法可以与微扰结合，上节涉及的耦合簇方法有CCSD(T)，多参考方法中有CASPT2等。对于很多体系，将电子关联归入微扰项是十分合理的，我们本节优先解释一个比较基础的微扰理论，即M\o ller-Plesset微扰(MPX)\footnote{X代表了微扰做到X阶}。
+        \subsection{MPX方法简介}
+          M\o ller-Plesset微扰的思路其实非常简单，那就是将真正的哈密顿量与Hartree-Fock之间的差作为微扰哈密顿量，然后求解微扰的能量修正和波函数修正。
+
+          我们首先写下Hartree-Fock近似下的体系的总哈密顿量
+          \begin{equation}
+            \hat{H}_0 = \sum_i \left[h(i) + v^{HF}(i)\right]
+          \end{equation}
+          其中$v^{HF}(i)$是Hartree-Fock对电子相互作用的平均化处理，实际上是库伦算符和交换算符的求和。而真正的哈密顿量的写法为$\hat{H} = \sum_i h(i) + \sum_{i <j} r_{ij}^{-1}$，这两者的差就是M\o ller-Plesset微扰中的微扰哈密顿量
+          \begin{equation}
+            V = \sum_{i <j} r_{ij}^{-1} -  \sum_i v^{HF}(i)
+            \label{MP PT}
+          \end{equation}
+          得到了微扰哈密顿量，剩下的就是零阶波函数，由于零阶哈密顿量就是Hartree-Fock近似下的$N$电子哈密顿量，所以零阶波函数就是Hartree-Fock基态。现在有了零阶波函数和微扰哈密顿量的形式(\ref{MP PT})，剩下的就与普通的微扰理论没什么区别了，利用这两项，就可以求解任意阶微扰的能量修正和波函数修正。
+        \subsection{MPX中一阶和二阶能量修正}
+          微扰理论的公式此处不再重新推导，由于一阶能量修正非常简单，我们直接写下M\o ller-Plesset微扰中基态的一阶能量修正的表达式
+          \begin{equation}
+            \begin{aligned}
+              E_0^{(1)} &= \langle \Psi_0 | V | \Psi_0 \rangle\\
+              &=\langle \Psi_0 | \sum_{i <j} r_{ij}^{-1} | \Psi_0 \rangle - \langle \Psi_0 |  \sum_i v^{HF}(i) | \Psi_0 \rangle\\
+              &=\frac{1}{2}\sum_{ab}([aa|bb] - [ab|ba]) - \sum_a \langle \chi_a | v^{HF} |  \chi_a \rangle\\
+              &=-\frac{1}{2}\sum_{ab}([aa|bb] - [ab|ba]) 
+            \end{aligned}
+            \label{MP1 energy correction}
+          \end{equation}
+          上式的第二行到第三行我们在Hartree-Fock那一节中已经推导过了。
+
+          MP2的基态能量修正就比较麻烦了，二阶微扰能量修正的一般表达式为
+          \begin{equation}
+            E_0^{(2)} = \sum_n\frac{\left| \langle \Psi_0 | V | n \rangle \right|^2}{E_0^{(0)}-E_n^{(0)}}
+          \end{equation}
+          其中对n求和要遍历所有的零阶哈密顿量激发态，由于$V$是一个双电子算符，所以肯定只涉及第一激发态和第二激发态，根据Slater-Condon规则，双电子算符对于两个相差三个激发及以上的组态的矩阵元是零。接着我们证明第一激发态是不参与能量修正的。首先，我们有$V = \hat{H} - \hat{H}_0$，第一项是真实的哈密顿量，所以根据Brillouin定理，这一项是零，第二项是Fock算符的求和，所以是一个单电子算符，根据Slater-Condon规则中相差一个激发的两个行列式的单电子积分项(\ref{case2 1e})，这一项等于$f_{ar}$，但很可惜，在Hartree-Fock框架下，自旋波函数是Fock算符本征态，所以Fock算符的非对角元$f_{ar} = 0$。至此，我们证明了单激发态不参与二阶微扰能量修正。
+
+          所以就只剩下了双激发态，我们首先计算分母，在Hartree-Fock哈密顿量下，一个Slater行列式的能量就是其所有自旋轨道能量的求和，所以双激发态$ | \Psi_{ab}^{rs} \rangle $和基态的能量差就是它们相差的自旋轨道的能量作加减法，由于分母是基态减去第二激发态，所以这个分母的数值为$\varepsilon_a + \varepsilon_b -\varepsilon_r - \varepsilon_s$。接下来再次看微扰哈密顿量，$V = \sum_{i <j} r_{ij}^{-1} -  \sum_i v^{HF}(i)$，第二项是一个单电子算符，由于基态和双激发态之间相差两个自旋轨道，所以根据(\ref{case3 1e})这一项为零。就只剩下了第一项，即$r_{ij}^{-1}$，再一次，根据(\ref{case3 2e})，这一项等于$[ar|bs]-[as|br]$。所以我们可以写下最后的MP2的基态二阶能量修正
+          \begin{equation}
+            E_0^{(2)} = \sum_{a<b}\sum_{r<s} \frac{\left|[ar|bs]-[as|br]\right|^2}{\varepsilon_a + \varepsilon_b -\varepsilon_r - \varepsilon_s}
+          \end{equation}
+          如果你不介意零除以零这件事的话，可以把求和中的限制去掉，转而得到两个二分之一的乘积
+          \begin{equation}
+            E_0^{(2)} = \frac{1}{4}\sum_{a,b,r,s} \frac{\left|[ar|bs]-[as|br]\right|^2}{\varepsilon_a + \varepsilon_b -\varepsilon_r - \varepsilon_s}
+            \label{MP2 energy correction}
+          \end{equation}
+          关于更高阶的M\o ller-Plesset微扰本指南中不再做推导，感兴趣的读者可以参阅相关教材。
+
+          可以看到，M\o ller-Plesset微扰的思路非常简单，而且MP2方法提供了一个还算不错的计算精度与计算量的平衡。但是M\o ller-Plesset微扰是基于Hartree-Fock计算结果的，自然在处理近简并体系和激发态上有很多困难。正如单行列式的Hartree-Fock方法推演出高级的多组态自洽场理论，那么自然也有单组态微扰的升级版——多组态微扰理论，这里就不再叙述相关内容。
       \section{密度泛函理论简介}
       \section{二次量子化}
         之所以二次量子化的内容不放在量子力学中，是因为从占据数表象重新理解二次量子化是相对浩大的工程，感兴趣的同学可以直接参阅相关的高等量子力学书籍。而之所以放在这里讲，是因为在诸多的量化文献和书籍中使用了二次量子化的语言，尽管在量化领域经常见到产生湮灭算符，但是并没有与二次量子化真实地联系起来，只是用来作为简化表达的一种方式。为了帮助大家看懂相关的公式，我们在电子结构部分从实用的角度简要介绍电子(费米子)的二次量子化语言。本节主要参考(\sout{其实就是翻译了一遍然后调整了几个小地方})\cite{Szabo1989Modern}书中2.4节的内容。
