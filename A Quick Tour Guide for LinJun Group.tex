@@ -253,7 +253,7 @@
           
           复数是实数的拓展。让我们先回顾一下从小到大的数学的学习，来看一下我们（也是整个人类）是怎么认识数的。
           
-          首先认识的是正整数，正整数$\mathbb{Z}^+$对加法封闭\footnote{本节中，封闭的意思是对集合中的数进行某种运算的结果仍然在该集合内。}，但是对于减法就不封闭了，于是人们引入了负整数，组成了对加减法都封闭的整数$\mathbb{Z}$。整数对乘法也封闭，但是对非零除法则不封闭，于是数扩张为了有理数$\mathbb{Q}$。有理数对加减乘除都封闭，但是对于例如对角线长度、圆的周长之类的问题时就不好解决了，从而引入了无理数\sout{以及各种测度}$\mathbb{R}$。到目前为止看起来可以告一段落，但是，当人们求解实系数代数方程的时候，发现其根不一定是实数，从而引入了虚数，组成了复数$\mathbb{C}$。简单的说，数的扩充是为了更高级的运算，而复数的意思是对代数方程求根封闭。数学王子高数证明了，在复数域上，$N$次方程有$N$个根\footnote{此即为\textbf{代数基本定理}}。
+          首先认识的是正整数，正整数$\mathbb{Z}^+$对加法封闭\footnote{本节中，封闭的意思是对集合中的数进行某种运算的结果仍然在该集合内。}，但是对于减法就不封闭了，于是人们引入了负整数，组成了对加减法都封闭的整数$\mathbb{Z}$。整数对乘法也封闭，但是对非零除法则不封闭，于是数扩张为了有理数$\mathbb{Q}$。有理数对加减乘除都封闭，但是对于例如对角线长度、圆的周长之类的问题时就不好解决了，从而引入了无理数\sout{以及各种测度}$\mathbb{R}$。到目前为止看起来可以告一段落，但是，当人们求解实系数代数方程的时候，发现其根不一定是实数，从而引入了虚数，组成了复数$\mathbb{C}$。简单的说，数的扩充是为了更高级的运算，而复数的意思是对代数方程求根封闭。数学王子高斯证明了，在复数域上，$N$次方程有$N$个根\footnote{此即为\textbf{代数基本定理}}。
           
           引入复数的核心就是单位虚数$i$，定义为
           \begin{equation}
@@ -264,60 +264,6 @@
             z=x+iy
           \end{equation}
           这称为复数的\textbf{代数式}，其中$x$被称为\textbf{实部}，$y$被称为\textbf{虚部}。
-          \begin{equation}
-            \varepsilon_{ijk}\varepsilon_{kmn} = \varepsilon_{kij} \varepsilon_{kmn} = \delta_{im} \delta_{jn} - \delta_{in}\delta_{jm}
-          \end{equation} 
-          我们可以这么想这个公式：由于$i,j,k,m,n$都是取三个坐标元，保持$k$一致后其余的指标的选择是非常有限的，然后就能很容易想明白上式是如何推出来的。
-
-          \textbf{梯度}算符是在矢量代数中比较重要的算符，但它也并不神秘，它其实就代表了向各个维度求一阶导的“向量”。比如
-          \begin{equation*}
-            \grad{f}=\qty(\pdv{f}{x},\pdv{f}{y},\pdv{f}{z})\equiv\pdv{f}{x_i}\equiv\partial_i f
-          \end{equation*} 
-          那么与此对应，求一个向量的\textbf{散度}也很容易：
-          \begin{equation*}
-            \div{\vb*{a}} = \partial_i a_i 
-          \end{equation*} 
-          \textbf{旋度}也很简单：
-          \begin{equation*}
-            \curl{\vb*{a}} = \varepsilon_{ijk} \vb*{e}_i \partial_j a_k
-          \end{equation*} 
-          但这些东西能够延伸的内容是非常丰富的。比如对$\vb*{r} = (x,y,z)$，有
-          \begin{align}
-            &\div{\vb*{r}} = 3 \\
-            &\curl{\vb*{r}} = 0 \\
-            &\curl{(\grad{f})} = 0 \\
-            &\grad{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} = \frac{-\qty(\vb*{r}-\vb*{r}')}{\abs{\vb*{r}-\vb*{r}'}^3} = - \grad'{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} \\
-            &\curl{\qty(r^n \vb*{r})} = 0 
-          \end{align}
-          读者有兴趣可以自行证明。对此感兴趣的读者可进一步阅读附录\ref{tensor_higher}。\\
-
-          {\color{red}{\textbf{Warning: 前方高能！非\sout{战斗人员}相对论量子力学相关读者请迅速撤离！！！}}}
-
-          张量分析在矢量代数的基础上考虑了坐标系自身的影响，比如，这个坐标系的各个基向量之间是不互相正交的。此时向量之间的内积自然就不能简单地利用向量系数的相乘。为了方便地搞定这个事情，张量分析使用了“协变张量”和“逆变张量”的概念。“协变张量”是我们所熟悉的张量，而“逆变张量”则代表了与它相对应的另一种张量\footnote{\sout{好了好了我知道我中文很菜}}。
-
-          比如我们有两个基向量$\vb*{i}_1,\vb*{i}_2$，他们满足
-          \begin{equation*}
-            \vb*{i}_1 \cdot \vb*{i}_1 = \vb*{i}_2 \cdot \vb*{i}_2 = 1, \quad \vb*{i}_1 \cdot \vb*{i}_2 = \cos{\varphi}
-          \end{equation*} 
-          甚至还不止于此，我们有两个非归一的基向量
-          \begin{equation*}
-            \vb*{g}_1 = \abs{\vb*{g}_1} \vb*{i}_1, \vb*{g}_2 = \abs{\vb*{g}_2} \vb*{i}_2
-          \end{equation*} 
-          此时两个向量$\vb*{p},\vb*{q}$ 的内积直接写起来是非常复杂的。但我们可以通过代数方程构建这两个基向量对应的逆变基矢量$\vb*{g}^1,\vb*{g}^2$，使
-          \begin{equation*}
-            \vb*{g}^1 \cdot \vb*{g}_2  = 0, \quad \vb*{g}^1 \cdot \vb*{g}_1 = \vb*{g}^2 \cdot \vb*{g}_2 = 1 
-          \end{equation*} 
-          也就是
-          \begin{equation*}
-            \vb*{g}^i \cdot \vb*{g}_j = \delta^i_j
-          \end{equation*}
-          我们就可以方便地写出两个向量的内积，
-          \begin{equation*}
-            \mean{\vb*{p},\vb*{q}} = p^i \cdot q_i
-          \end{equation*} 
-          其中上标的向量表示通过逆变基向量线性组合得到的逆变向量，下标为对应的协变向量。
-
-          这样我们就在一定程度上解决了坐标系自身带来的影响。那么对协变向量/逆变向量自然存在对应的线性变换
           \begin{equation*}
             \begin{cases}
               x&=\Re(z)\\
