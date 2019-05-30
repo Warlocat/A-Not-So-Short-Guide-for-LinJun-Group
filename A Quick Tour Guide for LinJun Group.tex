@@ -760,7 +760,7 @@
             \delta_k=
             \begin{cases}
               1,\quad k=0 \\
-              2, quad k\neq0 
+              2,\quad k\neq0 
             \end{cases}
             .
           \end{equation}
@@ -1081,15 +1081,15 @@
         \end{equation*}
         我们就可以方便地写出两个向量的内积，
         \begin{equation*}
-          \mean{\vb*{p},\vb*{q}} = p^i \cdot q_i
+          \mean{\vb*{p},\vb*{q}} = \vb*{p}^i \cdot \vb*{q}_i
         \end{equation*} 
         其中上标的向量表示通过逆变基向量线性组合得到的逆变向量，下标为对应的协变向量。
 
         这样我们就在一定程度上解决了坐标系自身带来的影响。那么对协变向量/逆变向量自然存在对应的线性变换
         \begin{equation*}
           \begin{cases}
-            \vb*{p}_{j'} = \beta^{j'}_i p_i \\
-            \vb*{p}^{j'} = \beta^{j'}_i p^i
+            \vb*{p}_{j'} = \beta^{i}_{j'} \vb*{p}_i \\
+            \vb*{p}^{j'} = \beta^{j'}_i\vb*{p}^i
           \end{cases}
         \end{equation*} 
         可以很容易地证明
@@ -3828,11 +3828,13 @@
 
       \section{Legendre 函数}
         \subsection{轴对称球函数}
-          满足的微分形式为
+          满足的微分方程形式为
           \begin{equation}
             (1-x^2) \frac{\mathrm{d}^2 y}{\mathrm{d}x^2} -2x \frac{\mathrm{d} y}{\mathrm{d} x} +\left[ l(l+1) - \frac{m^2}{1-x^2} \right] y = 0
           .
-          \end{equation} 
+          \end{equation}
+        \subsection{轴对称球函数}
+          对于轴对称的球函数，满足$ m = 0 $，此时的解为
           \begin{equation}
             P_l (x) = \sum_{k=0} ^{[\frac{l}{2} ]} (-1)^k \frac{(2l-2k)!}{2^l k! (l-k)! (l-2k)!} x^{l-2k}
           .
