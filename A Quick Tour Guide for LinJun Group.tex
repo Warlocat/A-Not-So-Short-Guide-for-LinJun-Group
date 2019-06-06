@@ -253,7 +253,7 @@
           
           复数是实数的拓展。让我们先回顾一下从小到大的数学的学习，来看一下我们（也是整个人类）是怎么认识数的。
           
-          首先认识的是正整数，正整数$\mathbb{Z}^+$对加法封闭\footnote{本节中，封闭的意思是对集合中的数进行某种运算的结果仍然在该集合内。}，但是对于减法就不封闭了，于是人们引入了负整数，组成了对加减法都封闭的整数$\mathbb{Z}$。整数对乘法也封闭，但是对非零除法则不封闭，于是数扩张为了有理数$\mathbb{Q}$。有理数对加减乘除都封闭，但是对于例如对角线长度、圆的周长之类的问题时就不好解决了，从而引入了无理数\sout{以及各种测度}$\mathbb{R}$。到目前为止看起来可以告一段落，但是，当人们求解实系数代数方程的时候，发现其根不一定是实数，从而引入了虚数，组成了复数$\mathbb{C}$。简单的说，数的扩充是为了更高级的运算，而复数的意思是对代数方程求根封闭。数学王子高数证明了，在复数域上，$N$次方程有$N$个根\footnote{此即为\textbf{代数基本定理}}。
+          首先认识的是正整数，正整数$\mathbb{Z}^+$对加法封闭\footnote{本节中，封闭的意思是对集合中的数进行某种运算的结果仍然在该集合内。}，但是对于减法就不封闭了，于是人们引入了负整数，组成了对加减法都封闭的整数$\mathbb{Z}$。整数对乘法也封闭，但是对非零除法则不封闭，于是数扩张为了有理数$\mathbb{Q}$。有理数对加减乘除都封闭，但是对于例如对角线长度、圆的周长之类的问题时就不好解决了，从而引入了无理数$\mathbb{R}$\sout{以及各种测度}。到目前为止看起来可以告一段落，但是，当人们求解实系数代数方程的时候，发现其根不一定是实数，从而引入了虚数，组成了复数$\mathbb{C}$。简单的说，数的扩充是为了更高级的运算，而复数的意思是对代数方程求根封闭。数学王子高斯证明了，在复数域上，$N$次方程有$N$个根\footnote{此即为\textbf{代数基本定理}}。
           
           引入复数的核心就是单位虚数$i$，定义为
           \begin{equation}
@@ -264,64 +264,10 @@
             z=x+iy
           \end{equation}
           这称为复数的\textbf{代数式}，其中$x$被称为\textbf{实部}，$y$被称为\textbf{虚部}。
-          \begin{equation}
-            \varepsilon_{ijk}\varepsilon_{kmn} = \varepsilon_{kij} \varepsilon_{kmn} = \delta_{im} \delta_{jn} - \delta_{in}\delta_{jm}
-          \end{equation} 
-          我们可以这么想这个公式：由于$i,j,k,m,n$都是取三个坐标元，保持$k$一致后其余的指标的选择是非常有限的，然后就能很容易想明白上式是如何推出来的。
-
-          \textbf{梯度}算符是在矢量代数中比较重要的算符，但它也并不神秘，它其实就代表了向各个维度求一阶导的“向量”。比如
-          \begin{equation*}
-            \grad{f}=\qty(\pdv{f}{x},\pdv{f}{y},\pdv{f}{z})\equiv\pdv{f}{x_i}\equiv\partial_i f
-          \end{equation*} 
-          那么与此对应，求一个向量的\textbf{散度}也很容易：
-          \begin{equation*}
-            \div{\vb*{a}} = \partial_i a_i 
-          \end{equation*} 
-          \textbf{旋度}也很简单：
-          \begin{equation*}
-            \curl{\vb*{a}} = \varepsilon_{ijk} \vb*{e}_i \partial_j a_k
-          \end{equation*} 
-          但这些东西能够延伸的内容是非常丰富的。比如对$\vb*{r} = (x,y,z)$，有
-          \begin{align}
-            &\div{\vb*{r}} = 3 \\
-            &\curl{\vb*{r}} = 0 \\
-            &\curl{(\grad{f})} = 0 \\
-            &\grad{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} = \frac{-\qty(\vb*{r}-\vb*{r}')}{\abs{\vb*{r}-\vb*{r}'}^3} = - \grad'{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} \\
-            &\curl{\qty(r^n \vb*{r})} = 0 
-          \end{align}
-          读者有兴趣可以自行证明。对此感兴趣的读者可进一步阅读附录\ref{tensor_higher}。\\
-
-          {\color{red}{\textbf{Warning: 前方高能！非\sout{战斗人员}相对论量子力学相关读者请迅速撤离！！！}}}
-
-          张量分析在矢量代数的基础上考虑了坐标系自身的影响，比如，这个坐标系的各个基向量之间是不互相正交的。此时向量之间的内积自然就不能简单地利用向量系数的相乘。为了方便地搞定这个事情，张量分析使用了“协变张量”和“逆变张量”的概念。“协变张量”是我们所熟悉的张量，而“逆变张量”则代表了与它相对应的另一种张量\footnote{\sout{好了好了我知道我中文很菜}}。
-
-          比如我们有两个基向量$\vb*{i}_1,\vb*{i}_2$，他们满足
-          \begin{equation*}
-            \vb*{i}_1 \cdot \vb*{i}_1 = \vb*{i}_2 \cdot \vb*{i}_2 = 1, \quad \vb*{i}_1 \cdot \vb*{i}_2 = \cos{\varphi}
-          \end{equation*} 
-          甚至还不止于此，我们有两个非归一的基向量
-          \begin{equation*}
-            \vb*{g}_1 = \abs{\vb*{g}_1} \vb*{i}_1, \vb*{g}_2 = \abs{\vb*{g}_2} \vb*{i}_2
-          \end{equation*} 
-          此时两个向量$\vb*{p},\vb*{q}$ 的内积直接写起来是非常复杂的。但我们可以通过代数方程构建这两个基向量对应的逆变基矢量$\vb*{g}^1,\vb*{g}^2$，使
-          \begin{equation*}
-            \vb*{g}^1 \cdot \vb*{g}_2  = 0, \quad \vb*{g}^1 \cdot \vb*{g}_1 = \vb*{g}^2 \cdot \vb*{g}_2 = 1 
-          \end{equation*} 
-          也就是
-          \begin{equation*}
-            \vb*{g}^i \cdot \vb*{g}_j = \delta^i_j
-          \end{equation*}
-          我们就可以方便地写出两个向量的内积，
-          \begin{equation*}
-            \mean{\vb*{p},\vb*{q}} = p^i \cdot q_i
-          \end{equation*} 
-          其中上标的向量表示通过逆变基向量线性组合得到的逆变向量，下标为对应的协变向量。
-
-          这样我们就在一定程度上解决了坐标系自身带来的影响。那么对协变向量/逆变向量自然存在对应的线性变换
           \begin{equation*}
             \begin{cases}
-              x&=\Re(z)\\
-              y&=\Im(z)
+              x=\Re(z)\\
+              y=\Im(z)
             \end{cases}
           \end{equation*}
           于是从某种意义上来说，复数可以看成是一个二元有序实数对$(x,y)$。复数的几何表示也自然而然地对应一个二维平面\footnote{即\textbf{复平面}}。
@@ -331,11 +277,11 @@
           复数也可以用极坐标$\rho$和$\phi$来表示。
           \begin{equation}
             \begin{cases}
-              \rho&=\sqrt{x^2+y^2}\\
-              \phi&=\arctan(\frac{y}{x})
+              \rho=\sqrt{x^2+y^2}\\
+              \phi=\arctan(\frac{y}{x})
             \end{cases}\ \begin{cases}
-              x&=\rho\cos\phi\\
-              y&=\rho\sin\phi
+              x=\rho\cos\phi\\
+              y=\rho\sin\phi
             \end{cases}
           \end{equation}
           则复数可以表示为\textbf{三角式}
@@ -349,8 +295,8 @@
           其中$\rho$称为复数的\textbf{模}，而$\phi$称为复数的\textbf{辐角}。若$0\leq\phi<2\pi$，则称为\textbf{辐角主值}。
           \begin{equation}
             \begin{cases}
-              \rho&=\abs{z}\\
-              \phi&=\arg\qty(z)
+              \rho=\abs{z}\\
+              \phi=\arg\qty(z)
             \end{cases}
           \end{equation}
           以下运算结论利用定义即可得到，在此直接给出结论：对于
@@ -489,11 +435,11 @@
               \vdots & {} & \vdots \\
               A_{N 1} & \cdots & A_{N N}
             }=\sum_{i=1}^{N !}{\qty(-1)^{p_i} \mathscr{P}_i A_{1i_1} A_{2i_2} \cdots A_{N i_N}}
-            \label{determinants defination}
+            \label{determinants definition}
           \end{equation}
           其中$\mathscr{P}_i$是排列算符，它的意义是给出一种列指标$1,2,3,\dots,N$的排列，求和就是关于所有的$N!$种排列求和，$p_i$是从自然序排列(1,2,3,\dots,N)出发得到排列$\mathscr{P}_i$所需要的近邻交换操作的个数。看似非常复杂，让我们以$3\times3$矩阵为例说明这个操作是如何实现的。
 
-          对于$3\times3$矩阵的矩阵元乘积$A_{1i_1} A_{2i_2}A_{3i_3}$的排列总有$3!=6$种，即$i_1,i_2,i_3$分别等于$1,2,3$，$1,3,2$，$2,3,1$，$2,1,3$，$3,1,2$和$3,2,1$，接下来就是计算每种排列对应的$p_i$，即从$1,2,3$实现该排列所需要的近邻交换操作的个数，分别是$0,1,2,1,2,3$\footnote{你可能算出来跟我差一个偶数，但根据式(\ref{determinants defination})这不重要}，所以$3\times3$矩阵的行列式计算表达式为
+          对于$3\times3$矩阵的矩阵元乘积$A_{1i_1} A_{2i_2}A_{3i_3}$的排列总有$3!=6$种，即$i_1,i_2,i_3$分别等于$1,2,3$，$1,3,2$，$2,3,1$，$2,1,3$，$3,1,2$和$3,2,1$，接下来就是计算每种排列对应的$p_i$，即从$1,2,3$实现该排列所需要的近邻交换操作的个数，分别是$0,1,2,1,2,3$\footnote{你可能算出来跟我差一个偶数，但根据式(\ref{determinants definition})这不重要}，所以$3\times3$矩阵的行列式计算表达式为
           \begin{equation}
             \det(\vb*{A})=A_{11} A_{22}A_{33}-A_{11} A_{23}A_{32}+A_{12} A_{23}A_{31}-A_{12} A_{21}A_{33}+A_{12} A_{21}A_{32}-A_{13} A_{22}A_{31}
           \end{equation}
@@ -507,19 +453,19 @@
           线性代数中定义，如果矩阵$\vb*{A}$右乘一个向量$\vb*{X}$恒等于一个数$\lambda$乘以这个向量
           \begin{equation}
             \vb*{AX}=\lambda\vb*{X}
-            \label{eigen defination}
+            \label{eigen definition}
           \end{equation}
           那么向量$\vb*{X}$称为矩阵$\vb*{A}$的对应特征值$\lambda$特征向量。如何求解特征值和特征向量其实非常简单，先假设特征向量存在，就有
           \begin{equation}
             \vb*{AX}-\lambda\vb*{I}\vb*{X}=\qty(\vb*{A}-\lambda\vb*{I})\vb*{X}=0
-            \label{eigen defination2}
+            \label{eigen definition2}
           \end{equation}
           当$\vb*{X}$不是零向量时，要求左边乘以它的矩阵的行列式为0，由此得到
           \begin{equation}
             \det\qty(\vb*{A}-\lambda\vb*{I})=0
             \label{eigen equ}
           \end{equation}
-          就可以求出特征值，将特征值代入(\ref{eigen defination})或(\ref{eigen defination2})就可以求出对应的特征矢量。其实可以看到一个特征值对应的特征矢量构成了一个线性空间，称为特征子空间。
+          就可以求出特征值，将特征值代入(\ref{eigen definition})或(\ref{eigen definition2})就可以求出对应的特征矢量。其实可以看到一个特征值对应的特征矢量构成了一个线性空间，称为特征子空间。
 
           在应用中，我们经常需要将一个矩阵对角化，即通过线性变换使得矩阵变成对角阵，对角化通常是使用特征值与特征向量的方法。如果$n\times n$矩阵$\vb*{A}$有$n$个特征值，对应$n$个特征向量，\sout{物理里的矩阵性质都很好的，}首先求出矩阵对应的特征值和(模为1)特征向量，将这些特征向量按列向量的形式组合成一个矩阵
           \begin{equation*}
@@ -766,6 +712,8 @@
           \end{equation}
         \end{theorem}
 
+        {\color{red}{\textbf{Warning: 前方高能！}}}
+
         我们刚刚描述过完备基展开，而且$\sin{\omega_k x}$和$\cos{\omega_k x}$恰好是 $f''\qty(x) + \lambda f\qty(x) = 0$的解，所以它们在$\qty[-l,l]$上构成了完备基，而且它们互相之间是正交的。在这里值得一提的是，$\sin{\omega_k x}$满足了\textbf{第一类齐次边界条件}，即在边界上函数值为零，而$\cos{\omega_k x}$满足了\textbf{第二类齐次边界条件}，即在边界上的一阶导为零，这允许我们在各类边界条件下研究一个物理问题。同时从某种意义上，我们可以说
         \begin{center}
           \textbf{边界条件导致了特征值的分立。}
@@ -779,7 +727,9 @@
 
         而我们认为波函数在空间的任何一个点都是不发散的，因此在$\theta$方向上必须要展开成多项式而非无穷级数，而$\phi$方向的方程使它必须要符合连属Legendre多项式的形式\footnote{详细讨论还是见任何一本数学物理方法或者量子力学的书。}。同时波函数在全空间下是绝对可积的（因为我们已经定义了波函数的内积——它必须是在Hilbert空间下的），所以在无穷远处它必须收敛于零，这使得径向函数必须满足连带Laguerre函数的形式。所以从某种角度而言，\textbf{量子力学的能级分立是由于量子力学是使用一个偏微分方程描述且存在边界条件的}。
 
-        \sout{上面那段关于特征值的部分看不懂也没事，等你以后神功大成了再回看也不迟。}简单地说，对于任意一个周期为$2l$\footnote{$l>0$}的函数$f\qty(x)$，其都可以展开为$\qty{\sin{\omega_k x},\cos{\omega x}}_{n=0}^\infty$的线性组合。回顾\ref{expansion_of_complete_basis}一节的内容，这就是完备基展开。
+        \sout{上面那段关于特征值的部分看不懂也没事，等你以后神功大成了再回看也不迟。}
+        
+        简单地说，对于任意一个周期为$2l$\footnote{$l>0$}的函数$f\qty(x)$，其都可以展开为$\qty{\sin{\omega_k x},\cos{\omega x}}_{n=0}^\infty$的线性组合。回顾\ref{expansion_of_complete_basis}一节的内容，这就是完备基展开。
 
         然后，让我们用一个更一般的形式来处理这个问题。著名的Euler公式表明
         \begin{equation}
@@ -804,7 +754,7 @@
         \begin{equation}
           c_k=\frac{1}{2l}\int_{-l}^l{f\qty(\xi)e^{-i\omega_k\xi}\dd{\xi}}
         \end{equation}
-        利用正交性即可。显然，$c_k\in\mathbb{C}$，$c_k=c_{-k}^*$。
+        利用正交性即可。显然，$c_k\in\mathbb{C}$，$c_k=c_{-k}^*$。这种形式的好处在于形式上更加统一，而且不用考虑要不要除以二的问题。
 
         如果我们想要展开的是一个全实数域的函数呢？我们还是从\ref{real_fourier_series}出发，然后令$l\to\infty$，我们发现它转换为一个积分。首先对于$a_0$
         \begin{equation}
@@ -812,6 +762,7 @@
         \end{equation}
         如果积分是可积的，那么就有$a_0=0$。我们令$\Delta\omega_k=\omega_k-\omega_{k-1}=\frac{\pi}{l}\to0$，于是，
         \begin{equation}
+          \label{fourier_transformation_derivation}
           \begin{aligned}
             &f\qty(x)=\lim_{l\to\infty}\sum_{k=1}^{\infty}{\qty(a_k\cos{\omega_k x}+b_k\sin{\omega_k x})}\\
             \Rightarrow&f\qty(x)=\lim_{l\to\infty}{\sum_{k=1}^{\infty}{\qty[\qty(\frac{1}{l}\int_{-l}^l{f\qty(\xi)\cos{\omega_k\xi}\dd{\xi}})\cos{\omega_k x}+\qty(\frac{1}{l}\int_{-l}^l{f\qty(\xi)\sin{\omega_k\xi}\dd{\xi}})\sin{\omega_k x}]}}\\
@@ -825,11 +776,13 @@
         而系数为
         \begin{equation}
           \begin{cases}
+            \label{fourier_transformation_real_coefficient}
             A\qty(\omega)=\frac{1}{\pi}\int^\infty_{-\infty}{f\qty(\xi)\cos{\omega\xi}\dd{\xi}}\\
             B\qty(\omega)=\frac{1}{\pi}\int^\infty_{-\infty}{f\qty(\xi)\sin{\omega\xi}\dd{\xi}} 
           \end{cases}
           .
         \end{equation}
+        注意\ref{fourier_transformation_derivation}的推导过程。我们第一步代入了傅里叶展开的系数的表达式，第二步代入了周期$l$的表达式，第三步只是简单的提取了公因式，但是这样根据积分的极限定义我们就可以把第三步的结果写成第四步的积分，归纳就得到了最后一步以及对应的系数表达式\ref{fourier_transformation_real_coefficient}。
 
         那么类似地，我们也可以得到复数域中的傅立叶变换以及对应的傅立叶逆变换，即
         \begin{equation}
@@ -845,110 +798,25 @@
 
         我们还能够引入各种定理，
         \begin{theorem}
-          \begin{equation}
-            \mathcal{F}[f'(x)] = ik F(k)
-          \end{equation}
+          \begin{align}
+            \mathcal{F}\qty[f'\qty(x)]&=&ikF\qty(k)\\
+            \mathcal{F}\qty[\int^\qty(x){f\qty(\xi)\dd{\xi}}]&=&\frac{1}{ik}F\qty{k}\\
+            \mathcal{F}\qty[f\qty(ax)]&=&\frac{1}{a}F\qty(\frac{k}{a})\\
+            \mathcal{F}\qty[f\qty(x-x_0)]&=&e^{-ikx_0}F\qty(k)\\
+            \mathcal{F}\qty[e^{ik_0x}f\qty(x)]&=&F\qty(k-k_0)\\
+            \mathcal{F}\qty[\int\limits_\mathbb{R}{f_1\qty(\xi)f_2\qty(x-\xi)\dd{\xi}}]&=&2\pi\mathcal{F}\qty[f_1\qty(x)]\mathcal{F}\qty[f_2\qty(x)]
+          \end{align}
         \end{theorem}
-        \begin{proof}
-          \begin{align*}
-            \mathcal{F}[f'(x)] &=\frac{1}{2\pi}\int ^\infty_\infty f'(x) e^{-ik x} \, \ud x \\
-                  &= \frac{1}{2\pi}\left[ f(x) e^{-ik x} \right] ^\infty _{-\infty} - \frac{1}{2\pi}\int ^\infty _{-\infty} f(x) \left[ e^{-ik x} \right] ' \, \ud x 
-          \end{align*}
-          傅立叶变换要求原函数在整个空间上绝对可积，从而有$\lim_{x\to \pm \infty} f(x) = 0$,所以
-          \begin{equation*}
-            \mathcal{F}[f'(x)] = - \frac{1}{2\pi}\int ^\infty_{-\infty} f(x) \left[ e^{-ik x} \right] '  \, \ud x = ik F(k) 
-          \end{equation*} 
-        \end{proof}
-        \begin{theorem}
-          \begin{equation}
-            \mathcal{F}[f(x-x_0)] = e^{-ikx_0} F(k)
-          \end{equation}
-        \end{theorem}
-        \begin{proof}
-          \begin{equation*}
-            \mathcal{F}[f(x-x_0)] =\frac{1}{2\pi} e^{-ikx_0}\int ^\infty_{-infty} f(x-x_0) e^{-ik(x-x_0)} \, d(x-x_0) = e^{-ikx_0} F(k)
-          \end{equation*} 
-        \end{proof}
-        \begin{theorem}
-          \begin{equation}
-            \mathcal{F}[f_1(x) * f_2(x)] = 2\pi F_1(k)F_2(k)
-          \end{equation}
-        \end{theorem}
-        \begin{proof}
-          \begin{equation*}
-            \mathcal{F}[f_1*f_2] = \frac{1}{2\pi}\int ^\infty_{-\infty} \left[ \int ^\infty_{-\infty} f_1(\xi) f_2(x-\xi) \, d\xi   \right] e^{-ikx} \, \ud x 
-          \end{equation*} 
-          交换积分次序，
-          \begin{equation*}
-            \mathcal{F}[f_1*f_2] = \frac{1}{2\pi} \int ^\infty _{-\infty} f_1(\xi) \left( \int ^\infty_{-\infty} f_2(x-\xi) e^{-ik x} \, \ud x  \right) \, d\xi 
-          \end{equation*} 
-          利用延迟定理，
-          \begin{equation*}
-            \mathcal{F}[f_1 * f_2] = \frac{1}{2\pi} \int ^\infty_{-\infty} f_1(\xi) e^{-i k\xi} \, d\xi \cdot 2\pi F_2(k) = 2\pi F_1(k)F_2(k)
-          \end{equation*} 
-        \end{proof}
+        上述过程的证明\sout{留做习题}感兴趣的读者可以根据傅里叶变换的定义自行完成。
 
         当然傅立叶变换不只是在一维上。我们对三维空间$\vb*{r}$也可以做傅立叶变换，
-        \begin{equation*}
-          F(\vb*{k}) = \frac{1}{(2\pi)^{\frac{3}{2}}} \iiint f(\vb*{r})  e^{-i\vb*{k}\cdot\vb*{r}  } \, d\vb*{r} 
-        \end{equation*} 
-
-        傅立叶变换的一个非常有价值的特点是可以把导数转换为一个常数相乘，从而极大地简化方程。比如无界空间下的扩散问题，
-        \begin{equation*}
-          u_t-a^2u_{xx} = 0
-        \end{equation*} 
-        初始条件：
-        \begin{equation*}
-          u\big|_{t=0} = \phi(x)
-        \end{equation*} 
-        傅立叶变换再逆变换就能回到原来的样子，
-        \begin{equation*}
-          u(x,t) = \int \mathcal{F}[u] e^{ikx} \, dk = \mathcal{F}^{-1}[\mathcal{F}[u]]
-        \end{equation*} 
-        对$x$做Fourier Transform,
-        \begin{equation*}
-          \mathcal{F}[u](k,t) = \frac{1}{2\pi} \int u(x,t) e^{-ikx} \, \ud x 
-        \end{equation*} 
-        原方程便转换为
-        \begin{equation*}
-          \begin{cases}
-            \mathcal{F}[u_t] + a^2 k^2 \mathcal{F}[u] = 0 \\
-            \mathcal{F}[u]\big|_{t=0} = \mathcal{F}[\phi]
-          \end{cases}
-        \end{equation*} 
-        \begin{equation*}
-          \Rightarrow \mathcal{F}[u] = \mathcal{F}[\phi] e^{-k^2 a^2 t}
-        \end{equation*} 
-        \begin{equation*}
-          u = \mathcal{F}^{-1} [\mathcal{F}[\phi] e^{-k^2a^2 t}]
-        \end{equation*} 
-        有
-        \begin{equation*}
-          \mathcal{F}[f_1 * f_2] = 2\pi \mathcal{F}[f_1] \mathcal{F} [f_2]
-        \end{equation*} 
-        故
-        \begin{equation*}
-          u = \frac{1}{2\pi} \phi * \mathcal{F}^{-1} e^{-k^2 a^2 t} 
-        \end{equation*} 
-        当然也可以直接套定义，
-        \begin{equation*}
-          u = \int_{-\infty} ^\infty \mathcal{F}[\phi] e^{-k^2 a^2 t} e^{ikx} \, dk 
-        \end{equation*} 
-        \begin{align*}
-          u &= \frac{1}{2\pi}\int \int \phi(\xi) e^{-ik\xi} \, d\xi e^{ikx}  \, dk\\
-            &=\frac{1}{2\pi} \int \phi(\xi) \int e^{-k^2 a^2 t} e^{-ik(x-\xi)} \, dk  \, d\xi \\
-            &=\sqrt{\frac{\pi}{a^2 t}}\frac{1}{2\pi} \int \phi(\xi) e^{-\frac{(x-\xi)^2}{4a^2 t}} \, d\xi\\
-            &=\frac{1}{2\pi} \phi(x) * \sqrt{\frac{\pi}{a^2 t}} e^{-\frac{x^2}{4 a^2 t}}
-        \end{align*}
-        其中，有一步是做配方，
-        \begin{equation*}
-          e^{-k^2a^2 t} e^{ik (x-\xi)} = e^{-a^2 t (k-\frac{i (x-\xi)}{2a^2 t})^2} e^{-\frac{(x-\xi)^2}{4a^2 t}}
-        \end{equation*} 
-        注意在积分该式时存在积分路径不在实轴的问题，但事实上构造回路后由于回路积分为零，故可以直接化为在实轴上的积分，从而解得最终解。
-
-        同样地，对于连续狄拉克函数$\delta(x)$，表示$x=0$时其值不为零（或者正无穷），$x\neq 0$时恒为零，同时保证
         \begin{equation}
-          \int \delta(x) \, \ud x = 1 
+          F(\vb*{k})=\frac{1}{(2\pi)^{\frac{3}{2}}}\iiint\limits_{\mathbb{R}^3}{f(\vb*{r})e^{-i\vb*{k}\cdot\vb*{r}}\dd{\vb*{r}}}
+        \end{equation}
+
+        另外一个跟傅里叶变换相关的内容是连续狄拉克函数$\delta(x)$，它在$x=0$时其值不为零（或者正无穷），$x\neq 0$时恒为零，同时保证
+        \begin{equation}
+          \int\limits_\mathbb{R}{\delta(x)\dd{x}}=1
         \end{equation}
         它还有这些性质，
         \begin{align}
@@ -976,42 +844,42 @@
 
         在开始讲述之前，我们先引入爱因斯坦求和约定。在矢量代数中，当一个字母成对出现后，即默认对这个字母遍历的所有情况进行求和。而在张量分析中，若一个上指标和一个下指标成对出现，那么进行遍历求和。
 
-        为更详细地描述该约定，我们假设存在两个向量$\vb*{a} = \mqty(\xmat*{a}{1}{3}), \, \vb*{b} = \mqty(\xmat*{b}{1}{3})$.此时我们可以使用$a_i$及 $b_i$来直接代表这两个向量，因为 $i$没有重复出现，说明它是“灵活的”，也就是它对能够遍历的所有情况都成立。那么求和约定怎么弄呢？其实很简单，
+        为更详细地描述该约定，我们假设存在两个向量$\vb*{a}=\mqty(\xmat*{a}{1}{3}),\ \vb*{b}=\mqty(\xmat*{b}{1}{3})$.此时我们可以使用$a_i$及$b_i$来直接代表这两个向量，因为 $i$没有重复出现，说明它是“灵活的”，也就是它对能够遍历的所有情况都成立。那么求和约定怎么弄呢？其实很简单，
         \begin{equation*}
-          a_i b_i \equiv \mqty(\xmat*{a}{1}{3}) \cdot \mqty(\xmat*{b}{1}{3})  = \sum_{i=1}^3{A_iB_i}
+          a_ib_i\equiv\mqty(\xmat*{a}{1}{3})\cdot\mqty(\xmat*{b}{1}{3})=\sum_{i=1}^3{A_iB_i}
         \end{equation*} 
         那么很容易联想，
         \begin{equation*}
-          a_i a_i = \abs{\vb*{a}}^2
+          a_ia_i=\norm{\vb*{a}}^2
         \end{equation*} 
-        那$a_i b_j$呢？ $i,j$都是没有成对出现的，说明它们都是灵活的，可以遍历所有情况，那么这个玩意儿应该出现9个元素。没错，它某种程度上就代表了一个矩阵。更准确地说，它代表了一个并矢。用矩阵来表示，
+        那$a_ib_j$呢？ $i,j$都是没有成对出现的，说明它们都是灵活的，可以遍历所有情况，那么这个玩意儿应该出现9个元素。没错，它某种程度上就代表了一个矩阵。更准确地说，它代表了一个并矢。用矩阵来表示，
         \begin{equation*}
-          a_i b_j\equiv\mqty(
-            a_1 b_1 & a_1 b_2 & a_1 b_3 \\
-            a_2 b_1 & a_2 b_2 & a_2 b_3 \\
-            a_3 b_1 & a_3 b_2 & a_3 b_3 
+          a_ib_j\equiv\mqty(
+            a_1b_1 & a_1b_2 & a_1b_3 \\
+            a_2b_1 & a_2b_2 & a_2b_3 \\
+            a_3b_1 & a_3b_2 & a_3b_3 
           )
         \end{equation*} 
         那么易得，
         \begin{equation}
-          \Tr(a_i b_j) = a_i b_i.
+          \Tr(a_ib_j)=a_ib_i.
         \end{equation}
 
         矢量的一个比较重要的性质便是向量是受旋转矩阵控制的。旋转矩阵$R$(或$R_{ij}$)作为正交矩阵，满足
         \begin{equation*}
-          R^\mathsf{T} R = I
+          R^\mathsf{T}R=I
         \end{equation*}
         它代表了对向量的旋转，也可以是向量在一个空间的表述转换到了另一个空间的表述，同时保持各个向量之间的内积保持不变。它表达起来为
         \begin{equation*}
-          a'_i b'_i = a_j R_{ji} R_{ij} b_j = a_j b_j
+          a'_ib'_i=a_jR_{ji}R_{ij}b_j=a_jb_j
         \end{equation*} 
-        其中$a'_i,\,b'_i$表示为新坐标下的向量表示。我们可以清晰地看到旋转矩阵的正交性质在保持向量内积中起到的作用。我们可以从这一点出发，若某个量是受旋转矩阵控制的，那么它是一个矢量。
+        其中$a'_i,\ b'_i$表示为新坐标下的向量表示。我们可以清晰地看到旋转矩阵的正交性质在保持向量内积中起到的作用。我们可以从这一点出发，若某个量是受旋转矩阵控制的，那么它是一个矢量。
 
         旋转矩阵其实便代表了一个二阶张量：它存在两个指标，这两个指标之间是独立的。我们还可以从并矢得到灵感，在字母上多标箭头来表达高阶张量\footnote{为什么不写出来？\sout{编者\LaTeX 能力太差}}。特别地，二阶张量还可以用$\overleftrightarrow{T}$来表示。
 
         当然旋转矩阵也并不是只能作用于矢量。我们从并矢可以很容易联想到，高阶张量某种程度上代表了多个向量的笛卡尔积，那么若要对它进行旋转也就意味着对每一个向量进行旋转，而互相之间的旋转可以是独立的。从而我们可以写成
         \begin{equation*}
-          T'_{i_1i_2...i_n} = R_{i_1j_1} R_{i_2j_2} ... R_{i_n j_n} T_{j_1j_2....j_n}
+          T'_{i_1i_2\dots i_n}=R_{i_1j_1}R_{i_2j_2}\dots R_{i_nj_n}T_{j_1j_2\dots j_n}
         \end{equation*} 
         从旋转矩阵我们也看到了张量的一个重要的性质：高阶张量可以代表对低阶张量的线性变换。这也说明了高阶张量多个指标的作用：这些指标可以自由地与别的张量的指标进行结合，“发动”爱因斯坦求和约定。
 
@@ -1019,21 +887,21 @@
         \begin{equation*}
           \vb*{a} \times \vb*{b} = \varepsilon_{ijk} \vb*{e}_i a_j b_k
         \end{equation*} 
-        其中$\vb*{e}_i$便表达了基向量。$\varepsilon_{ijk}$\footnote{被称为Levi-Civita符号}表达的是若 $i,j,k$的顺序为“正序”，也就是从最开始的正序列通过偶数次元素得到的序列时，其值为1，若为“倒序”为 $-1$，若存在重复数字则为零。\footnote{没错其实就是行列式的求值方法。}
+        其中$\vb*{e}_i$便表达了基向量。$\varepsilon_{ijk}$\footnote{被称为Levi-Civita符号}表达的是若 $i,j,k$的顺序为“正序”，也就是从最开始的正序列(即12345\dots)通过偶数次元素得到的序列时(比如231，312），其值为1，若为“倒序”（即321，213和132）其值为$-1$，若存在重复数字则为零。\footnote{没错其实就是行列式的求值方法。}
 
         由此可以出发证明一个非常有用的公式：
         \begin{equation}
-          \vb*{a}\times (\vb*{b}\times \vb*{c}) = (\vb*{a} \cdot \vb*{c}) \vb*{b} - (\vb*{a} \cdot \vb*{b}) \vb*{c}
+          \vb*{a}\times(\vb*{b}\times\vb*{c})=(\vb*{a}\cdot\vb*{c})\vb*{b}-(\vb*{a}\cdot\vb*{b})\vb*{c}
         \end{equation} 
         我们可以这么出发：
         \begin{align*}
-          \vb*{a} \times (\vb*{b} \times \vb*{c}) &= \vb*{e}_i \varepsilon_{ijk} a_j (\vb*{b} \times \vb*{c})_k \\
-          &= \vb*{e}_i \varepsilon_{ijk} \varepsilon_{kmn} a_j b_m c_n \\
-          &= \vb*{e}_i b_i a_j c_j - \vb*{e}_i c_i a_j b_j
+          \vb*{a}\times(\vb*{b}\times\vb*{c})&=\vb*{e}_i\varepsilon_{ijk}a_j(\vb*{b}\times\vb*{c})_k\\
+          &=\vb*{e}_i\varepsilon_{ijk}\varepsilon_{kmn}a_jb_mc_n \\
+          &=\vb*{e}_ib_ia_jc_j-\vb*{e}_ic_ia_jb_j
         \end{align*}
         其中利用了
         \begin{equation}
-          \varepsilon_{ijk}\varepsilon_{kmn} = \varepsilon_{kij} \varepsilon_{kmn} = \delta_{im} \delta_{jn} - \delta_{in}\delta_{jm}
+          \varepsilon_{ijk}\varepsilon_{kmn}=\varepsilon_{kij}\varepsilon_{kmn}=\delta_{im}\delta_{jn}-\delta_{in}\delta_{jm}
         \end{equation} 
         我们可以这么想这个公式：由于$i,j,k,m,n$都是取三个坐标元，保持$k$一致后其余的指标的选择是非常有限的，然后就能很容易想明白上式是如何推出来的。
 
@@ -1043,19 +911,19 @@
         \end{equation*} 
         那么与此对应，求一个向量的\textbf{散度}也很容易：
         \begin{equation*}
-          \div{\vb*{a}} = \partial_i a_i 
+          \div{\vb*{a}}=\partial_i a_i 
         \end{equation*} 
         \textbf{旋度}也很简单：
         \begin{equation*}
-          \curl{\vb*{a}} = \varepsilon_{ijk} \vb*{e}_i \partial_j a_k
+          \curl{\vb*{a}}=\varepsilon_{ijk}\vb*{e}_i\partial_j a_k
         \end{equation*} 
         但这些东西能够延伸的内容是非常丰富的。比如对$\vb*{r} = (x,y,z)$及单位矩阵$\overleftrightarrow{I}$，有
         \begin{align}
-          &\div{\vb*{r}} = 3 \\
-          &\curl{\vb*{r}} = 0 \\
-          &\curl{(\grad{f})} = 0 \\
-          &\grad{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} = \frac{-\qty(\vb*{r}-\vb*{r}')}{\abs{\vb*{r}-\vb*{r}'}^3} = - \grad'{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} \\
-          &\curl{\qty(r^n \vb*{r})} = 0 
+          &\div{\vb*{r}}=3 \\
+          &\curl{\vb*{r}}=0 \\
+          &\curl{(\grad{f})}=0 \\
+          &\grad{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}}=\frac{-\qty(\vb*{r}-\vb*{r}')}{\abs{\vb*{r}-\vb*{r}'}^3}=-\grad'{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} \\
+          &\curl{\qty(r^n \vb*{r})}=0 
         \end{align}
         读者有兴趣可以自行证明。对此感兴趣的读者可进一步阅读附录\ref{tensor_higher}。\\
 
@@ -1065,69 +933,69 @@
 
         比如我们有两个基向量$\vb*{i}_1,\vb*{i}_2$，他们满足
         \begin{equation*}
-          \vb*{i}_1 \cdot \vb*{i}_1 = \vb*{i}_2 \cdot \vb*{i}_2 = 1, \quad \vb*{i}_1 \cdot \vb*{i}_2 = \cos{\varphi}
+          \vb*{i}_1\cdot\vb*{i}_1=\vb*{i}_2\cdot\vb*{i}_2=1,\ \vb*{i}_1\cdot\vb*{i}_2=\cos{\varphi}
         \end{equation*} 
         甚至还不止于此，我们有两个非归一的基向量
         \begin{equation*}
-          \vb*{g}_1 = \abs{\vb*{g}_1} \vb*{i}_1, \vb*{g}_2 = \abs{\vb*{g}_2} \vb*{i}_2
+          \vb*{g}_1=\norm{\vb*{g}_1}\vb*{i}_1,\ \vb*{g}_2=\norm{\vb*{g}_2}\vb*{i}_2
         \end{equation*} 
         此时两个向量$\vb*{p},\vb*{q}$ 的内积直接写起来是非常复杂的。但我们可以通过代数方程构建这两个基向量对应的逆变基矢量$\vb*{g}^1,\vb*{g}^2$，使
         \begin{equation*}
-          \vb*{g}^1 \cdot \vb*{g}_2  = 0, \quad \vb*{g}^1 \cdot \vb*{g}_1 = \vb*{g}^2 \cdot \vb*{g}_2 = 1 
+          \vb*{g}^1\cdot\vb*{g}_2=0,\ \vb*{g}^1\cdot\vb*{g}_1=\vb*{g}^2\cdot\vb*{g}_2=1 
         \end{equation*} 
         也就是
         \begin{equation*}
-          \vb*{g}^i \cdot \vb*{g}_j = \delta^i_j
+          \vb*{g}^i\cdot\vb*{g}_j=\delta^i_j
         \end{equation*}
         我们就可以方便地写出两个向量的内积，
         \begin{equation*}
-          \mean{\vb*{p},\vb*{q}} = p^i \cdot q_i
+          \mean{\vb*{p},\vb*{q}}=p^i \cdot q_i
         \end{equation*} 
         其中上标的向量表示通过逆变基向量线性组合得到的逆变向量，下标为对应的协变向量。
 
         这样我们就在一定程度上解决了坐标系自身带来的影响。那么对协变向量/逆变向量自然存在对应的线性变换
         \begin{equation*}
           \begin{cases}
-            \vb*{p}_{j'} = \beta^{j'}_i p_i \\
-            \vb*{p}^{j'} = \beta^{j'}_i p^i
+            \vb*{p}_{j'}=\beta^{j'}_i p_i \\
+            \vb*{p}^{j'}=\beta^{j'}_i p^i
           \end{cases}
         \end{equation*} 
         可以很容易地证明
         \begin{equation*}
-          \beta^j_i \beta^i_k = \delta^j_k
+          \beta^j_i\beta^i_k=\delta^j_k
         \end{equation*}
         同时还需引入 fundamental tensor $g^{ij}$,它某种程度上起到了“抬升指标”的作用，
         \begin{equation*}
-          p^j = g^{ji} p_i
+          p^j=g^{ji}p_i
         \end{equation*} 
         那么$\beta^{ij}$就是在变换的同时抬升指标的一个算符。
 
         相对论量子力学引入了狭义相对论中的核心——光速不变原理引入的各种修正。从原点发光，光的传播满足
         \begin{equation}
-          c^2 t^2 -\qty(x^2 + y^2 + z^2 ) =0
+          c^2t^2-\qty(x^2+y^2+z^2)=0
         \end{equation}
         以不同的参考系来看，由于光速不变，同样会有
         \begin{equation}
-          c^2 t'^2 -\qty(x'^2 + y'^2 + z'^2)=0
+          c^2t'^2-\qty(x'^2+y'^2+z'^2)=0
         \end{equation}
         从而
         \begin{equation}
-          c^2 t'^2 -\qty(x'^2 + y'^2 + z'^2) = c^2 t^2 -\qty(x^2 + y^2 + z^2 )
+          c^2t'^2-\qty(x'^2+y'^2+z'^2)=c^2t^2-\qty(x^2+y^2+z^2)
         \end{equation}
         定义坐标形式为$\qty(x,y,z,ct)$，建立 Minkowski Space，定义该空间的内积为:
         \begin{equation}
           \begin{cases}
-            \eta\qty(u,v) = u_0 v_0 - u_1 v_1 - u_2 v_2 - u_3 v_3\\
+            \eta\qty(u,v)=u_0v_0-u_1v_1-u_2 v_2-u_3v_3\\
             u=\mqty(
-              u_0 \\
-              u_1 \\
-              u_2 \\
+              u_0\\
+              u_1\\
+              u_2\\
               u_3
             ),
             v=\mqty(
-              v_0 \\
-              v_1 \\
-              v_2 \\
+              v_0\\
+              v_1\\
+              v_2\\
               v_3
             )
           \end{cases}
@@ -1140,20 +1008,20 @@
 
         那么原来的协变/逆变基向量之间的关系也就发生了改变，
         \begin{equation}
-          \vb*{g}^i \cdot \vb*{g}_j = \delta_{ij} \rightarrow \eta\qty(A_i,A_j) =
+          \vb*{g}^i\cdot\vb*{g}_j=\delta_{ij}\rightarrow\eta\qty(A_i,A_j)=
           \begin{cases}
-            1,\quad i=j=0\\
-            -1,\quad i=j\neq 0 \\
-            0,\quad \text{other cases}
+            1,\ i=j=0\\
+            -1,\ i=j\neq 0\\
+            0,\ i\neq j
           \end{cases}
         \end{equation}
         这个时候的fundamental tensor就需要改为
         \begin{equation}
           g^{\mu\nu} =
           \begin{cases}
-            1,\quad i=j=0\\
-            -1,\quad i=j\neq 0 \\
-            0,\quad \text{other cases}
+            1,\ i=j=0\\
+            -1,\ i=j\neq 0\\
+            0,\ i\neq j
           \end{cases}
         \end{equation}
         相对论量子力学便基于这样的符号系统展开了包含了狭义相对论修正的量子力学描述。
@@ -1161,15 +1029,15 @@
       \section{简易数值计算方法}
         我们一般将可以直接写出数学表达式的问题称为解析的，与之对应的就是数值的。虽然解析的数学在相当多的方面都有重要意义，但是对于实际的应用来说，尤其是计算机模拟的问题来说，得到解析表达式是极为困难。举个简单的例子，常微分方程，就连本科生课程中给出的例子很多都需要做数值计算才能真正得到结果。而在王老师课题组，由于研究的都是动力学问题，即体系随时间演化，更是需要很多数值拟合，微分积分和数值解微分方程的概念，因此本节中我们将极其简要地介绍相关问题的最基础方法，为了简单，我们都用单变量函数的最简单的数值方法作为例子，实际操作中需要多变量、较高精度方法请参阅相关书籍\cite{numerical_calc_methods}及其它，这部分只是给读者一个概念，在之后查阅资料过程中不至于\sout{被水淹没}不知所措。
         \subsection{非线性方程求解}
-          对于线性方程，方程组，如果我们已经确定其有解，则一定可以通过消元法等方法将其求解，最多只是过程繁琐，但是总可以交给计算机去解决，线性方程组更是有各类已有的数学运算库函数来求解，比我们在课本上学到的方法要精确，这也是我们跳过线性方程组求解的原因\footnote{读者在需要这类功能时可以咨询学长学姐相关的MKL库函数使用，本指南不再特别说明。另外，这也是我们不讲述矩阵特征值数值解法的原因。}。对于非线性方程$f\qty(x) = 0$，这件事情是很让人头疼的，因为没有一个严格的普适求解方法，在这里我们介绍最简单的几种数值方法。
+          对于线性方程，方程组，如果我们已经确定其有解，则一定可以通过消元法等方法将其求解，最多只是过程繁琐，但是总可以交给计算机去解决，线性方程组更是有各类已有的数学运算库函数来求解，比我们在课本上学到的方法要精确，这也是我们跳过线性方程组求解的原因\footnote{读者在需要这类功能时可以咨询学长学姐相关的MKL库函数使用，本指南不再特别说明。另外，这也是我们不讲述矩阵特征值数值解法的原因。}。对于非线性方程$f\qty(x)=0$，这件事情是很让人头疼的，因为没有一个严格的普适求解方法，在这里我们介绍最简单的几种数值方法。
 
-          \textbf{二分法：}这是一个非常朴素的方法，相信读者之前就听说过，只要函数连续，那么总可以通过二分的方法从一正一负两个函数值点出发，不断迭代，就能找到其中的解。思路是首先选择一对具有相反函数值的自变量点，取它们的平均值计算函数值$f\qty(\frac{x_i + x_j}{2})$，根据符号相反的一侧选择下一个区域，继续二分，直到两次二分的区间都极小，就可以取最后区间的点作为非线性方程的解。
+          \textbf{二分法：}这是一个非常朴素的方法，相信读者之前就听说过，只要函数连续，那么总可以通过二分的方法从一正一负两个函数值点出发，不断迭代，就能找到其中的解。思路是首先选择一对具有相反函数值的自变量点，取它们的平均值计算函数值$f\qty(\frac{x_i+x_j}{2})$，根据符号相反的一侧选择下一个区域，继续二分，直到两次二分的区间都极小，就可以取最后区间的点作为非线性方程的解。
 
-          \textbf{不动点迭代法：}相信很多读者在学习分析化学1时都用过这个方法，就是将非线性方程$f\qty(x)=0$写成$x = g\qty(x)$的形式，然后选择一个初值$x_0$代入得到$x_1 = g\qty(x_0)$，进而迭代得到$x_2,x_3,\dots$，直到最后两个数相差很小，就可以认为迭代法收敛，收敛的值就是非线性方程的解。我们还相信，读者在学习分析化学1的时候就发现这个方法不总是能收敛的，或者收敛到两个值，不动点迭代法强烈依赖于$g\qty(x)$的性质，具体数学证明不予展开，但是很多时候任意构造的$g\qty(x)$并不能满足收敛性的要求，因此这个方法的适用范围非常局限。
+          \textbf{不动点迭代法：}相信很多读者在学习分析化学1时都用过这个方法，就是将非线性方程$f\qty(x)=0$写成$x=g\qty(x)$的形式，然后选择一个初值$x_0$代入得到$x_1=g\qty(x_0)$，进而迭代得到$x_2,x_3,\dots$，直到最后两个数相差很小，就可以认为迭代法收敛，收敛的值就是非线性方程的解。我们还相信，读者在学习分析化学1的时候就发现这个方法不总是能收敛的，或者收敛到两个值，不动点迭代法强烈依赖于$g\qty(x)$的性质，具体数学证明不予展开，但是很多时候任意构造的$g\qty(x)$并不能满足收敛性的要求，因此这个方法的适用范围非常局限。
 
           \textbf{牛顿迭代法：}牛顿迭代法也是迭代求解非线性方程的重要方法，尽管比很多后续方法慢，但是多数情况下，其收敛性可以得到保证，也是正常的求解非线性方程中最一般的方法(前面两个基本没人用)。牛顿迭代法的核心思想是，设方程$f\qty(x)=0$有近似解$x_k$，且$f'\qty(x_k)\neq0$，那么真正的解就可以在这个近似解附近展开
           \begin{equation*}
-            f(x) \approx f\qty(x_k)+f'\qty(x_k)\qty(x-x_k)
+            f(x)\approx f\qty(x_k)+f'\qty(x_k)\qty(x-x_k)
           \end{equation*}
           方程$f(x)=0$就是上式右边等于0，或者写成
           \begin{equation*}
@@ -1184,21 +1052,21 @@
           之所以称为插值问题，是因为插值函数有一个要求，就是必须经过所有的$\qty(x_i,y_i)$点，即所有的已知数据都严格符合插值多项式，多数情况下，对于一组数据的插值多项式是存在且唯一的，比如两个点确定直线是唯一的，三个点确定抛物线也是唯一的。因此用哪种插值多项式，只是代码实现的难度和速度上的差别，拉格朗日插值多项式就是思路最平凡的一种：对于一组$n+1$个互不相同的插值点$\qty{x_i}_{i=0}^n$，如果能找到一个多项式$\qty{l_{i}\qty(x)}_{i=0}^{n}$，满足
           \begin{equation}
             l_{i}\qty(x_{j})=\delta_{i j}=\begin{cases}
-              1, i=j \\
-              0, i \neq j 
-            \end{cases}\ \ \ \ \ i, j=0,1, \cdots, n
+              1,i=j \\
+              0,i\neq j 
+            \end{cases}\ \ \ \ \ i,j=0,1,\cdots,n
           \end{equation}
           那么
           \begin{equation}
-            L_{n}\qty(x)=\sum_{i=0}^{n}{l_{i}\qty(x) f\qty(x_{i})}
+            L_{n}\qty(x)=\sum_{i=0}^{n}{l_{i}\qty(x)f\qty(x_{i})}
           \end{equation}
           就是关于这组插值点的拉格朗日插值多项式。它的思路非常简单，即要求在每个插值点的位置，只有正确插值点对应的函数值不是0，这个思路实现起来也非常容易，只需要
           \begin{equation}
-            l_{i}(x)=\prod_{j=0, j \neq i}^n{\frac{x-x_j}{x_i-x_j}}=\frac{\qty(x-x_0)\cdots\qty(x-x_{i-1})\qty(x-x_{i+1})\cdots\qty(x-x_{n})}{qty(x_{i}-x_0)\cdots\qty(x_i-x_{i-1})\qty(x_i-x_{i+1})\cdots\qty(x_i-x_{n})}
+            l_{i}(x)=\prod_{j=0,j\neq i}^n{\frac{x-x_j}{x_i-x_j}}=\frac{\qty(x-x_0)\cdots\qty(x-x_{i-1})\qty(x-x_{i+1})\cdots\qty(x-x_{n})}{qty(x_{i}-x_0)\cdots\qty(x_i-x_{i-1})\qty(x_i-x_{i+1})\cdots\qty(x_i-x_{n})}
           \end{equation}
           读者可以自行验证上式满足$\delta_{ij}$的条件，这样拉格郎日插值多项式就可以写成
           \begin{equation}
-            L_{n}\qty(x)=\sum_{i=0}^n{l_{i}\qty(x) y_i}=\sum_{i=0}^{n}{\qty(\prod_{j=0, j \neq i}^n \frac{x-x_j}{x_i-x_j}) y_i}
+            L_{n}\qty(x)=\sum_{i=0}^n{l_{i}\qty(x)y_i}=\sum_{i=0}^{n}{\qty(\prod_{j=0,j\neq i}^n \frac{x-x_j}{x_i-x_j})y_i}
           \end{equation}
           上式就满足插值多项式的基本要求。除去拉格朗日插值之外，还有牛顿插值多项式，Hermite插值多项式等，读者可自行查阅。这些插值多项式的出发点不同，但是最终结果是一致的，读者也可自行验证。
           
@@ -1206,12 +1074,12 @@
 
           上面是插值问题，接下来讨论拟合问题。这两者的重要区别就是插值多项式要求必须过已知数据点，但是拟合就不是了，顾名思义，拟合通常是有一个含$n+1$参数的函数$f\qty(x;a_0,a_1,\dots,a_n)$，希望调整这些参数使得这个函数最\textbf{接近}已有数据，就像我们实验课所做的那样。所谓的“接近”，通常用误差函数$\delta\qty(x_i)=f\qty(x_i)-y_i$来表征，其中$y_i$为已知数据，$f\qty(x_i)$是拟合函数在这点给出的值，而整体的误差的评判标准有很多，比如所有点误差函数绝对值求和，或者绝对值中最大的那个，最小二乘法的原则是所有误差函数的平方和最小，即$S=\sum_{i=1}^m{\delta_i^2}=\sum_{i=1}^m{\qty[f\qty(x_{i})-y_{i}]^{2}}=\min$。正如上所述，一般采用的拟合函数都是参数依赖的，所以想实现这个非常简单，只需要这个总误差函数对所有参数的导数等于0
           \begin{equation}
-            \pdv{S}{a_k}=0\ \qty(k=0,1, \cdots, n)
+            \pdv{S}{a_k}=0\ \qty(k=0,1,\cdots,n)
             \label{least square}
           \end{equation}
-          解上式$n+1$个方程就能得到$n+1$个参数值，就得到了最小二乘解。看起来非常简单，最小二乘法的核心难度在于找合适的拟合函数，只有拟合函数合适，这个参数才能较好地匹配，在不知道用什么函数的时候，可以用一组基函数来试，把最终的函数表达式写成一组函数的线性组合，参数就是线性组合系数，这个方法称为线性最小二乘法：在某个函数类$\Phi=\operatorname{span}\qty{\varphi_0\qty(x),\varphi_1\qty(x),\cdots,\varphi_n\qty(x)}$寻找一个函数$\varphi^*\qty(x)=a_0^*\varphi_0\qty(x)+a_1^* \varphi_1\qty(x)+\cdots+a_n^*\varphi_n\qty(x)$使其满足
+          解上式$n+1$个方程就能得到$n+1$个参数值，就得到了最小二乘解。看起来非常简单，最小二乘法的核心难度在于找合适的拟合函数，只有拟合函数合适，这个参数才能较好地匹配，在不知道用什么函数的时候，可以用一组基函数来试，把最终的函数表达式写成一组函数的线性组合，参数就是线性组合系数，这个方法称为线性最小二乘法：在某个函数类$\Phi=\operatorname{span}\qty{\varphi_0\qty(x),\varphi_1\qty(x),\cdots,\varphi_n\qty(x)}$寻找一个函数$\varphi^*\qty(x)=a_0^*\varphi_0\qty(x)+a_1^*\varphi_1\qty(x)+\cdots+a_n^*\varphi_n\qty(x)$使其满足
           \begin{equation}
-            \sum_{i=1}^m{\qty[\varphi^*\qty(x_i)-y_i]^2}=\min_{\varphi\qty(x) \in \Phi}\sum_{i=1}^m{\qty[\varphi\qty(x_i)-y_i]^2}
+            \sum_{i=1}^m{\qty[\varphi^*\qty(x_i)-y_i]^2}=\min_{\varphi\qty(x)\in\Phi}\sum_{i=1}^m{\qty[\varphi\qty(x_i)-y_i]^2}
           \end{equation}
           此时的总误差函数为
           \begin{equation}
@@ -2086,14 +1954,14 @@
         只要我们让$\lambda$满足下列形式，在动能和势能算符前的常数就可以被拿掉，换成另一个独立的常数
         \begin{equation}
           \frac { \hbar ^ { 2 } } { m _ { e } \lambda ^ { 2 } } = \frac { e ^ { 2 } } { 4 \pi \varepsilon _ { 0 } \lambda }\equiv \mathscr { E } _ { a }
-          \label{Hartree defination}
+          \label{Hartree definition}
         \end{equation}
-        这个独立的常数我们定为$ \mathscr { E } _ { a }$，解等式(\ref{Hartree defination})中的$\lambda$可得
+        这个独立的常数我们定为$ \mathscr { E } _ { a }$，解等式(\ref{Hartree definition})中的$\lambda$可得
         \begin{equation}
           \lambda=\frac{4\pi\varepsilon_0\hbar^2}{m_e e^2}=a_0
-          \label{Bohr defination}
+          \label{Bohr definition}
         \end{equation}
-        从这个等式可以看出，$\lambda$就是Bohr半径，我们是将坐标变量除以了这个因子，因此Bohr半径就是单位制下的长度单位，这个单位就叫Bohr，$1 \text{Bohr} = 5.2918 \times 10^{-11} \textrm{m}$。我们将式(\ref{Bohr defination})代入(\ref{lambda x y z})中，再将一堆常数换成$\mathscr{E}_a$
+        从这个等式可以看出，$\lambda$就是Bohr半径，我们是将坐标变量除以了这个因子，因此Bohr半径就是单位制下的长度单位，这个单位就叫Bohr，$1 \text{Bohr} = 5.2918 \times 10^{-11} \textrm{m}$。我们将式(\ref{Bohr definition})代入(\ref{lambda x y z})中，再将一堆常数换成$\mathscr{E}_a$
         \begin{equation}
           \mathscr { E } _ { a } \left[ - \frac { 1 } { 2 } \nabla ^ { \prime 2 } - \frac { 1 } { r ^ { \prime } } \right] \phi ^ { \prime } = \mathscr { E } \phi ^ { \prime }
         \end{equation}
@@ -2210,7 +2078,7 @@
           \end{equation}
           可以看出，对于任意两个电子坐标的交换相当于交换Slater行列式中的两行，根据行列式的性质，显然会产出一个负号来满足交换反对称性的要求。而且，如果两个电子处于同一个位置，即$\mathbf{x}_{i}=\mathbf{x}_{j}$，意味这行列式中的两行相同，对应着两个电子占据了完全相同(空间部分相同，自旋也相同)的自旋轨道，行列式就一定为零，因此Slater行列式严格满足反对称性，以及它所要求的Pauli不相容原理。
 
-          另外，我们根据行列式的定义式(\ref{determinants defination})，重新写一下Slater行列式的表达式
+          另外，我们根据行列式的定义式(\ref{determinants definition})，重新写一下Slater行列式的表达式
           \begin{equation}
             \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)=(N !)^{-1 / 2} \sum_{n=1}^{N !}(-1)^{p_{n}} \mathscr{P}_{n}\left\{\chi_{i}(1) \chi_{j}(2) \cdots \chi_{k}(N)\right\}
           \end{equation}
@@ -3533,6 +3401,60 @@
           A_n = \int^a_0{u_0 \sin{\frac{n\pi x}{a}}\dd{x}}=\frac{a u_0}{n\pi}\qty(1-\cos{n\pi}) .
         \end{equation}
         于是我们成功地获得了温度分布的解析解!(?)\footnote{当然有些人会觉得级数展开不算解析解。能展开成简单函数求和已经不容易了。}
+
+      \section{傅里叶变换的应用}
+        傅立叶变换的一个非常有价值的特点是可以把导数转换为一个常数相乘，从而极大地简化方程。比如无界空间下的扩散问题，
+        \begin{equation*}
+          u_t-a^2u_{xx} = 0
+        \end{equation*} 
+        初始条件：
+        \begin{equation*}
+          u\big|_{t=0} = \phi(x)
+        \end{equation*} 
+        傅立叶变换再逆变换就能回到原来的样子，
+        \begin{equation*}
+          u(x,t) = \int \mathcal{F}[u] e^{ikx} \, dk = \mathcal{F}^{-1}[\mathcal{F}[u]]
+        \end{equation*} 
+        对$x$做Fourier Transform,
+        \begin{equation*}
+          \mathcal{F}[u](k,t) = \frac{1}{2\pi} \int u(x,t) e^{-ikx} \, \ud x 
+        \end{equation*} 
+        原方程便转换为
+        \begin{equation*}
+          \begin{cases}
+            \mathcal{F}[u_t] + a^2 k^2 \mathcal{F}[u] = 0 \\
+            \mathcal{F}[u]\big|_{t=0} = \mathcal{F}[\phi]
+          \end{cases}
+        \end{equation*} 
+        \begin{equation*}
+          \Rightarrow \mathcal{F}[u] = \mathcal{F}[\phi] e^{-k^2 a^2 t}
+        \end{equation*} 
+        \begin{equation*}
+          u = \mathcal{F}^{-1} [\mathcal{F}[\phi] e^{-k^2a^2 t}]
+        \end{equation*} 
+        有
+        \begin{equation*}
+          \mathcal{F}[f_1 * f_2] = 2\pi \mathcal{F}[f_1] \mathcal{F} [f_2]
+        \end{equation*} 
+        故
+        \begin{equation*}
+          u = \frac{1}{2\pi} \phi * \mathcal{F}^{-1} e^{-k^2 a^2 t} 
+        \end{equation*} 
+        当然也可以直接套定义，
+        \begin{equation*}
+          u = \int_{-\infty} ^\infty \mathcal{F}[\phi] e^{-k^2 a^2 t} e^{ikx} \, dk 
+        \end{equation*} 
+        \begin{align*}
+          u &= \frac{1}{2\pi}\int \int \phi(\xi) e^{-ik\xi} \, d\xi e^{ikx}  \, dk\\
+            &=\frac{1}{2\pi} \int \phi(\xi) \int e^{-k^2 a^2 t} e^{-ik(x-\xi)} \, dk  \, d\xi \\
+            &=\sqrt{\frac{\pi}{a^2 t}}\frac{1}{2\pi} \int \phi(\xi) e^{-\frac{(x-\xi)^2}{4a^2 t}} \, d\xi\\
+            &=\frac{1}{2\pi} \phi(x) * \sqrt{\frac{\pi}{a^2 t}} e^{-\frac{x^2}{4 a^2 t}}
+        \end{align*}
+        其中，有一步是做配方，
+        \begin{equation*}
+          e^{-k^2a^2 t} e^{ik (x-\xi)} = e^{-a^2 t (k-\frac{i (x-\xi)}{2a^2 t})^2} e^{-\frac{(x-\xi)^2}{4a^2 t}}
+        \end{equation*} 
+        注意在积分该式时存在积分路径不在实轴的问题，但事实上构造回路后由于回路积分为零，故可以直接化为在实轴上的积分，从而解得最终解。
 
       \section{拉普拉斯积分变换}
         \begin{equation}
