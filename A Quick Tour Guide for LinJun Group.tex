@@ -3320,27 +3320,27 @@
         \begin{theorem}
           对形如
           \begin{equation}
-            \dv{x}\qty[k\qty(x)\dv{y}{x}]-q\qty(x)y +\lambda\rho\qty(x)y=0 \quad (a\leqslant x \leqslant b)
+            \dv{x}\qty[k\qty(x)\dv{y}{x}]-q\qty(x)y+\lambda\rho\qty(x)y=0\ (a\leqslant x\leqslant b)
           \end{equation}
-          的方程，若$k\qty(x),k'\qty(x),q\qty(x)$ 连续或最多以$x=a$ 和$x=b$ 为一阶极点\footnote{也就是最低项为$\frac{1}{x}$ 项。}，则
+          的方程，若$k\qty(x),k'\qty(x),q\qty(x)$连续或最多以$x=a$和$x=b$为一阶极点\footnote{也就是最低项为$\frac{1}{x}$项。}，则
           \begin{enumerate}
             \item 存在无穷多个本征值
               \begin{equation*}
-                \lambda_1 \leqslant \lambda_2 \leqslant \lambda_3 \leqslant ...
+                \lambda_1\leqslant\lambda_2\leqslant\lambda_3\leqslant\dots
               \end{equation*} 
               相应地有无限多个本征函数
               \begin{equation*}
-                y_1\qty(x),y_2\qty(x),y_3\qty(x),...
+                y_1\qty(x),y_2\qty(x),y_3\qty(x),\dots
               \end{equation*}
               这些本征函数的排列持续正好使节点个数依次增多（即函数值为零的点的个数）。
-            \item 所有本征值 $\lambda_n \geqslant 0$,
-            \item 相应于不同本征值$\lambda_m$ 和 $\lambda_n$的本征函数$y_m\qty(x)$和$y_n\qty(x)$在区间$[a,b]$上带权重$\rho(x)$正交，即
+            \item 所有本征值 $\lambda_n\geqslant 0$,
+            \item 相应于不同本征值$\lambda_m$和$\lambda_n$的本征函数$y_m\qty(x)$和$y_n\qty(x)$在区间$[a,b]$上带权重$\rho(x)$正交，即
               \begin{equation}
                 \int^b_a{y_m\qty(x)y_n\qty(x)\rho\qty(x)\dd{x}}=\delta_{mn} 
               \end{equation}
-            \item 本征函数族$y_1\qty(x),y_2\qty(x),y_3\qty(x)...$是完备的，即函数$f\qty(x)$如具有连续一阶导数和分段连续二阶导数，且满足本征函数族所满足的边界条件，就可以展   开为绝对且一致收敛的级数
+            \item 本征函数族$y_1\qty(x),y_2\qty(x),y_3\qty(x)...$是完备的，即函数$f\qty(x)$如具有连续一阶导数和分段连续二阶导数，且满足本征函数族所满足的边界条件，就可以展开为绝对且一致收敛的级数
               \begin{equation*}
-                f\qty(x) = \sum_n{f_n y_n\qty(x)}
+                f\qty(x)=\sum_n{f_n y_n\qty(x)}
               \end{equation*}
           \end{enumerate}
         \end{theorem}
@@ -3379,26 +3379,26 @@
         直接解这个常微分方程，得到
         \begin{equation}
           \begin{cases}
-            X = A_k\sin{kx} + B_k\cos{kx} \\
-            Y = C_k e^{-kt}
+            X=A_k\sin{kx}+B_k\cos{kx}\\
+            Y=C_k e^{-kt}
           \end{cases}.
         \end{equation}
-        由于这个世界实在不太可能有无穷大的温度，故$Y = e^{kt}$项不考虑。
+        由于这个世界实在不太可能有无穷大的温度，故$Y=e^{kt}$项不考虑。
 
         考虑到$\eval{u}_{x=0}=\eval{u}_{x=a}=0$，$k$应该要满足某种条件才能满足这个，那么事实上
         \begin{equation}
-          X = A_n \sin{\frac{n\pi x}{a}} , k = \frac{n\pi x}{a}, n \in\mathbb{N}^+.
+          X=A_n\sin{\frac{n\pi x}{a}},k=\frac{n\pi x}{a},n\in\mathbb{N}^+.
         \end{equation}
         由于前面提到的本征值问题，$-k^2$是$X$的常微分方程的本征值，对应本征函数构成完备基，对$Y$也有相应情况，从而$u$可以展开为$XY$的线性组合，即
         \begin{equation}
-          X = \sum_n{A_n \sin{\frac{n\pi x}{a}} e^{- \frac{n\pi y}{a}}}.
+          X=\sum_n{A_n\sin{\frac{n\pi x}{a}}e^{-\frac{n\pi y}{a}}}.
         \end{equation}
         可是……$A_n$怎么确定呀？
         
         就是广义傅立叶级数呀！
-        注意到$\eval{u}|_{y=0} = u_0$,有
+        注意到$\eval{u}|_{y=0}=u_0$,有
         \begin{equation}
-          A_n = \int^a_0{u_0 \sin{\frac{n\pi x}{a}}\dd{x}}=\frac{a u_0}{n\pi}\qty(1-\cos{n\pi}) .
+          A_n=\int^a_0{u_0\sin{\frac{n\pi x}{a}}\dd{x}}=\frac{a u_0}{n\pi}\qty(1-\cos{n\pi}) .
         \end{equation}
         于是我们成功地获得了温度分布的解析解!(?)\footnote{当然有些人会觉得级数展开不算解析解。能展开成简单函数求和已经不容易了。}
 
@@ -3409,50 +3409,44 @@
         \end{equation*} 
         初始条件：
         \begin{equation*}
-          u\big|_{t=0} = \phi(x)
+          \eval{u}_{t=0}=\phi\qty(x)
         \end{equation*} 
         傅立叶变换再逆变换就能回到原来的样子，
         \begin{equation*}
-          u(x,t) = \int \mathcal{F}[u] e^{ikx} \, dk = \mathcal{F}^{-1}[\mathcal{F}[u]]
+          u\qty(x,t)=\int{\mathcal{F}\qty[u]e^{ikx}\dd{k}}=\mathcal{F}^{-1}\qty[\mathcal{F}\qty[u]]
         \end{equation*} 
         对$x$做Fourier Transform,
         \begin{equation*}
-          \mathcal{F}[u](k,t) = \frac{1}{2\pi} \int u(x,t) e^{-ikx} \, \ud x 
+          \mathcal{F}\qty[u]\qty(k,t)=\frac{1}{2\pi}\int{u\qty(x,t)e^{-ikx}\dd{x}} 
         \end{equation*} 
         原方程便转换为
-        \begin{equation*}
-          \begin{cases}
-            \mathcal{F}[u_t] + a^2 k^2 \mathcal{F}[u] = 0 \\
-            \mathcal{F}[u]\big|_{t=0} = \mathcal{F}[\phi]
+        \begin{eqnarray*}
+          &\begin{cases}
+            \mathcal{F}\qty[u_t]+a^2k^2\mathcal{F}\qty[u]=0\\
+            \eval{\mathcal{F}\qty[u]}_{t=0}=\mathcal{F}\qty[\phi]
           \end{cases}
-        \end{equation*} 
-        \begin{equation*}
-          \Rightarrow \mathcal{F}[u] = \mathcal{F}[\phi] e^{-k^2 a^2 t}
-        \end{equation*} 
-        \begin{equation*}
-          u = \mathcal{F}^{-1} [\mathcal{F}[\phi] e^{-k^2a^2 t}]
-        \end{equation*} 
+          \Rightarrow&\mathcal{F}\qty[u]=\mathcal{F}\qty[\phi]e^{-k^2a^2t}
+          \Rightarrow&u=\mathcal{F}^{-1}\qty[\mathcal{F}\qty[\phi]e^{-k^2a^2t}]
+        \end{eqnarray*}
         有
         \begin{equation*}
-          \mathcal{F}[f_1 * f_2] = 2\pi \mathcal{F}[f_1] \mathcal{F} [f_2]
-        \end{equation*} 
-        故
+          \mathcal{F}\qty[f_1 * f_2]=2\pi\mathcal{F}\qty[f_1]\mathcal{F}\qty[f_2]
+        \end{equation*}
+        其中$*$表示卷积。故
         \begin{equation*}
-          u = \frac{1}{2\pi} \phi * \mathcal{F}^{-1} e^{-k^2 a^2 t} 
+          u=\frac{1}{2\pi}\phi*\mathcal{F}^{-1}e^{-k^2a^2t} 
         \end{equation*} 
         当然也可以直接套定义，
-        \begin{equation*}
-          u = \int_{-\infty} ^\infty \mathcal{F}[\phi] e^{-k^2 a^2 t} e^{ikx} \, dk 
-        \end{equation*} 
         \begin{align*}
-          u &= \frac{1}{2\pi}\int \int \phi(\xi) e^{-ik\xi} \, d\xi e^{ikx}  \, dk\\
-            &=\frac{1}{2\pi} \int \phi(\xi) \int e^{-k^2 a^2 t} e^{-ik(x-\xi)} \, dk  \, d\xi \\
-            &=\sqrt{\frac{\pi}{a^2 t}}\frac{1}{2\pi} \int \phi(\xi) e^{-\frac{(x-\xi)^2}{4a^2 t}} \, d\xi\\
-            &=\frac{1}{2\pi} \phi(x) * \sqrt{\frac{\pi}{a^2 t}} e^{-\frac{x^2}{4 a^2 t}}
+          u&=\int_{-\infty}^\infty{\mathcal{F}\qty[\phi]e^{-k^2a^2t}e^{ikx}\dd{k}}\\
+          &=\frac{1}{2\pi}\int{e^{ikx}\dd{k}\int{\phi\qty(\xi)e^{-ik\xi}\dd{\xi}}}\\
+          &=\frac{1}{2\pi}\int{\phi\qty(\xi)\dd{\xi}\int{e^{-k^2a^2t}e^{-ik\qty(x-\xi)}\dd{k}}}\\
+          &=\sqrt{\frac{\pi}{a^2 t}}\frac{1}{2\pi}\int{\phi\qty(\xi)e^{-\frac{\qty(x-\xi)^2}{4a^2t}}\dd{\xi}}\\
+          &=\frac{1}{2\pi}\phi(x)*\sqrt{\frac{\pi}{a^2t}}e^{-\frac{x^2}{4a^2t}}
         \end{align*}
         其中，有一步是做配方，
         \begin{equation*}
-          e^{-k^2a^2 t} e^{ik (x-\xi)} = e^{-a^2 t (k-\frac{i (x-\xi)}{2a^2 t})^2} e^{-\frac{(x-\xi)^2}{4a^2 t}}
+          e^{-k^2a^2t}e^{ik\qty(x-\xi)}=e^{-a^2t(k-\frac{i\qty(x-\xi)}{2a^2t})^2}e^{-\frac{\qty(x-\xi)^2}{4a^2t}}
         \end{equation*} 
         注意在积分该式时存在积分路径不在实轴的问题，但事实上构造回路后由于回路积分为零，故可以直接化为在实轴上的积分，从而解得最终解。
 
