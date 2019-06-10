@@ -64,7 +64,7 @@
   \setlength{\oddsidemargin}{0mm}
   \setlength{\evensidemargin}{0mm}
   \renewcommand{\baselinestretch}{1.2}
-  \title{王林军老师课题组本科生入门指南}
+  \title{王林军老师课题组入门指南}
   \author{Chaoqun ZHANG - 张超群\\Rui LI - 李睿\\Kai GU - 顾锴}
   \date{\today}
   \begin{document}
@@ -253,7 +253,7 @@
           
           复数是实数的拓展。让我们先回顾一下从小到大的数学的学习，来看一下我们（也是整个人类）是怎么认识数的。
           
-          首先认识的是正整数，正整数$\mathbb{Z}^+$对加法封闭\footnote{本节中，封闭的意思是对集合中的数进行某种运算的结果仍然在该集合内。}，但是对于减法就不封闭了，于是人们引入了负整数，组成了对加减法都封闭的整数$\mathbb{Z}$。整数对乘法也封闭，但是对非零除法则不封闭，于是数扩张为了有理数$\mathbb{Q}$。有理数对加减乘除都封闭，但是对于例如对角线长度、圆的周长之类的问题时就不好解决了，从而引入了无理数$\mathbb{R}$\sout{以及各种测度}。到目前为止看起来可以告一段落，但是，当人们求解实系数代数方程的时候，发现其根不一定是实数，从而引入了虚数，组成了复数$\mathbb{C}$。简单的说，数的扩充是为了更高级的运算，而复数的意思是对代数方程求根封闭。数学王子高斯证明了，在复数域上，$N$次方程有$N$个根\footnote{此即为\textbf{代数基本定理}}。
+          首先认识的是正整数，正整数$\mathbb{Z}^+$对加法封闭\footnote{本节中，封闭的意思是对集合中的数进行某种运算的结果仍然在该集合内。}，但是对于减法就不封闭了，于是人们引入了负整数，组成了对加减法都封闭的整数$\mathbb{Z}$。整数对乘法也封闭，但是对非零除法则不封闭，于是数扩张为了有理数$\mathbb{Q}$。有理数对加减乘除都封闭，但是对于例如对角线长度、圆的周长之类的问题时就不好解决了，从而引入了无理数\sout{以及各种测度}$\mathbb{R}$。到目前为止看起来可以告一段落，但是，当人们求解实系数代数方程的时候，发现其根不一定是实数，从而引入了虚数，组成了复数$\mathbb{C}$。简单的说，数的扩充是为了更高级的运算，而复数的意思是对代数方程求根封闭。数学王子高斯证明了，在复数域上，$N$次方程有$N$个根\footnote{此即为\textbf{代数基本定理}}。
           
           引入复数的核心就是单位虚数$i$，定义为
           \begin{equation}
@@ -1502,7 +1502,7 @@
         \begin{equation}
           \hat{P} | \Psi \rangle  \rightarrow  \langle \Psi | \hat{P}^{\dagger}
         \end{equation}
-        然后基于内积的性质$\langle c | a\rangle=(\langle a | c\rangle)^{*}$我们得到另一种算符的厄米共轭的定义：
+        然后基于内积的性质$\langle c | a\rangle=(\langle a | c\rangle)^{*}$我们得到另一种算符的厄米共轭的���义：
         \begin{equation}
           \langle b|\hat{P}^{\dagger}| a\rangle=(\langle a|\hat{P}| b\rangle)^{*}
           \label{adjoint}
@@ -1852,15 +1852,8 @@
         
           \item[Brillouin 定理]
             \begin{equation}
-              \bracketl{\psi_0}{\hat{H}}{\psi_a^r}=\bracketl{a}{\hat{h}}{r}+\sum_b\bra{ab}\ket{rb}=\bracketl{\phi_a}{\hat{f}}{\phi_r}=0
+              \langle\psi_0|\mathbf{H}|S\rangle = \langle \chi_m|\hat{f}|\chi_p\rangle = 0
             \end{equation}
-          
-            \begin{align*}
-              \bracketl{\psi_0}{\hat{H}}{\psi_a^r}&=(\prod_i\bra{\phi_i})O_1(\prod_j\ket{\phi_j})\\
-              &=\sum_k(\prod_i\bra{\psi{\phi_i}})h_k(\prod_l\ket{\phi_j})\\
-              &=\sum_k \bracketl{\phi_k}{h_k}{\phi_k}*\prod_{i \neq k} \bra{\phi_i} \prod_{j \neq k} \bra{\phi_j}\\
-              &-\sum_k \bracketl{\phi_k}{h_k}{\phi_k}
-            \end{align*}
 
           \item[DFT理论]将电子波函数和体系能量表示为电子密度的泛函，将体系自由度降低，进而进行自洽场计算。
             \begin{description}
@@ -2114,14 +2107,16 @@
           这两点经常用Figure \ref{exact solution}这个图来表示。如果只使用一个组态，也就是之后会讲到的Hartree-Fock近似下，不断地增大原子轨道基组的数目，这个极限称为单电子极限，或者Hartree-Fock极限；而在原子轨道大小固定之后，不断增大所使用的组态的个数，最后引入所有的组态就称为FCI极限。同时满足Hartree-Fock极限和FCI极限的计算结果，就是精确解。
           
           尽管计算机已经非常发达，但是实际操作中，第一条暂时不可能实现，当原子轨道基组很大的时候，第二条也很难实现\sout{，好惨啊！}。因此量子化学的精确解，FCI的计算几乎只能适用于非常小的体系\footnote{但是没有那么小，现在已经可以在一个相当大的原子轨道基组的前提下求解$\text{F}_2$的FCI结果。}，但很多时候我们对精度的要求并没有这么高。电子结构的发展，就是引入一系列近似方法，为了用尽可能小的计算量，实现尽可能高的计算精度，来满足各种需求。
-      \section{Hartree-Fock方法}
-        Hartree-Fock方法是量子化学的基础和开端，一旦涉及到使用Hartree理论或Hartree-Fock理论计算单分子(非固体)的问题，就已经进入到了量子化学的领域。同时，几乎所有更高精度的电子结构方法都是以HF方法为基础，或者直接从HF方法的结果出发的，因此HF方法的正确理解关系到整个电子结构理论框架的理解。在各种教材中，讲解HF理论的方法有很多种，鉴于电子结构方法前后的完整性，我们选用了其中一种，一个很重要的特殊之处在于我们尽可能使用量子化学家的语言，并且跳过了Hartree理论。这样的写法可能会比较难，因此我们第一小节给出了一个类似结论性质的总结，再在后面几个小节中给出它的来源，以防止读者被数学推导淹没而忘记了我们的目的。
+      \section{Hartree-Fock近似}
+        Hartree-Fock近似是量子化学的基础和开端，一旦涉及到使用Hartree理论或Hartree-Fock理论计算单分子(非固体)的问题，就已经进入到了量子化学的领域。同时，几乎所有更高精度的电子结构方法都是以HF方法为基础，或者直接从HF方法的结果出发的，因此HF方法的正确理解关系到整个电子结构理论框架的理解。在各种教材中，讲解HF理论的方法有很多种，鉴于电子结构方法前后的完整性，我们选用了其中一种，一个很重要的特殊之处在于我们尽可能使用量子化学家的语言，并且跳过了Hartree理论。这样的写法可能会比较难，因此我们第一小节给出了一个类似结论性质的总结，再在后面几个小节中给出它的来源，以防止读者被数学推导淹没而忘记了我们的目的。
+        
+        我们在电子结构的后面每一节中都会有这样的小节，这些内容相对较难，而且如果不涉及电子结构理论的话，并不会经常用到，因此各位可以按需跳过它们，但是编者建议对电子结构方法感兴趣的读者或者\sout{或者背上电子结构的锅的}读者认真阅读这些小节，毕竟这些都是电子结构理论的基础内容，在相关书籍中和文献中会多次用到。
         
         读者若发现本指南的逻辑与一些书籍相左，请根据各自的框架理解。
         \subsection{HF方法概论}
           上一节中我们已经给出了量子化学的精确解和目前最精确的计算方法，但是我们也提到，FCI方法由于对计算量和内存的巨大需求几乎不可能作为一个普适方法。因此多少年来，量子化学家们一直在寻找合适的\sch 方程的近似解。其中最经典的，就是Hartree-Fock近似。
 
-          这个近似非常平凡，就是只使用一个Slater行列式表述体系。这是因为描述$N$电子体系的最简单的反对称波函数就是只用一个Slater行列式
+          这个近似非常平凡，就是只使用一个Slater行列式表述体系。描述$N$电子体系的最简单的反对称波函数就是只用一个Slater行列式
           \begin{equation}
             | \Psi_{0} \rangle=| \chi_{1} \chi_{2} \cdots \chi_{N} \rangle
             \label{HF gs}
@@ -2154,7 +2149,7 @@
           
           很多时候，由于化学图像清晰，人们经常使用分子轨道来讨论问题，这与后文中提到的Koopmans定理是有密切联系的。但是需要提醒读者的是，分子轨道(单电子轨道)不是量子化学的目的，它只是用于构建多电子波函数的基础。而HF方法的逻辑，也需要注意，并不是优化单电子自旋轨道的能量，而是优化能量最低的$N$个单电子自旋轨道构成的那个多电子波函数(Slater行列式)的能量，尽管很多时候这两者是等价的。
 
-          在推导Hartree-Fock方程之前，我们需要其他的一些基础内容，这些内容将在后面多个部分中用到，我们建议对电子结构方法感兴趣的\sout{或者背上电子结构的锅的}读者认真阅读下列章节。
+          在推导Hartree-Fock方程之前，我们需要其他的一些基础内容，接下来的几小节内我们将慢慢道来。
           
         \subsection{单行列式的能量}
           我们首先讨论一个问题，我们如果知道一个N电子的Slater行列式，它由自旋轨道组$\left\{\chi_1, \chi_2,\dots,\chi_N\right\}$构成，那么它的能量期望值是多少？同样，为了回答这个问题，我们先考虑一个简单的情况，就是两电子问题，读者可以把它想象成$\text{H}_2$中的两个电子，描述这个两电子的波函数是一个二阶的Slater行列式
@@ -2210,7 +2205,7 @@
             [i j | k l] =\left[\chi_{i} \chi_{j} | \chi_{k} \chi_{l}\right]\equiv\int \mathrm{d} \mathbf{x}_{1} \mathrm{d} \mathbf{x}_{2} \chi_{i}^{*}\left(\mathbf{x}_{1}\right) \chi_{j}\left(\mathbf{x}_{1}\right) r_{12}^{-1} \chi_{{k}}^{*}\left(\mathbf{x}_{2}\right) \chi_{l}\left(\mathbf{x}_{2}\right)
             \label{double electron integral}
           \end{equation}
-          需要注意，上式定义中，调整了波函数的位置，算符左边写第一个电子的波函数，右边是第二个电子的波函数，带星的自旋轨道在不带星的左边。如果自旋轨道都是实数，显然上述定义满足如下的对称性
+          需要注意，上式定义中，调整了波函数的位置，算符左边写第一个电子的波函数，右边是第二个电子的波函数，带星的自旋轨道在不带星的左边。如果自旋轨道都是实的，这在多数条件下都是成立的，只要你不涉及平面波基组或者相对论量子化学，显然上述定义满足如下的对称性
           \begin{equation}
             [i j | k l]=[j i | k l]=[i j | l k]=[j i | l k]
           \end{equation}
@@ -2327,13 +2322,453 @@
             \hat{f}(\mathbf{x}_i)\chi_a^{\prime}(\mathbf{x}_i) = \varepsilon_a\chi_a^{\prime}(\mathbf{x}_i)
           \end{equation}
           此时的Hartree-Fock方程通常被称为Hartree-Fock方程的正则(标准)形式，解得的本征态也称为正则自旋轨道，此后如果再用到这个等式，我们将把撇去掉。当然正如我们在第一节所说的那样，这个本征值问题是非线性问题，只能通过所谓自洽场的方法求解。
+        \subsection{非正交基组的本征值问题}
+          上一小节我们知道，求单Slater行列式的最小能量等价于求解Fock算符的本征值问题，通常在数学上，本征值问题的“基组”都是正交的这是因为数学上空间的单位正交基其实是让一个分量为1其他分量为0的矢量。但是在量子化学中，原子轨道基组并不正交，一个H原子的1s轨道和相邻C原子的1s轨道内积并不是零。所以本征值问题会稍微有点变化，我们在这里提出这个问题，一方面是导出Hartree-Fock近似下最后真正求解的“久期方程”\footnote{编者认为，在我们的逻辑框架下，HF的久期方程并不是通过线性变分法(在组态相关一节中会介绍)导出的，这是因为我们的逻辑并不是变分优化分子轨道的能量，而是优化行列式的能量，虽然这两者是等价的}，同时也想提醒读者，这个不正交的特性经常被忘掉，\sout{导致编者debug了一个月。}
 
-      \section{post-Hartree-Fock方法}
-        post-Hartree-Fock方法是指那些以Hartree-Fock方法得到的单电子波函数与Hatree-Fock基态为基础，计算多电子波函数的方法。我们之前介绍的FCI方法其实就是post-Hartree-Fock方法中的一个，本节中我们将简要介绍几种计算体系多电子波函数的post-Hartree-Fock方法，包括多组态相关方法(Configuration Interaction, CI)、多组态自洽场方法(Multiconfigurational Self-Consistent-Field)、耦合簇方法(Coupled Cluster)、微扰方法(Perturbation)等。
-        \subsection{组态相关方法}
-        \subsection{多组态自洽场方法}
-        \subsection{耦合簇方法}
-        \subsection{微扰理论}
+          我们先定义原子轨道基组$\left\{\phi_i\right\}$，他们之间不满足正交归一性，而是存在一个重叠积分矩阵
+          \begin{equation}
+            {S}_{ij} \equiv \langle \phi_i|\phi_j\rangle = \int \mathrm{d} \mathbf{x} \phi_i^*(\mathbf{x})\phi_j(\mathbf{x})
+          \end{equation}
+          Fock算符的本征态可以在这个基下展开(我们先忽略自旋的问题，或者认为上述原子轨道其实是自旋轨道)，
+          \begin{equation}
+            |\psi_i\rangle = \sum_j C_{ji} |\phi_i\rangle
+          \end{equation}
+          这样，系数矩阵$C_{ji} $的第$i$列表示第$i$个分子轨道对原子轨道的展开系数，这与多数软件中的设定是一致的。原本的Fock算符的本征值问题可以写作
+          \begin{equation}
+            \hat{f}|\psi_j\rangle = \varepsilon_j |\psi_j\rangle
+          \end{equation}
+          左乘一个$\langle \psi_i|$然后将原子轨道展开代入
+          \begin{equation}
+            \sum_k\sum_l C_{ki}^* C_{lj} \langle \phi_k|\hat{f}|\phi_l\rangle = \sum_k\sum_l C_{ki}^* C_{lj} \langle \phi_k|\phi_l\rangle \varepsilon_j 
+          \end{equation}
+          我们定义原子轨道基组下的Fock算符的矩阵为$F_{kl} \equiv \phi_k|\hat{f}|\phi_l$，在很多文献中，这个矩阵称为Fock矩阵。改写上式为
+          \begin{equation}
+            \sum_k\sum_l C_{ik}^{\dagger} F_{kl} C_{lj} = \sum_k\sum_l  C_{ik}^{\dagger} S_{kl} C_{lj}\varepsilon_j 
+          \end{equation}
+          即
+          \begin{equation}
+            \left( C^{\dagger}FC \right)_{ij} = \left( C^{\dagger}SC \varepsilon\right)_{ij}
+          \end{equation}
+          其中$\varepsilon$为对角线为原本本征能量的对角阵，将上式的矩阵形式左乘$ C^{\dagger -1}$就得到了Hartree-Fock近似下最后求解的方程
+          \begin{equation}
+            FC = SC \varepsilon
+            \label{matrix form of secular equation}
+          \end{equation}
+          上式经常用于在已知Hartree-Fock分子轨道能量的情况下反推Fock矩阵(比如你有Gaussian计算结果，想知道Fock矩阵的时候)，即使用$F = SC \varepsilon C^{-1}$。另外，上式其实是一个矩阵的形式，并不是常见的本征值方程，如果单独拿出某一列，才会化成一般的本征值问题，即
+          \begin{equation}
+            Fc = ESc
+          \end{equation}
+          此时$E$只是一个常数，$c$也只是一个列矢量而非之前的矩阵，求解上述本征值问题所用的行列式方程为
+          \begin{equation}
+            \det\left[F - ES\right] = 0
+            \label{secular equation}
+          \end{equation}
+          上式又被称为久期方程。如果读者熟悉HMO理论，可能会对它感到眼熟，因为HMO中求解的那个行列式就是上式在共轭多烯体系的一个应用，前提是引入一系列的近似，即重要的分子轨道只是由原子轨道中的$p_z$轨道贡献，并且只有邻近原子的$p_z$轨道之间不正交，重叠积分为$\beta$，Fock矩阵也只有对角元$\alpha$，如果把$E$写成$x$，等式(\ref{secular equation})就变成了HMO理论中的行列式方程。
+
+          但是读者应该也发现了，如果有$K$个空间原子轨道，求解方程(\ref{secular equation})，会得到$2K$个自旋轨道，Hartree-Fock近似所使用的其实是由能量最低的$N$个自旋轨道构成的Slater行列式，称为Hartree-Fock基态。在Hartree-Fock基态中被占据的自旋轨道称为占据轨道，未占据的轨道称为未占据轨道，或者另一个常见的名字，虚轨道(Virtual Orbital)。
+          
+          可以看到，求解久期方程只涉及一个电子的信息，其他的电子的作用变成了一个平均的形式，这某种程度上说的确是一个近似，但我们的推导中似乎没有提及这一个近似，这是为什么呢？如果读者看过Hartree理论的推导就会发现，它必须在某一步将求和中的$i\neq j$删去变成纯粹的对$i$求和，但是Hartree-Fock近似下，这一点是不需要的，因为在能量求和中，当$i=j$时，库仑积分和交换积分抵消了：$[ii|jj] - [ij|ji] = 0$(前提当然是你能接受两个无穷大相减这个操作的话)。这一点也是我们跳过了Hartree理论的原因，编者期望能给读者一个更深的印象，那就是Hartree-Fock的核心近似是\textbf{只用一个Slater行列式描述$N$电子波函数。}鉴于无穷大的问题仍然存在，因此这仍然是一个近似，即单电子近似/平均场近似，电子与电子的运动是不关联的。
+
+          体系的真实能量，或者说FCI解得的能量$\varepsilon_{exact}$与Hartree-Fock基态能量$E_0$之间的差通常被称为电子的关联能，这个值越大，电子的关联也就越强，post-Hartree-Fock方法和后来的DFT理论中，都是试图添加电子之间的关联，只是方法不同。
+        \subsection{Hartree-Fock轨道能量与Koopmans定理}
+          Hartree-Fock方法远没有读者想的那么平凡和简单，我们在这一小节的开头提一个简单的问题，这一小节就是要回到这个问题：如果Hartree-Fock的Slater行列式由能量最低的$N$个自旋轨道构成，每个自旋轨道占据一个电子，那么Hartree-Fock的基态能量是不是就是这$N$个自旋轨道对应的Fock算符的本征值之和呢？这个问题不能简单套用之前Hartree积的结论，这是因为我们从来没证明过体系总的哈密顿量可以写成Fock算符的求和。那如果不是，那这个“轨道能量”还有意义吗？
+
+          我们直接使用数学工具来说明这个问题，先复习一下Fock算符的形式
+          \begin{equation}
+            \hat{f} = h + \sum_b^N (\mathscr{J}_b - \mathscr{K}_b)
+          \end{equation}
+          那Hartree-Fock的某个轨道的能量可以写作
+          \begin{equation}
+            \begin{aligned}
+              \varepsilon_i &=  \langle\chi_i|\hat{f}|\chi_i\rangle = \langle\chi_i|h + \sum_b^N (\mathscr{J}_b - \mathscr{K}_b)|\chi_i\rangle\\
+              &=[i|h|i] + \sum_b^N([ii|bb] - [ib|bi])
+            \end{aligned}
+            \label{orbital energy for HF orbitals}
+          \end{equation}
+          如果我取$i$为某个占据轨道的编号，用$a$表示，那么在上式对$b$求和时有一项是零，即
+          \begin{equation}
+            \varepsilon_a=[a|h|a] + \sum_{b\neq a}^N([aa|bb] - [ab|ba])
+            \label{orbital energy for occupied}
+          \end{equation}
+          
+          我们分析一下这个等式的物理意义，对于占据轨道的轨道能量，它等于一个电子在这个轨道上的动能和与原子核的势能，加上它与剩余的$N-1$个电子之间的相互作用，这看上去非常合理。但是如此看来，Hartree-Fock轨道的能量显然不应该是所有占据轨道的Fock算符的本征值的和，因为每计算一个轨道的能量，就会将这个轨道上的电子与所有其他占据轨道上电子之间的相互作用考虑在内，因此简单地求和会导致这部分相互作用重复计算了。数学语言来说，Hartree-Fock基态的真正能量为
+          \begin{equation}
+            E_0 = \sum_a^N [a|h|a] + \frac{1}{2}\sum_a^N \sum_b^N([aa|bb] - [ab|ba])
+          \end{equation}
+          而Fock算符的本征值求和为
+          \begin{equation}
+            \sum_a \varepsilon_a = \sum_a^N [a|h|a] + \sum_a^N \sum_b^N([aa|bb] - [ab|ba])
+          \end{equation}
+          缺少的二分之一就代表了重复计算的电子间的相互作用。
+
+          接下来回答第二个问题，这个“轨道能量”的意义是什么。在这之前，我们看一个有趣的结果，那就是计算一个未占据的Hartree-Fock轨道的Fock算符本征值，我们取等式(\ref{orbital energy for HF orbitals})中的$i$为某个未占据轨道的编号，用$r$表示，那刚刚等于零的那一项就不存在了，求和中的所有项都会保留，即
+          \begin{equation}
+            \varepsilon_r=[r|h|r] + \sum_{b}^N([rr|bb] - [rb|br])
+            \label{orbital energy for virtual}
+          \end{equation}
+          对于未占据轨道，它的轨道能量等于一个电子在这个轨道上的动能和与原子核的势能，加上它与原本占据的全部$N$个电子之间的相互作用！这等价于在原本电子都不动的基础上加一个电子到第$r$个轨道，而得到的这个新电子的能量。这引导着我们计算一个这个体系的电子亲和能，定义为体系加上一个电子的基态能量与原本的基态能量的差\footnote{可能差一个符号，读者不要在意}，我们假设这个$r$指标恰好是LUMO轨道的标号
+          \begin{equation}
+            \begin{aligned}
+              E_A &= -E_0^{(N)} + E_0^{(N+1)} = -\langle \Psi_0|\mathscr{H}|\Psi_0\rangle + \langle \Psi_0^r|\mathscr{H}|\Psi_0^r\rangle \\
+              &=-\sum_a^N [a|h|a] - \frac{1}{2}\sum_a^N \sum_b^N([aa|bb] - [ab|ba]) + \sum_a^{N,r} [a|h|a] + \frac{1}{2}\sum_a^{N,r} \sum_b^{N,r}([aa|bb] - [ab|ba])\\
+              &=  [r|h|r]  +  \frac{1}{2}\sum_b^{N}([rr|bb] - [rb|br]) +  \frac{1}{2}\sum_a^{N}([aa|rr] - [ar|ra])\\
+              &= [r|h|r] + \sum_b^{N}([rr|bb] - [rb|br]) =\varepsilon_r
+            \end{aligned}
+          \end{equation}
+          可以看到，将一个电子加到原本未占据的$r$轨道上所产生的能量就是原本的非占据轨道$r$的轨道能量。同理，我们可以从一个占据轨道$s$拿走一个电子需要的能量，即离子化的能量
+          \begin{equation}
+            \begin{aligned}
+              E_I &= E_0^{(N)} - E_0^{(N-1)} \\
+              &= \sum_a^N [a|h|a] + \frac{1}{2}\sum_a^N \sum_b^N([aa|bb] - [ab|ba]) - \sum_{a\neq s}^{N} [a|h|a] - \frac{1}{2}\sum_{a\neq s}^{N} \sum_{a\neq s}^{N}([aa|bb] - [ab|ba])\\
+              &=  [s|h|s]  +  \frac{1}{2}\sum_{b\neq s}^{N}([ss|bb] - [sb|bs]) +  \frac{1}{2}\sum_{a\neq s}^{N}([aa|ss] - [as|sa])\\
+              &= [s|h|s] + \sum_{b\neq s}^{N}([ss|bb] - [sb|bs]) =\varepsilon_s
+            \end{aligned}
+          \end{equation}
+          可以看到，从一个已占据轨道$s$上移走一个电子需要的能量就是原本的占据轨道$s$的轨道能量。
+          
+          以上两个式子也就是Hartree-Fock方法解出的轨道能量的意义，这最早被总结成了一个定理，\textbf{Koopmans定理：在一个给定的$N$电子Hartree-Fock单行列式中，占据轨道$\chi_a$的轨道能量等于从这个轨道上移走一个电子所需要的能量；非占据轨道$\chi_r$的轨道能量等于新加一个在这个轨道上的电子额外引入的能量。}或者换句话说，\textbf{Hartree-Fock近似的HOMO能量基本等于体系的第一电离能，LUMO能量基本等于体系的第一电子亲和能。}\footnote{当然，按照定义应该是差一个正负号。}
+
+          显然，Koopmans定理是一个近似的定理，它基于我们上面的两个推导，而这两个推导是基于一个假设，即增加电子和减少电子时，体系的Hartree-Fock解出的自旋轨道不变。这显然不是什么很好的假设，电子数的多少原则上会影响轨道，严格计算上需要加减电子之后重新计算本征态，再计算电离能和电子亲和能。所以用单电子图像(分子轨道)分析电离能、电子亲和能以及电子跃迁原则上都是一个很大的近似，即使是DFT得到的添加了电子关联的分子轨道。但是，用Hartree-Fock计算得到的中性分子的第一电离能(电子亲和能不行)往往是比较准确的，这是因为一个非常非常凑巧的正负误差的抵消，即加减电子引起的自旋轨道的重排和驰豫的能量恰好与电子关联的能量修正大小相近，符号相反。
+      \section{组态相关方法}
+        本节开始讲解各种post-Hartree-Fock方法，指那些以Hartree-Fock方法得到的单电子波函数与Hatree-Fock基态为基础，计算多电子波函数的方法。我们之前介绍的FCI方法其实就是post-Hartree-Fock方法中的一个，本节和接下来的几节中我们将简要介绍几种计算体系多电子波函数的post-Hartree-Fock方法，包括多组态相关方法(Configuration Interaction, CI)、多组态自洽场方法(Multiconfigurational Self-Consistent-Field)、耦合簇方法(Coupled Cluster)、微扰方法(Perturbation)等。本节关心的是第一个也是图像最简单的一个，组态相关方法，同上一节一样，我们在第一小节给出总结性质的评述，然后再展开细节。另外，本节只涉及单参考的组态相关，多参考组态相关方法(MRCI)将在后续内容中出现。
+        
+        \subsection{CI方法概论}
+          在上一节中讲解的Hartree-Fock近似中，我们通过变分的方法找到了只用单个行列式描述体系$N$电子体系中能量最低的那个行列式，以及构成它的全 部自旋轨道，我们称这个Slater行列式对应的量子态为Hartree-Fock基态。从Hartree-Fock基态和一系列的占据、非占据的的自旋轨道出发，我们很 容易得到组态相关方法的图像。
+
+          我们再简要回顾一下量子化学的最高精度方法：完全组态相关方法。如果我们有$K$个空间的原子轨道基组，解Hartree-Fock方程将会得到$2K$个自旋 轨道，从中选择$N$个就得到了一个Slater行列式，总有$\mathbf{C}_N^2$种选法，Hartree-Fock基态实际上就是取了能量最低的$N$个自旋轨道构 建出来的。我们知道如果$K\rightarrow\infty$，则这$\mathbf{C}_N^2$个Slater行列式可以构成$N$电子波函数完备的Hilbert空间，每一个Slater行列式称为一个“组态(Configuration)”，它们的线性组合就可以组成真正的精确$N$电子波函数，也就是FCI方法。
+
+          但是对于较大的体系，正如前文所述，FCI是不可能实现的，因此要对这$\mathbf{C}_N^2$个Slater行列式进行截断，组态相关方法就是一种截断的 方法，而且物理图像最为简单(但是不是最高效的)。我们知道，每一个Slater行列式代表了$N$个电子占据了哪些自旋轨道，因此可以把这$\mathbf  {C}_N^2$个Slater行列式按照它们与Hartree-Fock基态$ | \Psi_0 \rangle $的差别进行分类，我们习惯上把Hartree-Fock基态中被占据的自旋  轨道用字母$a,b,c,\dots$表示，将未占据的自旋轨道用$r,s,t,\dots$表示。如果某个行列式与Hartree-Fock基态只相差一个自旋轨道，等价于它  代表的态可以由Hartree-Fock基态激发一个电子得到，这样的态称为单激发行列式，比如$ | \Psi_0 \rangle $中的$\chi_a$在这个态中被替换成  了$\chi_r$，这个行列式可以表示为$| \Psi_a^r\rangle$；如果它与Hartree-Fock基态相差两个自旋轨道，等价于它代表的态可以由 Hartree-Fock基态激发两个电子得到，这样的态称为双激发行列式，比如比如$ | \Psi_0 \rangle $中的$\chi_a,\chi_b$在这个态中被替换成了  $\chi_r,\chi_s$，这个行列式可以表示为$| \Psi_{ab}^{rs}\rangle$；以此类推可以定义三激发行列式，四激发行列式等等。那么完全组态相关  的波函数就可以写成
+          \begin{equation}
+            |\Phi\rangle= c_{0}\left|\Psi_{0}\right\rangle+\sum_{r a} c_{a}^{r}\left|\Psi_{a}^{r}\right\rangle+\sum_{a<b \atop r<s} c_{a b}^{r s}\left|\Psi_{a b}^{r s}\right\rangle+\sum_{a<b<c \atop r<s<t} c_{a b c}^{r s t}|\Psi_{a b c}^{r s t}\rangle+\cdots
+            \label{FCI expansion}
+          \end{equation}
+          上式中的线性展开系数在一些文献中称为CI系数。根据上式，一个很自然的截断方法就随之产生了，那就是通过与Hartree-Fock基态$ | \Psi_0 \rangle $的差别进行截断，比如只考虑单激发双激发的贡献的组态相关(CISD)\footnote{也许你会疑问为什么没有CIS，这个问题我们在接下来的几个小节内就会给出回答。}，单激发双激发三激发的贡献的组态相关(CISDT)，或者再加上四激发(CISDTQ)、五激发(CISDTQ5)、六激发(CISDTQ56)等。可以看到，这是一个不断逼近FCI的过程，而且显然，当考虑的激发数越来越多时，体系的能量与FCI得到的精确能量之间的差会越来越少。如果我们关心的是体系在平衡位置附近的基态问题，那么可以想象，精确波函数中Hartree-Fock基态和一些比较低的激发态将会贡献最大，所以这种情况下，只考虑单激发和双激发的CISD方法就已经能给出非常好的结果。
+
+          CI方法的物理图像非常简单，也易于理解，那么问题就转化成了细节处理的问题，比如怎么求等式(\ref{FCI expansion})中的线性组合系数，接下来的几个小节将会来讨论这个问题。
+        \subsection{线性变分法}
+          量子化学中，变分法是极其重要的，在变分法中有一类特殊的情况，即变分函数是一系列其他固定的函数的线性组合，变分函数的可变性在于这个线性组合的系数，这样的变分方法称为线性变分法，此时的变分方程就会等价于一个本征值问题。上一小节中可以发现，组态相关方法就是优化不同组态前面的线性组合系数，自然是线性变分法的问题。
+
+          在这里我们将变分函数写成某个基组的线性组合$|\psi\rangle=\sum_{i} c_{i}|\phi_{i}\rangle$，这组基函数并不一定是正交的，他们的内积定义为重叠积分$S_{ij} = \langle \phi_i | \phi_j \rangle $。体系的能量的期望值可以写成
+          \begin{equation}
+            E=\frac{\langle\psi|\mathbf{H}| \psi\rangle}{\langle\psi | \psi\rangle}=\frac{(\sum_{i} c_{i}^{*}\left\langle\phi_{i}\right|) \mathbf{H}(\sum_{j} c_{j}\left|\phi_{j}\right\rangle)}{(\sum_{i} c_{i}^{*}\left\langle\phi_{i}\right|)(\sum_{j} c_{j}\left|\phi_{j}\right\rangle)}=\frac{\sum_{i j} c_{i}^{*} H_{i j} c_{j}}{\sum_{i j} c_{i}^{*} S_{i j} c_{j}} \equiv \frac{C^{*} H C}{C^{*} S C}
+          \end{equation}
+          上式右侧的分母乘到左边，
+          \begin{equation}
+            E C^{*} S C=C^{*} H C
+          \end{equation}
+          左右同时对某一个线性组合系数求变分
+          \begin{equation}
+            \frac{\delta E}{\delta c_{k}} C^{*} S C+E \frac{\delta C^{*}}{\delta c_{k}} S C+E C^{*} S \frac{\delta C}{\delta c_{k}}=\frac{\delta C^{*}}{\delta c_{k}} H C+C^{*} H \frac{\delta C}{\delta c_{k}}
+          \end{equation}
+          可以解得
+          \begin{equation}
+            \frac{\delta E}{\delta c_{k}}=\frac{\frac{\delta C^{*}}{\delta c_{k}}(H C-E S C)+\left(C^{*} H-E C^{*} S\right) \frac{\delta C}{\delta c_{k}}}{C^{*} S C}
+          \end{equation}
+          根据变分原理，上式应该等于零，如果我们在实数范围内处理这个问题，就得到了线性变分法最后的变分方程
+          \begin{equation}
+            HC = ESC
+            \label{linear variation method}
+          \end{equation}
+          这样变分的问题就等价为了一个求矩阵本征值的问题，这个哈密顿矩阵是在我们所选用的基组下展开的。
+          
+          其实读者可能会发现，上述推导与在归一化的限制条件下进行拉格朗日乘子的变分法是等价的，而且得到的方程也与我们在Hartree-Fock本征值问题中的类似，尽管这两者在某种程度上等价，但是推导的逻辑是不同的。
+
+          等式(\ref{linear variation method})是一个普适的表达式，适用于所有基组，对于组态相关来说，我们选用的基函数是对应着不同激发态的组态，可以证明，这些组态之间是正交的。所以重叠积分矩阵$S_{ij} = \delta_{ij}$。所以求解组态相关方法的展开系数，就是要对角化在组态基下的哈密顿量。
+        \subsection{组态之间哈密顿量的一般形式}
+          在这一节中，我们将给出计算组态之间的哈密顿量矩阵元的一般公式，即Slater-Condon规则。另外证明一个定理，Brillouin定理。这两者能帮助我们写下和计算组态之间的哈密顿量的任何一项，得到这个哈密顿量之后，对角化它就可以得到CI方法给出基态激发态能量和对应的波函数的展开系数。
+
+          Slater-Condon规则是计算任意两个组态之间的哈密顿量矩阵元$\mathbf{H}_{ij} = \langle \Psi_i | \mathscr{H} | \Psi_j \rangle $的公式，它的证明我们略去了(其实我们在计算单行列式能量时已经证明了下述的条件1的公式)，读者可以在很多地方找到，而且难度并不高，只是因为这个规则比较长，所以推导比较冗长，读者也可以尝试自己完成。
+
+          跟我们讨论单行列式的能量时相同，我们把体系的总电子哈密顿量写成两部分，只与一个电子坐标有关的单电子算符以及喻两个电子坐标有关的双电子算符：
+          \begin{equation}
+            \mathscr{H} = \sum_{i=1}^N h(i) +\sum_{i=1}^N\sum_{j>i}^N r_{ij}^{-1} \equiv \mathcal{O}_1+\mathcal{O}_2
+          \end{equation}
+          正是由于哈密顿量最多只含有双电子算符，而没有三电子四电子的部分，如果两个组态之间电子相差了三个或者更多的自旋轨道，那么这两个组态之间的哈密顿量矩阵元一定是零。这是因为当对全部的电子坐标积分时，需要考虑自旋轨道的正交归一性，但是这个正交性可以被算符的性质“约化”：如果算符只跟两个电子相关，比如说跟电子1和电子2相关，那么即使电子1和电子2在两个组态中占据不同的自旋轨道，由于积分中有一个$r_{12}^{-1}$也不会立即等于零。但是如果有三个电子占据的自旋轨道不同的话，其中两个可以被双电子算符“约化”，但是剩下一个积分仍然会给最终结果乘以一个零。所以对于相差三个自旋轨道及以上的组态之间的哈密顿量矩阵元，可以不用计算，一定为零。同理，对于单电子算符，只要两个组态相差两个自旋轨道，积分就一定是零。
+
+          如果读者理解了这一点，Slater-Condon规则中我们计算哈密顿量矩阵元时，只需要关心完全相同的行列式、相差一个自旋轨道的行列式和相差两个自旋轨道的行列式三种情况，我们分别称为条件1、2、3。条件1中，两个相同的行列式都用$|K\rangle$表示；条件2中，$|K\rangle$中的的自旋轨道$\chi_m$在另一个行列式$|L\rangle$中被换成了$\chi_p$；条件3中，$|K\rangle$中的自旋轨道$\chi_m$和$\chi_n$在另一个行列式$|L\rangle$中被换成了$\chi_p$和$\chi_q$。利用我们之前引入的单电子积分(\ref{single electron integral})和双电子积分(\ref{double electron integral})的简写记号，完整版的Slater-Condon规则如下：
+          \begin{itemize}
+            \item 条件1：$|K\rangle=|\cdots m n \cdot \cdots\rangle$
+            \begin{equation}
+              \left\langle K\left|\mathcal{O}_{1}\right| K\right\rangle=\sum_{m}^{N}[m|h| m]
+              \label{case1 1e}
+            \end{equation}
+            \begin{equation}
+              \left\langle K\left|\mathcal{O}_{2}\right| K\right\rangle=\frac{1}{2} \sum_{m}^{N} \sum_{n}^{N}\left([m m | n n]-[m n | n m]\right)
+              \label{case1 2e}
+            \end{equation}
+            \item 条件2：$|K\rangle=|\cdots m n \cdot \cdots\rangle$, $|L\rangle=|\cdots p n \cdot \cdots\rangle$
+            \begin{equation}
+              \left\langle K\left|\mathcal{O}_{1}\right| L\right\rangle=[m|h| p]
+              \label{case2 1e}
+            \end{equation}
+            \begin{equation}
+              \left\langle K\left|\mathcal{O}_{2}\right| L\right\rangle=\sum_{n}^{N}\left([m p | n n]-[m n | n p]\right)
+              \label{case2 2e}
+            \end{equation}
+            \item 条件3：$|K\rangle=|\cdots m n \cdot \cdots\rangle$, $|L\rangle=|\cdots pq \cdot \cdots\rangle$
+            \begin{equation}
+              \left\langle K\left|\mathcal{O}_{1}\right| L\right\rangle= 0
+              \label{case3 1e}
+            \end{equation}
+            \begin{equation}
+              \left\langle K\left|\mathcal{O}_{2}\right| L\right\rangle=[m p | n q]-[m q | n p]
+              \label{case3 2e}
+            \end{equation}
+          \end{itemize}
+
+          利用等式(\ref{case1 1e})-(\ref{case3 2e})我们可以计算任意的两个行列式之间的矩阵元，最终都转化成了对自旋轨道和电子坐标的积分。但是自旋轨道总是比较麻烦的，空间轨道的积分就会好很多，原则上，自旋轨道的积分总可以转化成空间轨道的积分，即自旋部分相反的自旋轨道的积分为零，自旋部分相同的自旋轨道的积分就等于对应空间轨道的积分。这几个等式虽然看起来令人头大，但是几乎是post-Hartree-Fock方法的核心，尽管多数情况下它们一般被写成密度矩阵的形式。
+
+          有了Slater-Condon规则，我们已经能计算完整的组态哈密顿量了，不管组态有多少个都不是问题。而且矩阵元中只有接近对角线的部分非零，远离对角线意味着两个组态相差越大，如果相差三个及以上的自旋轨道，哈密顿量矩阵元就恒等于零；相差两个及以上的自旋轨道，单电子积分部分就恒等于零。但是还有一个比较特殊的情况，对于Hartree-Fock基态和任意一个第一激发态，尽管它们之间只相差了一个自旋轨道，但是他们的哈密顿量矩阵元仍然为零。
+
+          我们根据(\ref{case2 1e})和(\ref{case2 2e})写下这个矩阵元的表达式：
+          \begin{equation}
+            \langle\psi_0|\mathbf{H}|S\rangle = [m|h| p]+\sum_{n}^{N}\left([m p | n n]-[m n | n p]\right)
+          \end{equation}
+          其中$\psi_0$代表artree-Fock基态$S$代表了单激发态。因为一侧是Hartree-Fock基态，所以求和变量$n$是遍历了所有的Hartree-Fock基态的占据轨道，这一点非常重要，而且这一点只有当计算Hartree-Fock基态和第一激发态之间的矩阵元时是成立的。我们可以写出此时对应的Hartree-Fock的自旋轨道$\chi_m$和$\chi_p$关于Fock算符的矩阵元，根据Fock算符、库伦算符和交换算符的定义，我们有
+          \begin{equation}
+            \langle \chi_m|\hat{f}|\chi_p\rangle = \langle \chi_m|h + \sum_b^N (\mathscr{J}_b - \mathscr{K}_b)|\chi_p\rangle = [m|h| p]+\sum_{b}^{N}\left([m p | b b]-[m b | b p]\right)
+          \end{equation}
+          其中的求和变量$b$也是关于所有的占据轨道，所以这个等式和上面的计算两个组态之间的哈密顿量矩阵元的结果相等，而读者不要忘记，Hartree-Fock的自旋轨道是Fock算符的本征态，所以当$m\neq p$时这个矩阵元为零，即
+          \begin{equation}
+            \langle\psi_0|\mathbf{H}|S\rangle = \langle \chi_m|\hat{f}|\chi_p\rangle = 0
+            \label{Brillouin theory}
+          \end{equation}
+          等式(\ref{Brillouin theory})表示，Hartree-Fock基态和任何一个单激发态没有直接的相互作用，这个结论称为Brillouin定理。
+
+          在这里，我们可以回答很早的一个问题了，那就是为什么没有CIS。根据Brillouin定理，只考虑单激发和基态，这个哈密顿量矩阵将是一个对角阵。进而对基态的能量没有任何修正，那我们是不是可以扔掉单激发呢？这也是不行的，这是因为即使第一激发态与基态没有“直接”的相互作用，但是它与第二激发态有相互作用。第二激发态与基态有相互作用，导致在计算CISD时，第一激发态其实会通过第二激发态间接地与基态相互作用进而影响能量\footnote{其实有些时候是可以扔掉第一激发态的，这主要是从对称性的思想出发的，对于一个对称分子的基态，波函数一定也是有偶对称性的，而第一激发态是奇对称性，因此有些时候可以不考虑}。
+
+          所以在考虑了Slater-Condon规则和Brillouin定理之后，一个包含了很多组态的哈密顿量的形式可以写为
+          \begin{equation}
+            \mathbf{H} = \left[\begin{array}{cccccc}
+            {\langle\psi_0|\mathbf{H}|\psi_0\rangle}&{0}&{\langle\psi_0|\mathbf{H}|D\rangle} &{0}&{0}&{\cdots}\\
+            {0}&{ \langle S|\mathbf{H}| S\rangle} & {\langle S|\mathbf{H}| D\rangle}& {\langle S|\mathbf{H}| T\rangle}&{0}&{\cdots} \\
+            {\langle D|\mathbf{H }|\psi\rangle}& {\langle D|\mathbf{H}| S\rangle} & {\langle D|\mathbf{H}| D\rangle} & {\langle D|\mathbf{H}| T\rangle} & {\langle D|\mathbf{H}| Q\rangle}&{\cdots}\\
+            {0}&{\langle T|\mathbf{H}|S\rangle}&{\langle T|\mathbf{H}|D\rangle}&{\langle T|\mathbf{H}|T\rangle}&{\langle T|\mathbf{H}|Q\rangle}&{\cdots}\\
+            {0}&{0}&{\langle Q|\mathbf{H}|D\rangle}&{\langle Q|\mathbf{H}|T\rangle}&{\langle Q|\mathbf{H}|Q\rangle}&{\cdots}\\
+            {\cdots}&{\cdots}&{\cdots}&{\cdots}&{\cdots}&{\cdots}
+            \end{array}\right]
+            \label{CI matrix}
+          \end{equation}
+          较小的组态相关矩阵只需要在这个矩阵上截取就可以了，写出这个形式是过分简单的，因为单激发组态其实有非常多而非一个，双激发、三激发等等更是如此，上述矩阵其实是一个非常非常大的矩阵，而且计算每个矩阵元的数值还需要用这一节提到的计算方法。这个矩阵的大小与基组的选择(还有后续将会涉及的活性空间的大小)密切相关，基组变大的时候，这个矩阵的规模将成倍地快速增长。由于需要存储的矩阵太大，内存的限制甚至会早于计算量的限制，这使得CI方法的发展除了减少计算量，还有减少内存这一重要部分。
+
+          减少计算量或者内存，又不想失去太多的精度，关键就在于找到对体系重要的组态，扔掉不重要的。这也是下一节中将讲到的活性空间的根本思想。除此之外，还有很多骚操作来寻找重要的组态，比如说对组态空间进行抽样，按照某个权重决定我是否将这个组态纳入考虑范围，甚至可以用机器学习的方法寻找对体系有意义的组态，来提高效率。        
+        \subsection{组态相关的两大问题}
+          组态相关方法的物理图像非常清晰，而且根据Slater-Condon规则，我们可以计算任意大小的CI哈密顿量，在密度矩阵形式下完成各种推导和计算也并不是很困难。但是除了我们之前提到的计算量和内存需求大的问题，组态相关还有两个主要的缺陷。
+
+          一是任何一个有限截断的组态相关方法不满足所谓的尺寸一致性，即体系的能量应该正比于体系的大小。举一个简单的例子，如果现在有一个距离非常非常远的分子二聚体，二聚体的总能量应当是两个分子单体计算出的能量之和，但是有限阶截断的CI不能满足这一点。比如，先对第一个分子做CISD的计算，再对第二个分子做CISD的计算，然后将两个分子放在一起计算的时候，CISD方法并不能重现两个分子单独做双激发的效果。容易想象，第一个分子双激发，第二个分子双激发，将它们一起处理的话，必须用某些三激发或者四激发的态来代表两个分子独立的双激发，当然FCI没有这个问题，这是因为它每次都考虑了全部激发。本质原因是因为，只有当总体系的变分空间等于每个子体系的变分空间的积的时候，尺寸一致性才能被满足，这一点组态相关方法显然无法满足。不满足尺寸一致性也直接导致了CI方法无法对体系进行分开处理，否则得不到自恰的能量。
+
+          另一个缺点在于，CI方法对电子体系的描述是不完备的，因为做了截断，尽管高的激发态对于体系的重要程度大大下降，但是它们的数量同时也远远多于低的激发态。而且对于体系不处于平衡位置的情况或者处理激发态的时候，只计算为数不多的激发态往往会有失偏颇。不但如此，组态相关方法对于变分参数的收敛速度是非常慢的，很重要的一个原因就是它对于不同激发态的引入是线性的。这在一定程度上降低了传统的组态相关方法的效率，我们之后涉及的耦合簇方法(CC)在这一点上是超越组态相关方法的，而且后者非常容易与微扰方法结合，也使得我们最终有了CCSD(T)这个电子结构计算的“黄金标准”。
+
+      \section{多组态自洽场方法、活性空间方法与多参考组态相关}
+        在Hartree-Fock近似中，我们将多电子波函数近似为一个Slater行列式，所做的优化仅是构成这一个行列式的分子轨道。而我们知道，在量子化学中的精确解中，是需要接近无穷个Slater行列式才能完备地展开多电子波函数所在的空间，因此Hartree-Fock是远远不够的。另一方面，当我们使用组态相关方法时，通常我们是直接使用Hartree-Fock方法得到的自旋轨道，再优化组态的线性组合系数，自旋轨道是不再优化的，换句话说，我们其实优化的是电子如何在自旋轨道上分布的，但是如果这组自旋轨道不是描述电子关联最好的自旋轨道呢？最后我们就很自然地问出一个问题：有没有一个方法可以同时优化自旋轨道和组态系数呢？答案是肯定的，这个方法就是多组态自洽场(MCSCF)方法，本节就简要介绍多组态自洽场方法，重点在其中最常用的完全活性空间自洽场(Complete Active Space Self-Consistent-Field, CASSCF)方法。
+        \subsection{MCSCF概论}
+          简单来说，MCSCF方法的核心思想就是多电子波函数在组态的展开系数和构成每一个组态的自旋轨道同时优化，也就是组态系数和分子轨道系数同时作为变分的变量。使得体系的总能量$\langle \Psi_{MCSCF} |\mathscr{H}|\Psi_{MCSCF}\rangle$最小，当然，这也是一个限制性的变分，需要满足一些限制条件，比如组态和自旋轨道的正交性。
+
+          用更加数学一点的语言，我们用$|i\rangle$表示一个组态，那么组态相关方法得到的波函数可以写作
+          \begin{equation}
+            | \Psi_{CI} \rangle = \sum_i C_i | i \rangle
+          \end{equation}
+          而就像我们在Hartree-Fock近似中做的那样，我们还要优化构成上式中的各个组态的自旋轨道，而自旋轨道的优化等价于将一个幺正算符作用在体系的Slater行列式行列式上，Hartree-Fock基态波函数就可以写为\footnote{该式中我们用了幺正算符的一个特性：任意一个幺正算符都可以写成一个反厄米算符的指数的形式}
+          \begin{equation}
+            |\Psi_{HF}\rangle = | 0 \rangle = \exp(-\hat{\kappa}) | 0^{\prime} \rangle
+          \end{equation}
+          那么问题变得清晰了起来，如果想同时优化自旋轨道和组态系数，MCSCF方法中的波函数可以写为
+          \begin{equation}
+            | \Psi_{MCSCF} \rangle = | \mathbf{\kappa}, \mathbf{C} \rangle=\exp(-\hat{\kappa}) \sum_i C_i | i \rangle
+            \label{MCSCF wavefunction}
+          \end{equation}
+          而我们要优化的能量就是满足归一性限制下的MCSCF波函数对哈密顿量的期望值：
+          \begin{equation}
+            E = \min_{\mathbf{\kappa}, \mathbf{C}} = \frac{\langle \mathbf{\kappa}, \mathbf{C} | \mathscr{H} | \mathbf{\kappa}, \mathbf{C} \rangle }{\langle \mathbf{\kappa}, \mathbf{C} | \mathbf{\kappa}, \mathbf{C} \rangle }
+            \label{MCSCF energy}
+          \end{equation}
+          如此一来，就达到了所有系数一起优化的目的。
+        \subsection{CASCI与CASSCF概论}
+          当我们研究完一般的MCSCF的思路时，就又产生了一个问题，该选用哪些组态呢，要像我们在CI方法中那样按激发截断，还是另寻他法？在实际操作中，人们更加常用被称为活性空间(active space)的思路来选择所使用的组态。当我们有$K$个原子轨道和对应的$K$个分子轨道时，我们可以把这些分子轨道分成三部分，内核部分，活性空间部分和惰性虚轨道部分，电子也相应地分为内核部分和活性空间部分。举两个非常简单的选择方法，第一就是直接将内层电子认为成内核部分，活性空间就是价电子和价层轨道，惰性虚轨道就是价层轨道之上的虚轨道；第二种就是根据化学键的特性来选择，比如苯环体系，化学中我们一般认为最重要的是6个$\pi$电子和6个$\pi$轨道，因此就可以选活性空间为$\pi$电子和$\pi$轨道。
+          
+          这样分类之后，常用的完全活性空间(CAS)方案就是在活性空间内做FCI，其他部分就用Hartree-Fock基态的结果，这类方法称为完全活性空间组态相关(CASCI)。CASCI有多个好处，首先总可以扩大活性空间来达到FCI仅限，尽管CASCI方法连所有的单激发都无法遍历，但是它遍历了化学图像更加清晰的全部组态，高能量的单激发的重要性很多时候比不上一些较低的多激发的重要性。而且CAS系列方法的计算量不会随着原子轨道基组的大小变化有剧烈的变化，与之相对的是CISD等方法会剧烈变化，因为会多出很多新组态。当然由于这些原因，CASCI的计算精度在一些时候是低于CISD系列方法的，但是由于关心的组态变少了，它的计算效率是大大提升的。
+
+          因为精度的问题，人们一般不会直接使用CASCI的结果作为多电子波函数的计算结果，CAS这个思路更有意义的存在是它在MCSCF中的应用，即CASSCF理论。选一个活性空间内的所有组态，按照等式(\ref{MCSCF wavefunction})和(\ref{MCSCF energy})的方法进行变分，就可以在活性空间内得到一个最终的基态。需要注意的是，由于幺正变换是作用在所有自旋轨道上的，所以在CASSCF的过程中，CI部分只涉及活性空间内的组态的组态系数，但是分子轨道系数的优化是活性空间内外都做的。
+
+          CASSCF(MCSCF)方法是电子结构领域中处理电子关联相当有效的一套方法，并且以其清晰的图像和可以接受的计算量成为了计算基态的多电子波函数的很好的选择。但是它也有问题，当我们计算激发态时，MCSCF方法往往不能得到相互正交的基态和激发态，很多时候人们会选用态平均MCSCF来处理激发态问题，但是这类方法又有一些人为可控的不严格因素，计算也很难保证准确。另外，尽管CASSCF的图像很清晰，但是活性空间的选择往往是一个技术活，这是因为通常的化学图像与实际的分子轨道之间可能有出入，再用苯环举例，我们都知道要选用6电子6轨道作为活性空间，但是具体是哪6个轨道呢？HF计算可不能保证这6个$\pi$轨道恰好就是HOMO和LUMO上下各三个，尤其是有取代基的时候，分子轨道的能量顺序很可能并不可靠。因此很多时候选择活性空间是通过分子轨道的对称性信息来选择的，这不在本指南的讨论范围内，但是这个问题我们需要重申，即活性空间的选取不是简单地使用能量顺序就能搞定的。
+        \subsection{激发算符与多参考组态相关}
+          为了解释一个更高精度的组态相关方法——多参考组态相关(Multi-reference Configuration Interaction, MRCI)，我们先简单了解一下激发算符。我们定义单激发算符为
+          \begin{equation}
+            \hat{T}_a^r|\chi_1\chi_2\cdots\chi_a\cdots\chi_N\rangle = |\chi_1\chi_2\cdots\chi_r\cdots\chi_N\rangle
+            \label{single excitation operator}
+          \end{equation}
+          $\hat{T}_a^r$的作用即把原本的一个处于$\chi_a$的电子激发到了$\chi_r$，当然，这里的激发只是一个形象的说法，$a$和$r$也只是两个自旋轨道的标记而已，原则上也可以表示电子向下跃迁，在二次量子化的语言里，它的作用是湮灭了一个处于$\chi_a$的电子，然后又产生了一个处于$\chi_r$的电子。但是在本指南的语言中，它通常用来表示激发。与单激发算符类似，我们可以定义双激发算符
+          \begin{equation}
+            \hat{T}_{ab}^{rs}|\chi_1\chi_2\cdots\chi_a\cdots\chi_b\cdots\chi_N\rangle = |\chi_1\chi_2\cdots\chi_r\cdots\chi_s\cdots\chi_N\rangle
+            \label{double excitation operator}
+          \end{equation}
+          同理可以有三激发、四激发算符等。
+          
+          根据激发算符的写法，我们可以重写组态相关的波函数表达式
+          \begin{equation}
+            | \Psi_{CI} \rangle = \left(1+\sum_{a,r}\hat{X}_{a}^{r}+\sum_{a<b,r<s}\hat{X}_{ab}^{rs}+\cdots\right) | \Psi_0 \rangle
+            \label{SRCI}
+          \end{equation}
+          其中$ | \Psi_0 \rangle $为Hartree-Fock基态，算符$\hat{X}_{a}^{r}$定义为组态系数乘上对应的激发算符
+          \begin{equation}
+            \hat{X}_{a}^{r} | \Psi_0 \rangle = C_{a}^r \hat{T}_{a}^{r} | \Psi_0 \rangle
+          \end{equation}
+          式(\ref{SRCI})就代表了上一节中讲到的组态相关方法的多电子波函数，我们通常称为单参考的组态相关。那什么叫多参考呢，其实很简单，式(\ref{SRCI})最右边的那个波函数我们称为参考态波函数，我们其实从未要求过它一定是Hartree-Fock基态。原则上，我们可以让它是某一个第一激发态，单激发算符作用到第一激发态上就得到第二激发态，我们也可以在这个基础上做组态相关，只是缺少了基态和绝大多数第一激发态的信息而已。不过这还不算多参考，那是因为我们甚至没有要求过右侧一定是一个单独的组态，完全可以是一个组态的线性组合呀！当参考态选用组态的线性组合的时候，我们就得到了一个基于很多个参考态的CI方法，称之为MRCI。
+
+          问题还没有结束，那就是我们到底要用哪几个组态的线性组合，怎么线性组合呢？换句话说，我们的参考空间怎么选，CASSCF给出了一个很好的备选项，我们完全可以将参考空间就定为活性空间，这样也符合化学图像。此时，式(\ref{SRCI})中的参考态就选用我们用CASSCF优化得到的多电子波函数基态。既然我们选用了一个Slater行列式线性组合的态为参考态，单激发算符和双激发算符作用上去之后就也不再是单一的Slater行列式，但这些“单激发”和“双激发”态之间仍然满足正交性。
+
+          因为CI方法只需要对角化矩阵就可以同时同权重地得到基态和激发态，而不需要对激发态做过多处理，在多参考波函数的加持下，MRCI方法得到的基态和激发态都是比较准确的，也几乎是目前计算多电子激发态的参考方法，在后面将涉及的动力学问题中，MRCI方法也是通常的提供各个电子能级势能面的重要工具。
+      \section{耦合簇方法}
+        我们之前在介绍CI系列方法时，曾经提到过组态相关方法是图像最为清晰，处理起来也最简单的post-HF方法，但也同时提到了，它并不是效率最高的方法，CI方法有两个较大的问题：不满足尺寸一致性；随组态数量增大时的收敛速度较慢，而后者主要是因为组态相关方法对于不同激发的组态的引入是线性的。而耦合簇(CC)方法的核心思路，就是非线性地引入激发态，它以一个指数的形式引入激发态，由于指数展开的无穷性，尺寸一致性的问题也同时被解决了。
+        \subsection{CC方法概论}
+          正如前面说到的，耦合簇方法的核心思想就是以指数的形式引入激发算符，在这个思路下，多电子波函数可以写作
+          \begin{equation}
+            | \Psi_{CC} \rangle = \exp(\hat{T}) | \Psi_0 \rangle
+          \end{equation}
+          其中$ | \Psi_0 \rangle$仍然为Hartree-Fock基态，$\exp(\hat{T})$是总激发算符的指数形式，其定义与一般的算符或者矩阵的指数形式一致，即
+          \begin{equation}
+            \exp(\hat{T}) = 1 + \hat{T} + \frac{1}{2!}\hat{T}^2+ \frac{1}{3!}\hat{T}^3 + \cdots
+          \end{equation}
+          其中总激发算符是所有可能的激发算符的权重求和，这个权重等价于在CI方法中的组态系数
+          \begin{equation}
+            \hat{T} = \hat{T}_1 +\hat{T}_2 +\cdots, \;\;\hat{T}_1 = \sum_{a,r}t_a^r\hat{T}_a^r,\;\;\hat{T}_2 = \sum_{a<b,r<s}t_{ab}^{rs}\hat{T}_{ab}^{rs}
+          \end{equation}
+          式子中的$\hat{T}_a^r$和$\hat{T}_{ab}^{rs}$就是我们在等式(\ref{single excitation operator})和(\ref{double excitation operator})中定义的单激发算符和双激发算符，每一个激发算符都有一个权重因子，即$t_a^r$、$t_{ab}^{rs}$等等。
+
+          读者可能对这个指数形式感到头大，先不要着急，我们对其的导出放在下一小节中。现在，我们只需要知道它的逻辑框架，与组态相关的一个类似的地方是，当我们考虑全部的激发算符时，CC和CI都收敛到FCI的极限。尽管两者都是按照激发算符来截断的，但是耦合簇方法里，即使只截断到二阶(CCSD)，这个二阶的截断指的是总激发算符展开的截断，即在CCSD方法中，$ \hat{T} = \hat{T}_1 +\hat{T}_2 $。但是由于$ \hat{T} $是在指数上面的，会有全部的$\hat{T}^n$作用到HF基态上。又由于两个不同的单激发算符同时作用到基态上等于一个双激发算符，单激发和双激发同时作用等于一个三激发，依次类推，由于$n = 0,1,2,\dots$，所以实际上我们已经遍历了全部的激发态，只是每个激发态的系数不够完整(下一节仔细讨论)。因此，尽管CC中的截断也是到有限阶，但是任意阶的CC都包括了全部的激发态。
+
+          回到我们最初的出发点，当我们用激发算符的指数形式来构建多电子波函数时，它会遍历所有的激发态。在这个意义上说，CC方法自然满足了尺寸一致性的要求。另外，由于其对激发态的引入是非线性的，所以CC方法对截断的收敛性是非常好的，使用严格的CCSD再加上微扰处理第三阶截断，这样的CC方法称为CCSD(T)，而CCSD(T)方法对基态能量的描述已经拥有非常高的精度，与FCI极限的差已经在化学精度的要求之内，因此又被称为基态计算的“黄金标准”。
+
+          但是，这样的高效率和高精度是有代价的：一方面，实际操作中人们发现，在电子关联非常强的体系内，比如能级简并或者分子离平衡位置非常远(化学反应)的情况，CC方法计算电子关联的精确度是不如MCSCF方法和MRCI的(但考虑到计算量也已经非常不错)；另一方面，就是指数形式带来的额外的复杂性，主要是推导上的复杂性也限制了CC的更多推广。
+        \subsection{激发算符的指数形式}
+          组态相关方法中，从Hartree-Fock基态到单激发、双激发、多激发再到FCI极限是一个非常平凡的过程，但是簇耦合方法中就略有难度。这一小节我们就是要说明簇耦合方法逻辑的导出，即为什么可以将多电子波函数写成激发算符的指数乘以HF基态的形式，以及CC的截断体现在了哪里。
+
+          我们首先利用激发算符，写出组态相关思路下的FCI的波函数，即等式(\ref{SRCI})
+          \begin{equation}
+            | \Psi_{CI} \rangle = \left(1+\sum_{a,r}\hat{X}_{a}^{r}+\sum_{a<b,r<s}\hat{X}_{ab}^{rs}+\cdots\right) | \Psi_0 \rangle
+          \end{equation}
+          如果读者还记得的话，这里的$\hat{X}$是对应的激发算符乘以一个系数，这个系数就是线性组合系数\footnote{这个式子其实没有归一化}。这是一种比较简单的写法，我们不妨叫它CI写法。那显然，我们表示一个无穷的展开有很多种不同但是等价的表达方法，比如下面这个，之后我们会证明它与耦合簇方法给出的多电子波函数形式等价
+          \begin{equation}
+            |\Psi_{CC}\rangle=\left[\prod_{a,r}\left(1+\hat{X}_{a}^{r}\right)\right]\left[\prod_{a<b, r<s}\left(1+\hat{X}_{ab}^{rs}\right)\right] \cdots|\Psi_{0}\rangle
+          \end{equation}
+          我们暂时管这个写法为CC写法。读者不难发现，上述连乘的形式也可以遍历所有可能的激发态，但是CC与CI写法最大的区别就是，CC写法中，一个行列式可能出现多次，比如说某一个双激发行列式$ | \Psi_{ab}^{rs} \rangle $，它既可以通过$1\times\hat{X}_{ab}^{rs}$产生，又可以通过$\hat{X}_a^r\times\hat{X}_b^s$产生。因此这两种写法中算符$\hat{X}$中的参数是不相等的。准确地说，CI写法中的某个激发行列式对应的参数是CC写法中很多参数相乘再求和的结果。
+
+          现在我们来介绍一个激发算符的性质，那就是对于同一个激发算符$\hat{T}$来说，满足
+          \begin{equation}
+            \hat{T}^n = 0, \; n =2,3,4,\dots
+          \end{equation}
+          这个性质是平凡的，这是因为激发算符对应的自旋轨道，所以激发过一次后，原本的自旋轨道就没有电子了，再激发是不可能的，或者说新的自旋轨道上已经有电子了，再次激发到这个自旋轨道就会由于Pauli不相容原理得到0\footnote{这个是唯象的解释，严格地说，这是因为激发算符可以写成产生算符乘以湮灭算符的形式，由于费米子的产生湮灭算符的反对易性质，这个零的结果是很容易严格证明的}。当这个条件满足时，我们可以在原本的CC写法中添加任意个数的$\hat{X}^n$，对任意一个算符$\hat{X}$，我们有
+          \begin{equation}
+            1+\hat{X}=1+\hat{X}+\frac{1}{2} \hat{X} \hat{X}+\cdots=\exp \left(\hat{X}\right)
+          \end{equation}
+          而且，对于不同指标的激发算符是可对易的，所以原本的CC写法就可以改写为
+          \begin{equation}
+            |\Psi_{CC}\rangle=\exp(\hat{T})|\Psi_{0}\rangle
+          \end{equation}
+          其中
+          \begin{equation}
+            \hat{T} = \hat{T}_1 +\hat{T}_2 +\cdots, \;\;\hat{T}_1 = \sum_{a,r}t_a^r\hat{T}_a^r,\;\;\hat{T}_2 = \sum_{a<b,r<s}t_{ab}^{rs}\hat{T}_{ab}^{rs}
+          \end{equation}
+          这样就得到了我们在上一小节提出的式子，也就回到了CC波函数为什么可以写成指数形式这个问题，而且根据这个推导可以知道，CC在不做截断的情况下可以推到FCI极限。
+
+          那么耦合簇方法的截断到底“截在哪”？我们把指数按照经典的方法展开，然后把得到的激发算符按照单激发、双激发等的方法分类排好，就会得到
+          \begin{equation}
+            \exp(\hat{T}_1 +\hat{T}_2 +\cdots) = 1 + (\hat{T}_1) + (\hat{T}_2 + \frac{1}{2!}\hat{T}_1^2) + (\hat{T}_3 + \hat{T}_2\hat{T}_1 + \frac{1}{3!}\hat{T}_1^3) + \cdots
+          \end{equation}
+          可以看到，如果我们截断到CCSD，那么从三激发态开始，系数的描述就会减少项数，所以尽管任意阶的CC方法都涉及到了所有的激发态，但是对于高阶激发态的描述不完备的。
+
+          一般来说，CC方法的系数求解不是通过变分法推出的，而是利用转化后的定态薛定谔方程
+          \begin{equation}
+            \exp (-\hat{T}) \hat{H} \exp (\hat{T})|\Psi_0\rangle= E_{{CC}}|\Psi_0\rangle
+          \end{equation}
+          左乘一组组态得到的正交性方程求解的
+          \begin{equation}
+            \langle\mu|\exp (-\hat{T}) \hat{H} \exp (\hat{T})| \Psi_0\rangle= 0
+          \end{equation}
+          最后得到的簇耦合方法的基态能量为
+          \begin{equation}
+            E_{{CC}}=\langle\Psi_0|\exp (-\hat{T}) \hat{H} \exp (\hat{T})| \Psi_0\rangle
+          \end{equation}          
+      \section{微扰理论}
+        微扰方法作为物理学家的大杀器，自然在量子化学中也大有作为。量子化学的非常多的方法可以与微扰结合，上节涉及的耦合簇方法有CCSD(T)，多参考方法中有CASPT2等。对于很多体系，将电子关联归入微扰项是十分合理的，我们本节优先解释一个比较基础的微扰理论，即M\o ller-Plesset微扰(MPX)\footnote{X代表了微扰做到X阶}。
+        \subsection{MPX方法简介}
+          M\o ller-Plesset微扰的思路其实非常简单，那就是将真正的哈密顿量与Hartree-Fock之间的差作为微扰哈密顿量，然后求解微扰的能量修正和波函数修正。
+
+          我们首先写下Hartree-Fock近似下的体系的总哈密顿量
+          \begin{equation}
+            \hat{H}_0 = \sum_i \left[h(i) + v^{HF}(i)\right]
+          \end{equation}
+          其中$v^{HF}(i)$是Hartree-Fock对电子相互作用的平均化处理，实际上是库伦算符和交换算符的求和。而真正的哈密顿量的写法为$\hat{H} = \sum_i h(i) + \sum_{i <j} r_{ij}^{-1}$，这两者的差就是M\o ller-Plesset微扰中的微扰哈密顿量
+          \begin{equation}
+            V = \sum_{i <j} r_{ij}^{-1} -  \sum_i v^{HF}(i)
+            \label{MP PT}
+          \end{equation}
+          得到了微扰哈密顿量，剩下的就是零阶波函数，由于零阶哈密顿量就是Hartree-Fock近似下的$N$电子哈密顿量，所以零阶波函数就是Hartree-Fock基态。现在有了零阶波函数和微扰哈密顿量的形式(\ref{MP PT})，剩下的就与普通的微扰理论没什么区别了，利用这两项，就可以求解任意阶微扰的能量修正和波函数修正。
+        \subsection{MPX中一阶和二阶能量修正}
+          微扰理论的公式此处不再重新推导，由于一阶能量修正非常简单，我们直接写下M\o ller-Plesset微扰中基态的一阶能量修正的表达式
+          \begin{equation}
+            \begin{aligned}
+              E_0^{(1)} &= \langle \Psi_0 | V | \Psi_0 \rangle\\
+              &=\langle \Psi_0 | \sum_{i <j} r_{ij}^{-1} | \Psi_0 \rangle - \langle \Psi_0 |  \sum_i v^{HF}(i) | \Psi_0 \rangle\\
+              &=\frac{1}{2}\sum_{ab}([aa|bb] - [ab|ba]) - \sum_a \langle \chi_a | v^{HF} |  \chi_a \rangle\\
+              &=-\frac{1}{2}\sum_{ab}([aa|bb] - [ab|ba]) 
+            \end{aligned}
+            \label{MP1 energy correction}
+          \end{equation}
+          上式的第二行到第三行我们在Hartree-Fock那一节中已经推导过了。
+
+          MP2的基态能量修正就比较麻烦了，二阶微扰能量修正的一般表达式为
+          \begin{equation}
+            E_0^{(2)} = \sum_n\frac{\left| \langle \Psi_0 | V | n \rangle \right|^2}{E_0^{(0)}-E_n^{(0)}}
+          \end{equation}
+          其中对n求和要遍历所有的零阶哈密顿量激发态，由于$V$是一个双电子算符，所以肯定只涉及第一激发态和第二激发态，根据Slater-Condon规则，双电子算符对于两个相差三个激发及以上的组态的矩阵元是零。接着我们证明第一激发态是不参与能量修正的。首先，我们有$V = \hat{H} - \hat{H}_0$，第一项是真实的哈密顿量，所以根据Brillouin定理，这一项是零，第二项是Fock算符的求和，所以是一个单电子算符，根据Slater-Condon规则中相差一个激发的两个行列式的单电子积分项(\ref{case2 1e})，这一项等于$f_{ar}$，但很可惜，在Hartree-Fock框架下，自旋波函数是Fock算符本征态，所以Fock算符的非对角元$f_{ar} = 0$。至此，我们证明了单激发态不参与二阶微扰能量修正。
+
+          所以就只剩下了双激发态，我们首先计算分母，在Hartree-Fock哈密顿量下，一个Slater行列式的能量就是其所有自旋轨道能量的求和，所以双激发态$ | \Psi_{ab}^{rs} \rangle $和基态的能量差就是它们相差的自旋轨道的能量作加减法，由于分母是基态减去第二激发态，所以这个分母的数值为$\varepsilon_a + \varepsilon_b -\varepsilon_r - \varepsilon_s$。接下来再次看微扰哈密顿量，$V = \sum_{i <j} r_{ij}^{-1} -  \sum_i v^{HF}(i)$，第二项是一个单电子算符，由于基态和双激发态之间相差两个自旋轨道，所以根据(\ref{case3 1e})这一项为零。就只剩下了第一项，即$r_{ij}^{-1}$，再一次，根据(\ref{case3 2e})，这一项等于$[ar|bs]-[as|br]$。所以我们可以写下最后的MP2的基态二阶能量修正
+          \begin{equation}
+            E_0^{(2)} = \sum_{a<b}\sum_{r<s} \frac{\left|[ar|bs]-[as|br]\right|^2}{\varepsilon_a + \varepsilon_b -\varepsilon_r - \varepsilon_s}
+          \end{equation}
+          如果你不介意零除以零这件事的话，可以把求和中的限制去掉，转而得到两个二分之一的乘积
+          \begin{equation}
+            E_0^{(2)} = \frac{1}{4}\sum_{a,b,r,s} \frac{\left|[ar|bs]-[as|br]\right|^2}{\varepsilon_a + \varepsilon_b -\varepsilon_r - \varepsilon_s}
+            \label{MP2 energy correction}
+          \end{equation}
+          关于更高阶的M\o ller-Plesset微扰本指南中不再做推导，感兴趣的读者可以参阅相关教材。
+
+          可以看到，M\o ller-Plesset微扰的思路非常简单，而且MP2方法提供了一个还算不错的计算精度与计算量的平衡。但是M\o ller-Plesset微扰是基于Hartree-Fock计算结果的，自然在处理近简并体系和激发态上有很多困难。正如单行列式的Hartree-Fock方法推演出高级的多组态自洽场理论，那么自然也有单组态微扰的升级版——多组态微扰理论，这里就不再叙述相关内容。
+      \section{密度泛函理论}
+        密度泛函理论可能是计算化学和凝聚态物理计算领域内最常听到的一个词了，DFT之所以流行，一方面是它能用较少的计算时间得到精度较高的计算结果，另一方面也要归功于高度集成和用户友好的Gaussian软件包\sout{，以及早期用Gaussian胡乱算点东西就水到的大量文章和现在做泛函的人所收获的并无意义的几万引用量}。尽管受很多计算化学组的喜欢，但是实际上在量子化学领域中使用的DFT理论非常依赖于参数，是一个非常不严格的方法，因此DFT在理论化学课题组内并不受欢迎，之所以使用只是限于计算量的一种妥协。不但如此，DFT中的参数往往是根据能量数据拟合的，即使很多时候可以给出不错的能量预测，但是对波函数描述的正确性是无法保证的，因此从DFT得到的波函数信息往往不那么靠谱。
+        \subsection{DFT方法概论}
+          密度泛函理论的基本思想非常简单，而且严格。我们之前讲述的Hartree-Fock方法和各种post-Hartree-Fock方法有一个共同点，即希望利用多电子波函数来描述的电子态，而密度泛函理论的出发点就与此不同，希望用电子密度来代替多电子波函数。可以想象，对于一个$N$电子体系，每个电子有三个空间自由度，对空间部分的自由度就有$3N$个，而如果使用电子密度的话，空间的电子密度自由度固定为$3$。
+
+          那么问题来了，我们可以找到电子密度和电子态之间的种对应关系吗？或者更基础的一个问题是，这种对应关系存在吗？唯一吗？非常幸运，后一个问题已经被证明了，在上个世纪，就有了Hohenberg-Kohn两大定理，即所有可观测量的期望值原则上都是基态电子密度的泛函，基态电子密度原则上可以通过变分的方法得到。或者简单一点说，当外势能给定之后，体系基态的电子密度就给定了，而且两者是一一对应的，也就是说给定一个哈密顿量，就能找到基态的电子密度，而且用这个电子密度可以求得任何希望求得的性质，多电子波函数是不需要的。在这之后，又有了Runge-Gross定理，证明了当体系的初态确定时，任何时刻的电子密度都与外势能是一一对应的。RG定理是HK定理的含时版本，DFT理论也就从一个静态问题到了一个可以含时的问题，进而可以用来计算激发态。
+
+          接下来就到了灵魂发问，如果现在给定一个外势能，怎么才能找到那个唯一确定的基态电子密度呢？非常遗憾，除了在一些特殊的条件下，这个导出并没有一般性的方法。也就是说，当我们有一个外势能的时候，我们知道有那么一个唯一的基态电子密度，但是我们却求不出它来。我们会发现，电子与电子之间的库仑排斥和外加的势场其实比较容易与电子的密度结合起来，但是电子的动能很难直接写成电子密度的形式，除去极特殊情况下，比如之后小节中我们会见到Thomas-Fermi理论，最终就可以把电子的动能写成了电子密度的泛函。困扰我们的动能项是不是可以用某种别的近似方法处理呢？
+
+          1965年，Kohn和沈吕九先生合作提出了Kohn-Sham密度泛函理论，它结合了经典的Hartree-Fock方法和DFT理论，与传统的DFT已经有所区别，但是Kohn-Sham的DFT理论才是现代正在使用的DFT理论。真正的基态能量写成电子密度的泛函，我们有
+          \begin{equation}
+            E[\rho] = T_e[\rho] + U_{ee}[\rho] + V_{ext}[\rho]
+          \end{equation}
+          即真正的基态能量可以写成真正的电子动能对电子密度的泛函，加上电子之间相互作用对电子密度的泛函，加上外势能对电子密度的泛函。其中$ V_{ext}[\rho]$容易给出，正如上文所说，$T_e[\rho]$难以写出严格表达式，$U_{ee}[\rho]$虽然可以写出但计算困难。在Kohn-Sham的框架下，上式被重新改写了
+          \begin{align}
+            E[\rho] = T_0[\rho] + U_{cl}[\rho] + V_{ext}[\rho] + E_{xc}[\rho]
+            \\E_{xc}[\rho]\equiv(T_e[\rho]-T_0[\rho])+(U_{ee}[\rho]-U_{cl}[\rho])
+          \end{align}
+          式中的$T_0[\rho]$和$U_{cl}[\rho]$分别是Hartree-Fock近似下波函数给出的动能和库仑积分，而$ E_{xc}[\rho]$称为交换关联能，这是因为，相比与Hartree-Fock方法，上式中其实缺少了交换积分，而相比于多行列式方法，Hartree-Fock又缺少了关联能。而且不仅如此，上述缺少的交换和关联能只是$U_{ee}[\rho]-U_{cl}[\rho]$项的意义，还有一部分是来自于真实的动能泛函和Hartree-Fock的动能之间的差。
+
+          上述方程描述了体系的最低能量，对电子密度求变分等于零，就可以得到一个类似Hartree-Fock方程的形式，即Kohn-Sham方程，如果电子的外势能只由核与电子的相互作用描述，则Kohn-Sham方程可以写作
+          \begin{equation}
+            \left[-\frac{1}{2} \nabla_{i}^{2}-\sum_{A=1}^{M} \frac{Z_{A}}{r_{i A}}+\int \frac{\rho\left(r_{2}\right)}{r_{12}} d r_{2}+v_{x c}(1)\right] \phi_{i}^{K S}(1)=\varepsilon_{i}^{K S} \phi_{i}^{K S}(1)
+            \label{KS equation}
+          \end{equation}
+          其中有
+          \begin{equation*}
+            v_{x c}(r) \equiv \frac{\delta E_{x c}[\rho(r)]}{\delta \rho(r)} \quad \rho(r)=\sum_{i=1}^{n}\left|\phi_{i}^{K S}(r)\right|^{2}
+          \end{equation*}
+          式中的$v_{x c}(r)$是交换关联泛函对电子密度的变分，其物理意义代表了单位电子密度下的交换关联能。熟悉Hartree-Fock推导的读者可以看出，上式的导出与Hartree-Fock方程的导出非常相似。如果我们把$\rho(r_2)$的表达式代入等式(\ref{KS equation})，就会发现，该项就是Hartree-Fock中的库仑算符，上式与Hartree-Fock方程的唯一区别就是交换算符被换成了$v_{x c}(r)$。如果交换关联泛函是严格的，Kohn-Sham方程就可以以一个单行列式的计算量得到准确的基态能量，但是可惜的是，这一项的解析表达式无法写出，所以Kohn-Sham密度泛函理论的关键是找到好的近似交换关联泛函，而这个所谓的找到，其实是半经验而且不知道是否能达到的过程。目前的交换关联泛函都是用半经验的方法定义的参数定义的，这也就是最开始说的现代DFT理论中充斥着的不严格性之处，也是我们不太喜欢它的原因。
+
+          KS方程与HF方程类似，都是一个非线性方程，只能迭代求解，思路也基本一致，只是要从电子密度出发。先猜测一个初始的电子密度，然后计算人工定义的交换关联泛函，进而计算它对电子密度的变分，这样就得到了$v_{x c}(r)$。同时，单电子的KS方程所有项也知道了，可以对角化KS方程中的“Fock算符”得到新的KS单电子波函数，进而利用$\rho(r)=\sum_{i=1}^{n}\left|\phi_{i}^{K S}(r)\right|^{2}$计算新的电子密度，新的交换关联泛函，新的波函数，新的密度。如此重复迭代，直到得到收敛的结果。
+
+          由于交换关联泛函是参数化的，所以在很多时候，DFT理论能取得还可以的精度，由于求解单电子的KS方程，所以它的计算量与Hartree-Fock量级类似，却能得到几乎MP2方法的精度，与传统的量化方法相比，为较大体系的计算提供了一种行之有效的思路。DFT理论在计算精度和计算代价之间达到了一个很好的平衡，因而越来越多地被应用到物理、化学和生物等学科领域，这种趋势还在加快。目前寻找更好的泛函和拓展到激发态的应用是DFT理论发展的两个最重要的方向，毕竟，我们只要能找到那个真正的“上帝的交换关联泛函”，我们就能得到精确解了。
       \section{二次量子化}
         之所以二次量子化的内容不放在量子力学中，是因为从占据数表象重新理解二次量子化是相对浩大的工程，感兴趣的同学可以直接参阅相关的高等量子力学书籍。而之所以放在这里讲，是因为在诸多的量化文献和书籍中使用了二次量子化的语言，尽管在量化领域经常见到产生湮灭算符，但是并没有与二次量子化真实地联系起来，只是用来作为简化表达的一种方式。为了帮助大家看懂相关的公式，我们在电子结构部分从实用的角度简要介绍电子(费米子)的二次量子化语言。本节主要参考(\sout{其实就是翻译了一遍然后调整了几个小地方})\cite{Szabo1989Modern}书中2.4节的内容。
 
@@ -2759,8 +3194,8 @@
         在等式(\ref{time-depend-coeff})中，我们演化波函数的系数，但是为了方便，我们会使用密度矩阵的演化，在等式(\ref{linear combination})的展开形式下，密度矩阵的矩阵元定义为$a_{kj}=c_k c_j^*$，在这个两边取时间导数并将(\ref{time-depend-coeff})的结果代入，我们就得到了关键性的等式
         \begin{equation}
           \begin{aligned}
-            i \hbar \dot{a}_{k j}=& \sum_{T}\left\{a_{l j}\left[V_{k l}-i \hbar \dot{\vb*{R}} \cdot \vb*{d}_{k l}\right]\right.\\
-            &-a_{k l}\left[V_{l j}-i \hbar \dot{\vb*{R}} \cdot \vb*{d}_{i j}\right] \}
+            i \hbar \dot{a}_{k j}=& \sum_{l}\left\{a_{l j}\left[V_{k l}-i \hbar \dot{\vb*{R}} \cdot \vb*{d}_{k l}\right]\right.\\
+            &\left. -a_{k l}\left[V_{l j}-i \hbar \dot{\vb*{R}} \cdot \vb*{d}_{i j}\right] \right\}
           \end{aligned}
           \label{time-de DM}
         \end{equation}
@@ -2783,6 +3218,8 @@
           \label{hopping probability}
         \end{equation}
         上式就是FSSH的核心公式\footnote{细心的读者可能会发现与Tully原文中的分母不完全相同，但是本文的推导更加合理一点，通常也是使用这一套公式，当然，由于$\vb*{d}t$内密度矩阵几乎不会变化，究竟是用$t$时刻还是$t+\vb*{d}t$时刻对结果的影响不大。}。FSSH单个轨迹的流程就是先初始化，赋予研究的体系一个初始动能(动量)和位置，然后每个$\vb*{d}t$内先用经典力学的方法演化原子核的运动，再利用等式(\ref{hopping probability})计算出当前态跃迁到其他态的概率，用随机数的方法判断是否跃迁，同时还要判断跃迁之后是否满足能量守恒，如果满足，则完成跃迁并修正体系原子核运动的速度，不断重复上述过程就得到了动力学演化的结果。
+
+        也许很多读者都会需要写FSSH的代码来学习部分工作，我们的细节部分就不再仔细展开，各位读者可以在实践中体会上面这段话的核心意义。我们需要提醒读者一个矛盾点，那就是虽然在势间跳跃方法中我们有电子的波函数和对应的密度矩阵，但是FSSH中的电子态并不是由这个波函数描述的。电子在哪个能级上并不是由展开系数决定的，而是有一个所谓active态的存在用来标记电子是在哪个能级上。这样其实说明FSSH中的电子波函数系数只是一个辅助工具，是一个辅助用来计算当前点的统计性质的工具，这个性质就是跃迁概率，然后通过不同轨迹做统计平均，才是FSSH的核心。
         
       \section{鸟瞰SH方法中的特殊问题}
         本小节将会简要地介绍在SH发展这么多年来，出现的很多问题，包括王老师组学长学姐在这方面的工作的简介，但是由于编者水平有限，只能略作介绍，并且有很大概率在细节上理解不全面甚至有错误，而王老师课题组的各位学长学姐在这方面有更多可说的内容。
