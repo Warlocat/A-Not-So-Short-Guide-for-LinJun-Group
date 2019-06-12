@@ -253,7 +253,7 @@
           
           复数是实数的拓展。让我们先回顾一下从小到大的数学的学习，来看一下我们（也是整个人类）是怎么认识数的。
           
-          首先认识的是正整数，正整数$\mathbb{Z}^+$对加法封闭\footnote{本节中，封闭的意思是对集合中的数进行某种运算的结果仍然在该集合内。}，但是对于减法就不封闭了，于是人们引入了负整数，组成了对加减法都封闭的整数$\mathbb{Z}$。整数对乘法也封闭，但是对非零除法则不封闭，于是数扩张为了有理数$\mathbb{Q}$。有理数对加减乘除都封闭，但是对于例如对角线长度、圆的周长之类的问题时就不好解决了，从而引入了无理数\sout{以及各种测度}$\mathbb{R}$。到目前为止看起来可以告一段落，但是，当人们求解实系数代数方程的时候，发现其根不一定是实数，从而引入了虚数，组成了复数$\mathbb{C}$。简单的说，数的扩充是为了更高级的运算，而复数的意思是对代数方程求根封闭。数学王子高数证明了，在复数域上，$N$次方程有$N$个根\footnote{此即为\textbf{代数基本定理}}。
+          首先认识的是正整数，正整数$\mathbb{Z}^+$对加法封闭\footnote{本节中，封闭的意思是对集合中的数进行某种运算的结果仍然在该集合内。}，但是对于减法就不封闭了，于是人们引入了负整数，组成了对加减法都封闭的整数$\mathbb{Z}$。整数对乘法也封闭，但是对非零除法则不封闭，于是数扩张为了有理数$\mathbb{Q}$。有理数对加减乘除都封闭，但是对于例如对角线长度、圆的周长之类的问题时就不好解决了，从而引入了无理数\sout{以及各种测度}$\mathbb{R}$。到目前为止看起来可以告一段落，但是，当人们求解实系数代数方程的时候，发现其根不一定是实数，从而引入了虚数，组成了复数$\mathbb{C}$。简单的说，数的扩充是为了更高级的运算，而复数的意思是对代数方程求根封闭。数学王子高斯证明了，在复数域上，$N$次方程有$N$个根\footnote{此即为\textbf{代数基本定理}}。
           
           引入复数的核心就是单位虚数$i$，定义为
           \begin{equation}
@@ -264,64 +264,10 @@
             z=x+iy
           \end{equation}
           这称为复数的\textbf{代数式}，其中$x$被称为\textbf{实部}，$y$被称为\textbf{虚部}。
-          \begin{equation}
-            \varepsilon_{ijk}\varepsilon_{kmn} = \varepsilon_{kij} \varepsilon_{kmn} = \delta_{im} \delta_{jn} - \delta_{in}\delta_{jm}
-          \end{equation} 
-          我们可以这么想这个公式：由于$i,j,k,m,n$都是取三个坐标元，保持$k$一致后其余的指标的选择是非常有限的，然后就能很容易想明白上式是如何推出来的。
-
-          \textbf{梯度}算符是在矢量代数中比较重要的算符，但它也并不神秘，它其实就代表了向各个维度求一阶导的“向量”。比如
-          \begin{equation*}
-            \grad{f}=\qty(\pdv{f}{x},\pdv{f}{y},\pdv{f}{z})\equiv\pdv{f}{x_i}\equiv\partial_i f
-          \end{equation*} 
-          那么与此对应，求一个向量的\textbf{散度}也很容易：
-          \begin{equation*}
-            \div{\vb*{a}} = \partial_i a_i 
-          \end{equation*} 
-          \textbf{旋度}也很简单：
-          \begin{equation*}
-            \curl{\vb*{a}} = \varepsilon_{ijk} \vb*{e}_i \partial_j a_k
-          \end{equation*} 
-          但这些东西能够延伸的内容是非常丰富的。比如对$\vb*{r} = (x,y,z)$，有
-          \begin{align}
-            &\div{\vb*{r}} = 3 \\
-            &\curl{\vb*{r}} = 0 \\
-            &\curl{(\grad{f})} = 0 \\
-            &\grad{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} = \frac{-\qty(\vb*{r}-\vb*{r}')}{\abs{\vb*{r}-\vb*{r}'}^3} = - \grad'{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} \\
-            &\curl{\qty(r^n \vb*{r})} = 0 
-          \end{align}
-          读者有兴趣可以自行证明。对此感兴趣的读者可进一步阅读附录\ref{tensor_higher}。\\
-
-          {\color{red}{\textbf{Warning: 前方高能！非\sout{战斗人员}相对论量子力学相关读者请迅速撤离！！！}}}
-
-          张量分析在矢量代数的基础上考虑了坐标系自身的影响，比如，这个坐标系的各个基向量之间是不互相正交的。此时向量之间的内积自然就不能简单地利用向量系数的相乘。为了方便地搞定这个事情，张量分析使用了“协变张量”和“逆变张量”的概念。“协变张量”是我们所熟悉的张量，而“逆变张量”则代表了与它相对应的另一种张量\footnote{\sout{好了好了我知道我中文很菜}}。
-
-          比如我们有两个基向量$\vb*{i}_1,\vb*{i}_2$，他们满足
-          \begin{equation*}
-            \vb*{i}_1 \cdot \vb*{i}_1 = \vb*{i}_2 \cdot \vb*{i}_2 = 1, \quad \vb*{i}_1 \cdot \vb*{i}_2 = \cos{\varphi}
-          \end{equation*} 
-          甚至还不止于此，我们有两个非归一的基向量
-          \begin{equation*}
-            \vb*{g}_1 = \abs{\vb*{g}_1} \vb*{i}_1, \vb*{g}_2 = \abs{\vb*{g}_2} \vb*{i}_2
-          \end{equation*} 
-          此时两个向量$\vb*{p},\vb*{q}$ 的内积直接写起来是非常复杂的。但我们可以通过代数方程构建这两个基向量对应的逆变基矢量$\vb*{g}^1,\vb*{g}^2$，使
-          \begin{equation*}
-            \vb*{g}^1 \cdot \vb*{g}_2  = 0, \quad \vb*{g}^1 \cdot \vb*{g}_1 = \vb*{g}^2 \cdot \vb*{g}_2 = 1 
-          \end{equation*} 
-          也就是
-          \begin{equation*}
-            \vb*{g}^i \cdot \vb*{g}_j = \delta^i_j
-          \end{equation*}
-          我们就可以方便地写出两个向量的内积，
-          \begin{equation*}
-            \mean{\vb*{p},\vb*{q}} = p^i \cdot q_i
-          \end{equation*} 
-          其中上标的向量表示通过逆变基向量线性组合得到的逆变向量，下标为对应的协变向量。
-
-          这样我们就在一定程度上解决了坐标系自身带来的影响。那么对协变向量/逆变向量自然存在对应的线性变换
           \begin{equation*}
             \begin{cases}
-              x&=\Re(z)\\
-              y&=\Im(z)
+              x=\Re(z)\\
+              y=\Im(z)
             \end{cases}
           \end{equation*}
           于是从某种意义上来说，复数可以看成是一个二元有序实数对$(x,y)$。复数的几何表示也自然而然地对应一个二维平面\footnote{即\textbf{复平面}}。
@@ -331,11 +277,11 @@
           复数也可以用极坐标$\rho$和$\phi$来表示。
           \begin{equation}
             \begin{cases}
-              \rho&=\sqrt{x^2+y^2}\\
-              \phi&=\arctan(\frac{y}{x})
+              \rho=\sqrt{x^2+y^2}\\
+              \phi=\arctan(\frac{y}{x})
             \end{cases}\ \begin{cases}
-              x&=\rho\cos\phi\\
-              y&=\rho\sin\phi
+              x=\rho\cos\phi\\
+              y=\rho\sin\phi
             \end{cases}
           \end{equation}
           则复数可以表示为\textbf{三角式}
@@ -349,8 +295,8 @@
           其中$\rho$称为复数的\textbf{模}，而$\phi$称为复数的\textbf{辐角}。若$0\leq\phi<2\pi$，则称为\textbf{辐角主值}。
           \begin{equation}
             \begin{cases}
-              \rho&=\abs{z}\\
-              \phi&=\arg\qty(z)
+              \rho=\abs{z}\\
+              \phi=\arg\qty(z)
             \end{cases}
           \end{equation}
           以下运算结论利用定义即可得到，在此直接给出结论：对于
@@ -489,11 +435,11 @@
               \vdots & {} & \vdots \\
               A_{N 1} & \cdots & A_{N N}
             }=\sum_{i=1}^{N !}{\qty(-1)^{p_i} \mathscr{P}_i A_{1i_1} A_{2i_2} \cdots A_{N i_N}}
-            \label{determinants defination}
+            \label{determinants definition}
           \end{equation}
           其中$\mathscr{P}_i$是排列算符，它的意义是给出一种列指标$1,2,3,\dots,N$的排列，求和就是关于所有的$N!$种排列求和，$p_i$是从自然序排列(1,2,3,\dots,N)出发得到排列$\mathscr{P}_i$所需要的近邻交换操作的个数。看似非常复杂，让我们以$3\times3$矩阵为例说明这个操作是如何实现的。
 
-          对于$3\times3$矩阵的矩阵元乘积$A_{1i_1} A_{2i_2}A_{3i_3}$的排列总有$3!=6$种，即$i_1,i_2,i_3$分别等于$1,2,3$，$1,3,2$，$2,3,1$，$2,1,3$，$3,1,2$和$3,2,1$，接下来就是计算每种排列对应的$p_i$，即从$1,2,3$实现该排列所需要的近邻交换操作的个数，分别是$0,1,2,1,2,3$\footnote{你可能算出来跟我差一个偶数，但根据式(\ref{determinants defination})这不重要}，所以$3\times3$矩阵的行列式计算表达式为
+          对于$3\times3$矩阵的矩阵元乘积$A_{1i_1} A_{2i_2}A_{3i_3}$的排列总有$3!=6$种，即$i_1,i_2,i_3$分别等于$1,2,3$，$1,3,2$，$2,3,1$，$2,1,3$，$3,1,2$和$3,2,1$，接下来就是计算每种排列对应的$p_i$，即从$1,2,3$实现该排列所需要的近邻交换操作的个数，分别是$0,1,2,1,2,3$\footnote{你可能算出来跟我差一个偶数，但根据式(\ref{determinants definition})这不重要}，所以$3\times3$矩阵的行列式计算表达式为
           \begin{equation}
             \det(\vb*{A})=A_{11} A_{22}A_{33}-A_{11} A_{23}A_{32}+A_{12} A_{23}A_{31}-A_{12} A_{21}A_{33}+A_{12} A_{21}A_{32}-A_{13} A_{22}A_{31}
           \end{equation}
@@ -507,19 +453,19 @@
           线性代数中定义，如果矩阵$\vb*{A}$右乘一个向量$\vb*{X}$恒等于一个数$\lambda$乘以这个向量
           \begin{equation}
             \vb*{AX}=\lambda\vb*{X}
-            \label{eigen defination}
+            \label{eigen definition}
           \end{equation}
           那么向量$\vb*{X}$称为矩阵$\vb*{A}$的对应特征值$\lambda$特征向量。如何求解特征值和特征向量其实非常简单，先假设特征向量存在，就有
           \begin{equation}
             \vb*{AX}-\lambda\vb*{I}\vb*{X}=\qty(\vb*{A}-\lambda\vb*{I})\vb*{X}=0
-            \label{eigen defination2}
+            \label{eigen definition2}
           \end{equation}
           当$\vb*{X}$不是零向量时，要求左边乘以它的矩阵的行列式为0，由此得到
           \begin{equation}
             \det\qty(\vb*{A}-\lambda\vb*{I})=0
             \label{eigen equ}
           \end{equation}
-          就可以求出特征值，将特征值代入(\ref{eigen defination})或(\ref{eigen defination2})就可以求出对应的特征矢量。其实可以看到一个特征值对应的特征矢量构成了一个线性空间，称为特征子空间。
+          就可以求出特征值，将特征值代入(\ref{eigen definition})或(\ref{eigen definition2})就可以求出对应的特征矢量。其实可以看到一个特征值对应的特征矢量构成了一个线性空间，称为特征子空间。
 
           在应用中，我们经常需要将一个矩阵对角化，即通过线性变换使得矩阵变成对角阵，对角化通常是使用特征值与特征向量的方法。如果$n\times n$矩阵$\vb*{A}$有$n$个特征值，对应$n$个特征向量，\sout{物理里的矩阵性质都很好的，}首先求出矩阵对应的特征值和(模为1)特征向量，将这些特征向量按列向量的形式组合成一个矩阵
           \begin{equation*}
@@ -766,6 +712,8 @@
           \end{equation}
         \end{theorem}
 
+        {\color{red}{\textbf{Warning: 前方高能！}}}
+
         我们刚刚描述过完备基展开，而且$\sin{\omega_k x}$和$\cos{\omega_k x}$恰好是 $f''\qty(x) + \lambda f\qty(x) = 0$的解，所以它们在$\qty[-l,l]$上构成了完备基，而且它们互相之间是正交的。在这里值得一提的是，$\sin{\omega_k x}$满足了\textbf{第一类齐次边界条件}，即在边界上函数值为零，而$\cos{\omega_k x}$满足了\textbf{第二类齐次边界条件}，即在边界上的一阶导为零，这允许我们在各类边界条件下研究一个物理问题。同时从某种意义上，我们可以说
         \begin{center}
           \textbf{边界条件导致了特征值的分立。}
@@ -779,7 +727,9 @@
 
         而我们认为波函数在空间的任何一个点都是不发散的，因此在$\theta$方向上必须要展开成多项式而非无穷级数，而$\phi$方向的方程使它必须要符合连属Legendre多项式的形式\footnote{详细讨论还是见任何一本数学物理方法或者量子力学的书。}。同时波函数在全空间下是绝对可积的（因为我们已经定义了波函数的内积——它必须是在Hilbert空间下的），所以在无穷远处它必须收敛于零，这使得径向函数必须满足连带Laguerre函数的形式。所以从某种角度而言，\textbf{量子力学的能级分立是由于量子力学是使用一个偏微分方程描述且存在边界条件的}。
 
-        \sout{上面那段关于特征值的部分看不懂也没事，等你以后神功大成了再回看也不迟。}简单地说，对于任意一个周期为$2l$\footnote{$l>0$}的函数$f\qty(x)$，其都可以展开为$\qty{\sin{\omega_k x},\cos{\omega x}}_{n=0}^\infty$的线性组合。回顾\ref{expansion_of_complete_basis}一节的内容，这就是完备基展开。
+        \sout{上面那段关于特征值的部分看不懂也没事，等你以后神功大成了再回看也不迟。}
+        
+        简单地说，对于任意一个周期为$2l$\footnote{$l>0$}的函数$f\qty(x)$，其都可以展开为$\qty{\sin{\omega_k x},\cos{\omega x}}_{n=0}^\infty$的线性组合。回顾\ref{expansion_of_complete_basis}一节的内容，这就是完备基展开。
 
         然后，让我们用一个更一般的形式来处理这个问题。著名的Euler公式表明
         \begin{equation}
@@ -804,7 +754,7 @@
         \begin{equation}
           c_k=\frac{1}{2l}\int_{-l}^l{f\qty(\xi)e^{-i\omega_k\xi}\dd{\xi}}
         \end{equation}
-        利用正交性即可。显然，$c_k\in\mathbb{C}$，$c_k=c_{-k}^*$。
+        利用正交性即可。显然，$c_k\in\mathbb{C}$，$c_k=c_{-k}^*$。这种形式的好处在于形式上更加统一，而且不用考虑要不要除以二的问题。
 
         如果我们想要展开的是一个全实数域的函数呢？我们还是从\ref{real_fourier_series}出发，然后令$l\to\infty$，我们发现它转换为一个积分。首先对于$a_0$
         \begin{equation}
@@ -812,6 +762,7 @@
         \end{equation}
         如果积分是可积的，那么就有$a_0=0$。我们令$\Delta\omega_k=\omega_k-\omega_{k-1}=\frac{\pi}{l}\to0$，于是，
         \begin{equation}
+          \label{fourier_transformation_derivation}
           \begin{aligned}
             &f\qty(x)=\lim_{l\to\infty}\sum_{k=1}^{\infty}{\qty(a_k\cos{\omega_k x}+b_k\sin{\omega_k x})}\\
             \Rightarrow&f\qty(x)=\lim_{l\to\infty}{\sum_{k=1}^{\infty}{\qty[\qty(\frac{1}{l}\int_{-l}^l{f\qty(\xi)\cos{\omega_k\xi}\dd{\xi}})\cos{\omega_k x}+\qty(\frac{1}{l}\int_{-l}^l{f\qty(\xi)\sin{\omega_k\xi}\dd{\xi}})\sin{\omega_k x}]}}\\
@@ -825,11 +776,13 @@
         而系数为
         \begin{equation}
           \begin{cases}
+            \label{fourier_transformation_real_coefficient}
             A\qty(\omega)=\frac{1}{\pi}\int^\infty_{-\infty}{f\qty(\xi)\cos{\omega\xi}\dd{\xi}}\\
             B\qty(\omega)=\frac{1}{\pi}\int^\infty_{-\infty}{f\qty(\xi)\sin{\omega\xi}\dd{\xi}} 
           \end{cases}
           .
         \end{equation}
+        注意\ref{fourier_transformation_derivation}的推导过程。我们第一步代入了傅里叶展开的系数的表达式，第二步代入了周期$l$的表达式，第三步只是简单的提取了公因式，但是这样根据积分的极限定义我们就可以把第三步的结果写成第四步的积分，归纳就得到了最后一步以及对应的系数表达式\ref{fourier_transformation_real_coefficient}。
 
         那么类似地，我们也可以得到复数域中的傅立叶变换以及对应的傅立叶逆变换，即
         \begin{equation}
@@ -845,110 +798,25 @@
 
         我们还能够引入各种定理，
         \begin{theorem}
-          \begin{equation}
-            \mathcal{F}[f'(x)] = ik F(k)
-          \end{equation}
+          \begin{align}
+            \mathcal{F}\qty[f'\qty(x)]&=&ikF\qty(k)\\
+            \mathcal{F}\qty[\int^\qty(x){f\qty(\xi)\dd{\xi}}]&=&\frac{1}{ik}F\qty{k}\\
+            \mathcal{F}\qty[f\qty(ax)]&=&\frac{1}{a}F\qty(\frac{k}{a})\\
+            \mathcal{F}\qty[f\qty(x-x_0)]&=&e^{-ikx_0}F\qty(k)\\
+            \mathcal{F}\qty[e^{ik_0x}f\qty(x)]&=&F\qty(k-k_0)\\
+            \mathcal{F}\qty[\int\limits_\mathbb{R}{f_1\qty(\xi)f_2\qty(x-\xi)\dd{\xi}}]&=&2\pi\mathcal{F}\qty[f_1\qty(x)]\mathcal{F}\qty[f_2\qty(x)]
+          \end{align}
         \end{theorem}
-        \begin{proof}
-          \begin{align*}
-            \mathcal{F}[f'(x)] &=\frac{1}{2\pi}\int ^\infty_\infty f'(x) e^{-ik x} \, \ud x \\
-                  &= \frac{1}{2\pi}\left[ f(x) e^{-ik x} \right] ^\infty _{-\infty} - \frac{1}{2\pi}\int ^\infty _{-\infty} f(x) \left[ e^{-ik x} \right] ' \, \ud x 
-          \end{align*}
-          傅立叶变换要求原函数在整个空间上绝对可积，从而有$\lim_{x\to \pm \infty} f(x) = 0$,所以
-          \begin{equation*}
-            \mathcal{F}[f'(x)] = - \frac{1}{2\pi}\int ^\infty_{-\infty} f(x) \left[ e^{-ik x} \right] '  \, \ud x = ik F(k) 
-          \end{equation*} 
-        \end{proof}
-        \begin{theorem}
-          \begin{equation}
-            \mathcal{F}[f(x-x_0)] = e^{-ikx_0} F(k)
-          \end{equation}
-        \end{theorem}
-        \begin{proof}
-          \begin{equation*}
-            \mathcal{F}[f(x-x_0)] =\frac{1}{2\pi} e^{-ikx_0}\int ^\infty_{-infty} f(x-x_0) e^{-ik(x-x_0)} \, d(x-x_0) = e^{-ikx_0} F(k)
-          \end{equation*} 
-        \end{proof}
-        \begin{theorem}
-          \begin{equation}
-            \mathcal{F}[f_1(x) * f_2(x)] = 2\pi F_1(k)F_2(k)
-          \end{equation}
-        \end{theorem}
-        \begin{proof}
-          \begin{equation*}
-            \mathcal{F}[f_1*f_2] = \frac{1}{2\pi}\int ^\infty_{-\infty} \left[ \int ^\infty_{-\infty} f_1(\xi) f_2(x-\xi) \, d\xi   \right] e^{-ikx} \, \ud x 
-          \end{equation*} 
-          交换积分次序，
-          \begin{equation*}
-            \mathcal{F}[f_1*f_2] = \frac{1}{2\pi} \int ^\infty _{-\infty} f_1(\xi) \left( \int ^\infty_{-\infty} f_2(x-\xi) e^{-ik x} \, \ud x  \right) \, d\xi 
-          \end{equation*} 
-          利用延迟定理，
-          \begin{equation*}
-            \mathcal{F}[f_1 * f_2] = \frac{1}{2\pi} \int ^\infty_{-\infty} f_1(\xi) e^{-i k\xi} \, d\xi \cdot 2\pi F_2(k) = 2\pi F_1(k)F_2(k)
-          \end{equation*} 
-        \end{proof}
+        上述过程的证明\sout{留做习题}感兴趣的读者可以根据傅里叶变换的定义自行完成。
 
         当然傅立叶变换不只是在一维上。我们对三维空间$\vb*{r}$也可以做傅立叶变换，
-        \begin{equation*}
-          F(\vb*{k}) = \frac{1}{(2\pi)^{\frac{3}{2}}} \iiint f(\vb*{r})  e^{-i\vb*{k}\cdot\vb*{r}  } \, d\vb*{r} 
-        \end{equation*} 
-
-        傅立叶变换的一个非常有价值的特点是可以把导数转换为一个常数相乘，从而极大地简化方程。比如无界空间下的扩散问题，
-        \begin{equation*}
-          u_t-a^2u_{xx} = 0
-        \end{equation*} 
-        初始条件：
-        \begin{equation*}
-          u\big|_{t=0} = \phi(x)
-        \end{equation*} 
-        傅立叶变换再逆变换就能回到原来的样子，
-        \begin{equation*}
-          u(x,t) = \int \mathcal{F}[u] e^{ikx} \, dk = \mathcal{F}^{-1}[\mathcal{F}[u]]
-        \end{equation*} 
-        对$x$做Fourier Transform,
-        \begin{equation*}
-          \mathcal{F}[u](k,t) = \frac{1}{2\pi} \int u(x,t) e^{-ikx} \, \ud x 
-        \end{equation*} 
-        原方程便转换为
-        \begin{equation*}
-          \begin{cases}
-            \mathcal{F}[u_t] + a^2 k^2 \mathcal{F}[u] = 0 \\
-            \mathcal{F}[u]\big|_{t=0} = \mathcal{F}[\phi]
-          \end{cases}
-        \end{equation*} 
-        \begin{equation*}
-          \Rightarrow \mathcal{F}[u] = \mathcal{F}[\phi] e^{-k^2 a^2 t}
-        \end{equation*} 
-        \begin{equation*}
-          u = \mathcal{F}^{-1} [\mathcal{F}[\phi] e^{-k^2a^2 t}]
-        \end{equation*} 
-        有
-        \begin{equation*}
-          \mathcal{F}[f_1 * f_2] = 2\pi \mathcal{F}[f_1] \mathcal{F} [f_2]
-        \end{equation*} 
-        故
-        \begin{equation*}
-          u = \frac{1}{2\pi} \phi * \mathcal{F}^{-1} e^{-k^2 a^2 t} 
-        \end{equation*} 
-        当然也可以直接套定义，
-        \begin{equation*}
-          u = \int_{-\infty} ^\infty \mathcal{F}[\phi] e^{-k^2 a^2 t} e^{ikx} \, dk 
-        \end{equation*} 
-        \begin{align*}
-          u &= \frac{1}{2\pi}\int \int \phi(\xi) e^{-ik\xi} \, d\xi e^{ikx}  \, dk\\
-            &=\frac{1}{2\pi} \int \phi(\xi) \int e^{-k^2 a^2 t} e^{-ik(x-\xi)} \, dk  \, d\xi \\
-            &=\sqrt{\frac{\pi}{a^2 t}}\frac{1}{2\pi} \int \phi(\xi) e^{-\frac{(x-\xi)^2}{4a^2 t}} \, d\xi\\
-            &=\frac{1}{2\pi} \phi(x) * \sqrt{\frac{\pi}{a^2 t}} e^{-\frac{x^2}{4 a^2 t}}
-        \end{align*}
-        其中，有一步是做配方，
-        \begin{equation*}
-          e^{-k^2a^2 t} e^{ik (x-\xi)} = e^{-a^2 t (k-\frac{i (x-\xi)}{2a^2 t})^2} e^{-\frac{(x-\xi)^2}{4a^2 t}}
-        \end{equation*} 
-        注意在积分该式时存在积分路径不在实轴的问题，但事实上构造回路后由于回路积分为零，故可以直接化为在实轴上的积分，从而解得最终解。
-
-        同样地，对于连续狄拉克函数$\delta(x)$，表示$x=0$时其值不为零（或者正无穷），$x\neq 0$时恒为零，同时保证
         \begin{equation}
-          \int \delta(x) \, \ud x = 1 
+          F(\vb*{k})=\frac{1}{(2\pi)^{\frac{3}{2}}}\iiint\limits_{\mathbb{R}^3}{f(\vb*{r})e^{-i\vb*{k}\cdot\vb*{r}}\dd{\vb*{r}}}
+        \end{equation}
+
+        另外一个跟傅里叶变换相关的内容是连续狄拉克函数$\delta(x)$，它在$x=0$时其值不为零（或者正无穷），$x\neq 0$时恒为零，同时保证
+        \begin{equation}
+          \int\limits_\mathbb{R}{\delta(x)\dd{x}}=1
         \end{equation}
         它还有这些性质，
         \begin{align}
@@ -976,42 +844,42 @@
 
         在开始讲述之前，我们先引入爱因斯坦求和约定。在矢量代数中，当一个字母成对出现后，即默认对这个字母遍历的所有情况进行求和。而在张量分析中，若一个上指标和一个下指标成对出现，那么进行遍历求和。
 
-        为更详细地描述该约定，我们假设存在两个向量$\vb*{a} = \mqty(\xmat*{a}{1}{3}), \, \vb*{b} = \mqty(\xmat*{b}{1}{3})$.此时我们可以使用$a_i$及 $b_i$来直接代表这两个向量，因为 $i$没有重复出现，说明它是“灵活的”，也就是它对能够遍历的所有情况都成立。那么求和约定怎么弄呢？其实很简单，
+        为更详细地描述该约定，我们假设存在两个向量$\vb*{a}=\mqty(\xmat*{a}{1}{3}),\ \vb*{b}=\mqty(\xmat*{b}{1}{3})$.此时我们可以使用$a_i$及$b_i$来直接代表这两个向量，因为 $i$没有重复出现，说明它是“灵活的”，也就是它对能够遍历的所有情况都成立。那么求和约定怎么弄呢？其实很简单，
         \begin{equation*}
-          a_i b_i \equiv \mqty(\xmat*{a}{1}{3}) \cdot \mqty(\xmat*{b}{1}{3})  = \sum_{i=1}^3{A_iB_i}
+          a_ib_i\equiv\mqty(\xmat*{a}{1}{3})\cdot\mqty(\xmat*{b}{1}{3})=\sum_{i=1}^3{A_iB_i}
         \end{equation*} 
         那么很容易联想，
         \begin{equation*}
-          a_i a_i = \abs{\vb*{a}}^2
+          a_ia_i=\norm{\vb*{a}}^2
         \end{equation*} 
-        那$a_i b_j$呢？ $i,j$都是没有成对出现的，说明它们都是灵活的，可以遍历所有情况，那么这个玩意儿应该出现9个元素。没错，它某种程度上就代表了一个矩阵。更准确地说，它代表了一个并矢。用矩阵来表示，
+        那$a_ib_j$呢？ $i,j$都是没有成对出现的，说明它们都是灵活的，可以遍历所有情况，那么这个玩意儿应该出现9个元素。没错，它某种程度上就代表了一个矩阵。更准确地说，它代表了一个并矢。用矩阵来表示，
         \begin{equation*}
-          a_i b_j\equiv\mqty(
-            a_1 b_1 & a_1 b_2 & a_1 b_3 \\
-            a_2 b_1 & a_2 b_2 & a_2 b_3 \\
-            a_3 b_1 & a_3 b_2 & a_3 b_3 
+          a_ib_j\equiv\mqty(
+            a_1b_1 & a_1b_2 & a_1b_3 \\
+            a_2b_1 & a_2b_2 & a_2b_3 \\
+            a_3b_1 & a_3b_2 & a_3b_3 
           )
         \end{equation*} 
         那么易得，
         \begin{equation}
-          \Tr(a_i b_j) = a_i b_i.
+          \Tr(a_ib_j)=a_ib_i.
         \end{equation}
 
         矢量的一个比较重要的性质便是向量是受旋转矩阵控制的。旋转矩阵$R$(或$R_{ij}$)作为正交矩阵，满足
         \begin{equation*}
-          R^\mathsf{T} R = I
+          R^\mathsf{T}R=I
         \end{equation*}
         它代表了对向量的旋转，也可以是向量在一个空间的表述转换到了另一个空间的表述，同时保持各个向量之间的内积保持不变。它表达起来为
         \begin{equation*}
-          a'_i b'_i = a_j R_{ji} R_{ij} b_j = a_j b_j
+          a'_ib'_i=a_jR_{ji}R_{ij}b_j=a_jb_j
         \end{equation*} 
-        其中$a'_i,\,b'_i$表示为新坐标下的向量表示。我们可以清晰地看到旋转矩阵的正交性质在保持向量内积中起到的作用。我们可以从这一点出发，若某个量是受旋转矩阵控制的，那么它是一个矢量。
+        其中$a'_i,\ b'_i$表示为新坐标下的向量表示。我们可以清晰地看到旋转矩阵的正交性质在保持向量内积中起到的作用。我们可以从这一点出发，若某个量是受旋转矩阵控制的，那么它是一个矢量。
 
         旋转矩阵其实便代表了一个二阶张量：它存在两个指标，这两个指标之间是独立的。我们还可以从并矢得到灵感，在字母上多标箭头来表达高阶张量\footnote{为什么不写出来？\sout{编者\LaTeX 能力太差}}。特别地，二阶张量还可以用$\overleftrightarrow{T}$来表示。
 
         当然旋转矩阵也并不是只能作用于矢量。我们从并矢可以很容易联想到，高阶张量某种程度上代表了多个向量的笛卡尔积，那么若要对它进行旋转也就意味着对每一个向量进行旋转，而互相之间的旋转可以是独立的。从而我们可以写成
         \begin{equation*}
-          T'_{i_1i_2...i_n} = R_{i_1j_1} R_{i_2j_2} ... R_{i_n j_n} T_{j_1j_2....j_n}
+          T'_{i_1i_2\dots i_n}=R_{i_1j_1}R_{i_2j_2}\dots R_{i_nj_n}T_{j_1j_2\dots j_n}
         \end{equation*} 
         从旋转矩阵我们也看到了张量的一个重要的性质：高阶张量可以代表对低阶张量的线性变换。这也说明了高阶张量多个指标的作用：这些指标可以自由地与别的张量的指标进行结合，“发动”爱因斯坦求和约定。
 
@@ -1019,21 +887,21 @@
         \begin{equation*}
           \vb*{a} \times \vb*{b} = \varepsilon_{ijk} \vb*{e}_i a_j b_k
         \end{equation*} 
-        其中$\vb*{e}_i$便表达了基向量。$\varepsilon_{ijk}$\footnote{被称为Levi-Civita符号}表达的是若 $i,j,k$的顺序为“正序”，也就是从最开始的正序列通过偶数次元素得到的序列时，其值为1，若为“倒序”为 $-1$，若存在重复数字则为零。\footnote{没错其实就是行列式的求值方法。}
+        其中$\vb*{e}_i$便表达了基向量。$\varepsilon_{ijk}$\footnote{被称为Levi-Civita符号}表达的是若 $i,j,k$的顺序为“正序”，也就是从最开始的正序列(即12345\dots)通过偶数次元素得到的序列时(比如231，312），其值为1，若为“倒序”（即321，213和132）其值为$-1$，若存在重复数字则为零。\footnote{没错其实就是行列式的求值方法。}
 
         由此可以出发证明一个非常有用的公式：
         \begin{equation}
-          \vb*{a}\times (\vb*{b}\times \vb*{c}) = (\vb*{a} \cdot \vb*{c}) \vb*{b} - (\vb*{a} \cdot \vb*{b}) \vb*{c}
+          \vb*{a}\times(\vb*{b}\times\vb*{c})=(\vb*{a}\cdot\vb*{c})\vb*{b}-(\vb*{a}\cdot\vb*{b})\vb*{c}
         \end{equation} 
         我们可以这么出发：
         \begin{align*}
-          \vb*{a} \times (\vb*{b} \times \vb*{c}) &= \vb*{e}_i \varepsilon_{ijk} a_j (\vb*{b} \times \vb*{c})_k \\
-          &= \vb*{e}_i \varepsilon_{ijk} \varepsilon_{kmn} a_j b_m c_n \\
-          &= \vb*{e}_i b_i a_j c_j - \vb*{e}_i c_i a_j b_j
+          \vb*{a}\times(\vb*{b}\times\vb*{c})&=\vb*{e}_i\varepsilon_{ijk}a_j(\vb*{b}\times\vb*{c})_k\\
+          &=\vb*{e}_i\varepsilon_{ijk}\varepsilon_{kmn}a_jb_mc_n \\
+          &=\vb*{e}_ib_ia_jc_j-\vb*{e}_ic_ia_jb_j
         \end{align*}
         其中利用了
         \begin{equation}
-          \varepsilon_{ijk}\varepsilon_{kmn} = \varepsilon_{kij} \varepsilon_{kmn} = \delta_{im} \delta_{jn} - \delta_{in}\delta_{jm}
+          \varepsilon_{ijk}\varepsilon_{kmn}=\varepsilon_{kij}\varepsilon_{kmn}=\delta_{im}\delta_{jn}-\delta_{in}\delta_{jm}
         \end{equation} 
         我们可以这么想这个公式：由于$i,j,k,m,n$都是取三个坐标元，保持$k$一致后其余的指标的选择是非常有限的，然后就能很容易想明白上式是如何推出来的。
 
@@ -1043,19 +911,19 @@
         \end{equation*} 
         那么与此对应，求一个向量的\textbf{散度}也很容易：
         \begin{equation*}
-          \div{\vb*{a}} = \partial_i a_i 
+          \div{\vb*{a}}=\partial_i a_i 
         \end{equation*} 
         \textbf{旋度}也很简单：
         \begin{equation*}
-          \curl{\vb*{a}} = \varepsilon_{ijk} \vb*{e}_i \partial_j a_k
+          \curl{\vb*{a}}=\varepsilon_{ijk}\vb*{e}_i\partial_j a_k
         \end{equation*} 
         但这些东西能够延伸的内容是非常丰富的。比如对$\vb*{r} = (x,y,z)$及单位矩阵$\overleftrightarrow{I}$，有
         \begin{align}
-          &\div{\vb*{r}} = 3 \\
-          &\curl{\vb*{r}} = 0 \\
-          &\curl{(\grad{f})} = 0 \\
-          &\grad{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} = \frac{-\qty(\vb*{r}-\vb*{r}')}{\abs{\vb*{r}-\vb*{r}'}^3} = - \grad'{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} \\
-          &\curl{\qty(r^n \vb*{r})} = 0 
+          &\div{\vb*{r}}=3 \\
+          &\curl{\vb*{r}}=0 \\
+          &\curl{(\grad{f})}=0 \\
+          &\grad{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}}=\frac{-\qty(\vb*{r}-\vb*{r}')}{\abs{\vb*{r}-\vb*{r}'}^3}=-\grad'{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} \\
+          &\curl{\qty(r^n \vb*{r})}=0 
         \end{align}
         读者有兴趣可以自行证明。对此感兴趣的读者可进一步阅读附录\ref{tensor_higher}。\\
 
@@ -1065,19 +933,19 @@
 
         比如我们有两个基向量$\vb*{i}_1,\vb*{i}_2$，他们满足
         \begin{equation*}
-          \vb*{i}_1 \cdot \vb*{i}_1 = \vb*{i}_2 \cdot \vb*{i}_2 = 1, \quad \vb*{i}_1 \cdot \vb*{i}_2 = \cos{\varphi}
+          \vb*{i}_1\cdot\vb*{i}_1=\vb*{i}_2\cdot\vb*{i}_2=1,\ \vb*{i}_1\cdot\vb*{i}_2=\cos{\varphi}
         \end{equation*} 
         甚至还不止于此，我们有两个非归一的基向量
         \begin{equation*}
-          \vb*{g}_1 = \abs{\vb*{g}_1} \vb*{i}_1, \vb*{g}_2 = \abs{\vb*{g}_2} \vb*{i}_2
+          \vb*{g}_1=\norm{\vb*{g}_1}\vb*{i}_1,\ \vb*{g}_2=\norm{\vb*{g}_2}\vb*{i}_2
         \end{equation*} 
         此时两个向量$\vb*{p},\vb*{q}$ 的内积直接写起来是非常复杂的。但我们可以通过代数方程构建这两个基向量对应的逆变基矢量$\vb*{g}^1,\vb*{g}^2$，使
         \begin{equation*}
-          \vb*{g}^1 \cdot \vb*{g}_2  = 0, \quad \vb*{g}^1 \cdot \vb*{g}_1 = \vb*{g}^2 \cdot \vb*{g}_2 = 1 
+          \vb*{g}^1\cdot\vb*{g}_2=0,\ \vb*{g}^1\cdot\vb*{g}_1=\vb*{g}^2\cdot\vb*{g}_2=1 
         \end{equation*} 
         也就是
         \begin{equation*}
-          \vb*{g}^i \cdot \vb*{g}_j = \delta^i_j
+          \vb*{g}^i\cdot\vb*{g}_j=\delta^i_j
         \end{equation*}
         我们就可以方便地写出两个向量的内积，
         \begin{equation*}
@@ -1094,40 +962,40 @@
         \end{equation*} 
         可以很容易地证明
         \begin{equation*}
-          \beta^j_i \beta^i_k = \delta^j_k
+          \beta^j_i\beta^i_k=\delta^j_k
         \end{equation*}
         同时还需引入 fundamental tensor $g^{ij}$,它某种程度上起到了“抬升指标”的作用，
         \begin{equation*}
-          p^j = g^{ji} p_i
+          p^j=g^{ji}p_i
         \end{equation*} 
         那么$\beta^{ij}$就是在变换的同时抬升指标的一个算符。
 
         相对论量子力学引入了狭义相对论中的核心——光速不变原理引入的各种修正。从原点发光，光的传播满足
         \begin{equation}
-          c^2 t^2 -\qty(x^2 + y^2 + z^2 ) =0
+          c^2t^2-\qty(x^2+y^2+z^2)=0
         \end{equation}
         以不同的参考系来看，由于光速不变，同样会有
         \begin{equation}
-          c^2 t'^2 -\qty(x'^2 + y'^2 + z'^2)=0
+          c^2t'^2-\qty(x'^2+y'^2+z'^2)=0
         \end{equation}
         从而
         \begin{equation}
-          c^2 t'^2 -\qty(x'^2 + y'^2 + z'^2) = c^2 t^2 -\qty(x^2 + y^2 + z^2 )
+          c^2t'^2-\qty(x'^2+y'^2+z'^2)=c^2t^2-\qty(x^2+y^2+z^2)
         \end{equation}
         定义坐标形式为$\qty(x,y,z,ct)$，建立 Minkowski Space，定义该空间的内积为:
         \begin{equation}
           \begin{cases}
-            \eta\qty(u,v) = u_0 v_0 - u_1 v_1 - u_2 v_2 - u_3 v_3\\
+            \eta\qty(u,v)=u_0v_0-u_1v_1-u_2 v_2-u_3v_3\\
             u=\mqty(
-              u_0 \\
-              u_1 \\
-              u_2 \\
+              u_0\\
+              u_1\\
+              u_2\\
               u_3
             ),
             v=\mqty(
-              v_0 \\
-              v_1 \\
-              v_2 \\
+              v_0\\
+              v_1\\
+              v_2\\
               v_3
             )
           \end{cases}
@@ -1140,20 +1008,20 @@
 
         那么原来的协变/逆变基向量之间的关系也就发生了改变，
         \begin{equation}
-          \vb*{g}^i \cdot \vb*{g}_j = \delta_{ij} \rightarrow \eta\qty(A_i,A_j) =
+          \vb*{g}^i\cdot\vb*{g}_j=\delta_{ij}\rightarrow\eta\qty(A_i,A_j)=
           \begin{cases}
-            1,\quad i=j=0\\
-            -1,\quad i=j\neq 0 \\
-            0,\quad \text{other cases}
+            1,\ i=j=0\\
+            -1,\ i=j\neq 0\\
+            0,\ i\neq j
           \end{cases}
         \end{equation}
         这个时候的fundamental tensor就需要改为
         \begin{equation}
           g^{\mu\nu} =
           \begin{cases}
-            1,\quad i=j=0\\
-            -1,\quad i=j\neq 0 \\
-            0,\quad \text{other cases}
+            1,\ i=j=0\\
+            -1,\ i=j\neq 0\\
+            0,\ i\neq j
           \end{cases}
         \end{equation}
         相对论量子力学便基于这样的符号系统展开了包含了狭义相对论修正的量子力学描述。
@@ -1161,15 +1029,15 @@
       \section{简易数值计算方法}
         我们一般将可以直接写出数学表达式的问题称为解析的，与之对应的就是数值的。虽然解析的数学在相当多的方面都有重要意义，但是对于实际的应用来说，尤其是计算机模拟的问题来说，得到解析表达式是极为困难。举个简单的例子，常微分方程，就连本科生课程中给出的例子很多都需要做数值计算才能真正得到结果。而在王老师课题组，由于研究的都是动力学问题，即体系随时间演化，更是需要很多数值拟合，微分积分和数值解微分方程的概念，因此本节中我们将极其简要地介绍相关问题的最基础方法，为了简单，我们都用单变量函数的最简单的数值方法作为例子，实际操作中需要多变量、较高精度方法请参阅相关书籍\cite{numerical_calc_methods}及其它，这部分只是给读者一个概念，在之后查阅资料过程中不至于\sout{被水淹没}不知所措。
         \subsection{非线性方程求解}
-          对于线性方程，方程组，如果我们已经确定其有解，则一定可以通过消元法等方法将其求解，最多只是过程繁琐，但是总可以交给计算机去解决，线性方程组更是有各类已有的数学运算库函数来求解，比我们在课本上学到的方法要精确，这也是我们跳过线性方程组求解的原因\footnote{读者在需要这类功能时可以咨询学长学姐相关的MKL库函数使用，本指南不再特别说明。另外，这也是我们不讲述矩阵特征值数值解法的原因。}。对于非线性方程$f\qty(x) = 0$，这件事情是很让人头疼的，因为没有一个严格的普适求解方法，在这里我们介绍最简单的几种数值方法。
+          对于线性方程，方程组，如果我们已经确定其有解，则一定可以通过消元法等方法将其求解，最多只是过程繁琐，但是总可以交给计算机去解决，线性方程组更是有各类已有的数学运算库函数来求解，比我们在课本上学到的方法要精确，这也是我们跳过线性方程组求解的原因\footnote{读者在需要这类功能时可以咨询学长学姐相关的MKL库函数使用，本指南不再特别说明。另外，这也是我们不讲述矩阵特征值数值解法的原因。}。对于非线性方程$f\qty(x)=0$，这件事情是很让人头疼的，因为没有一个严格的普适求解方法，在这里我们介绍最简单的几种数值方法。
 
-          \textbf{二分法：}这是一个非常朴素的方法，相信读者之前就听说过，只要函数连续，那么总可以通过二分的方法从一正一负两个函数值点出发，不断迭代，就能找到其中的解。思路是首先选择一对具有相反函数值的自变量点，取它们的平均值计算函数值$f\qty(\frac{x_i + x_j}{2})$，根据符号相反的一侧选择下一个区域，继续二分，直到两次二分的区间都极小，就可以取最后区间的点作为非线性方程的解。
+          \textbf{二分法：}这是一个非常朴素的方法，相信读者之前就听说过，只要函数连续，那么总可以通过二分的方法从一正一负两个函数值点出发，不断迭代，就能找到其中的解。思路是首先选择一对具有相反函数值的自变量点，取它们的平均值计算函数值$f\qty(\frac{x_i+x_j}{2})$，根据符号相反的一侧选择下一个区域，继续二分，直到两次二分的区间都极小，就可以取最后区间的点作为非线性方程的解。
 
-          \textbf{不动点迭代法：}相信很多读者在学习分析化学1时都用过这个方法，就是将非线性方程$f\qty(x)=0$写成$x = g\qty(x)$的形式，然后选择一个初值$x_0$代入得到$x_1 = g\qty(x_0)$，进而迭代得到$x_2,x_3,\dots$，直到最后两个数相差很小，就可以认为迭代法收敛，收敛的值就是非线性方程的解。我们还相信，读者在学习分析化学1的时候就发现这个方法不总是能收敛的，或者收敛到两个值，不动点迭代法强烈依赖于$g\qty(x)$的性质，具体数学证明不予展开，但是很多时候任意构造的$g\qty(x)$并不能满足收敛性的要求，因此这个方法的适用范围非常局限。
+          \textbf{不动点迭代法：}相信很多读者在学习分析化学1时都用过这个方法，就是将非线性方程$f\qty(x)=0$写成$x=g\qty(x)$的形式，然后选择一个初值$x_0$代入得到$x_1=g\qty(x_0)$，进而迭代得到$x_2,x_3,\dots$，直到最后两个数相差很小，就可以认为迭代法收敛，收敛的值就是非线性方程的解。我们还相信，读者在学习分析化学1的时候就发现这个方法不总是能收敛的，或者收敛到两个值，不动点迭代法强烈依赖于$g\qty(x)$的性质，具体数学证明不予展开，但是很多时候任意构造的$g\qty(x)$并不能满足收敛性的要求，因此这个方法的适用范围非常局限。
 
           \textbf{牛顿迭代法：}牛顿迭代法也是迭代求解非线性方程的重要方法，尽管比很多后续方法慢，但是多数情况下，其收敛性可以得到保证，也是正常的求解非线性方程中最一般的方法(前面两个基本没人用)。牛顿迭代法的核心思想是，设方程$f\qty(x)=0$有近似解$x_k$，且$f'\qty(x_k)\neq0$，那么真正的解就可以在这个近似解附近展开
           \begin{equation*}
-            f(x) \approx f\qty(x_k)+f'\qty(x_k)\qty(x-x_k)
+            f(x)\approx f\qty(x_k)+f'\qty(x_k)\qty(x-x_k)
           \end{equation*}
           方程$f(x)=0$就是上式右边等于0，或者写成
           \begin{equation*}
@@ -1184,21 +1052,21 @@
           之所以称为插值问题，是因为插值函数有一个要求，就是必须经过所有的$\qty(x_i,y_i)$点，即所有的已知数据都严格符合插值多项式，多数情况下，对于一组数据的插值多项式是存在且唯一的，比如两个点确定直线是唯一的，三个点确定抛物线也是唯一的。因此用哪种插值多项式，只是代码实现的难度和速度上的差别，拉格朗日插值多项式就是思路最平凡的一种：对于一组$n+1$个互不相同的插值点$\qty{x_i}_{i=0}^n$，如果能找到一个多项式$\qty{l_{i}\qty(x)}_{i=0}^{n}$，满足
           \begin{equation}
             l_{i}\qty(x_{j})=\delta_{i j}=\begin{cases}
-              1, i=j \\
-              0, i \neq j 
-            \end{cases}\ \ \ \ \ i, j=0,1, \cdots, n
+              1,i=j \\
+              0,i\neq j 
+            \end{cases}\ \ \ \ \ i,j=0,1,\cdots,n
           \end{equation}
           那么
           \begin{equation}
-            L_{n}\qty(x)=\sum_{i=0}^{n}{l_{i}\qty(x) f\qty(x_{i})}
+            L_{n}\qty(x)=\sum_{i=0}^{n}{l_{i}\qty(x)f\qty(x_{i})}
           \end{equation}
           就是关于这组插值点的拉格朗日插值多项式。它的思路非常简单，即要求在每个插值点的位置，只有正确插值点对应的函数值不是0，这个思路实现起来也非常容易，只需要
           \begin{equation}
-            l_{i}(x)=\prod_{j=0, j \neq i}^n{\frac{x-x_j}{x_i-x_j}}=\frac{\qty(x-x_0)\cdots\qty(x-x_{i-1})\qty(x-x_{i+1})\cdots\qty(x-x_{n})}{qty(x_{i}-x_0)\cdots\qty(x_i-x_{i-1})\qty(x_i-x_{i+1})\cdots\qty(x_i-x_{n})}
+            l_{i}(x)=\prod_{j=0,j\neq i}^n{\frac{x-x_j}{x_i-x_j}}=\frac{\qty(x-x_0)\cdots\qty(x-x_{i-1})\qty(x-x_{i+1})\cdots\qty(x-x_{n})}{qty(x_{i}-x_0)\cdots\qty(x_i-x_{i-1})\qty(x_i-x_{i+1})\cdots\qty(x_i-x_{n})}
           \end{equation}
           读者可以自行验证上式满足$\delta_{ij}$的条件，这样拉格郎日插值多项式就可以写成
           \begin{equation}
-            L_{n}\qty(x)=\sum_{i=0}^n{l_{i}\qty(x) y_i}=\sum_{i=0}^{n}{\qty(\prod_{j=0, j \neq i}^n \frac{x-x_j}{x_i-x_j}) y_i}
+            L_{n}\qty(x)=\sum_{i=0}^n{l_{i}\qty(x)y_i}=\sum_{i=0}^{n}{\qty(\prod_{j=0,j\neq i}^n \frac{x-x_j}{x_i-x_j})y_i}
           \end{equation}
           上式就满足插值多项式的基本要求。除去拉格朗日插值之外，还有牛顿插值多项式，Hermite插值多项式等，读者可自行查阅。这些插值多项式的出发点不同，但是最终结果是一致的，读者也可自行验证。
           
@@ -1206,12 +1074,12 @@
 
           上面是插值问题，接下来讨论拟合问题。这两者的重要区别就是插值多项式要求必须过已知数据点，但是拟合就不是了，顾名思义，拟合通常是有一个含$n+1$参数的函数$f\qty(x;a_0,a_1,\dots,a_n)$，希望调整这些参数使得这个函数最\textbf{接近}已有数据，就像我们实验课所做的那样。所谓的“接近”，通常用误差函数$\delta\qty(x_i)=f\qty(x_i)-y_i$来表征，其中$y_i$为已知数据，$f\qty(x_i)$是拟合函数在这点给出的值，而整体的误差的评判标准有很多，比如所有点误差函数绝对值求和，或者绝对值中最大的那个，最小二乘法的原则是所有误差函数的平方和最小，即$S=\sum_{i=1}^m{\delta_i^2}=\sum_{i=1}^m{\qty[f\qty(x_{i})-y_{i}]^{2}}=\min$。正如上所述，一般采用的拟合函数都是参数依赖的，所以想实现这个非常简单，只需要这个总误差函数对所有参数的导数等于0
           \begin{equation}
-            \pdv{S}{a_k}=0\ \qty(k=0,1, \cdots, n)
+            \pdv{S}{a_k}=0\ \qty(k=0,1,\cdots,n)
             \label{least square}
           \end{equation}
-          解上式$n+1$个方程就能得到$n+1$个参数值，就得到了最小二乘解。看起来非常简单，最小二乘法的核心难度在于找合适的拟合函数，只有拟合函数合适，这个参数才能较好地匹配，在不知道用什么函数的时候，可以用一组基函数来试，把最终的函数表达式写成一组函数的线性组合，参数就是线性组合系数，这个方法称为线性最小二乘法：在某个函数类$\Phi=\operatorname{span}\qty{\varphi_0\qty(x),\varphi_1\qty(x),\cdots,\varphi_n\qty(x)}$寻找一个函数$\varphi^*\qty(x)=a_0^*\varphi_0\qty(x)+a_1^* \varphi_1\qty(x)+\cdots+a_n^*\varphi_n\qty(x)$使其满足
+          解上式$n+1$个方程就能得到$n+1$个参数值，就得到了最小二乘解。看起来非常简单，最小二乘法的核心难度在于找合适的拟合函数，只有拟合函数合适，这个参数才能较好地匹配，在不知道用什么函数的时候，可以用一组基函数来试，把最终的函数表达式写成一组函数的线性组合，参数就是线性组合系数，这个方法称为线性最小二乘法：在某个函数类$\Phi=\operatorname{span}\qty{\varphi_0\qty(x),\varphi_1\qty(x),\cdots,\varphi_n\qty(x)}$寻找一个函数$\varphi^*\qty(x)=a_0^*\varphi_0\qty(x)+a_1^*\varphi_1\qty(x)+\cdots+a_n^*\varphi_n\qty(x)$使其满足
           \begin{equation}
-            \sum_{i=1}^m{\qty[\varphi^*\qty(x_i)-y_i]^2}=\min_{\varphi\qty(x) \in \Phi}\sum_{i=1}^m{\qty[\varphi\qty(x_i)-y_i]^2}
+            \sum_{i=1}^m{\qty[\varphi^*\qty(x_i)-y_i]^2}=\min_{\varphi\qty(x)\in\Phi}\sum_{i=1}^m{\qty[\varphi\qty(x_i)-y_i]^2}
           \end{equation}
           此时的总误差函数为
           \begin{equation}
@@ -2079,14 +1947,14 @@
         只要我们让$\lambda$满足下列形式，在动能和势能算符前的常数就可以被拿掉，换成另一个独立的常数
         \begin{equation}
           \frac { \hbar ^ { 2 } } { m _ { e } \lambda ^ { 2 } } = \frac { e ^ { 2 } } { 4 \pi \varepsilon _ { 0 } \lambda }\equiv \mathscr { E } _ { a }
-          \label{Hartree defination}
+          \label{Hartree definition}
         \end{equation}
-        这个独立的常数我们定为$ \mathscr { E } _ { a }$，解等式(\ref{Hartree defination})中的$\lambda$可得
+        这个独立的常数我们定为$ \mathscr { E } _ { a }$，解等式(\ref{Hartree definition})中的$\lambda$可得
         \begin{equation}
           \lambda=\frac{4\pi\varepsilon_0\hbar^2}{m_e e^2}=a_0
-          \label{Bohr defination}
+          \label{Bohr definition}
         \end{equation}
-        从这个等式可以看出，$\lambda$就是Bohr半径，我们是将坐标变量除以了这个因子，因此Bohr半径就是单位制下的长度单位，这个单位就叫Bohr，$1 \text{Bohr} = 5.2918 \times 10^{-11} \textrm{m}$。我们将式(\ref{Bohr defination})代入(\ref{lambda x y z})中，再将一堆常数换成$\mathscr{E}_a$
+        从这个等式可以看出，$\lambda$就是Bohr半径，我们是将坐标变量除以了这个因子，因此Bohr半径就是单位制下的长度单位，这个单位就叫Bohr，$1 \text{Bohr} = 5.2918 \times 10^{-11} \textrm{m}$。我们将式(\ref{Bohr definition})代入(\ref{lambda x y z})中，再将一堆常数换成$\mathscr{E}_a$
         \begin{equation}
           \mathscr { E } _ { a } \left[ - \frac { 1 } { 2 } \nabla ^ { \prime 2 } - \frac { 1 } { r ^ { \prime } } \right] \phi ^ { \prime } = \mathscr { E } \phi ^ { \prime }
         \end{equation}
@@ -2203,7 +2071,7 @@
           \end{equation}
           可以看出，对于任意两个电子坐标的交换相当于交换Slater行列式中的两行，根据行列式的性质，显然会产出一个负号来满足交换反对称性的要求。而且，如果两个电子处于同一个位置，即$\mathbf{x}_{i}=\mathbf{x}_{j}$，意味这行列式中的两行相同，对应着两个电子占据了完全相同(空间部分相同，自旋也相同)的自旋轨道，行列式就一定为零，因此Slater行列式严格满足反对称性，以及它所要求的Pauli不相容原理。
 
-          另外，我们根据行列式的定义式(\ref{determinants defination})，重新写一下Slater行列式的表达式
+          另外，我们根据行列式的定义式(\ref{determinants definition})，重新写一下Slater行列式的表达式
           \begin{equation}
             \Psi\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{N}\right)=(N !)^{-1 / 2} \sum_{n=1}^{N !}(-1)^{p_{n}} \mathscr{P}_{n}\left\{\chi_{i}(1) \chi_{j}(2) \cdots \chi_{k}(N)\right\}
           \end{equation}
@@ -2242,6 +2110,8 @@
       \section{Hartree-Fock近似}
         Hartree-Fock近似是量子化学的基础和开端，一旦涉及到使用Hartree理论或Hartree-Fock理论计算单分子(非固体)的问题，就已经进入到了量子化学的领域。同时，几乎所有更高精度的电子结构方法都是以HF方法为基础，或者直接从HF方法的结果出发的，因此HF方法的正确理解关系到整个电子结构理论框架的理解。在各种教材中，讲解HF理论的方法有很多种，鉴于电子结构方法前后的完整性，我们选用了其中一种，一个很重要的特殊之处在于我们尽可能使用量子化学家的语言，并且跳过了Hartree理论。这样的写法可能会比较难，因此我们第一小节给出了一个类似结论性质的总结，再在后面几个小节中给出它的来源，以防止读者被数学推导淹没而忘记了我们的目的。
         
+        我们在电子结构的后面每一节中都会有这样的小节，这些内容相对较难，而且如果不涉及电子结构理论的话，并不会经常用到，因此各位可以按需跳过它们，但是编者建议对电子结构方法感兴趣的读者或者\sout{或者背上电子结构的锅的}读者认真阅读这些小节，毕竟这些都是电子结构理论的基础内容，在相关书籍中和文献中会多次用到。
+        
         读者若发现本指南的逻辑与一些书籍相左，请根据各自的框架理解。
         \subsection{HF方法概论}
           上一节中我们已经给出了量子化学的精确解和目前最精确的计算方法，但是我们也提到，FCI方法由于对计算量和内存的巨大需求几乎不可能作为一个普适方法。因此多少年来，量子化学家们一直在寻找合适的\sch 方程的近似解。其中最经典的，就是Hartree-Fock近似。
@@ -2279,7 +2149,7 @@
           
           很多时候，由于化学图像清晰，人们经常使用分子轨道来讨论问题，这与后文中提到的Koopmans定理是有密切联系的。但是需要提醒读者的是，分子轨道(单电子轨道)不是量子化学的目的，它只是用于构建多电子波函数的基础。而HF方法的逻辑，也需要注意，并不是优化单电子自旋轨道的能量，而是优化能量最低的$N$个单电子自旋轨道构成的那个多电子波函数(Slater行列式)的能量，尽管很多时候这两者是等价的。
 
-          在推导Hartree-Fock方程之前，我们需要其他的一些基础内容，这些内容将在后面多个部分中用到，我们建议对电子结构方法感兴趣的\sout{或者背上电子结构的锅的}读者认真阅读下列章节。
+          在推导Hartree-Fock方程之前，我们需要其他的一些基础内容，接下来的几小节内我们将慢慢道来。
           
         \subsection{单行列式的能量}
           我们首先讨论一个问题，我们如果知道一个N电子的Slater行列式，它由自旋轨道组$\left\{\chi_1, \chi_2,\dots,\chi_N\right\}$构成，那么它的能量期望值是多少？同样，为了回答这个问题，我们先考虑一个简单的情况，就是两电子问题，读者可以把它想象成$\text{H}_2$中的两个电子，描述这个两电子的波函数是一个二阶的Slater行列式
@@ -2685,14 +2555,220 @@
         \subsection{组态相关的两大问题}
           组态相关方法的物理图像非常清晰，而且根据Slater-Condon规则，我们可以计算任意大小的CI哈密顿量，在密度矩阵形式下完成各种推导和计算也并不是很困难。但是除了我们之前提到的计算量和内存需求大的问题，组态相关还有两个主要的缺陷。
 
-          一是任何一个有限截断的组态相关方法不满足所谓的尺寸一致性。举一个简单的例子，如果现在有一个分子二聚体，先对第一个分子做CISD的计算，再对第二个分子做CISD的计算，然后将两个分子放在一起计算的时候，CISD方法并不能重现两个分子单独做双激发的效果。容易想象，第一个分子双激发，第二个分子双激发，将它们一起处理的话，必须用某些三激发或者四激发的态来代表两个分子独立的双激发，当然FCI没有这个问题，这是因为它每次都考虑了全部激发。本质原因是因为，只有当总体系的变分空间等于每个子体系的变分空间的积的时候，尺寸一致性才能被满足，这一点组态相关方法显然无法满足。不满足尺寸一致性也直接导致了CI方法无法对体系进行分开处理，否则得不到自恰的能量。
+          一是任何一个有限截断的组态相关方法不满足所谓的尺寸一致性，即体系的能量应该正比于体系的大小。举一个简单的例子，如果现在有一个距离非常非常远的分子二聚体，二聚体的总能量应当是两个分子单体计算出的能量之和，但是有限阶截断的CI不能满足这一点。比如，先对第一个分子做CISD的计算，再对第二个分子做CISD的计算，然后将两个分子放在一起计算的时候，CISD方法并不能重现两个分子单独做双激发的效果。容易想象，第一个分子双激发，第二个分子双激发，将它们一起处理的话，必须用某些三激发或者四激发的态来代表两个分子独立的双激发，当然FCI没有这个问题，这是因为它每次都考虑了全部激发。本质原因是因为，只有当总体系的变分空间等于每个子体系的变分空间的积的时候，尺寸一致性才能被满足，这一点组态相关方法显然无法满足。不满足尺寸一致性也直接导致了CI方法无法对体系进行分开处理，否则得不到自恰的能量。
 
           另一个缺点在于，CI方法对电子体系的描述是不完备的，因为做了截断，尽管高的激发态对于体系的重要程度大大下降，但是它们的数量同时也远远多于低的激发态。而且对于体系不处于平衡位置的情况或者处理激发态的时候，只计算为数不多的激发态往往会有失偏颇。不但如此，组态相关方法对于变分参数的收敛速度是非常慢的，很重要的一个原因就是它对于不同激发态的引入是线性的。这在一定程度上降低了传统的组态相关方法的效率，我们之后涉及的耦合簇方法(CC)在这一点上是超越组态相关方法的，而且后者非常容易与微扰方法结合，也使得我们最终有了CCSD(T)这个电子结构计算的“黄金标准”。
 
-      \section{多组态自洽场方法}
+      \section{多组态自洽场方法、活性空间方法与多参考组态相关}
+        在Hartree-Fock近似中，我们将多电子波函数近似为一个Slater行列式，所做的优化仅是构成这一个行列式的分子轨道。而我们知道，在量子化学中的精确解中，是需要接近无穷个Slater行列式才能完备地展开多电子波函数所在的空间，因此Hartree-Fock是远远不够的。另一方面，当我们使用组态相关方法时，通常我们是直接使用Hartree-Fock方法得到的自旋轨道，再优化组态的线性组合系数，自旋轨道是不再优化的，换句话说，我们其实优化的是电子如何在自旋轨道上分布的，但是如果这组自旋轨道不是描述电子关联最好的自旋轨道呢？最后我们就很自然地问出一个问题：有没有一个方法可以同时优化自旋轨道和组态系数呢？答案是肯定的，这个方法就是多组态自洽场(MCSCF)方法，本节就简要介绍多组态自洽场方法，重点在其中最常用的完全活性空间自洽场(Complete Active Space Self-Consistent-Field, CASSCF)方法。
+        \subsection{MCSCF概论}
+          简单来说，MCSCF方法的核心思想就是多电子波函数在组态的展开系数和构成每一个组态的自旋轨道同时优化，也就是组态系数和分子轨道系数同时作为变分的变量。使得体系的总能量$\langle \Psi_{MCSCF} |\mathscr{H}|\Psi_{MCSCF}\rangle$最小，当然，这也是一个限制性的变分，需要满足一些限制条件，比如组态和自旋轨道的正交性。
+
+          用更加数学一点的语言，我们用$|i\rangle$表示一个组态，那么组态相关方法得到的波函数可以写作
+          \begin{equation}
+            | \Psi_{CI} \rangle = \sum_i C_i | i \rangle
+          \end{equation}
+          而就像我们在Hartree-Fock近似中做的那样，我们还要优化构成上式中的各个组态的自旋轨道，而自旋轨道的优化等价于将一个幺正算符作用在体系的Slater行列式行列式上，Hartree-Fock基态波函数就可以写为\footnote{该式中我们用了幺正算符的一个特性：任意一个幺正算符都可以写成一个反厄米算符的指数的形式}
+          \begin{equation}
+            |\Psi_{HF}\rangle = | 0 \rangle = \exp(-\hat{\kappa}) | 0^{\prime} \rangle
+          \end{equation}
+          那么问题变得清晰了起来，如果想同时优化自旋轨道和组态系数，MCSCF方法中的波函数可以写为
+          \begin{equation}
+            | \Psi_{MCSCF} \rangle = | \mathbf{\kappa}, \mathbf{C} \rangle=\exp(-\hat{\kappa}) \sum_i C_i | i \rangle
+            \label{MCSCF wavefunction}
+          \end{equation}
+          而我们要优化的能量就是满足归一性限制下的MCSCF波函数对哈密顿量的期望值：
+          \begin{equation}
+            E = \min_{\mathbf{\kappa}, \mathbf{C}} = \frac{\langle \mathbf{\kappa}, \mathbf{C} | \mathscr{H} | \mathbf{\kappa}, \mathbf{C} \rangle }{\langle \mathbf{\kappa}, \mathbf{C} | \mathbf{\kappa}, \mathbf{C} \rangle }
+            \label{MCSCF energy}
+          \end{equation}
+          如此一来，就达到了所有系数一起优化的目的。
+        \subsection{CASCI与CASSCF概论}
+          当我们研究完一般的MCSCF的思路时，就又产生了一个问题，该选用哪些组态呢，要像我们在CI方法中那样按激发截断，还是另寻他法？在实际操作中，人们更加常用被称为活性空间(active space)的思路来选择所使用的组态。当我们有$K$个原子轨道和对应的$K$个分子轨道时，我们可以把这些分子轨道分成三部分，内核部分，活性空间部分和惰性虚轨道部分，电子也相应地分为内核部分和活性空间部分。举两个非常简单的选择方法，第一就是直接将内层电子认为成内核部分，活性空间就是价电子和价层轨道，惰性虚轨道就是价层轨道之上的虚轨道；第二种就是根据化学键的特性来选择，比如苯环体系，化学中我们一般认为最重要的是6个$\pi$电子和6个$\pi$轨道，因此就可以选活性空间为$\pi$电子和$\pi$轨道。
+          
+          这样分类之后，常用的完全活性空间(CAS)方案就是在活性空间内做FCI，其他部分就用Hartree-Fock基态的结果，这类方法称为完全活性空间组态相关(CASCI)。CASCI有多个好处，首先总可以扩大活性空间来达到FCI仅限，尽管CASCI方法连所有的单激发都无法遍历，但是它遍历了化学图像更加清晰的全部组态，高能量的单激发的重要性很多时候比不上一些较低的多激发的重要性。而且CAS系列方法的计算量不会随着原子轨道基组的大小变化有剧烈的变化，与之相对的是CISD等方法会剧烈变化，因为会多出很多新组态。当然由于这些原因，CASCI的计算精度在一些时候是低于CISD系列方法的，但是由于关心的组态变少了，它的计算效率是大大提升的。
+
+          因为精度的问题，人们一般不会直接使用CASCI的结果作为多电子波函数的计算结果，CAS这个思路更有意义的存在是它在MCSCF中的应用，即CASSCF理论。选一个活性空间内的所有组态，按照等式(\ref{MCSCF wavefunction})和(\ref{MCSCF energy})的方法进行变分，就可以在活性空间内得到一个最终的基态。需要注意的是，由于幺正变换是作用在所有自旋轨道上的，所以在CASSCF的过程中，CI部分只涉及活性空间内的组态的组态系数，但是分子轨道系数的优化是活性空间内外都做的。
+
+          CASSCF(MCSCF)方法是电子结构领域中处理电子关联相当有效的一套方法，并且以其清晰的图像和可以接受的计算量成为了计算基态的多电子波函数的很好的选择。但是它也有问题，当我们计算激发态时，MCSCF方法往往不能得到相互正交的基态和激发态，很多时候人们会选用态平均MCSCF来处理激发态问题，但是这类方法又有一些人为可控的不严格因素，计算也很难保证准确。另外，尽管CASSCF的图像很清晰，但是活性空间的选择往往是一个技术活，这是因为通常的化学图像与实际的分子轨道之间可能有出入，再用苯环举例，我们都知道要选用6电子6轨道作为活性空间，但是具体是哪6个轨道呢？HF计算可不能保证这6个$\pi$轨道恰好就是HOMO和LUMO上下各三个，尤其是有取代基的时候，分子轨道的能量顺序很可能并不可靠。因此很多时候选择活性空间是通过分子轨道的对称性信息来选择的，这不在本指南的讨论范围内，但是这个问题我们需要重申，即活性空间的选取不是简单地使用能量顺序就能搞定的。
+        \subsection{激发算符与多参考组态相关}
+          为了解释一个更高精度的组态相关方法——多参考组态相关(Multi-reference Configuration Interaction, MRCI)，我们先简单了解一下激发算符。我们定义单激发算符为
+          \begin{equation}
+            \hat{T}_a^r|\chi_1\chi_2\cdots\chi_a\cdots\chi_N\rangle = |\chi_1\chi_2\cdots\chi_r\cdots\chi_N\rangle
+            \label{single excitation operator}
+          \end{equation}
+          $\hat{T}_a^r$的作用即把原本的一个处于$\chi_a$的电子激发到了$\chi_r$，当然，这里的激发只是一个形象的说法，$a$和$r$也只是两个自旋轨道的标记而已，原则上也可以表示电子向下跃迁，在二次量子化的语言里，它的作用是湮灭了一个处于$\chi_a$的电子，然后又产生了一个处于$\chi_r$的电子。但是在本指南的语言中，它通常用来表示激发。与单激发算符类似，我们可以定义双激发算符
+          \begin{equation}
+            \hat{T}_{ab}^{rs}|\chi_1\chi_2\cdots\chi_a\cdots\chi_b\cdots\chi_N\rangle = |\chi_1\chi_2\cdots\chi_r\cdots\chi_s\cdots\chi_N\rangle
+            \label{double excitation operator}
+          \end{equation}
+          同理可以有三激发、四激发算符等。
+          
+          根据激发算符的写法，我们可以重写组态相关的波函数表达式
+          \begin{equation}
+            | \Psi_{CI} \rangle = \left(1+\sum_{a,r}\hat{X}_{a}^{r}+\sum_{a<b,r<s}\hat{X}_{ab}^{rs}+\cdots\right) | \Psi_0 \rangle
+            \label{SRCI}
+          \end{equation}
+          其中$ | \Psi_0 \rangle $为Hartree-Fock基态，算符$\hat{X}_{a}^{r}$定义为组态系数乘上对应的激发算符
+          \begin{equation}
+            \hat{X}_{a}^{r} | \Psi_0 \rangle = C_{a}^r \hat{T}_{a}^{r} | \Psi_0 \rangle
+          \end{equation}
+          式(\ref{SRCI})就代表了上一节中讲到的组态相关方法的多电子波函数，我们通常称为单参考的组态相关。那什么叫多参考呢，其实很简单，式(\ref{SRCI})最右边的那个波函数我们称为参考态波函数，我们其实从未要求过它一定是Hartree-Fock基态。原则上，我们可以让它是某一个第一激发态，单激发算符作用到第一激发态上就得到第二激发态，我们也可以在这个基础上做组态相关，只是缺少了基态和绝大多数第一激发态的信息而已。不过这还不算多参考，那是因为我们甚至没有要求过右侧一定是一个单独的组态，完全可以是一个组态的线性组合呀！当参考态选用组态的线性组合的时候，我们就得到了一个基于很多个参考态的CI方法，称之为MRCI。
+
+          问题还没有结束，那就是我们到底要用哪几个组态的线性组合，怎么线性组合呢？换句话说，我们的参考空间怎么选，CASSCF给出了一个很好的备选项，我们完全可以将参考空间就定为活性空间，这样也符合化学图像。此时，式(\ref{SRCI})中的参考态就选用我们用CASSCF优化得到的多电子波函数基态。既然我们选用了一个Slater行列式线性组合的态为参考态，单激发算符和双激发算符作用上去之后就也不再是单一的Slater行列式，但这些“单激发”和“双激发”态之间仍然满足正交性。
+
+          因为CI方法只需要对角化矩阵就可以同时同权重地得到基态和激发态，而不需要对激发态做过多处理，在多参考波函数的加持下，MRCI方法得到的基态和激发态都是比较准确的，也几乎是目前计算多电子激发态的参考方法，在后面将涉及的动力学问题中，MRCI方法也是通常的提供各个电子能级势能面的重要工具。
       \section{耦合簇方法}
+        我们之前在介绍CI系列方法时，曾经提到过组态相关方法是图像最为清晰，处理起来也最简单的post-HF方法，但也同时提到了，它并不是效率最高的方法，CI方法有两个较大的问题：不满足尺寸一致性；随组态数量增大时的收敛速度较慢，而后者主要是因为组态相关方法对于不同激发的组态的引入是线性的。而耦合簇(CC)方法的核心思路，就是非线性地引入激发态，它以一个指数的形式引入激发态，由于指数展开的无穷性，尺寸一致性的问题也同时被解决了。
+        \subsection{CC方法概论}
+          正如前面说到的，耦合簇方法的核心思想就是以指数的形式引入激发算符，在这个思路下，多电子波函数可以写作
+          \begin{equation}
+            | \Psi_{CC} \rangle = \exp(\hat{T}) | \Psi_0 \rangle
+          \end{equation}
+          其中$ | \Psi_0 \rangle$仍然为Hartree-Fock基态，$\exp(\hat{T})$是总激发算符的指数形式，其定义与一般的算符或者矩阵的指数形式一致，即
+          \begin{equation}
+            \exp(\hat{T}) = 1 + \hat{T} + \frac{1}{2!}\hat{T}^2+ \frac{1}{3!}\hat{T}^3 + \cdots
+          \end{equation}
+          其中总激发算符是所有可能的激发算符的权重求和，这个权重等价于在CI方法中的组态系数
+          \begin{equation}
+            \hat{T} = \hat{T}_1 +\hat{T}_2 +\cdots, \;\;\hat{T}_1 = \sum_{a,r}t_a^r\hat{T}_a^r,\;\;\hat{T}_2 = \sum_{a<b,r<s}t_{ab}^{rs}\hat{T}_{ab}^{rs}
+          \end{equation}
+          式子中的$\hat{T}_a^r$和$\hat{T}_{ab}^{rs}$就是我们在等式(\ref{single excitation operator})和(\ref{double excitation operator})中定义的单激发算符和双激发算符，每一个激发算符都有一个权重因子，即$t_a^r$、$t_{ab}^{rs}$等等。
+
+          读者可能对这个指数形式感到头大，先不要着急，我们对其的导出放在下一小节中。现在，我们只需要知道它的逻辑框架，与组态相关的一个类似的地方是，当我们考虑全部的激发算符时，CC和CI都收敛到FCI的极限。尽管两者都是按照激发算符来截断的，但是耦合簇方法里，即使只截断到二阶(CCSD)，这个二阶的截断指的是总激发算符展开的截断，即在CCSD方法中，$ \hat{T} = \hat{T}_1 +\hat{T}_2 $。但是由于$ \hat{T} $是在指数上面的，会有全部的$\hat{T}^n$作用到HF基态上。又由于两个不同的单激发算符同时作用到基态上等于一个双激发算符，单激发和双激发同时作用等于一个三激发，依次类推，由于$n = 0,1,2,\dots$，所以实际上我们已经遍历了全部的激发态，只是每个激发态的系数不够完整(下一节仔细讨论)。因此，尽管CC中的截断也是到有限阶，但是任意阶的CC都包括了全部的激发态。
+
+          回到我们最初的出发点，当我们用激发算符的指数形式来构建多电子波函数时，它会遍历所有的激发态。在这个意义上说，CC方法自然满足了尺寸一致性的要求。另外，由于其对激发态的引入是非线性的，所以CC方法对截断的收敛性是非常好的，使用严格的CCSD再加上微扰处理第三阶截断，这样的CC方法称为CCSD(T)，而CCSD(T)方法对基态能量的描述已经拥有非常高的精度，与FCI极限的差已经在化学精度的要求之内，因此又被称为基态计算的“黄金标准”。
+
+          但是，这样的高效率和高精度是有代价的：一方面，实际操作中人们发现，在电子关联非常强的体系内，比如能级简并或者分子离平衡位置非常远(化学反应)的情况，CC方法计算电子关联的精确度是不如MCSCF方法和MRCI的(但考虑到计算量也已经非常不错)；另一方面，就是指数形式带来的额外的复杂性，主要是推导上的复杂性也限制了CC的更多推广。
+        \subsection{激发算符的指数形式}
+          组态相关方法中，从Hartree-Fock基态到单激发、双激发、多激发再到FCI极限是一个非常平凡的过程，但是簇耦合方法中就略有难度。这一小节我们就是要说明簇耦合方法逻辑的导出，即为什么可以将多电子波函数写成激发算符的指数乘以HF基态的形式，以及CC的截断体现在了哪里。
+
+          我们首先利用激发算符，写出组态相关思路下的FCI的波函数，即等式(\ref{SRCI})
+          \begin{equation}
+            | \Psi_{CI} \rangle = \left(1+\sum_{a,r}\hat{X}_{a}^{r}+\sum_{a<b,r<s}\hat{X}_{ab}^{rs}+\cdots\right) | \Psi_0 \rangle
+          \end{equation}
+          如果读者还记得的话，这里的$\hat{X}$是对应的激发算符乘以一个系数，这个系数就是线性组合系数\footnote{这个式子其实没有归一化}。这是一种比较简单的写法，我们不妨叫它CI写法。那显然，我们表示一个无穷的展开有很多种不同但是等价的表达方法，比如下面这个，之后我们会证明它与耦合簇方法给出的多电子波函数形式等价
+          \begin{equation}
+            |\Psi_{CC}\rangle=\left[\prod_{a,r}\left(1+\hat{X}_{a}^{r}\right)\right]\left[\prod_{a<b, r<s}\left(1+\hat{X}_{ab}^{rs}\right)\right] \cdots|\Psi_{0}\rangle
+          \end{equation}
+          我们暂时管这个写法为CC写法。读者不难发现，上述连乘的形式也可以遍历所有可能的激发态，但是CC与CI写法最大的区别就是，CC写法中，一个行列式可能出现多次，比如说某一个双激发行列式$ | \Psi_{ab}^{rs} \rangle $，它既可以通过$1\times\hat{X}_{ab}^{rs}$产生，又可以通过$\hat{X}_a^r\times\hat{X}_b^s$产生。因此这两种写法中算符$\hat{X}$中的参数是不相等的。准确地说，CI写法中的某个激发行列式对应的参数是CC写法中很多参数相乘再求和的结果。
+
+          现在我们来介绍一个激发算符的性质，那就是对于同一个激发算符$\hat{T}$来说，满足
+          \begin{equation}
+            \hat{T}^n = 0, \; n =2,3,4,\dots
+          \end{equation}
+          这个性质是平凡的，这是因为激发算符对应的自旋轨道，所以激发过一次后，原本的自旋轨道就没有电子了，再激发是不可能的，或者说新的自旋轨道上已经有电子了，再次激发到这个自旋轨道就会由于Pauli不相容原理得到0\footnote{这个是唯象的解释，严格地说，这是因为激发算符可以写成产生算符乘以湮灭算符的形式，由于费米子的产生湮灭算符的反对易性质，这个零的结果是很容易严格证明的}。当这个条件满足时，我们可以在原本的CC写法中添加任意个数的$\hat{X}^n$，对任意一个算符$\hat{X}$，我们有
+          \begin{equation}
+            1+\hat{X}=1+\hat{X}+\frac{1}{2} \hat{X} \hat{X}+\cdots=\exp \left(\hat{X}\right)
+          \end{equation}
+          而且，对于不同指标的激发算符是可对易的，所以原本的CC写法就可以改写为
+          \begin{equation}
+            |\Psi_{CC}\rangle=\exp(\hat{T})|\Psi_{0}\rangle
+          \end{equation}
+          其中
+          \begin{equation}
+            \hat{T} = \hat{T}_1 +\hat{T}_2 +\cdots, \;\;\hat{T}_1 = \sum_{a,r}t_a^r\hat{T}_a^r,\;\;\hat{T}_2 = \sum_{a<b,r<s}t_{ab}^{rs}\hat{T}_{ab}^{rs}
+          \end{equation}
+          这样就得到了我们在上一小节提出的式子，也就回到了CC波函数为什么可以写成指数形式这个问题，而且根据这个推导可以知道，CC在不做截断的情况下可以推到FCI极限。
+
+          那么耦合簇方法的截断到底“截在哪”？我们把指数按照经典的方法展开，然后把得到的激发算符按照单激发、双激发等的方法分类排好，就会得到
+          \begin{equation}
+            \exp(\hat{T}_1 +\hat{T}_2 +\cdots) = 1 + (\hat{T}_1) + (\hat{T}_2 + \frac{1}{2!}\hat{T}_1^2) + (\hat{T}_3 + \hat{T}_2\hat{T}_1 + \frac{1}{3!}\hat{T}_1^3) + \cdots
+          \end{equation}
+          可以看到，如果我们截断到CCSD，那么从三激发态开始，系数的描述就会减少项数，所以尽管任意阶的CC方法都涉及到了所有的激发态，但是对于高阶激发态的描述不完备的。
+
+          一般来说，CC方法的系数求解不是通过变分法推出的，而是利用转化后的定态薛定谔方程
+          \begin{equation}
+            \exp (-\hat{T}) \hat{H} \exp (\hat{T})|\Psi_0\rangle= E_{{CC}}|\Psi_0\rangle
+          \end{equation}
+          左乘一组组态得到的正交性方程求解的
+          \begin{equation}
+            \langle\mu|\exp (-\hat{T}) \hat{H} \exp (\hat{T})| \Psi_0\rangle= 0
+          \end{equation}
+          最后得到的簇耦合方法的基态能量为
+          \begin{equation}
+            E_{{CC}}=\langle\Psi_0|\exp (-\hat{T}) \hat{H} \exp (\hat{T})| \Psi_0\rangle
+          \end{equation}          
       \section{微扰理论}
-      \section{密度泛函理论简介}
+        微扰方法作为物理学家的大杀器，自然在量子化学中也大有作为。量子化学的非常多的方法可以与微扰结合，上节涉及的耦合簇方法有CCSD(T)，多参考方法中有CASPT2等。对于很多体系，将电子关联归入微扰项是十分合理的，我们本节优先解释一个比较基础的微扰理论，即M\o ller-Plesset微扰(MPX)\footnote{X代表了微扰做到X阶}。
+        \subsection{MPX方法简介}
+          M\o ller-Plesset微扰的思路其实非常简单，那就是将真正的哈密顿量与Hartree-Fock之间的差作为微扰哈密顿量，然后求解微扰的能量修正和波函数修正。
+
+          我们首先写下Hartree-Fock近似下的体系的总哈密顿量
+          \begin{equation}
+            \hat{H}_0 = \sum_i \left[h(i) + v^{HF}(i)\right]
+          \end{equation}
+          其中$v^{HF}(i)$是Hartree-Fock对电子相互作用的平均化处理，实际上是库伦算符和交换算符的求和。而真正的哈密顿量的写法为$\hat{H} = \sum_i h(i) + \sum_{i <j} r_{ij}^{-1}$，这两者的差就是M\o ller-Plesset微扰中的微扰哈密顿量
+          \begin{equation}
+            V = \sum_{i <j} r_{ij}^{-1} -  \sum_i v^{HF}(i)
+            \label{MP PT}
+          \end{equation}
+          得到了微扰哈密顿量，剩下的就是零阶波函数，由于零阶哈密顿量就是Hartree-Fock近似下的$N$电子哈密顿量，所以零阶波函数就是Hartree-Fock基态。现在有了零阶波函数和微扰哈密顿量的形式(\ref{MP PT})，剩下的就与普通的微扰理论没什么区别了，利用这两项，就可以求解任意阶微扰的能量修正和波函数修正。
+        \subsection{MPX中一阶和二阶能量修正}
+          微扰理论的公式此处不再重新推导，由于一阶能量修正非常简单，我们直接写下M\o ller-Plesset微扰中基态的一阶能量修正的表达式
+          \begin{equation}
+            \begin{aligned}
+              E_0^{(1)} &= \langle \Psi_0 | V | \Psi_0 \rangle\\
+              &=\langle \Psi_0 | \sum_{i <j} r_{ij}^{-1} | \Psi_0 \rangle - \langle \Psi_0 |  \sum_i v^{HF}(i) | \Psi_0 \rangle\\
+              &=\frac{1}{2}\sum_{ab}([aa|bb] - [ab|ba]) - \sum_a \langle \chi_a | v^{HF} |  \chi_a \rangle\\
+              &=-\frac{1}{2}\sum_{ab}([aa|bb] - [ab|ba]) 
+            \end{aligned}
+            \label{MP1 energy correction}
+          \end{equation}
+          上式的第二行到第三行我们在Hartree-Fock那一节中已经推导过了。
+
+          MP2的基态能量修正就比较麻烦了，二阶微扰能量修正的一般表达式为
+          \begin{equation}
+            E_0^{(2)} = \sum_n\frac{\left| \langle \Psi_0 | V | n \rangle \right|^2}{E_0^{(0)}-E_n^{(0)}}
+          \end{equation}
+          其中对n求和要遍历所有的零阶哈密顿量激发态，由于$V$是一个双电子算符，所以肯定只涉及第一激发态和第二激发态，根据Slater-Condon规则，双电子算符对于两个相差三个激发及以上的组态的矩阵元是零。接着我们证明第一激发态是不参与能量修正的。首先，我们有$V = \hat{H} - \hat{H}_0$，第一项是真实的哈密顿量，所以根据Brillouin定理，这一项是零，第二项是Fock算符的求和，所以是一个单电子算符，根据Slater-Condon规则中相差一个激发的两个行列式的单电子积分项(\ref{case2 1e})，这一项等于$f_{ar}$，但很可惜，在Hartree-Fock框架下，自旋波函数是Fock算符本征态，所以Fock算符的非对角元$f_{ar} = 0$。至此，我们证明了单激发态不参与二阶微扰能量修正。
+
+          所以就只剩下了双激发态，我们首先计算分母，在Hartree-Fock哈密顿量下，一个Slater行列式的能量就是其所有自旋轨道能量的求和，所以双激发态$ | \Psi_{ab}^{rs} \rangle $和基态的能量差就是它们相差的自旋轨道的能量作加减法，由于分母是基态减去第二激发态，所以这个分母的数值为$\varepsilon_a + \varepsilon_b -\varepsilon_r - \varepsilon_s$。接下来再次看微扰哈密顿量，$V = \sum_{i <j} r_{ij}^{-1} -  \sum_i v^{HF}(i)$，第二项是一个单电子算符，由于基态和双激发态之间相差两个自旋轨道，所以根据(\ref{case3 1e})这一项为零。就只剩下了第一项，即$r_{ij}^{-1}$，再一次，根据(\ref{case3 2e})，这一项等于$[ar|bs]-[as|br]$。所以我们可以写下最后的MP2的基态二阶能量修正
+          \begin{equation}
+            E_0^{(2)} = \sum_{a<b}\sum_{r<s} \frac{\left|[ar|bs]-[as|br]\right|^2}{\varepsilon_a + \varepsilon_b -\varepsilon_r - \varepsilon_s}
+          \end{equation}
+          如果你不介意零除以零这件事的话，可以把求和中的限制去掉，转而得到两个二分之一的乘积
+          \begin{equation}
+            E_0^{(2)} = \frac{1}{4}\sum_{a,b,r,s} \frac{\left|[ar|bs]-[as|br]\right|^2}{\varepsilon_a + \varepsilon_b -\varepsilon_r - \varepsilon_s}
+            \label{MP2 energy correction}
+          \end{equation}
+          关于更高阶的M\o ller-Plesset微扰本指南中不再做推导，感兴趣的读者可以参阅相关教材。
+
+          可以看到，M\o ller-Plesset微扰的思路非常简单，而且MP2方法提供了一个还算不错的计算精度与计算量的平衡。但是M\o ller-Plesset微扰是基于Hartree-Fock计算结果的，自然在处理近简并体系和激发态上有很多困难。正如单行列式的Hartree-Fock方法推演出高级的多组态自洽场理论，那么自然也有单组态微扰的升级版——多组态微扰理论，这里就不再叙述相关内容。
+      \section{密度泛函理论}
+        密度泛函理论可能是计算化学和凝聚态物理计算领域内最常听到的一个词了，DFT之所以流行，一方面是它能用较少的计算时间得到精度较高的计算结果，另一方面也要归功于高度集成和用户友好的Gaussian软件包\sout{，以及早期用Gaussian胡乱算点东西就水到的大量文章和现在做泛函的人所收获的并无意义的几万引用量}。尽管受很多计算化学组的喜欢，但是实际上在量子化学领域中使用的DFT理论非常依赖于参数，是一个非常不严格的方法，因此DFT在理论化学课题组内并不受欢迎，之所以使用只是限于计算量的一种妥协。不但如此，DFT中的参数往往是根据能量数据拟合的，即使很多时候可以给出不错的能量预测，但是对波函数描述的正确性是无法保证的，因此从DFT得到的波函数信息往往不那么靠谱。
+        \subsection{DFT方法概论}
+          密度泛函理论的基本思想非常简单，而且严格。我们之前讲述的Hartree-Fock方法和各种post-Hartree-Fock方法有一个共同点，即希望利用多电子波函数来描述的电子态，而密度泛函理论的出发点就与此不同，希望用电子密度来代替多电子波函数。可以想象，对于一个$N$电子体系，每个电子有三个空间自由度，对空间部分的自由度就有$3N$个，而如果使用电子密度的话，空间的电子密度自由度固定为$3$。
+
+          那么问题来了，我们可以找到电子密度和电子态之间的种对应关系吗？或者更基础的一个问题是，这种对应关系存在吗？唯一吗？非常幸运，后一个问题已经被证明了，在上个世纪，就有了Hohenberg-Kohn两大定理，即所有可观测量的期望值原则上都是基态电子密度的泛函，基态电子密度原则上可以通过变分的方法得到。或者简单一点说，当外势能给定之后，体系基态的电子密度就给定了，而且两者是一一对应的，也就是说给定一个哈密顿量，就能找到基态的电子密度，而且用这个电子密度可以求得任何希望求得的性质，多电子波函数是不需要的。在这之后，又有了Runge-Gross定理，证明了当体系的初态确定时，任何时刻的电子密度都与外势能是一一对应的。RG定理是HK定理的含时版本，DFT理论也就从一个静态问题到了一个可以含时的问题，进而可以用来计算激发态。
+
+          接下来就到了灵魂发问，如果现在给定一个外势能，怎么才能找到那个唯一确定的基态电子密度呢？非常遗憾，除了在一些特殊的条件下，这个导出并没有一般性的方法。也就是说，当我们有一个外势能的时候，我们知道有那么一个唯一的基态电子密度，但是我们却求不出它来。我们会发现，电子与电子之间的库仑排斥和外加的势场其实比较容易与电子的密度结合起来，但是电子的动能很难直接写成电子密度的形式，除去极特殊情况下，比如之后小节中我们会见到Thomas-Fermi理论，最终就可以把电子的动能写成了电子密度的泛函。困扰我们的动能项是不是可以用某种别的近似方法处理呢？
+
+          1965年，Kohn和沈吕九先生合作提出了Kohn-Sham密度泛函理论，它结合了经典的Hartree-Fock方法和DFT理论，与传统的DFT已经有所区别，但是Kohn-Sham的DFT理论才是现代正在使用的DFT理论。真正的基态能量写成电子密度的泛函，我们有
+          \begin{equation}
+            E[\rho] = T_e[\rho] + U_{ee}[\rho] + V_{ext}[\rho]
+          \end{equation}
+          即真正的基态能量可以写成真正的电子动能对电子密度的泛函，加上电子之间相互作用对电子密度的泛函，加上外势能对电子密度的泛函。其中$ V_{ext}[\rho]$容易给出，正如上文所说，$T_e[\rho]$难以写出严格表达式，$U_{ee}[\rho]$虽然可以写出但计算困难。在Kohn-Sham的框架下，上式被重新改写了
+          \begin{align}
+            E[\rho] = T_0[\rho] + U_{cl}[\rho] + V_{ext}[\rho] + E_{xc}[\rho]
+            \\E_{xc}[\rho]\equiv(T_e[\rho]-T_0[\rho])+(U_{ee}[\rho]-U_{cl}[\rho])
+          \end{align}
+          式中的$T_0[\rho]$和$U_{cl}[\rho]$分别是Hartree-Fock近似下波函数给出的动能和库仑积分，而$ E_{xc}[\rho]$称为交换关联能，这是因为，相比与Hartree-Fock方法，上式中其实缺少了交换积分，而相比于多行列式方法，Hartree-Fock又缺少了关联能。而且不仅如此，上述缺少的交换和关联能只是$U_{ee}[\rho]-U_{cl}[\rho]$项的意义，还有一部分是来自于真实的动能泛函和Hartree-Fock的动能之间的差。
+
+          上述方程描述了体系的最低能量，对电子密度求变分等于零，就可以得到一个类似Hartree-Fock方程的形式，即Kohn-Sham方程，如果电子的外势能只由核与电子的相互作用描述，则Kohn-Sham方程可以写作
+          \begin{equation}
+            \left[-\frac{1}{2} \nabla_{i}^{2}-\sum_{A=1}^{M} \frac{Z_{A}}{r_{i A}}+\int \frac{\rho\left(r_{2}\right)}{r_{12}} d r_{2}+v_{x c}(1)\right] \phi_{i}^{K S}(1)=\varepsilon_{i}^{K S} \phi_{i}^{K S}(1)
+            \label{KS equation}
+          \end{equation}
+          其中有
+          \begin{equation*}
+            v_{x c}(r) \equiv \frac{\delta E_{x c}[\rho(r)]}{\delta \rho(r)} \quad \rho(r)=\sum_{i=1}^{n}\left|\phi_{i}^{K S}(r)\right|^{2}
+          \end{equation*}
+          式中的$v_{x c}(r)$是交换关联泛函对电子密度的变分，其物理意义代表了单位电子密度下的交换关联能。熟悉Hartree-Fock推导的读者可以看出，上式的导出与Hartree-Fock方程的导出非常相似。如果我们把$\rho(r_2)$的表达式代入等式(\ref{KS equation})，就会发现，该项就是Hartree-Fock中的库仑算符，上式与Hartree-Fock方程的唯一区别就是交换算符被换成了$v_{x c}(r)$。如果交换关联泛函是严格的，Kohn-Sham方程就可以以一个单行列式的计算量得到准确的基态能量，但是可惜的是，这一项的解析表达式无法写出，所以Kohn-Sham密度泛函理论的关键是找到好的近似交换关联泛函，而这个所谓的找到，其实是半经验而且不知道是否能达到的过程。目前的交换关联泛函都是用半经验的方法定义的参数定义的，这也就是最开始说的现代DFT理论中充斥着的不严格性之处，也是我们不太喜欢它的原因。
+
+          KS方程与HF方程类似，都是一个非线性方程，只能迭代求解，思路也基本一致，只是要从电子密度出发。先猜测一个初始的电子密度，然后计算人工定义的交换关联泛函，进而计算它对电子密度的变分，这样就得到了$v_{x c}(r)$。同时，单电子的KS方程所有项也知道了，可以对角化KS方程中的“Fock算符”得到新的KS单电子波函数，进而利用$\rho(r)=\sum_{i=1}^{n}\left|\phi_{i}^{K S}(r)\right|^{2}$计算新的电子密度，新的交换关联泛函，新的波函数，新的密度。如此重复迭代，直到得到收敛的结果。
+
+          由于交换关联泛函是参数化的，所以在很多时候，DFT理论能取得还可以的精度，由于求解单电子的KS方程，所以它的计算量与Hartree-Fock量级类似，却能得到几乎MP2方法的精度，与传统的量化方法相比，为较大体系的计算提供了一种行之有效的思路。DFT理论在计算精度和计算代价之间达到了一个很好的平衡，因而越来越多地被应用到物理、化学和生物等学科领域，这种趋势还在加快。目前寻找更好的泛函和拓展到激发态的应用是DFT理论发展的两个最重要的方向，毕竟，我们只要能找到那个真正的“上帝的交换关联泛函”，我们就能得到精确解了。
       \section{二次量子化}
         之所以二次量子化的内容不放在量子力学中，是因为从占据数表象重新理解二次量子化是相对浩大的工程，感兴趣的同学可以直接参阅相关的高等量子力学书籍。而之所以放在这里讲，是因为在诸多的量化文献和书籍中使用了二次量子化的语言，尽管在量化领域经常见到产生湮灭算符，但是并没有与二次量子化真实地联系起来，只是用来作为简化表达的一种方式。为了帮助大家看懂相关的公式，我们在电子结构部分从实用的角度简要介绍电子(费米子)的二次量子化语言。本节主要参考(\sout{其实就是翻译了一遍然后调整了几个小地方})\cite{Szabo1989Modern}书中2.4节的内容。
 
@@ -3118,8 +3194,8 @@
         在等式(\ref{time-depend-coeff})中，我们演化波函数的系数，但是为了方便，我们会使用密度矩阵的演化，在等式(\ref{linear combination})的展开形式下，密度矩阵的矩阵元定义为$a_{kj}=c_k c_j^*$，在这个两边取时间导数并将(\ref{time-depend-coeff})的结果代入，我们就得到了关键性的等式
         \begin{equation}
           \begin{aligned}
-            i \hbar \dot{a}_{k j}=& \sum_{T}\left\{a_{l j}\left[V_{k l}-i \hbar \dot{\vb*{R}} \cdot \vb*{d}_{k l}\right]\right.\\
-            &-a_{k l}\left[V_{l j}-i \hbar \dot{\vb*{R}} \cdot \vb*{d}_{i j}\right] \}
+            i \hbar \dot{a}_{k j}=& \sum_{l}\left\{a_{l j}\left[V_{k l}-i \hbar \dot{\vb*{R}} \cdot \vb*{d}_{k l}\right]\right.\\
+            &\left. -a_{k l}\left[V_{l j}-i \hbar \dot{\vb*{R}} \cdot \vb*{d}_{i j}\right] \right\}
           \end{aligned}
           \label{time-de DM}
         \end{equation}
@@ -3142,6 +3218,8 @@
           \label{hopping probability}
         \end{equation}
         上式就是FSSH的核心公式\footnote{细心的读者可能会发现与Tully原文中的分母不完全相同，但是本文的推导更加合理一点，通常也是使用这一套公式，当然，由于$\vb*{d}t$内密度矩阵几乎不会变化，究竟是用$t$时刻还是$t+\vb*{d}t$时刻对结果的影响不大。}。FSSH单个轨迹的流程就是先初始化，赋予研究的体系一个初始动能(动量)和位置，然后每个$\vb*{d}t$内先用经典力学的方法演化原子核的运动，再利用等式(\ref{hopping probability})计算出当前态跃迁到其他态的概率，用随机数的方法判断是否跃迁，同时还要判断跃迁之后是否满足能量守恒，如果满足，则完成跃迁并修正体系原子核运动的速度，不断重复上述过程就得到了动力学演化的结果。
+
+        也许很多读者都会需要写FSSH的代码来学习部分工作，我们的细节部分就不再仔细展开，各位读者可以在实践中体会上面这段话的核心意义。我们需要提醒读者一个矛盾点，那就是虽然在势间跳跃方法中我们有电子的波函数和对应的密度矩阵，但是FSSH中的电子态并不是由这个波函数描述的。电子在哪个能级上并不是由展开系数决定的，而是有一个所谓active态的存在用来标记电子是在哪个能级上。这样其实说明FSSH中的电子波函数系数只是一个辅助工具，是一个辅助用来计算当前点的统计性质的工具，这个性质就是跃迁概率，然后通过不同轨迹做统计平均，才是FSSH的核心。
         
       \section{鸟瞰SH方法中的特殊问题}
         本小节将会简要地介绍在SH发展这么多年来，出现的很多问题，包括王老师组学长学姐在这方面的工作的简介，但是由于编者水平有限，只能略作介绍，并且有很大概率在细节上理解不全面甚至有错误，而王老师课题组的各位学长学姐在这方面有更多可说的内容。
@@ -3679,27 +3757,27 @@
         \begin{theorem}
           对形如
           \begin{equation}
-            \dv{x}\qty[k\qty(x)\dv{y}{x}]-q\qty(x)y +\lambda\rho\qty(x)y=0 \quad (a\leqslant x \leqslant b)
+            \dv{x}\qty[k\qty(x)\dv{y}{x}]-q\qty(x)y+\lambda\rho\qty(x)y=0\ (a\leqslant x\leqslant b)
           \end{equation}
-          的方程，若$k\qty(x),k'\qty(x),q\qty(x)$ 连续或最多以$x=a$ 和$x=b$ 为一阶极点\footnote{也就是最低项为$\frac{1}{x}$ 项。}，则
+          的方程，若$k\qty(x),k'\qty(x),q\qty(x)$连续或最多以$x=a$和$x=b$为一阶极点\footnote{也就是最低项为$\frac{1}{x}$项。}，则
           \begin{enumerate}
             \item 存在无穷多个本征值
               \begin{equation*}
-                \lambda_1 \leqslant \lambda_2 \leqslant \lambda_3 \leqslant ...
+                \lambda_1\leqslant\lambda_2\leqslant\lambda_3\leqslant\dots
               \end{equation*} 
               相应地有无限多个本征函数
               \begin{equation*}
-                y_1\qty(x),y_2\qty(x),y_3\qty(x),...
+                y_1\qty(x),y_2\qty(x),y_3\qty(x),\dots
               \end{equation*}
               这些本征函数的排列持续正好使节点个数依次增多（即函数值为零的点的个数）。
-            \item 所有本征值 $\lambda_n \geqslant 0$,
-            \item 相应于不同本征值$\lambda_m$ 和 $\lambda_n$的本征函数$y_m\qty(x)$和$y_n\qty(x)$在区间$[a,b]$上带权重$\rho(x)$正交，即
+            \item 所有本征值 $\lambda_n\geqslant 0$,
+            \item 相应于不同本征值$\lambda_m$和$\lambda_n$的本征函数$y_m\qty(x)$和$y_n\qty(x)$在区间$[a,b]$上带权重$\rho(x)$正交，即
               \begin{equation}
                 \int^b_a{y_m\qty(x)y_n\qty(x)\rho\qty(x)\dd{x}}=\delta_{mn} 
               \end{equation}
-            \item 本征函数族$y_1\qty(x),y_2\qty(x),y_3\qty(x)...$是完备的，即函数$f\qty(x)$如具有连续一阶导数和分段连续二阶导数，且满足本征函数族所满足的边界条件，就可以展   开为绝对且一致收敛的级数
+            \item 本征函数族$y_1\qty(x),y_2\qty(x),y_3\qty(x)...$是完备的，即函数$f\qty(x)$如具有连续一阶导数和分段连续二阶导数，且满足本征函数族所满足的边界条件，就可以展开为绝对且一致收敛的级数
               \begin{equation*}
-                f\qty(x) = \sum_n{f_n y_n\qty(x)}
+                f\qty(x)=\sum_n{f_n y_n\qty(x)}
               \end{equation*}
           \end{enumerate}
         \end{theorem}
@@ -3738,28 +3816,76 @@
         直接解这个常微分方程，得到
         \begin{equation}
           \begin{cases}
-            X = A_k\sin{kx} + B_k\cos{kx} \\
-            Y = C_k e^{-kt}
+            X=A_k\sin{kx}+B_k\cos{kx}\\
+            Y=C_k e^{-kt}
           \end{cases}.
         \end{equation}
-        由于这个世界实在不太可能有无穷大的温度，故$Y = e^{kt}$项不考虑。
+        由于这个世界实在不太可能有无穷大的温度，故$Y=e^{kt}$项不考虑。
 
         考虑到$\eval{u}_{x=0}=\eval{u}_{x=a}=0$，$k$应该要满足某种条件才能满足这个，那么事实上
         \begin{equation}
-          X = A_n \sin{\frac{n\pi x}{a}} , k = \frac{n\pi x}{a}, n \in\mathbb{N}^+.
+          X=A_n\sin{\frac{n\pi x}{a}},k=\frac{n\pi x}{a},n\in\mathbb{N}^+.
         \end{equation}
         由于前面提到的本征值问题，$-k^2$是$X$的常微分方程的本征值，对应本征函数构成完备基，对$Y$也有相应情况，从而$u$可以展开为$XY$的线性组合，即
         \begin{equation}
-          X = \sum_n{A_n \sin{\frac{n\pi x}{a}} e^{- \frac{n\pi y}{a}}}.
+          X=\sum_n{A_n\sin{\frac{n\pi x}{a}}e^{-\frac{n\pi y}{a}}}.
         \end{equation}
         可是……$A_n$怎么确定呀？
         
         就是广义傅立叶级数呀！
-        注意到$\eval{u}|_{y=0} = u_0$,有
+        注意到$\eval{u}|_{y=0}=u_0$,有
         \begin{equation}
-          A_n = \int^a_0{u_0 \sin{\frac{n\pi x}{a}}\dd{x}}=\frac{a u_0}{n\pi}\qty(1-\cos{n\pi}) .
+          A_n=\int^a_0{u_0\sin{\frac{n\pi x}{a}}\dd{x}}=\frac{a u_0}{n\pi}\qty(1-\cos{n\pi}) .
         \end{equation}
         于是我们成功地获得了温度分布的解析解!(?)\footnote{当然有些人会觉得级数展开不算解析解。能展开成简单函数求和已经不容易了。}
+
+      \section{傅里叶变换的应用}
+        傅立叶变换的一个非常有价值的特点是可以把导数转换为一个常数相乘，从而极大地简化方程。比如无界空间下的扩散问题，
+        \begin{equation*}
+          u_t-a^2u_{xx} = 0
+        \end{equation*} 
+        初始条件：
+        \begin{equation*}
+          \eval{u}_{t=0}=\phi\qty(x)
+        \end{equation*} 
+        傅立叶变换再逆变换就能回到原来的样子，
+        \begin{equation*}
+          u\qty(x,t)=\int{\mathcal{F}\qty[u]e^{ikx}\dd{k}}=\mathcal{F}^{-1}\qty[\mathcal{F}\qty[u]]
+        \end{equation*} 
+        对$x$做Fourier Transform,
+        \begin{equation*}
+          \mathcal{F}\qty[u]\qty(k,t)=\frac{1}{2\pi}\int{u\qty(x,t)e^{-ikx}\dd{x}} 
+        \end{equation*} 
+        原方程便转换为
+        \begin{eqnarray*}
+          \begin{cases}
+            \mathcal{F}\qty[u_t]+a^2k^2\mathcal{F}\qty[u]=0\\
+            \eval{\mathcal{F}\qty[u]}_{t=0}=\mathcal{F}\qty[\phi]
+          \end{cases}\\
+          \Rightarrow\mathcal{F}\qty[u]=\mathcal{F}\qty[\phi]e^{-k^2a^2t}\\
+          \Rightarrow=\mathcal{F}^{-1}\qty[\mathcal{F}\qty[\phi]e^{-k^2a^2t}]
+        \end{eqnarray*}
+        有
+        \begin{equation*}
+          \mathcal{F}\qty[f_1 * f_2]=2\pi\mathcal{F}\qty[f_1]\mathcal{F}\qty[f_2]
+        \end{equation*}
+        其中$*$表示卷积。故
+        \begin{equation*}
+          u=\frac{1}{2\pi}\phi*\mathcal{F}^{-1}e^{-k^2a^2t} 
+        \end{equation*} 
+        当然也可以直接套定义，
+        \begin{align*}
+          u&=\int_{-\infty}^\infty{\mathcal{F}\qty[\phi]e^{-k^2a^2t}e^{ikx}\dd{k}}\\
+          &=\frac{1}{2\pi}\int{e^{ikx}\dd{k}\int{\phi\qty(\xi)e^{-ik\xi}\dd{\xi}}}\\
+          &=\frac{1}{2\pi}\int{\phi\qty(\xi)\dd{\xi}\int{e^{-k^2a^2t}e^{-ik\qty(x-\xi)}\dd{k}}}\\
+          &=\sqrt{\frac{\pi}{a^2 t}}\frac{1}{2\pi}\int{\phi\qty(\xi)e^{-\frac{\qty(x-\xi)^2}{4a^2t}}\dd{\xi}}\\
+          &=\frac{1}{2\pi}\phi(x)*\sqrt{\frac{\pi}{a^2t}}e^{-\frac{x^2}{4a^2t}}
+        \end{align*}
+        其中，有一步是做配方，
+        \begin{equation*}
+          e^{-k^2a^2t}e^{ik\qty(x-\xi)}=e^{-a^2t(k-\frac{i\qty(x-\xi)}{2a^2t})^2}e^{-\frac{\qty(x-\xi)^2}{4a^2t}}
+        \end{equation*} 
+        注意在积分该式时存在积分路径不在实轴的问题，但事实上构造回路后由于回路积分为零，故可以直接化为在实轴上的积分，从而解得最终解。
 
       \section{拉普拉斯积分变换}
         \begin{equation}
