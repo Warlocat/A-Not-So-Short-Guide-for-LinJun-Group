@@ -1698,6 +1698,43 @@
         \end{align*}
     
 
+\section{相对论量子力学}
+薛定谔方程有很多不尽如人意的地方，比如说它并不能使用自身的理论解释电子自旋的由来，比如它根本没搞定相对论效应的事情。在王老师的量子化学课上会教标量相对论效应作为微扰对能量的修饰，但最为关键的光速不变原理仍旧没有在量子力学体系中得到体系。而成功将洛伦兹变换应用到量子力学的理论便是狄拉克的相对论量子力学体系。
+
+\subsection{经典电动力学}
+在描述相对论量子力学之前，编者（李睿）认为有必要了解一下经典电动力学。正如爱因斯坦从麦克斯韦方程组看到光速不变原理建立了狭义相对论一样，以麦克斯韦方程组作为出发点的电动力学是直接满足狭义相对论，即服从洛伦兹变换的。因此在讲述相对论量子力学的时候，我们也需要用经典电动力学作为其中的一个出发点。
+
+麦克斯韦方程组为
+\begin{equation}
+	\begin{cases}
+		\nabla \cdot \boldsymbol{D} = \rho, \\
+		\nabla \cdot \boldsymbol{B} = 0, \\
+		\nabla \times \boldsymbol{E} = \frac{\partial \boldsymbol{B}}{\partial t}, \\
+		\nabla \times \boldsymbol{H} = \frac{\partial \boldsymbol{E}}{\partial t} 
+	\end{cases}.
+\end{equation}
+我们提到过任何向量场的旋度的散度为零，即
+\[
+	\nabla \cdot (\nabla \times \boldsymbol{A}) = 0
+.\] 
+所以对于一个磁场总会有一个对应的向量场$\boldsymbol{A}$,使得
+\begin{equation}
+	\boldsymbol{B} = \nabla \times \boldsymbol{A} .
+\end{equation}
+$\boldsymbol{A}$便称为磁矢势。如果你记忆力比较好，你应该还记得一个标量场的梯度是没有旋度的\footnote{没有印象？不妨作为一个很小很小的作业。}，因此这个标量场的梯度加在磁矢势中会完全没有任何影响，也就是
+\[
+	\boldsymbol{B} = \nabla \times (\boldsymbol{A} + \nabla \lambda)
+.\] 
+其中$\lambda$为任意一个标量场。为了搞定这个事情，有两个规范进行约束，一个是
+\begin{equation}
+	\nabla \cdot \boldsymbol{A} = 0,
+\end{equation}
+此为库仑规范，一个是
+\begin{equation}
+	\nabla \cdot \boldsymbol{A} + \frac{1}{c^2} \frac{\partial \phi}{\partial t} = 0, 
+\end{equation}
+此为洛伦兹规范。
+
     \chapter{量子化学-电子结构基础}
       量子化学(电子结构)部分，我们将简要介绍常见的电子结构计算方法，所谓电子结构方法，即求解分子(或者固体)体系的定态\sch 方程的方法，大家都知道，多体的SE是难以求得精确的解析结果的，因此量子化学某种程度上也是各类近似方法及其如何一步步逼近精确解的简介，本节会\textbf{简要}介绍基于分子电子结构计算的各种理论，包括Hartree-Fock方法，post-Hartree-Fock方法和DFT理论，编者还在最后加入了简化版的电子(费米子)二次量子化的内容。限于篇幅，上述理论的部分证明被略去，暂时也不涉及关于固体理论的相关计算。本节内容与王老师高等物理化学-量子化学课程内容相似，但是又很多不同，我们也参考了非常多经典电子结构教材的内容。
       
