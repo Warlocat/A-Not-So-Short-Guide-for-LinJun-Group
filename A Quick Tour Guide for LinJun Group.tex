@@ -241,9 +241,9 @@
 
       本章包含了在王老师课题组可能用到的数学知识，但是并不是所有人所有方向都非常重要。阅读此章内容前，我们默认你掌握了基础的数学知识：单变量微积分，多元函数微积分，基础线性代数。如果自认为对此比较熟悉，可以有用到相关知识的时候再回来检索查看，如果不熟悉，还是建议阅读本章内容。对于一部分有一定意义但影响阅读连贯性的内容（例如部分证明及拓展应用），我们会将其列于附录中。\textbf{本指南不适合完全没学过线性代数的同学，如果想完整学习线性代数请参阅相关教材。}
 
-      \section{简易数学回顾}
+      \section{数学回顾}
       
-        数学基础的第一小节将关注于最基础的数学内容，主要是线性代数和微积分的一些知识，由于长时间不用可能有所生疏，我们就在这里作简单的回顾。熟悉此节内容的同学可以直接跳过。
+        数学基础的第一小节将关注于最基础的数学内容，主要是最基础的复数概念、线性代数和微积分的一些知识，由于长时间不用可能有所生疏，我们就在这里作简单的回顾。并且把线性代数学习中常用的实数问题推广到复数的情况下。熟悉此节内容的同学可以直接跳过。
 
         \subsection{复数及复变函数基础}
 
@@ -520,7 +520,7 @@
           \begin{equation}
             \vb*{A}=\vb*{A}^{\dagger}
           \end{equation}
-          可以看出，如果矩阵元都是实数，厄米矩阵就是实对称矩阵。厄米矩阵和实对称矩阵的性质相似：具有实数的特征值，并且不同特征值对应的特征向量正交。厄密矩阵的另一种定义为\footnote{也是“自伴”这一名称的来源，$\vb*{A}$的\textbf{伴随矩阵}$\vb*{A}^\dagger$的定义为$\mean{u,\vb*{A}v}=\mean{\vb*{A}^\dagger u,v}$。这一定义是从内积出发的，和从算符的矩阵形式出发得到的厄米共轭矩阵是等价的。}
+          可以看出，如果矩阵元都是实数，幺正矩阵就是正交矩阵，因此在复数范围内的保持矢量模长不变的变换就是\textbf{幺正变换}，它在量子力学的推导中极为重要；厄米矩阵就是实对称矩阵。厄米矩阵和实对称矩阵的性质相似：具有实数的特征值，并且不同特征值对应的特征向量正交。厄密矩阵的另一种定义为\footnote{也是“自伴”这一名称的来源，$\vb*{A}$的\textbf{伴随矩阵}$\vb*{A}^\dagger$的定义为$\mean{u,\vb*{A}v}=\mean{\vb*{A}^\dagger u,v}$。这一定义是从内积出发的，和从算符的矩阵形式出发得到的厄米共轭矩阵是等价的。}
           \begin{equation}
             \mean{u,\vb*{A}v}=\mean{\vb*{A}u,v}
           \end{equation}
@@ -560,7 +560,7 @@
             e^x=\qty[\frac{1}{0!},\frac{1}{1!},\frac{1}{2!},\frac{1}{3!},\dots,\frac{1}{n!},\dots]
           \end{equation}
 
-          那么这组基矢量（或者说基函数）是否正交归一呢？这就涉及到一个复杂的问题，函数的内积怎么定义，我们上文中其实没有展开内积的定义，我们此处也不深究。矢量的内积通常为对应系数乘积求和，函数的内积通常定义为在某个空间内，两个函数乘积的积分，即
+          那么这组基矢量（或者说基函数）是否正交归一呢？这就涉及到一个复杂的问题，函数的内积怎么定义，我们上文中其实没有展开内积的严格定义，只是给出了对于一般矢量，点积就是内积。我们此处也不深究内积的高级定义，只是给出对于函数空间的内积的一种常用定义方式，即
           \begin{equation}
             \mean{f,g}=\int_a^b{\dd{x} f\qty(x)g\qty(x)}
           \end{equation}
@@ -1255,7 +1255,11 @@
           4阶RK法的精度已经较高，已经满足了王老师课题组和多数其他物理工程领域的数值精度要求。
 
     \chapter{量子力学}
-      本指南默认入门者对量子力学最基础的部分有一定的理解，因此不会从\sch 方程入手，也不会涉及五大基本假设。另外，本指南也不涉及高深内容，只有在电子结构部分会从实用的角度简单介绍电子(费米子)的二次量子化。如果你需要量子力学的基础知识，暂时可以参阅各类量子力学教材，但是各类书籍难度差别巨大，我们为初学者推荐Griffiths的量子力学导论，基本看过基础理论部分就已经能满足我们的多数需求。另外，可以参见Levine量子化学中的量子力学基础部分，推导详实。为了方便，我们第一小节为快速概念检索。
+      本指南默认入门者对量子力学最基础的部分有一定的理解，因此不会从最简单的东西慢慢入手，我们通过直接讲解五大基本假设来帮助读者回忆基础量子力学的内容。作为量子化学的学习，并不需要每个量子力学中的模型都需要自己掌握解法（当然掌握最好），量子化学更多地关注方程的近似解。因此我们的量子力学部分会包括基础量子力学课讲到的，但是结构化学可能不会涉及的微扰理论以及变分法。另外就是会被熟练的
+      
+      在这些之后，我们从高等量子力学的角度重新阐述了波函数、力学量以及表象理论。最后，我们简单涉及了密度矩阵，在王老师课题组的实际应用中，一般只会涉及到密度矩阵的定义，不会深究，这里我们也只是多半复制了樱井纯高等量子力学中的表述，为大家提供一个更全面的密度矩阵的意义。
+      
+      另外，本指南也不涉及高深内容，只有在电子结构部分会从实用的角度简单介绍电子(费米子)的二次量子化。如果你需要量子力学的基础知识，暂时可以参阅各类量子力学教材，但是各类书籍难度差别巨大，我们为初学者推荐Griffiths的量子力学导论，基本看过基础理论部分就已经能满足我们的多数需求。另外，可以参见Levine量子化学中的量子力学基础部分，推导详实。为了方便，我们第一小节为快速概念检索。
 
       \section{快速概念检索}
         \begin{enumerate}
@@ -1458,10 +1462,114 @@
             \end{equation}
         \end{description}
 
+      \section{基础量子力学的基本假设}
+        这一节中我们简要回顾一下基础量子力学中的五大假设，以帮助读者回忆在量子力学或者结构化学课中学到的基础知识。为了简便，我们多数时候只用了一维问题中的定义。
+
+        \begin{description}
+          \item[波函数及其概率解释：]量子力学中粒子的状态用一个波函数$\Psi(x,t)$来表示，波函数的模平方\footnote{我们从未假定波函数是实的，所以是“模平方”，但确实，在不涉及相对论的量子化学应用中，基本可以假定波函数是实数。}代表了在特定位置发现这个粒子的概率密度。换句话说在$x$到$x+\mathrm{d}x$范围内发现这个粒子的概率为$\left|\Psi(x,t)\right|^2$
+          
+          \item[量子力学基本方程：]波函数满足\sch 方程，其有两个形式，含时的\sch 方程为
+          \begin{equation}
+            i\hbar \frac{\partial}{\partial t}\Psi(x,t) = \hat{H} \Psi(x,t)
+          \end{equation}
+          不含时的(定态)\sch 方程为
+          \begin{equation}
+            \hat{H} \psi(x) = E\psi(x)
+          \end{equation}
+          
+          \item[力学量与算符：]任何一个经典力学的可观测量在量子力学中都是一个厄密算符，他们的形式都可以通过把其经典形式中的坐标换为坐标算符($\hat{x}$)，动量换为动量算符($\hat{p} = -i\hbar \vec{\nabla}$)得到。力学量观测的期望值可以通过如下方法得到
+          \begin{equation}
+            \langle A\rangle = \int \mathrm{d}x \Psi^{*}\hat{A}\Psi 
+          \end{equation}
+          
+          \item[态叠加原理：]如果量子态$\Psi_1$和量子态$\Psi_2$都是量子力学允许的态，那么它们的线性组合也是量子力学允许的态。
+          
+          \item[全同粒子假设：]量子力学中的粒子是不可区分的。因此当交换粒子的位置时，不会改变物理观测的结果，即不会改变波函数的模平方。但是这个操作仍然可能改变波函数的符号，交换粒子位置波函数不变的称为对称波函数，满足这样行为的粒子称为玻色子；交换粒子位置改变波函数符号的称为反对称波函数，满足这样行为的粒子称为费米子。电子是费米子。  
+        \end{description}
+      \section{量子力学的近似解}
+        一般来说，除了量子力学课上学到的那些例子，\sch 方程基本是不可能严格求解的，尤其对于多电子的分子体系，因此在量子化学中只有近似解。而量子化学几乎所有近似的核心思想都是基于变分法和微扰理论的，因此量子近似解变得尤为重要。在这一节中我们将详细地介绍微扰理论和变分法。其中微扰理论主要是非含时微扰，包括非简并微扰和简并微扰理论。对于含时微扰理论，我们不做重点讨论。
+        \subsection{微扰理论}
+          微扰是一个物理学家非常喜欢的近似方法，它的出发点也是容易理解的。如果我们无法严格求解某些体系的量子方程，我们总可以把它的解写成某个近似点的展开的形式，如果这个近似点与当前体系相差很小的话，我们期望这个展开的低阶项就能很好地描述精确解了。这个思路与Taylor展开是十分相似的，数学上说，如果我们有一个已经知道解的体系
+          \begin{equation}
+            \hat{H}^{(0)}\left|\psi_i^{(0)}\right\rangle=E_i^{(0)} \left|\psi_i^{(0)}\right\rangle,\;\;\left\langle\psi_i^{(0)}\right.\left|\psi_j^{(0)}\right\rangle = \delta_{ij}
+          \end{equation}
+          现在我们需要求解的体系与这个已经有解的体系非常接近，哈密顿量的差只是一个小量，比如外加的弱电场、弱磁场、低速下的相对论修正等。体系哈密顿量可以写为$\hat{H}= \hat{H}^{(0)}+\lambda\hat{H}^{(1)}$，如果$\lambda$是一个小量，我们自然可以可以把波函数在$\left|\psi_i^{(0)}\right\rangle$附近展开，能量在$E_i^{(0)}$附近展开。
+
+          \subsubsection{非简并微扰理论}
+            如果我们的本征函数组非简并，我们展开到一阶项，有
+            \begin{equation}
+              \left|\psi_{i}\right\rangle=\left|\psi_{i}^{(0)}\right\rangle+\lambda\left|\psi_{i}^{(1)}\right\rangle+ O\left(\lambda^{2}\right)
+            \end{equation}
+            \begin{equation}
+              E_{i}=E_{i}^{(0)}+\lambda E_{i}^{(1)}+O\left(\lambda^{2}\right)
+            \end{equation}
+            把他们带回原本的定态\sch 方程中，
+            \begin{equation}
+              \begin{aligned}
+                &\left(\mathbf{H}^{(0)}+\lambda \mathbf{H}^{(1)}\right)\left(\left|\psi_{i}^{(0)}\right\rangle+\lambda\left|\psi_{i}^{(1)}\right\rangle+ O\left(\lambda^{2}\right)\right)\\&=\left(E_{i}^{(0)}+\lambda E_{i}^{(1)}+O\left(\lambda^{2}\right)\right)\left(\left|\psi_{i}^{(0)}\right\rangle+\lambda\left|\psi_{i}^{(1)}\right\rangle+ O\left(\lambda^{2}\right)\right)
+              \end{aligned}
+            \end{equation}
+            令其中含$\lambda$一次方的系数相等，我们得到
+            \begin{equation}
+              \left(\mathbf{H}^{(0)}-E_{i}^{(0)}\right)\left|\psi_{i}^{(1)}\right\rangle=\left(E_{i}^{(1)}-\mathbf{H}^{(1)}\right) \left| \psi_{i}^{(0)}\right\rangle
+              \label{1stPert}
+            \end{equation}
+            左乘$\left\langle\psi_j^{(0)}\right|$，
+            \begin{equation}
+              \begin{array}{l}{\left\langle\psi_{j}^{(0)}\left|\left(\mathbf{H}^{(0)}-E_{i}^{(0)}\right)\right| \psi_{i}^{(1)}\right\rangle=\left\langle\psi_{j}^{(0)}\left|\left(E_{i}^{(1)}-\mathbf{H}^{(1)}\right)\right| \psi_{i}^{(0)}\right\rangle} \\ {\left(E_{j}^{(0)}-E_{i}^{(0)}\right)\left\langle\psi_{j}^{(0)} | \psi_{i}^{(1)}\right\rangle= E_{i}^{(1)} \delta_{i j}-\left\langle\psi_{j}^{(0)}\left|\mathbf{H}^{(1)}\right| \psi_{i}^{(0)}\right\rangle}\end{array}
+            \end{equation}
+            化简后得到
+            \begin{equation}
+              \left\{\begin{array}{l}{E_{i}^{(1)}=\left\langle\psi_{i}^{(0)}\left|\mathbf{H}^{(1)}\right| \psi_{i}^{(0)}\right\rangle, \text { where } i=j} \\ {\left|\psi_{i}^{(1)}\right\rangle=\sum_{j \neq i} \frac{\left\langle\psi_{j}^{(0)}\left|\mathbf{H}^{(1)}\right| \psi_{i}^{(0)}\right\rangle}{E_{i}^{(0)}-E_{j}^{(0)}}\left|\psi_{j}^{(0)}\right\rangle, \text { where } i \neq j}\end{array}\right.
+            \end{equation}
+            上式就是对波函数和能量的一阶微扰修正\footnote{读者可能会问，那$\lambda$去哪了，其实我们使用$\lambda$只是为了标记小量的大小，所以上述推导可以完全忽略$\lambda$的存在，得到等式(\ref{1stPert})只需要令其中一阶小量相等就可以了}。
+
+            如果我们展开到二阶
+            \begin{equation}
+              \left\{\begin{array}{l}{\left|\psi_{i}\right\rangle=\left|\psi_{i}^{(0)}\right\rangle+\lambda\left|\psi_{i}^{(1)}\right\rangle+\lambda^{2}\left|\psi_{i}^{(2)}\right\rangle+ O\left(\lambda^{3}\right)} \\ {E_{i}=E_{i}^{(0)}+\lambda E_{i}^{(1)}+\lambda^{2} E_{i}^{(2)}+O\left(\lambda^{3}\right)}\end{array}\right.
+            \end{equation}
+            同样地，我们代入原本的\sch 方程
+            \begin{equation}
+              \begin{aligned}
+                &\left(\mathbf{H}^{(0)}+\lambda \mathbf{H}^{(1)}\right)\left(\left|\psi_{i}^{(0)}\right\rangle+\lambda\left|\psi_{i}^{(1)}\right\rangle+\lambda^{2}\left|\psi_{i}^{(2)}\right\rangle+ O\left(\lambda^{3}\right)\right)\\&=\left(E_{i}^{(0)}+\lambda E_{i}^{(1)}+\lambda^{2} E_{i}^{(2)}+O\left(\lambda^{3}\right)\right)\left(\left|\psi_{i}^{(0)}\right\rangle+\lambda\left|\psi_{i}^{(2)}\right\rangle+\lambda^{2}\left|\psi_{i}^{(2)}\right\rangle+ O\left(\lambda^{3}\right)\right)
+              \end{aligned}
+            \end{equation}
+            令其中$\lambda^2$项的系数相等(即其中二阶小量相等)
+            \begin{equation}
+              \left(\mathbf{H}^{(0)}-E_{i}^{(0)}\right)\left|\psi_{i}^{(2)}\right\rangle=\left(E_{i}^{(1)}-\mathbf{H}^{(1)}\right)\left|\psi_{i}^{(1)}\right\rangle+ E_{i}^{(2)}\left|\psi_{i}^{(0)}\right\rangle
+            \end{equation}
+            左乘$\left\langle\psi_k^{(0)}\right|$，同样，当$k=i$时我们得到能量的二阶修正，$k\neq i$时我们得到对波函数的二阶修正。而后者较为复杂，平常应用不多，我们只考虑二阶微扰的能量修正，即$i=k$
+            \begin{equation}
+              E_{i}^{(2)}=\sum_{l \neq i} \frac{\left\langle\psi_{l}^{(0)}\left|\mathbf{H}^{(1)}\right| \psi_{i}^{(0)}\right\rangle^{2}}{E_{i}^{(0)}-E_{l}^{(0)}}
+            \end{equation}
+
+            对于三阶及更高的微扰，由于公式复杂，计算不便，平常几乎不会使用。
+          
+          \subsubsection{简并微扰理论}
+            对于简并微扰，我们只讨论一阶情况，所谓简并，即等式(\ref{1stPert})中最后的$\left|\psi_i^{(0)}\right\rangle$并不是唯一的，而是很多简并态的线性组合，$\left|\psi_i^{(0)}\right\rangle=\sum_j c_{ij}\left|\psi_{ij}^{(0)}\right\rangle$。简并微扰的物理意义为，我们原本有很多简并能级，在外加某个微扰之后这些能级会发生变化，比如裂分而不再简并。在这种情况下，我们可以将等式(\ref{1stPert})写为
+            \begin{equation}
+              \left(\mathbf{H}^{(0)}-E_{i}^{(0)}\right)\left|\psi_{i}^{(1)}\right\rangle=\left(E_{i}^{(1)}-\mathbf{H}^{(1)}\right) \sum_j c_{ij}\left|\psi_{ij}^{(0)}\right\rangle
+            \end{equation}
+            我们左乘这个展开中的任何一个$\left\langle\psi_{ik}^{(0)}\right|$，等式左侧就等于零，整个等式变为
+            \begin{equation}
+              \sum_j \left\langle\psi_{ik}^{(0)}\right|\mathbf{H}^{(1)}\left|\psi_{ij}^{(0)}\right\rangle c_{ij}=E_{i}^{(1)}c_{ik}
+            \end{equation}
+            熟悉矩阵本征值问题的读者可以看出，上式等价于，一阶微扰的能量修正，就等于简并的各个能级基下微扰哈密顿量的本征值。所以当我们考虑简并能级在外场下的裂分时，只要计算这些简并能级对微扰哈密顿量的矩阵元，再对角化就可以了。
+          
+        \subsection{变分法}
+          变分法听起来是一个泛函分析里的高级概念，但是实际上在量子力学中的应用非常简单。简单来说，如果我们希望求解一个没有精确解的体系的基态波函数，设它的能量为$E_0$。如果我们瞎猜一个函数形式，含有参数$\lambda$，那么我们瞎猜的这个函数一定可以用原本问题的本征函数展开，那意味着它的能量期望值一定大于等于$E_0$。等于号也基本不可能，除非我们就猜出了精确解的函数形式。但是我们期望我们猜出来的函数在参数$\lambda$的意义下有最小的能量，即我们期望找到一个能量期望值关于$\lambda$的极值点
+          \begin{equation}
+            \frac{\partial}{\partial \lambda}\left\langle E\right\rangle =  \frac{\partial}{\partial \lambda} \frac{\left\langle\psi(\lambda)\right|\hat{H}\left|\psi(\lambda)\right\rangle}{\left\langle\psi(\lambda)\right.\left|\psi(\lambda)\right\rangle}=0
+          \end{equation}
+          这样我们就得到了我们猜测意义下的最好的基态描述。如果我们对波函数的猜测足够准的话，我们得到的近似波函数就越接近真正的基态波函数。这样说可能太过于随意了，首先我们对波函数的猜测并不是胡乱猜，而是根据一定的物理图像，比如我们假定He原子的基态波函数跟氢原子基态波函数形式一致，这个猜测就有一定的合理性。
+
+          但是很多情况下，物理图像也不起作用，但我们总可以给定一个基组，将我们的猜测波函数写成这组基函数的线性组合，而这个线性组合系数就是我们变分法的参数。这个意义下，只要我们可以用一套尽可能完备的基组，就能得到尽可能正确的基态波函数。
+
+          在量子化学中，我们对基态的关注远胜于其他电子态，因此变分法可以说是量子化学的核心近似方法。我们可以利用变分法基本公式推导出我们在量子化学中常用的线性变分法的公式，可以参见后续章节。
       \section{Hilbert空间和态矢量}
         接下来的几节，我们将关注一些可能读者学习量子力学没有接触到或者可能理解不好，却十分重要的内容。我们尽量前后贯通，让读者也看到这之中蕴含的线性代数的核心，而且尽可能用一种与高等量子力学自恰的表述体系，毕竟有不少人都说过：量子力学就是线性代数。
 
-        在数学基础部分，我们引入了线性空间，Hilbert空间是一个完备的定义了内积的无穷维线性空间，即有限维度的内积空间(Euclidean空间)的推广，我们不对其数学意义做过多讨论。它像所有的线性空间一样，满足对复数域的数乘运算和矢量加法封闭性，并且可以找到一个无限个数的基函数组，Hilbert空间中的任何一个矢量都可以用这组完备基线性组合表示出来。
+        在数学基础部分，我们引入了线性空间，现在我们引入Hilbert空间的概念，它就是一个完备的定义了内积的无穷维线性空间，即有限维度的内积空间(Euclidean空间)的推广，我们不对其数学意义做过多讨论。它像所有的线性空间一样，满足对复数域的数乘运算和矢量加法封闭性，并且可以找到一个无限个数的基函数组，Hilbert空间中的任何一个矢量都可以用这组完备基线性组合表示出来。
 
         像之前提到的那样，遵循Dirac的记号系统，Hilbert空间中的态矢量通常记成一个右矢ket$ | a \rangle $，在Hilbert空间中，每一个右矢都可以定义其伴随矢量(即厄米共轭)，后者用左矢bra$ \langle b | $表示，而在Hilbert空间中两个矢量的内积定义为一个左矢乘以一个右矢，这样得到一个数(复数)
         \begin{equation}
@@ -3145,7 +3253,7 @@
         \begin{equation*}
           Y_{a}=E_{a}+\frac{K}{2}\left(X-X_{a}\right)^{2}, Y_{b}=E_{b}+\frac{K}{2}\left(X-X_{b}\right)^{2}
         \end{equation*}
-        在这里我们定义重整能(Reorganization Energy)：电子从第一个势能面底垂直跃迁到第二个势能面上之后，从这个位置驰豫到第二个势能面的基态需要的能量，即图中的$E_r$\footnote{不同地方定义略有区别，但是为了推出这个公式，都是等价的}。那么重整能的大小也很容易计算
+        在这里我们定义重整能(Reorganization Energy)：电子从第一个势能面底垂直跃迁到第二个势能面上之后，从这个位置驰豫到第二个势能面的基态需要的能量，即图中的$E_r$\footnote{不同地方定义略有区别，但是为了推出这个公式，都是等价的}。那么重整能的大小也很容易计算\footnote{在很多文献中，人们分析的是双分子过程，所以给出的重整能是我们公式的两倍}
         \begin{equation*}
           E_{r}=Y_{2}\left(X_{a}\right)-Y_{2}\left(X_{b}\right)=E_{b}+\frac{K}{2}\left(X_{a}-X_{b}\right)^{2}-E_{b}=\frac{K}{2}\left(X_{a}-X_{b}\right)^{2}
         \end{equation*}
@@ -3154,7 +3262,7 @@
           \begin{array}{c}
             {Y_{a}\left(X_{\mathrm{tr}}\right)=Y_{b}\left(X_{\mathrm{tr}}\right)} \\
             {E_{a}+\frac{K}{2}\left(X_{\mathrm{tr}}-X_{a}\right)^{2}=E_{b}+\frac{K}{2}\left(X_{\mathrm{tr}}-X_{b}\right)^{2}} \\
-            {E_{a}+\frac{K}{2}\left(X^{2}-2 X_{a} X+X_{a}^{2}\right)=E_{b}+\frac{K}{2}\left(X^{2}-2 X_{b} X+X_{b}^{2}\right)} \\
+            {E_{a}+\frac{K}{2}\left(X_{tr}^{2}-2 X_{a} X_{tr}+X_{a}^{2}\right)=E_{b}+\frac{K}{2}\left(X_{tr}^{2}-2 X_{b} X_{tr}+X_{b}^{2}\right)} \\
             {X_{\mathrm{tr}}=\frac{E_{a}-E_{b}+\frac{K}{2}\left(X_{a}^{2}-X_{b}^{2}\right)}{K\left(X_{a}-X_{b}\right)}}
           \end{array}
         \end{equation*}
