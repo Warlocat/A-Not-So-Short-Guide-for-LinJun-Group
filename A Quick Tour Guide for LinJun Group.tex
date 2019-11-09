@@ -1488,12 +1488,12 @@
         \end{description}
       \section{量子力学的近似解}
         一般来说，除了量子力学课上学到的那些例子，\sch 方程基本是不可能严格求解的，尤其对于多电子的分子体系，因此在量子化学中只有近似解。而量子化学几乎所有近似的核心思想都是基于变分法和微扰理论的，因此量子近似解变得尤为重要。在这一节中我们将详细地介绍微扰理论和变分法。其中微扰理论主要是非含时微扰，包括非简并微扰和简并微扰理论。对于含时微扰理论，我们不做重点讨论。
-        \subsection{微扰理论}
+        \subsection{不含时微扰理论}
           微扰是一个物理学家非常喜欢的近似方法，它的出发点也是容易理解的。如果我们无法严格求解某些体系的量子方程，我们总可以把它的解写成某个近似点的展开的形式，如果这个近似点与当前体系相差很小的话，我们期望这个展开的低阶项就能很好地描述精确解了。这个思路与Taylor展开是十分相似的，数学上说，如果我们有一个已经知道解的体系
           \begin{equation}
             \hat{H}^{(0)}\left|\psi_i^{(0)}\right\rangle=E_i^{(0)} \left|\psi_i^{(0)}\right\rangle,\;\;\left\langle\psi_i^{(0)}\right.\left|\psi_j^{(0)}\right\rangle = \delta_{ij}
           \end{equation}
-          现在我们需要求解的体系与这个已经有解的体系非常接近，哈密顿量的差只是一个小量，比如外加的弱电场、弱磁场、低速下的相对论修正等。体系哈密顿量可以写为$\hat{H}= \hat{H}^{(0)}+\lambda\hat{H}^{(1)}$，如果$\lambda$是一个小量，我们自然可以可以把波函数在$\left|\psi_i^{(0)}\right\rangle$附近展开，能量在$E_i^{(0)}$附近展开。
+          现在我们需要求解的体系与这个已经有解的体系非常接近，哈密顿量的差只是一个小量，比如外加的弱电场、弱磁场、低速下的相对论修正等。体系哈密顿量可以写为$\hat{H}= \hat{H}^{(0)}+\lambda\hat{H}^{(1)}$，如果$\lambda$是一个小量，在实际应用中，通常为外加的磁场电场强度等。我们自然可以可以把波函数在$\left|\psi_i^{(0)}\right\rangle$附近展开，能量在$E_i^{(0)}$附近展开。
 
           \subsubsection{非简并微扰理论}
             如果我们的本征函数组非简并，我们展开到一阶项，有
@@ -1520,9 +1520,9 @@
             \end{equation}
             化简后得到
             \begin{equation}
-              \left\{\begin{array}{l}{E_{i}^{(1)}=\left\langle\psi_{i}^{(0)}\left|\mathbf{H}^{(1)}\right| \psi_{i}^{(0)}\right\rangle, \text { where } i=j} \\ {\left|\psi_{i}^{(1)}\right\rangle=\sum_{j \neq i} \frac{\left\langle\psi_{j}^{(0)}\left|\mathbf{H}^{(1)}\right| \psi_{i}^{(0)}\right\rangle}{E_{i}^{(0)}-E_{j}^{(0)}}\left|\psi_{j}^{(0)}\right\rangle, \text { where } i \neq j}\end{array}\right.
+              \left\{\begin{array}{l}{\lambda E_{i}^{(1)}=\left\langle\psi_{i}^{(0)}\left|\lambda\mathbf{H}^{(1)}\right| \psi_{i}^{(0)}\right\rangle, \text { where } i=j} \\ {\lambda\left|\psi_{i}^{(1)}\right\rangle=\sum_{j \neq i} \frac{\left\langle\psi_{j}^{(0)}\left|\lambda\mathbf{H}^{(1)}\right| \psi_{i}^{(0)}\right\rangle}{E_{i}^{(0)}-E_{j}^{(0)}}\left|\psi_{j}^{(0)}\right\rangle, \text { where } i \neq j}\end{array}\right.
             \end{equation}
-            上式就是对波函数和能量的一阶微扰修正\footnote{读者可能会问，那$\lambda$去哪了，其实我们使用$\lambda$只是为了标记小量的大小，所以上述推导可以完全忽略$\lambda$的存在，得到等式(\ref{1stPert})只需要令其中一阶小量相等就可以了}。
+            上式就是对波函数和能量的一阶微扰修正\footnote{读者可以看到，我们对波函数的修正里是没有第$i$项的系数的，我们可以给定任意的系数，并且通过归一化条件证明，这个系数必须是$0$或纯虚数，因此通常的微扰理论里认为这一项的贡献为$0$}。
 
             如果我们展开到二阶
             \begin{equation}
@@ -1540,7 +1540,7 @@
             \end{equation}
             左乘$\left\langle\psi_k^{(0)}\right|$，同样，当$k=i$时我们得到能量的二阶修正，$k\neq i$时我们得到对波函数的二阶修正。而后者较为复杂，平常应用不多，我们只考虑二阶微扰的能量修正，即$i=k$
             \begin{equation}
-              E_{i}^{(2)}=\sum_{l \neq i} \frac{\left\langle\psi_{l}^{(0)}\left|\mathbf{H}^{(1)}\right| \psi_{i}^{(0)}\right\rangle^{2}}{E_{i}^{(0)}-E_{l}^{(0)}}
+              \lambda^2E_{i}^{(2)}=\sum_{l \neq i} \frac{\left\langle\psi_{l}^{(0)}\left|\lambda\mathbf{H}^{(1)}\right| \psi_{i}^{(0)}\right\rangle^{2}}{E_{i}^{(0)}-E_{l}^{(0)}}
             \end{equation}
 
             对于三阶及更高的微扰，由于公式复杂，计算不便，平常几乎不会使用。
@@ -1555,17 +1555,89 @@
               \sum_j \left\langle\psi_{ik}^{(0)}\right|\mathbf{H}^{(1)}\left|\psi_{ij}^{(0)}\right\rangle c_{ij}=E_{i}^{(1)}c_{ik}
             \end{equation}
             熟悉矩阵本征值问题的读者可以看出，上式等价于，一阶微扰的能量修正，就等于简并的各个能级基下微扰哈密顿量的本征值。所以当我们考虑简并能级在外场下的裂分时，只要计算这些简并能级对微扰哈密顿量的矩阵元，再对角化就可以了。
+        \subsection{含时微扰理论}
+          读者可以看到，上一小节中的微扰理论与时间是没有关系的，是在处理外加扰动情况下定态\sch 方程的解如何变化的理论，在这一小节中，我们关心另外一个问题，即含时\sch 方程的解随着外界扰动的变化。但是我们希望强调，读者不要被含时这个名字所迷惑，我们最后会看到，含时微扰理论其实就是化学中的跃迁的理论。
+
+          我们先对跃迁概率做更加严格的讨论，我们令体系的哈密顿量$\hat{H}_0$不含时，$\psi_n$是$\hat{H}_0$的本征函数，对应的能量为$E_n$。如果体系的初态是某个特定的态$\psi(t=0)=\psi_m$，在没有外界相互作用的条件下，这个态是不会变化的，因为此时的含时\sch 方程的解可以写为
+          \begin{equation}
+            \psi(t) = \exp(\frac{-i\hat{H}t}{\hbar})\psi(0) = \exp(\frac{-iE_mt}{\hbar})\psi_m
+          \end{equation}
+          与初态波函数$\phi_m$只相差了一个相位因子，是不会改变物理测量的结果的。
           
+          但是当体系外加了一个含时间的相互作用$\hat{H}^{\prime}(t)$之后，体系将很有可能不能保持原本的量子态，我们将体系这个时候的波函数写成各个量子态含时演化的波函数的线性组合
+          \begin{equation}
+            \psi(t)=\sum_{n} C_{n m}(t) \mathrm{e}^{-i E_{n} t / \hbar} \psi_{n}
+            \label{t inde}
+          \end{equation}
+          而不再能保持在$\psi_m$态不变，而我们关心的问题就是现在的波函数处于某一个态$\psi_n$的概率，而这个概率就是我们通常所说的跃迁概率，定义为
+          \begin{equation}
+            P_{nm}(t)\equiv \left|C_{nm}\right|^2
+          \end{equation}
+          而单位时间内的跃迁概率：跃迁速率，定义为
+          \begin{equation}
+            w_{nm} \equiv \frac{\mathrm{d}}{\mathrm{d} t} P_{nm}(t)=\frac{\mathrm{d}}{\mathrm{d} t} \left|C_{nm}\right|^2
+          \end{equation}
+          于是我们的问题变为在给定初始条件$C_{nm} = \delta_{nm}$的条件下，如何求解$C_{nm}(t)$。此时的含时\sch 方程可以写为
+          \begin{equation}
+            \mathrm{i} \hbar \frac{\partial}{\partial t} \psi(t)=\left(H_{0}+H^{\prime}\right) \psi(t)
+          \end{equation}
+          带入\ref{t inde}可以得到
+          \begin{equation}
+            \mathrm{i} \hbar \sum_{n} \dot{C}_{n m} \mathrm{e}^{-i E_{n} t / \mathrm{h}} \psi_{n}=\sum_{n} C_{n m} \mathrm{e}^{-i E_{n} t / \hbar} H^{\prime} \psi_{n}
+          \end{equation}
+          上式左乘$\psi_k^{*}$再积分，根据函数的正交归一性我们得到
+          \begin{equation}
+            \mathrm{i} \hbar \dot{C}_{km}=\sum_{n} \mathrm{e}^{i \omega_{km} t}\left\langle k\left|H^{\prime}\right| n\right\rangle C_{nm}
+          \end{equation}
+          其中$\omega_{km}=(E_{k}-E_m)/\hbar$。需要注意的是，我们其实并没有解方程，只是将方程写成了另一个形式，接下来我们再讨论微扰理论。
+          \subsubsection{一般的含时微扰理论}
+          像不含时微扰一样，我们假定体系的跃迁概率很小很小，因此$C_{km}$可以在参考状态做一阶展开，这个参考状态就是初态，即$C_{nm}\approx\delta_{nm}$，我们有
+          \begin{equation}
+            \mathrm{i} \hbar \dot{C}_{km}^{(1)}=\sum_{n} \mathrm{e}^{i \omega_{km} t}\left\langle k\left|H^{\prime}\right| n\right\rangle \delta_{nm}= \mathrm{e}^{i \omega_{km} t}H_{km}^{\prime}
+          \end{equation}
+          我们将上式对时间积分并且加到$C_{km}$的修正中，就得到了一阶微扰下的系数表达式
+          \begin{equation}
+            C_{k m}(t)=C_{k m}^{(0)}+C_{k m}^{(1)}(t)=\delta_{k m}+\frac{1}{i \hbar} \int_{0}^{t} \mathrm{e}^{i \omega_{k m} t} H_{k m}^{\prime} \mathrm{d} t
+          \end{equation}
+          当然一般情况下，我们关心的并不是自己到自己的跃迁，因此当$k\neq m$时，跃迁概率就可以写作
+          \begin{equation}
+            P_{k m}(t)=\frac{1}{ \hbar^2} \left|\int_{0}^{t} \mathrm{e}^{i \omega_{k m} t} H_{k m}^{\prime} \mathrm{d} t\right|^2
+          \end{equation}
+          可以看到，只要$H_{k m}^{\prime} = 0$，上式就等于$0$。而由于对称性、守恒量等原因，这个微扰哈密顿量的矩阵元时可以等于$0$的，因此就有了某些能级的跃迁是\textbf{禁阻}的，这种结论称为\textbf{选择定则}。
+
+          \subsubsection{周期微扰：光谱}
+          当我们考虑光谱的问题时，外加的扰动一般为光，也就是电磁波，在这个意义下，我们可以把微扰哈密顿量写为$H^{\prime}(t)=H^{\prime} \mathrm{e}^{-i \omega t}$，我们可以将上一小节种最后的结论写下
+          \begin{equation}
+            C_{km}(t)=\frac{1}{i \hbar} \int_{0}^{t} \mathrm{d} t\left\langle k\left|H^{\prime}\right| m\right\rangle \mathrm{e}^{\mathrm{i}\left(\omega_{km}-\omega\right)t} =\frac{1}{\mathrm{i} \frac{1}{\hbar}}\left\langle k\left|H^{\prime}\right| m\right\rangle \frac{\mathrm{e}^{\mathrm{i}\left(\omega_{km}-\omega\right) t}-1}{\mathrm{i}\left(\omega_{km}-\omega\right)}
+          \end{equation}
+          以及
+          \begin{equation}
+            P_{k m}(t)=\frac{4\left|H_{k m}^{\prime}\right|^{2}}{\hbar^{2}}\left[\frac{\sin \left[\left(\omega_{k m}-\omega\right) t / 2\right]}{\omega_{k m}-\omega}\right]^{2}
+          \end{equation}
+          但是一般来说，外加光场的时间尺度远大于体系的特征时间，这个时候我们基本可以认为上式中的$t$是一个很大数字，甚至可以考虑它的极限情况，熟悉$\delta$函数的读者可以发现这是$\delta$函数的极限定义之一：$\lim _{a \rightarrow \infty} \frac{\sin ^{2} \alpha x}{x^{2}}=\pi a \delta(x)$，因此我们将$t$取极限得到
+          \begin{equation}
+            P_{k m}(t)=\frac{2 \pi t}{\hbar^{2}}\left|H_{ km}^{\prime}\right|^{2} \delta\left(\omega_{km}-\omega\right)
+          \end{equation}
+          而单位时间的跃迁概率（跃迁速率）为
+          \begin{equation}
+            w_{k m}(t)=\frac{2 \pi}{\hbar^{2}}\left|H_{ km}^{\prime}\right|^{2} \delta\left(\omega_{km}-\omega\right)
+            \label{hopping prob t indenpendent PT}
+          \end{equation}
+          这个公式就是很多光谱知识的出发点，很多看似图像性的结论，都可以从这个公式出发得到物理的结论。最显然的，由于$\delta$函数的存在，上式告诉我们，只有当外加电磁场的频率与体系的能级频率相同，也就是外加电磁场的能量恰好等于体系两个能级的能级差的时候，这个跃迁才能发生。
+
+          等式\ref{hopping prob t indenpendent PT}是我们之后讨论很多光谱问题的起点，更多关于振动和电子能级的讨论，请参考量子化学一章。
         \subsection{变分法}
-          变分法听起来是一个泛函分析里的高级概念，但是实际上在量子力学中的应用非常简单。简单来说，如果我们希望求解一个没有精确解的体系的基态波函数，设它的能量为$E_0$。如果我们瞎猜一个函数形式，含有参数$\lambda$，那么我们瞎猜的这个函数一定可以用原本问题的本征函数展开，那意味着它的能量期望值一定大于等于$E_0$。等于号也基本不可能，除非我们就猜出了精确解的函数形式。但是我们期望我们猜出来的函数在参数$\lambda$的意义下有最小的能量，即我们期望找到一个能量期望值关于$\lambda$的极值点
+          变分是一个泛函分析里的高级概念，但是实际上在量子力学中的应用非常简单。
+          
+          我们希望求解一个没有精确解的体系的基态波函数，设它的能量为$E_0$。如果我们瞎猜一个函数形式，含有参数$\lambda$，那么我们瞎猜的这个函数一定可以用原本问题的本征函数展开，那意味着它的能量期望值一定大于等于$E_0$。等于号也基本不可能，除非我们就猜出了精确解的函数形式。但是我们期望我们猜出来的函数在参数$\lambda$的意义下有最小的能量，即我们期望找到一个能量期望值关于$\lambda$的极值点
           \begin{equation}
             \frac{\partial}{\partial \lambda}\left\langle E\right\rangle =  \frac{\partial}{\partial \lambda} \frac{\left\langle\psi(\lambda)\right|\hat{H}\left|\psi(\lambda)\right\rangle}{\left\langle\psi(\lambda)\right.\left|\psi(\lambda)\right\rangle}=0
           \end{equation}
           这样我们就得到了我们猜测意义下的最好的基态描述。如果我们对波函数的猜测足够准的话，我们得到的近似波函数就越接近真正的基态波函数。这样说可能太过于随意了，首先我们对波函数的猜测并不是胡乱猜，而是根据一定的物理图像，比如我们假定He原子的基态波函数跟氢原子基态波函数形式一致，这个猜测就有一定的合理性。
 
-          但是很多情况下，物理图像也不起作用，但我们总可以给定一个基组，将我们的猜测波函数写成这组基函数的线性组合，而这个线性组合系数就是我们变分法的参数。这个意义下，只要我们可以用一套尽可能完备的基组，就能得到尽可能正确的基态波函数。
+          但是很多情况下，物理图像也不起作用，但我们总可以给定一个基组，将我们的猜测波函数写成这组基函数的线性组合，而这个线性组合系数就是我们变分法的参数。这个意义下，只要我们可以用一套尽可能完备的基组，就能得到尽可能正确的基态波函数（以及激发态波函数）。
 
-          在量子化学中，我们对基态的关注远胜于其他电子态，因此变分法可以说是量子化学的核心近似方法。我们可以利用变分法基本公式推导出我们在量子化学中常用的线性变分法的公式，可以参见后续章节。
+          在量子化学中，我们通常可以使用原子轨道基组作为一组可行的完备基，我们可以利用上面给出的基本公式推导出我们在量子化学中常用的线性变分法的公式，可以参见后续章节。
       \section{Hilbert空间和态矢量}
         接下来的几节，我们将关注一些可能读者学习量子力学没有接触到或者可能理解不好，却十分重要的内容。我们尽量前后贯通，让读者也看到这之中蕴含的线性代数的核心，而且尽可能用一种与高等量子力学自恰的表述体系，毕竟有不少人都说过：量子力学就是线性代数。
 
