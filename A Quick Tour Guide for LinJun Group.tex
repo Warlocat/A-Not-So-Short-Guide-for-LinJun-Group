@@ -2609,6 +2609,299 @@
           以上两个式子也就是Hartree-Fock方法解出的轨道能量的意义，这最早被总结成了一个定理，\textbf{Koopmans定理：在一个给定的$N$电子Hartree-Fock单行列式中，占据轨道$\chi_a$的轨道能量等于从这个轨道上移走一个电子所需要的能量；非占据轨道$\chi_r$的轨道能量等于新加一个在这个轨道上的电子额外引入的能量。}或者换句话说，\textbf{Hartree-Fock近似的HOMO能量基本等于体系的第一电离能，LUMO能量基本等于体系的第一电子亲和能。}\footnote{当然，按照定义应该是差一个正负号。}
 
           显然，Koopmans定理是一个近似的定理，它基于我们上面的两个推导，而这两个推导是基于一个假设，即增加电子和减少电子时，体系的Hartree-Fock解出的自旋轨道不变。这显然不是什么很好的假设，电子数的多少原则上会影响轨道，严格计算上需要加减电子之后重新计算本征态，再计算电离能和电子亲和能。所以用单电子图像(分子轨道)分析电离能、电子亲和能以及电子跃迁原则上都是一个很大的近似，即使是DFT得到的添加了电子关联的分子轨道。但是，用Hartree-Fock计算得到的中性分子的第一电离能(电子亲和能不行)往往是比较准确的，这是因为一个非常非常凑巧的正负误差的抵消，即加减电子引起的自旋轨道的重排和驰豫的能量恰好与电子关联的能量修正大小相近，符号相反。
+
+      \section{Hartree-Fock方法的数值计算}
+        \subsection{基组}
+          由于前面所提到的，一个基组使一个偏微分方程求解转换为线性代数的求解，从而使用计算机来进行数值计算这样的电子结构成为了可能。然而，数值计算对数值的稳定性以及精确度的要求相当地高，这可以类比为物理实验中多次测量导致的误差积累，在程序运行过程中由于使用了双精度这样只有有限有效位数的数字，即便是简单的加减乘除也会导致误差逐渐积累，使最后的结果可能完全变了样。因此在这样的科学计算中我们希望能够尽可能保留精确解，使产生误差的来源尽可能减少。这也因此高斯基组在电子结构计算中极其流行——其存在使一些复杂的积分如重叠积分、库伦积分等能够给出精确解，从而极大提高数值稳定性，同时加快运算速度（因为数值积分极其耗时）。
+
+          在实际基组中一个电子轨道往往表示为多个高斯函数的叠加：
+          \begin{equation}
+            \psi (\boldsymbol{r};\boldsymbol{r}_0,\boldsymbol{a}) \sim \sum_i c_i (x-x_0)^{a_x}(y-y_0)^{a_y}(z-z_0)^{a_z} e^{- \alpha_i (\boldsymbol{r} - \boldsymbol{r}_0)^2}.
+          \end{equation}
+          因此在实际的理论推导过程中电子轨道积分会转换为一个个高斯函数与算符之间的积分。而复杂的角向函数被转化为了简单的$x,y,z$的幂函数，从而为提供精确解扫除了另一障碍。
+
+          一般的电子结构程序使用的基组套装是从Basis Set Exchange (\url{https://www.basissetexchange.org}) 里面扒下来的，它会告诉你这个shell它会有多少个高斯函数，每个高斯函数的指数和系数分别是多少。
+
+          解决完基组后，我们便可以开始研究那些矩阵的数值表达方式。我们需要解决的是这么一个线性代数（特征值）问题，
+            \begin{equation}
+                F C = S C E
+            \end{equation}
+            其中$F$和$S$是我们需要实现求出来的。我们从最简单的$S$开始。
+
+        \subsection{重叠积分}
+          定义是这个：
+          \begin{equation}
+              S_{ij} = \langle \phi_i | \phi_j \rangle = \int \phi_i(\boldsymbol{r}) \phi_j(\boldsymbol{r}) d \boldsymbol{r}.
+          \end{equation}
+          所幸$\phi_i$和$\phi_j$都是高斯函数（或者乘上一个多项式），而这样的形式是能够给出精确解的，比如下面这个公式：
+          \begin{equation}
+              \int_\mathrm{R^n}\, dX \, f(X)\,e^{-\frac{1}{2}X^T A X + B^T X }= \sqrt{\frac{(2\pi)^n}{\mathrm{det} A}}e^{\frac{1}{2}B^T A^{-1}B} \mathrm{exp}\left(\frac{1}{2}(A^{-1})_{ij} \frac{\partial}{\partial x_i}\frac{\partial}{\partial x_j}\right) f(X) \bigg|_{X=B}
+          \end{equation}
+          它表达了对于包括任意数量的自变量$X$以及一个函数（最好是多项式），给出高斯函数的二次项矩阵$A$和一次项矢量$B$的情况下得到的精确解。其中$\exp$部分应理解为
+          \begin{equation}
+              \exp{\hat{g}} = \sum_n \frac{\hat{g}^n}{n!}
+          \end{equation}
+          当然这么写程序会非常难（我也只能在擅长符号计算的\emph{Mathematica}里实现它）。所幸电子轨道的样子是非常有规律的，所以我们可以通过 Obara \& Saika 提示的迭代关系来实现。
+
+          我们先展现所使用的符号。对于一个高斯函数，
+          \begin{equation}
+              |a) \equiv g(\vec{r},\alpha,\boldsymbol{a},\vec{A}) = (x- A_x)^{a_x} (y-A_y)^{a_y} (z-A_z)^{a_z} \exp \left(-\alpha |\vec{r} - \vec{A}|^2\right)
+          \end{equation}
+          有一个 Gaussian Product Theorem,即\cite{may2006density}：
+          \begin{theorem}
+              两个高斯函数的乘积可转换为一系列高斯函数的和，比如：
+              \begin{equation}
+                  g(\vec{r},\alpha, \boldsymbol{0},\vec{A})g(\vec{r},\beta, \boldsymbol{0},\vec{B}) = \exp(-\xi |\overline{AB}|^2) g(\vec{r},\zeta,\boldsymbol{0},\vec{P}),
+              \end{equation}
+              其中$\zeta = \alpha + \beta, \, \xi = \frac{\alpha\beta}{\zeta}, \, \vec{P} = \frac{\alpha \vec{A} + \beta \vec{B}}{\zeta}, \, \overline{AB} = \vec{A} - \vec{B}$.
+              对于含有多项式的高斯函数。可以利用
+              \begin{equation}
+                  (x- A_x) ^{a_x} = [(x-P_x) + \overline{PA}_x]^{a_x} = \sum_{i=0}^{a_x} C_{a_x}^i (x-P_x)^i {PA}_x^{a_x - i}
+              \end{equation}
+              从而可以展开两个高斯函数的乘积为
+              \begin{equation}
+                  g_1g_2 = \exp(-\xi|AB|^2) \exp(-\zeta|\vec{r} - \vec{P}|^2) \times \prod_{k=x,y,z} \sum_{i=0}^{i=a_k+b_k}(k-P_k)^i f_i (a_k,b_k,\overline{PA}_k,\overline{PB}_k),
+              \end{equation}
+              其中
+              \begin{equation}
+                  f_i(a_k,b_k,\overline{PA}_k,\overline{PB}_k) = \sum_{n=0}^{n=i} C_{a_k}^{n} C_{b_k}^{i-n} \overline{PA}_k^{a_x-n}\overline{PB}_k^{b_x-n+k}
+              \end{equation}
+          \end{theorem}
+          但这不迭代啊！
+          
+          高斯函数还有一个特殊的性质，我们可以通过对它进行求导来得到一个多项式的组合：
+          \begin{equation}
+              \partial_{A_i} g(\vec{r},\alpha,\boldsymbol{a},\vec{A}) = 2 \alpha g(\vec{r},\alpha,\boldsymbol{a} + \boldsymbol{1}_i,\vec{A}) - a_i g(\vec{r},\alpha,\boldsymbol{a} - \boldsymbol{1}_i,\vec{A})
+          \end{equation}
+          其中$\boldsymbol{1}_i = (\delta_{ix},\delta_{iy},\delta_{iz})$, 即沿着某一方向的单位矢量。从而可以有
+          \begin{equation}
+              (\boldsymbol{a}+\boldsymbol{1}_i|\boldsymbol{b}) = \frac{1}{2\alpha} \partial_{A_i} (\boldsymbol{a}|\boldsymbol{b}) + \frac{a_i}{2\alpha} (\boldsymbol{a}-\boldsymbol{1}_i|\boldsymbol{b})
+          \end{equation}
+          而$\partial_{A_i}$可以通过前面所描述的 Gaussian Product Theorem 展开后观察得到：
+          \begin{equation}
+              (\boldsymbol{a}+\boldsymbol{1}_i|\boldsymbol{b}) = (P_i - A_i)(\boldsymbol{a}|\boldsymbol{b}) +  \frac{b_i}{2\zeta} (\boldsymbol{a}|\boldsymbol{b}-\boldsymbol{1}_i) + \frac{a_i}{2\alpha} (\boldsymbol{a}-\boldsymbol{1}_i|\boldsymbol{b})
+          \end{equation}
+          而起始条件可以由高斯函数在全空间的积分中非常方便地得到：
+          \begin{equation}
+              (\boldsymbol{0}_A|\boldsymbol{0}_B) = \left(\frac{\pi}{\zeta}\right)^{3/2} \exp(- \xi |\overline{AB}|^2),
+          \end{equation}
+          从而建立起了完整的迭代关系。
+
+        \subsection{动能积分}
+          定义是
+          \begin{equation}
+              T_{ij} = \langle \phi_i | - \frac{\nabla ^ 2}{2} | \phi_j \rangle = -\frac{1}{2}\int \phi_i(\boldsymbol{r})[ \nabla^2 \phi_j(\boldsymbol{r}) ]d \boldsymbol{r}.
+          \end{equation}
+          其中
+          \begin{equation}
+              \nabla^2 \equiv \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2}.
+          \end{equation}
+          其实前面已经大概说明了，对于高斯函数而言求导并不算什么大问题——它很快就能拆开成两个不同的高斯函数的加和，那么我们只要在求导后对每一个高斯函数进行一次重叠积分，我们就能够知道动能的期望值，因此动能积分在得到Fock矩阵的流程中是最为简单的，在此也不多进行讲述。
+
+        \subsection{核吸引积分}
+          啊对就是Nuclear attraction energy integral\footnote{\sout{我只看过英文的资料我怎么知道中文叫什么嘛}}.
+
+          定义是
+          \begin{equation}
+              Z_{ij} = \langle \phi_i | \frac{1}{|\boldsymbol{r} - \boldsymbol{r}_l|} |\phi_j \rangle = \int \frac{\phi_i(\boldsymbol{r}) \phi_j(\boldsymbol{r})}{|\boldsymbol{r} - \boldsymbol{r}_l|} d \boldsymbol{r} 
+          \end{equation}
+          其中$\boldsymbol{r}_l$为原子核所在的坐标。
+
+          解决这个问题最强的地方在于——把$\frac{1}{|\boldsymbol{r} - \boldsymbol{r}_l|}$转换为高斯函数！
+
+          \begin{equation}
+              \left|\boldsymbol{r}_{1}-\boldsymbol{r}_{2}\right|^{-1}=\frac{2}{\pi^{1 / 2}} \int_{0}^{\infty} d u \exp \left[-\left(\boldsymbol{r}_{1}-\boldsymbol{r}_{2}\right)^{2} u^{2}\right].
+          \end{equation}
+
+          而
+          \begin{equation}
+              \exp \left[-\left(\boldsymbol{r}-\boldsymbol{r}_{l}\right)^{2} u^{2}\right] = g(\boldsymbol{r};u^2,\boldsymbol{0},\boldsymbol{r}_l)
+          \end{equation}
+          于是就变成了三中心重叠积分：
+          \begin{equation}
+              \langle \phi_i | \frac{1}{|\boldsymbol{r} - \boldsymbol{r}_l|} |\phi_j \rangle = \frac{2}{\pi^{1 / 2}} \int_0^\infty du \, (\phi_i|\boldsymbol{0}_{\boldsymbol{r}_2}^{u^2}|\phi_j)
+          \end{equation}
+          类似于二电子重叠积分，我们对三中心重叠积分也有迭代关系：
+          \begin{equation}
+          \begin{aligned}
+              \left(\boldsymbol{a}+\boldsymbol{1}_{i}|\boldsymbol{c}| \boldsymbol{b}\right)=&\left(G_{i}-A_{i}\right)(\boldsymbol{a}|\boldsymbol{c}| \boldsymbol{b})+\frac{a_i}{2\left(\zeta+\zeta_{c}\right)} \\ 
+          & \times \left(\boldsymbol{a}-\boldsymbol{1}_{i}|\boldsymbol{c}| \boldsymbol{b}\right)+\frac{ b_i}{2\left(\zeta+\zeta_{c}\right)} \left(\boldsymbol{a} | \boldsymbol{c}|\boldsymbol{b}-\boldsymbol{1}_{i}\right)\\ 
+          &+\frac{c_i}{2\left(\zeta+\zeta_{c}\right)}\left(\boldsymbol{a}\left|\boldsymbol{c}-\boldsymbol{1}_{i}\right| \boldsymbol{b}\right)
+          \end{aligned}
+          \end{equation}
+          其中$\boldsymbol{G}=\frac{\zeta \boldsymbol{P}+\zeta_{c} \boldsymbol{C}}{\zeta+\zeta_{c}}$.然后由于在这里$c$没有角动量，所以最后一项舍去，$\zeta_c = u^2$，从而有
+          \begin{equation}
+              \begin{aligned}
+              \left(\boldsymbol{a}+\boldsymbol{1}_{i}|\boldsymbol{0}_{\boldsymbol{r}_l}^{u^2}| \boldsymbol{b}\right)= & \left(G_{i}-A_{i}\right)(\boldsymbol{a}|\boldsymbol{0}_{\boldsymbol{r}_l}^{u^2}| \boldsymbol{b})+\frac{a_i}{2\left(\zeta + u^2\right)} \\ 
+              & \times \left(\boldsymbol{a}-\boldsymbol{1}_{i}|\boldsymbol{0}_{\boldsymbol{r}_l}^{u^2}| \boldsymbol{b}\right)+\frac{ b_i}{2\left(\zeta + u^2\right)} \left(\boldsymbol{a} | \boldsymbol{0}_{\boldsymbol{r}_l}^{u^2}|\boldsymbol{b}-\boldsymbol{1}_{i}\right)
+              \end{aligned}
+          \end{equation}
+          $G_i-A_i$是
+          \begin{equation}
+              G_i - A_i = \frac{\beta (B_i-A_i) + u^2 (C_i - A_i)}{\zeta + u^2}, \quad \boldsymbol{C} = \boldsymbol{r}_l
+          \end{equation}
+          也就是说最后在积分的时候$\frac{u^2}{\zeta+u^2}$和$\frac{u^2}{\zeta+u^2}$会影响最后的积分。这怎么玩嘛！
+
+          请见数值积分方法，本章节完（不是）
+
+          有变换
+          \begin{equation}
+              \frac{1}{\zeta + u^2} = \frac{1}{\zeta} \left(1 - \frac{u^2}{\zeta + u^2}\right)
+          \end{equation}
+          这样至少能把$\frac{u^2}{\zeta+u^2}$都转换成$\frac{u^2}{\zeta+u^2}$.这也就意味着最后的结果最多也就乘上$(\frac{u^2}{\zeta+u^2})^m$这一项。我们不妨定义
+          \begin{equation}
+              (\boldsymbol{a} | \frac{1}{|\boldsymbol{r} - \boldsymbol{r}_l|} |\boldsymbol{b} )^{(m)} = \frac{2}{\pi^{1 / 2}} \int_0^\infty \left(\frac{u^2}{\zeta+u^2}\right)^m\, du \, (\boldsymbol{a}|\boldsymbol{0}_{\boldsymbol{r}_2}^{u^2}|\boldsymbol{b})
+          \end{equation}
+          那么$m=0$就是我们本来想要的。$(\boldsymbol{a}|\boldsymbol{0}_{\boldsymbol{r}_2}^{u^2}|\boldsymbol{b})$这个东西可以通过迭代关系最终化简到$(\boldsymbol{0}_A|\boldsymbol{0}_C|\boldsymbol{0}_B)$类型,然后利用高斯积分计算可以得到
+          \begin{equation}
+              \left(\boldsymbol{0}_{A}\left|\boldsymbol{0}_{C}\right| \boldsymbol{0}_{B}\right)=\left(\frac{\pi}{\zeta_{a}+\zeta_{b}+\zeta_{c}}\right)^{3 / 2} \kappa_{a b c},
+          \end{equation}
+          其中
+          \begin{equation}
+              \kappa_{a b c}=\exp \left[-\xi(\boldsymbol{A}-\boldsymbol{B})^{2}\right] \exp \left[-\frac{\zeta \zeta_{c}}{\zeta+\zeta_{c}}(\boldsymbol{P}-\boldsymbol{C})^{2}\right].
+          \end{equation}
+          对$\left(\frac{\pi}{\zeta_{a}+\zeta_{b}+\zeta_{c}}\right)^{3 / 2}$ 我们可以使用刚才的方法继续转换成$\frac{1}{\zeta + u^2}$类型。这样我们就能够将积分转换成类似于
+          \[
+              \int_0^\infty \left(\frac{u^2}{\zeta + u^2}\right)^{(m+\frac{3}{2})}\exp\left[-\frac{u^2}{\zeta + u^2} \zeta (\boldsymbol{P}-\boldsymbol{r}_2)^2\right]\, du.
+          \]
+          看来只能用换元法呀！令
+          \begin{equation}
+              t^2 = \frac{u^2}{\zeta + u^2}.
+          \end{equation}
+          那么
+          \begin{equation}
+              \frac{1}{t^2} = 1 + \frac{\zeta}{u^2}.
+          \end{equation}
+          也就是
+          \begin{equation}
+              u = \sqrt{\frac{\zeta t^2}{1-t^2}}.
+          \end{equation}
+          省去求微分环节，就可以把上面的积分式转换得到
+          \[
+              \int_0^1 t^{2m} \exp\left[-\zeta (\boldsymbol{P}-\boldsymbol{r}_2)^2t^2\right]\, dt.
+          \]
+          这怎么积啊！
+
+          请见数值积分方法，本章节完（不是）
+
+          谷歌一查有惊喜，这个就是Boys function.也可以直接放进\emph{Mathematica}，得到
+          \begin{equation}
+              \int _0^1 t^{2m} \exp(-Tt^2) \, dt = \frac{1}{2} \, T^{-\frac{2m+1}{2}}\left[\Gamma\left(\frac{2m+1}{2}\right) -  \Gamma\left(\frac{2m+1}{2},T\right)\right],
+          \end{equation}
+          其中$\Gamma(n,x)$是incomplete Gamma function(定义详见wiki).
+
+          值得一提的是在实际计算Boys function过程中由于$\Gamma$函数的数值方法在零附近会给出相对不精确的值（因为在零点发散），通过这些$\Gamma$函数建立起来的Boys function在零点附近也并不理想，所以需要通过类似截断的方式来重新定义这样的区间下的行为。
+
+          将所有结果进行汇总，就能够得到
+          \begin{equation}
+              \begin{aligned}
+              (\boldsymbol{a} + \boldsymbol{1}_i|\frac{1}{|\boldsymbol{r}-\boldsymbol{r}_l|}|\boldsymbol{b})^{(m)} =  & \frac{\beta}{\zeta} \overline{BA}_i (\boldsymbol{a}|\frac{1}{|\boldsymbol{r}-\boldsymbol{r}_l|}|\boldsymbol{b})^{(m)} \\
+              & + \left(C_i - A_i - \frac{\beta}{\zeta} \overline{BA}_i \right) (\boldsymbol{a}|\frac{1}{|\boldsymbol{r}-\boldsymbol{r}_l|}|\boldsymbol{b})^{(m+1)} \\
+              & + \frac{a_i}{2\zeta}\left[(\boldsymbol{a} - \boldsymbol{1}_i|\frac{1}{|\boldsymbol{r}-\boldsymbol{r}_l|}|\boldsymbol{b})^{(m)}- (\boldsymbol{a} - \boldsymbol{1}_i|\frac{1}{|\boldsymbol{r}-\boldsymbol{r}_l|}|\boldsymbol{b})^{(m+1)}\right] \\
+              & + \frac{b_i}{2\zeta}\left[(\boldsymbol{a}|\frac{1}{|\boldsymbol{r}-\boldsymbol{r}_l|}|\boldsymbol{b}- \boldsymbol{1}_i)^{(m)}- (\boldsymbol{a}|\frac{1}{|\boldsymbol{r}-\boldsymbol{r}_l|}|\boldsymbol{b} - \boldsymbol{1}_i)^{(m+1)}\right]
+              \end{aligned}
+          \end{equation}
+          以及初始条件
+          \begin{equation}
+              \frac{2\pi}{\zeta} \exp\left(- \xi \overline{AB}^2\right) F_m(T),
+          \end{equation}
+          其中
+          \begin{equation}
+              T = \zeta \overline{PC}^2
+          ,\end{equation}
+          以及
+          \begin{equation}
+              F_m (T) = \int ^1_0 t^{2m} \exp \left\{ - T t^2 \right\}  \, dt 
+          .\end{equation}
+
+          \subsection{双电子积分/库仑积分}
+            定义为
+            \begin{equation}
+                J_{ij} = \langle \phi_i | \frac{1}{|\boldsymbol{r}_1 - \boldsymbol{r}_2|} |\phi_j \rangle = \int \frac{\phi_i(\boldsymbol{r}) \phi_j(\boldsymbol{r})}{|\boldsymbol{r}_1 - \boldsymbol{r}_2|} d \boldsymbol{r}. 
+            \end{equation}
+            所以其实方法和 Nuclear attraction energy integral 类似，把中间的距离的反比转换成高斯函数，然后变成迭代关系。
+            \begin{equation}
+                \begin{aligned}
+                ( \boldsymbol{a} + \boldsymbol{1}_i | \frac{1}{r_{12}} | \boldsymbol{b} ) =  & \overline{PA}_i ( \boldsymbol{a} | \frac{1}{r_{12}} | \boldsymbol{b} ) ^{(m+1)} \\
+                & + \frac{a_i}{2\alpha} \left\{ ( \boldsymbol{a}-\boldsymbol{1}_i | \frac{1}{r_{12}} | \boldsymbol{b} ) ^{(m)} - \frac{\beta}{\zeta}( \boldsymbol{a} - \boldsymbol{1}_i | \frac{1}{r_{12}} | \boldsymbol{b} ) ^{(m+1)}\right\}\\
+                & + \frac{b_i}{2\zeta} ( \boldsymbol{a} | \frac{1}{r_{12}} | \boldsymbol{b} - \boldsymbol{1}_i ) ^{(m+1)} 
+                \end{aligned}
+            \end{equation}
+            \begin{equation}
+                ( \boldsymbol{0}_A | \frac{1}{r_{12}} | \boldsymbol{0}_B ) ^{(m)} = \frac{2\pi ^{\frac{5}{2}}}{\alpha \beta \zeta^\frac{1}{2}} F_m(T)
+            ,\end{equation}
+            其中
+            \begin{equation}
+                T = \xi |\overline{AB}| ^2
+            ,\end{equation}
+            以及
+            \begin{equation}
+                F_m (T) = \int ^1_0 t^{2m} \exp \left\{ - T t^2 \right\}  \, dt 
+            .\end{equation}
+            在程序中体现为一系列的 \lstinline$JIntegral$ 函数。
+
+            值得一提的是在体系中应该是以双电子积分的形式存在，不过利用 Gaussian Product Theorem 可以把两边的高斯函数乘积转化成为一系列高斯函数之和，然后问题就简单了。在程序中以 \lstinline$two_electron_transform$ 的形式体现。
+          \subsection{L\"owdin 正交化方法}
+            我们虽然能够通过上面的积分方法得到$F$，但我们不能直接把它投进任何一种可以矩阵对角化的库，因为它们得到的结果都是在基组互相正交归一的前提下进行的\footnote{这句话当然有毛病——它们只帮你解决线性代数问题，而线性代数下的矢量内积是直接默认用点乘的。}线性代数曾教过我们如何解决这样的非正交情况下变成正交基组的操作——没错就是\sout{（翻阅谷歌一分钟）}Gram–Schmidt 方法。在这里不过多讲述它，但它在做这个问题的时候的最大的毛病是它采用了迭代的方法来得到所有的正交基组，而我们现在用的所有数值方法都是存在误差的（比如 \lstinline$double$ 类型的精度问题），而在迭代得到每一个新的向量的过程中误差会不断地积累，最终爆炸——比如最后一个和第一个并不正交。所以我们需要一个整体进行正交化然后求解的方法——而这就是我们即将学习的L\"owdin方法。
+
+            初始想法很简单——我们做这么一个变化：
+            \[
+                FC = SCE \Rightarrow F S^{-\frac{1}{2}}S^{\frac{1}{2}} C = S^{\frac{1}{2}}S^{\frac{1}{2}} C E \Rightarrow S^{-\frac{1}{2}} F S^{-\frac{1}{2}} S^{\frac{1}{2}}C = S^{\frac{1}{2}} C E,
+            \] 
+            我们就能够看到对基组进行一个$S^{1/2}$的变换，对$F$进行变换$F' = S^{-\frac{1}{2}} F S^{-\frac{1}{2}}$，我们就能够完美抵消$S$的存在，最终就能够转换成为
+            \begin{equation}
+                F' C' = C' E.
+            \end{equation}
+            于是问题转化成为如何求得$S^{-\frac{1}{2}}$及$S^{\frac{1}{2}}$。注意到$S$为实对称矩阵（而且是正定矩阵），
+            \begin{equation}
+                S U = s U \Leftrightarrow S = U s U^{T}
+            \end{equation}
+            其中$s$为$S$对角化后的矩阵，$U$为对应的特征向量组。然后约定$s^{1/2}$表示每个特征值取根号值，那么
+            \begin{equation}
+                U s^{1/2} U^{T} U s^{1/2} U^{T} = U s U^{T} = S
+            \end{equation}
+            因此我们可以判定$U s^{1/2} U^{T}$为我们想要的$S^{\frac{1}{2}}$. $S^{-\frac{1}{2}}$同理，从而有
+            \begin{equation}
+                S^{\frac{1}{2}} = U s^{1/2} U^{T}, \quad S^{-\frac{1}{2}} =  U s^{-1/2} U^{T}.
+            \end{equation}
+            有了这个我们就能愉快地求解非正交基组下的特征解问题了。
+
+            需要注意的是，进行变换后得到的特征向量组虽然库会帮你正交归一，但在实际使用的时候需要把它还原到原来的原子轨道基组中，也就是要乘上$S^{-\frac{1}{2}}$.
+
+          \subsection{混合——以Anderson's mixing为例}
+            一般来说迭代意味着要把上一次获得的结果以某种形式代入下一步进行运算——比如进行SCF迭代的时候，最容易的方法就是把上一次得到的系数矩阵直接拿过来算下一步的电子密度矩阵，然后算出Fock矩阵，再对角化，如此循环——但这种情况很难保证在一定的循环次数内达到收敛（即相差数值很小），而且也很难说是一定能收敛——从二分法就可以很容易想象。因此有很多mixing的方法，把前几次得到的运算结果以某种形式混合起来形成新的结果猜测，从而更快地达到收敛。在这里介绍相对简单的Anderson's mixing 的方法\cite{johnson1988modified}。
+
+            最简单的mixing的方法就是直接按照一定比例混合：
+            \begin{equation}
+                |n^{(m+1)}\rangle = (1-\alpha) |n^{(m)}\rangle + \alpha | n_{\text{out}}^{(m)} \rangle = |n^{m} \rangle + \alpha | F^{(m)} \rangle,
+            \end{equation}
+            其中$|n^{(m)}\rangle$ 表示第$m$次输入，$|n^{(m)}_\text{out}\rangle$表示第$m$次输出，以及
+            \begin{equation}
+                |F^{(m)}\rangle \equiv |n_\text{out}^{(m)} \rangle - |n^{(m)}\rangle,
+            \end{equation}
+            也就是把第$m$次的输入和输出按照一定比例混合然后作为第$m+1$次输入。但这个方法收敛也容易很慢，因为在即将接近结果的时候跳得过快，使得在很多情况下需要让$\alpha$设得非常小才能收敛。
+
+            Anderson's mixing 试图通过一个可调的$\beta$来将前一次的输入/输出和再前一次的输入/输出进行混合，从而起到把两次输入/输出综合考量的结果，并通过上面的方法把输入/输出混合起来形成下一步的猜测：
+            \begin{equation}
+                |\bar{n}_\text{in(out)} \rangle = (1-\beta) |n_\text{in(out)}^{(m)} \rangle + \beta |n_\text{in(out)}^{(m-1)} \rangle.
+            \end{equation}
+            而$\beta$在趋近的过程中应该满足
+            \begin{equation}
+                \partial D\left[\overline{n}_{\mathrm{in}}, \overline{n}_{\mathrm{out}}\right] / \partial \beta=0,
+            \end{equation}
+            其中
+            \begin{equation}
+            \begin{aligned} D\left[n_{\text {out }}, n\right] & \equiv\left(\left\langle n_{\text {out }}-n | n_{\text {out }}-n\right\rangle\right)^{1 / 2} \\ &=\langle F(n) | F(n)\rangle^{1 / 2} \end{aligned}.
+            \end{equation}
+            从而有
+            \begin{equation}
+                \beta=\frac{\left\langle F^{(m)} | F^{(m)}-F^{(m-1)}\right\rangle}{D^{2}\left[F^{(m)}, F^{(m-1)}\right]},
+            \end{equation}
+            而后通过原来的$\alpha$进行混合：
+            \begin{equation}
+                \left|n^{(m+1)}\right\rangle=(1-\alpha)\left|\overline{n}_{\text {in }}^{(m)}\right\rangle+\alpha\left|\overline{n}_{\text {out }}^{(m)}\right\rangle.
+            \end{equation}
+
       \section{组态相关方法}
         本节开始讲解各种post-Hartree-Fock方法，指那些以Hartree-Fock方法得到的单电子波函数与Hatree-Fock基态为基础，计算多电子波函数的方法。我们之前介绍的FCI方法其实就是post-Hartree-Fock方法中的一个，本节和接下来的几节中我们将简要介绍几种计算体系多电子波函数的post-Hartree-Fock方法，包括多组态相关方法(Configuration Interaction, CI)、多组态自洽场方法(Multiconfigurational Self-Consistent-Field)、耦合簇方法(Coupled Cluster)、微扰方法(Perturbation)等。本节关心的是第一个也是图像最简单的一个，组态相关方法，同上一节一样，我们在第一小节给出总结性质的评述，然后再展开细节。另外，本节只涉及单参考的组态相关，多参考组态相关方法(MRCI)将在后续内容中出现。
         
