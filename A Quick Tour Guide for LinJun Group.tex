@@ -19,6 +19,7 @@
   \lstset{
     backgroundcolor=\color{white},      % choose the background color
     basicstyle=\footnotesize\ttfamily,  % size of fonts used for the code
+    emphstyle={\color{red}}，
     columns=fullflexible,
     tabsize=4,
     breaklines=true,               % automatic line breaking only atwhitespace
@@ -30,7 +31,7 @@
     frame=single,
     rulesepcolor=\color{red!20!green!20!blue!20},
     % identifierstyle=\color{red},
-    language=Mathematica,
+    language=C++,
     alsolanguage=bash,
   }
 
@@ -4103,6 +4104,92 @@
               \end{cases}
             \end{equation}
         \end{enumerate}
+
+      \chapter{模块化编程——以C++为例}
+      \sout{开的话题过大扯到了蛋}
+
+      编者之一有幸接触了理论化学软件开发的最前线，收获了大量的软件工程相关的思想，并受此鼓舞写了一个自己的库（\url{https://github.com/Walter-Feng/Quartz}），感悟颇多，故分享于此。由于一直都接受的是C++的训练，便也只能用C++为例进行讲述\footnote{然而唯一接触的Fortran的软件xTB（\url{https://github.com/grimme-lab/xtb}）简直就是惨不忍睹}。但只能说，本人只学习了理论化学软件可以遵照的style，而且仅代表本人观点。同时，\textbf{在本章节不讨论动态语言}\footnote{\sout{想和我battle Python的可以歇歇了，动态语言的模块化根本没难度，而且都做理论化学软件了，还想着动态语言吃遍天呢？}}。
+
+        \section{心構え——写“好的程序”应该遵循的原则}
+        \begin{enumerate}
+          \item Don't repeat yourself;
+            遇到一个重复的步骤，想如何把这一部分写成函数；遇到一个重复功能的函数，删掉其中的一个；遇到相同名字但不同功能的，换名。
+
+            比如说，你想给你的分子动力学方法加一个Runge-Kutta 4，你又想给你的Surface Hopping方法加一个Runge-Kutta 4，那就考虑把这一部分独立出来。
+          \item Mark constant and reference as much as possible;
+            能够用常量表达的就通通都用常量表达，无论是创建local variable还是函数的argument都应尽量做成constant的形式。同时，若能做成constant，考虑能不能直接引用。
+          \item Use full name as much as possible, even for local variables;
+            别信任你的缩写能力，也别随便用大家公认的缩写——能用全称就用全称。
+          \item Classify your functions and objects;
+            不同功能的函数，对象分开来放，全局参数也专门用一个文件放（但尽量避免全局参数）。
+          \item Make your function generic;
+            能抽象化就抽象化。
+          \item Avoid using pointers.
+            （仅限C++）用一次指针，糊你一次脸。
+          \item Add Unit Tests.
+            单元测试基本操作。对于大型程序你需要在写的过程中保证你写出的每个东西是能够充分应用的，而如果进行了环境更换你需要验证你的这些子函数是否可用，若不可用应提醒用户其环境不适合使用该程序。同时，单元测试也可以让你在后期更快速地找到程序的问题所在，可谓好处多多\footnote{虽然我写的单元测试还没完全覆盖就是了}。
+
+            C++使用Catch2(\url{https://github.com/catchorg/Catch2})就很方便了。可以自动帮你生成可执行程序，在一个测试单元中检查多项内容，等等等等。
+        \end{enumerate}
+        \section{前期准备}
+          想要走模块化编程，或者是写出一个好的coding style，就必须要做好前期规划。而前期规划包括使用的语言，要引用的第三方库，主流框架等等。
+
+          其实选择的语言对整个程序的style有决定性的作用，即便是C++自身，C++11和C++17之间也能够存在相当的差别。同时好的代码需要对语言的相当程度的掌握，这样才能最大程度地实现``Don't repeat yourself''的诺言。
+
+          比如原来所提到的Runge-Kutta法，如果按照C的思想，``Don't repeat yourself''是很难实现的，因为Runge-Kutta对函数的具体类型不做要求，而C需要每种数据以及函数都是确定的。函数指针是个可行的操作，然而为了使其通用你只能将其转化为\lstinline$void *$以应对各种可能的函数，而这又会招来一大堆的麻烦。
+
+          C++的template能够很好地解决这个问题——利用template你可以隐去对类型的要求，从而可以实现更为generic的操作。对于Runge-Kutta的基本类型，
+          \begin{equation}
+            \frac{\mathrm{d} y}{\mathrm{d}t} = f(y,t) 
+          \end{equation}
+          其中$y$, $f$都是可以任意的，而且$y$还可以是
+          \begin{itemize}
+            \item 有微分定义，
+            \item 有加减定义，
+            \item 能够和简单的实（复）数的相乘，
+          \end{itemize}
+          的任意类型。而对于那个算符$f$，也是非常generic的，它既可以是含时的，也可以是不含时的。如果不含时，我们可以通过直接生成一个constant的时间传播元而不至于每次都费一点时间生成；而含时的话我们需要每经过$dt$的时间进行一次刷新。
+
+          而C++17能够完成这些。
+
+          我们首先对这个时间传播元，$y_n \rightarrow y_{n+1}$进行一个限制：它需要$dt$，需要原状态，然后就没了。因此我们定义
+          \begin{lstlisting}
+template<typename State>
+using Propagator = std::function<
+    State(const State &,
+          const double)>;
+          \end{lstlisting}
+          这样我们就能够定义出对任意的状态，其传播子就应该满足这样的形式。
+
+          然后我们对状态和算符抽象化，同时为了方便传进势能，我们对势能也进行抽象化。Runge-Kutta法将一个时间的一阶偏微分方程包装成为一个传播子，那么它应该返回一个传播子的函数，而它需要我们自身定义的算符以及外界的势能，从而有
+          \begin{lstlisting}
+template<typename Operator, typename State, typename Potential>
+OperatorWrapper<Operator, State, Potential>
+    runge_kutta_2 = [](const Operator & liouville_operator,
+                       const Potential & potential) -> Propagator<State> { ... }
+          \end{lstlisting}
+          其中我们使用\lstinline$OperatorWrapper$来定义了\lstinline$runge_kutta_2$的类型，从而方便其他函数引用Runge-Kutta法。\lstinline$[](...)->...$便是C++的匿名函数的操作，\lstinline$[]$代表了从外界传进去的参数，\lstinline$(...)$代表了这个函数需要接受的Argument，而\lstinline$->...$代表了返回类型。有了这些后我们能够比较快乐地写Runge-Kutta而不继续追究每一个的具体类型。
+
+          然而我们还需要分辨这个势能函数是不是含时的，而这又能够运用C++17的特性——\lstinline$constexpr$和SFINAE.通过\lstinline$constexpr$我们可以在编译期就判断这个势能函数是否满足某些特点从而构建分支，而SFINAE能够实现对对象的成员函数的检测，从而能够实现这个操作：
+          \begin{lstlisting}
+template<typename Operator, typename State, typename Potential>
+OperatorWrapper<Operator, State, Potential>
+    runge_kutta_2 = [](const Operator & liouville_operator,
+                       const Potential & potential) -> Propagator<State> {
+
+  if constexpr(has_time_evolve<Potential, void(const double &)>::value) {
+    return [&liouville_operator, &potential](const State & state,
+                                             const double dt) -> State {
+      ...
+  }
+
+  return [&liouville_operator, &potential](const State & state,
+                                           const double dt) -> State {
+      ...
+  };
+};
+          \end{lstlisting}
+          从而完美实现对势能函数拥有\lstinline$time_evolve$的成员函数的检测，构建分支。
 
     \newpage
     \appendix
