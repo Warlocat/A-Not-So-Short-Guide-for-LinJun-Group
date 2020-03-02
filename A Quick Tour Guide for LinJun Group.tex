@@ -107,6 +107,7 @@
       
       简而言之，本指南旨在为诸位不同时间加入王林军老师课题组或者感兴趣的同学们提供一个深入了解的机会，编者认为，对于决定在这里完成毕设或者深造的同学来说，本指南只是一个入门皮毛。另外，编者们水平有限，如果有错误也是正常现象，望读者海涵。
 
+    \part{A卷}
     \chapter{Linux基础及服务器使用}
       Linux和macOS、Windows并称为三大电脑操作系统，都是用来完成用户和计算机之间的互动。Linux由于其出色的稳定性以及免费（相对于Unix系统），被广泛用于服务器的操作系统。当然Linux是存在图形界面的，但它的最为使用，也最为核心的部分还是它的终端，也就是字符界面。为了如何操作这玩意儿，一些基础知识是必须的。
 
@@ -237,9 +238,9 @@
 
         此外，PBS系统还有诸多指令(如常用的qdel和qhold等)，诸多功能，诸多环境变量可以调用，鉴于递交任务实际操作的重要性，这里不再赘述，如果在实际操作过程中希望有更多了解，可以参阅浙江大学西溪校区化学系HPC超算平台介绍(可在超算QQ群的群文件中找到)中的Gridview PBS作业调度使用说明。
       
-    \chapter{数学基础}
+    \chapter{基础线性代数}
 
-      本章包含了在王老师课题组可能用到的数学知识，但是并不是所有人所有方向都非常重要。阅读此章内容前，我们默认你掌握了基础的数学知识：单变量微积分，多元函数微积分，基础线性代数。如果自认为对此比较熟悉，可以有用到相关知识的时候再回来检索查看，如果不熟悉，还是建议阅读本章内容。对于一部分有一定意义但影响阅读连贯性的内容（例如部分证明及拓展应用），我们会将其列于附录中。\textbf{本指南不适合完全没学过线性代数的同学，如果想完整学习线性代数请参阅相关教材。}
+      本章包含了在王老师课题组可能用到的数学知识中的最基础的部分，\textbf{本指南不适合完全没学过线性代数的同学，如果想完整学习线性代数请参阅相关教材。}虽然不能从零开始，但是还是会尽可能简单地过一遍对量子力学和量子化学最重要的基础数学部分：基础线性代数。如果自认为对此比较熟悉，可以直接跳过本章，如果不熟悉或者实在太久没有用过，建议可以阅读本章内容。
 
       \section{数学回顾}
       
@@ -599,662 +600,7 @@
 
         当然这么说可能很难有感觉这些到底是什么东西，让我们再换一种方式来表达。算符，变换，这些东西实则上都代表了类似于函数的概念，也就是传进去一个东西，传出去另一个东西，这两个东西可以相等，可以完全不是同一类。而左矢和右矢则代表了可以传进去的“参量”，并经过算符作用后得到了另一个左矢或右矢。比如一个关于$x$的函数$f\qty(x)$，经过求导算符$\dv{x}$作用后得到它的导函数$f'\qty(x)$，实则上也没有脱离这样的描述体系\sout{,从而为Dirac说明海森堡的矩阵力学和薛定谔的波动力学是等价表述做好了铺垫}\footnote{从数学的角度来说，\textbf{函数}是“数集合到数集合的\textbf{映射}”（回忆一下你的高中数学必修一第一章的内容），那么\textbf{算符}一般认为是“函数到函数的映射”，而常常听到的、令人头大的\textbf{泛函}则是“函数到数的映射”。至于为什么算符明明是函数到函数的映射却写成矩阵形式，参考\ref{expantion_to_function_space}一节}。
 
-      \section{完备基展开}
-        \label{expansion_of_complete_basis}
-        完备基展开是一个非常重要的概念，它直接提供了解决众多微分方程的方法，而解决微分方程是量子力学的至关重要的一个内容。
-
-        “完备”一词说明某一个基组的完备性，也就是我只要通过这个基组的线性组合就能完整描述我所研究的空间中的所有内容。
-        
-        回忆一下线性代数，对于一个线性空间，我给定了一组基向量，那么这个线性空间中的所有向量都可以用这一组基向量的线性组合得到，那么这组基向量就是完备的。例如，我用$\hat{x}$,$\hat{y}$,$\hat{z}$三个基向量就能完整描述三维实空间里的所有向量，那么这三个方向向量构成的基组就是三维实空间的完备基。
-        
-        拓展到函数空间也是一样。我用$\qty{x^n}_{n=0}^\infty$便能描述所有的一维函数，我用$\qty{\sin{nx},\cos{nx}}_{n=0}^\infty$\footnote{即傅里叶变换，参考\ref{fourier_transformation}一节}就能描述所有一维周期性函数，这些也构成了对应空间中完备基。至于函数是怎么用基组描述的，请回顾\ref{expantion_to_function_space}一节。
-
-        它有什么用呢？其中一个应用可见附录\ref{sturm_Liouville_eigenvalue_problem}。可以看到，它提供了一个解决复杂的微分方程问题的方法\footnote{其实线性代数里的本征值和本征向量也有同样的性质。}。同时它从某种角度上已经道明了量子力学的一个重要的点：
-        \begin{center}
-          所有的态都能用本征态的线性组合来表示。
-        \end{center}
-        至于为什么是本征态？想想\ref{expansion_to_complex_field}一节中提到的谱定理：复空间正规矩阵的本征态是该线性空间的完备基。
-
-        哦，我们的读者，然而故事还没有结束呢。
-
-        我们先用曾经描述的量子力学符号来说说这个完备基。对于某个完备的特征值集$\qty{\lambda_n}$和特征向量集$\qty{\ket{e_i}}$，我们认为特征向量集已经正交归一\footnote{即不同的两个特征向量之间相互正交，且每个向量模为1（即\sout{自交}自己与自己的内积为1）。你可能还记得存在多重特征根的情况，此时你或许也记得这个特征根对应多个特征向量，它们并不一定需要正交。那么你想想就能明白，你能通过某些奇技淫巧让它们互相之间变得正交并仍旧是特征向量（比如大名鼎鼎的Gram-Schmidt 正交化）。}，那么有定理
-        \begin{theorem}
-          \begin{equation}
-            \sum_i{\dyad{e_i}}=1\,\text{or}\,\int{\dd{q'}\dyad{q'}}=1.
-          \end{equation}
-        \end{theorem}
-
-        $\dyad{e_i}$是一个全新的操作，事实上它其实就是一个算符。为什么呢？因为你可以看到，
-        \begin{equation}
-          \qty(\dyad{e_i})\ket{\xi}=\ket{e_i}\bra{e_i}\ket{\xi}=\bra{e_i}\ket{\xi}\ket{e_i}.
-          \label{ ket bra }
-        \end{equation}
-        这是由于$\bra{e_i}\ket{\xi}$是一个数，所以它可以游荡在任何地方（向量可以非常自然地乘上任何一个数而不需要管顺序）。也就是我作用于$\ket{\xi}$然后获得了一个新的向量，那么它就是一个算符\footnote{从线性代数的角度理解，$\ket{e_i}$是一个列向量，$\bra{e_i}$是一个行向量，两者相乘即为列向量乘行向量，那么自然得到的$\dyad{e_i}$就是一个矩阵；根据之前所讲的，矩阵和算符是等价的}。
-
-        $1$是沿用了Dirac大佬的写法\footnote{编者表示被Dirac虐得越多\sout{对Dirac越爱得深沉}}，就是表示单位算符（或者单位矩阵$I$），作用后得到原来的结果，即
-        \begin{equation}
-          1\ket{\xi}=\ket{\xi}.
-        \end{equation}
-        所以上面的定理就是在说我把特征向量按照那种方式组合求和后它就会变成单位算符。
-
-        \begin{proof}
-          证明思路：验证其对完备基中任意向量都成立$\Rightarrow$空间内任意向量皆成立
-          \begin{equation}
-            \sum_i{\ket{e_i}\bra{e_i}\ket{e_j}}=\sum_i{\ket{e_i}\delta_{ij}}=\ket{e_j}.
-          \end{equation}
-          从而说明，对所有特征向量，该算符和单位算符等价。
-
-          注：$\delta_{ij}$是kronecker $\delta$符号，其含义为
-          \begin{equation}
-            \delta_{ij}=
-            \begin{cases}
-              1,\ i=j\\
-              0,\ i\neq j
-            \end{cases}
-          \end{equation}
-
-          利用展开的唯一性(即一个向量只有一种方式展开/系数组是唯一的)，得到
-          \begin{equation}
-            \begin{aligned}
-              &\ket{\psi}=\sum_i{c_i\ket{e_i}}\Rightarrow\bra{e_j}\ket{\psi}=\bra{e_j}\sum_i{c_i\ket{e_i}}\\
-              \Rightarrow&\bra{e_j}\ket{\psi}=\sum_i{c_i\bra{e_j}\ket{e_i}}\Rightarrow\bra{e_j}\ket{\psi}=\sum_i{c_i\delta_{ij}}\\
-              \Rightarrow&c_j=\bra{e_j}\ket{\psi}.
-            \end{aligned}
-          \end{equation}
-          则
-          \begin{equation}
-            \sum_i{\ket{e_i}\bra{e_i}\ket{\psi}}=\sum_i{\ket{e_i}c_i}=\ket{\psi}
-          \end{equation}
-          因此对所有向量，该算符都与单位算符等价，所以该算符就是单位算符，证毕。
-        \end{proof}
-        \sout{恭喜你发现了镇站之宝，}对于任意一个向量$\ket{\psi}$，其在某组完备基$\qty{\ket{e_i}}$下的展开系数为
-        \begin{equation}
-          c_i=\bra{e_i}\ket{\psi} 
-          \label{expansion coeff}
-        \end{equation}
-        \sout{是不是有那么一点感觉？其实就是广义傅立叶级数展开。}
-
-      \section{傅里叶展开和傅里叶变换}
-        \label{fourier_transformation}
-        \begin{quote}
-          它，改变了世界。
-          \begin{flushright}
-            ——李睿，谈傅里叶变换时
-          \end{flushright}
-        \end{quote}     
-        还记得傅里叶级数嘛？\sout{不记得也没事，我们慢慢讲。}它长这样：
-        \begin{theorem}
-          当一个有界函数在$\qty[-l,l]$可积时，该函数可展开为：
-          \begin{equation}
-            \label{real_fourier_series}
-            f\qty(x)=\sum_{k=0}^{\infty}\qty(a_k\cos{\omega_k x}+b_k\sin{\omega_k x}).
-          \end{equation}
-          其中，
-          \begin{equation} 
-            \begin{cases}
-              a_k=\frac{1}{\delta_k l}\int_{-l}^l{f\qty(\xi)\cos{\omega_k\xi}\dd{\xi}}\\
-              b_k=\frac{1}{l}\int_{-l}^l{f\qty(\xi)\sin{\omega_k\xi}\dd{\xi}}
-            \end{cases}
-            .
-          \end{equation}
-          其中
-          \begin{equation}
-            \omega_k=\frac{k\pi}{l}.
-          \end{equation}
-          以及
-          \begin{equation}
-            \delta_k=
-            \begin{cases}
-              1,\quad k=0 \\
-              2, quad k\neq0 
-            \end{cases}
-            .
-          \end{equation}
-        \end{theorem}
-
-        {\color{red}{\textbf{Warning: 前方高能！}}}
-
-        我们刚刚描述过完备基展开，而且$\sin{\omega_k x}$和$\cos{\omega_k x}$恰好是 $f''\qty(x) + \lambda f\qty(x) = 0$的解，所以它们在$\qty[-l,l]$上构成了完备基，而且它们互相之间是正交的。在这里值得一提的是，$\sin{\omega_k x}$满足了\textbf{第一类齐次边界条件}，即在边界上函数值为零，而$\cos{\omega_k x}$满足了\textbf{第二类齐次边界条件}，即在边界上的一阶导为零，这允许我们在各类边界条件下研究一个物理问题。同时从某种意义上，我们可以说
-        \begin{center}
-          \textbf{边界条件导致了特征值的分立。}
-        \end{center}
-
-        比如在氢原子模型的解里，我们事实上引入了一些“自然边界条件”：在球坐标下的函数必须要满足
-        \begin{equation}
-          f\qty(r,\theta, \phi)=f\qty(r,\theta,\phi+2\pi)
-        \end{equation}
-        这引发了角向的特征值分立，也就是\textbf{磁量子数的分立}。
-
-        而我们认为波函数在空间的任何一个点都是不发散的，因此在$\theta$方向上必须要展开成多项式而非无穷级数，而$\phi$方向的方程使它必须要符合连属Legendre多项式的形式\footnote{详细讨论还是见任何一本数学物理方法或者量子力学的书。}。同时波函数在全空间下是绝对可积的（因为我们已经定义了波函数的内积——它必须是在Hilbert空间下的），所以在无穷远处它必须收敛于零，这使得径向函数必须满足连带Laguerre函数的形式。所以从某种角度而言，\textbf{量子力学的能级分立是由于量子力学是使用一个偏微分方程描述且存在边界条件的}。
-
-        \sout{上面那段关于特征值的部分看不懂也没事，等你以后神功大成了再回看也不迟。}
-        
-        简单地说，对于任意一个周期为$2l$\footnote{$l>0$}的函数$f\qty(x)$，其都可以展开为$\qty{\sin{\omega_k x},\cos{\omega x}}_{n=0}^\infty$的线性组合。回顾\ref{expansion_of_complete_basis}一节的内容，这就是完备基展开。
-
-        然后，让我们用一个更一般的形式来处理这个问题。著名的Euler公式表明
-        \begin{equation}
-          e^{i\theta}=\cos\theta+i\sin\theta
-        \end{equation}
-        于是易证
-        \begin{equation}
-          \frac{1}{2l}\int_{-l}^l{e^{i\omega_k x}e^{-i\omega_l x}\dd{x}}=\delta_{kl}
-        \end{equation}
-        于是，对于我们的完备基$\qty{\sin{\omega_k x},\cos{\omega_k x}}_{n=0}^\infty$，一个平凡的想法是对其中的项进行线性组合
-        \begin{equation}
-          \begin{cases}
-            \sin{\omega_k x}=\frac{1}{2i}\qty(e^{i\omega_k x}-e^{-i\omega_k x})\\
-            \cos{\omega_k x}=\frac{1}{2}\qty(e^{i\omega_k x}+e^{-i\omega_k x})
-          \end{cases}
-        \end{equation}
-        于是，我们的基组就可以写为$\qty{e^{i\omega_k x}}_{n=-\infty}^\infty$。换句话说，我们可以把\ref{real_fourier_series}写为
-        \begin{equation}
-          f(x) = \sum_{k=-\infty}^{\infty}{c_k e^{i\omega_k x}}
-        \end{equation}
-        其中系数为
-        \begin{equation}
-          c_k=\frac{1}{2l}\int_{-l}^l{f\qty(\xi)e^{-i\omega_k\xi}\dd{\xi}}
-        \end{equation}
-        利用正交性即可。显然，$c_k\in\mathbb{C}$，$c_k=c_{-k}^*$。这种形式的好处在于形式上更加统一，而且不用考虑要不要除以二的问题。
-
-        如果我们想要展开的是一个全实数域的函数呢？我们还是从\ref{real_fourier_series}出发，然后令$l\to\infty$，我们发现它转换为一个积分。首先对于$a_0$
-        \begin{equation}
-          \lim_{l\to\infty}{a_0}=\lim_{l\to\infty}{\frac{1}{2l}\int_{-l}^{l}{f\qty(\xi)\dd{\xi}}}=0
-        \end{equation}
-        如果积分是可积的，那么就有$a_0=0$。我们令$\Delta\omega_k=\omega_k-\omega_{k-1}=\frac{\pi}{l}\to0$，于是，
-        \begin{equation}
-          \label{fourier_transformation_derivation}
-          \begin{aligned}
-            &f\qty(x)=\lim_{l\to\infty}\sum_{k=1}^{\infty}{\qty(a_k\cos{\omega_k x}+b_k\sin{\omega_k x})}\\
-            \Rightarrow&f\qty(x)=\lim_{l\to\infty}{\sum_{k=1}^{\infty}{\qty[\qty(\frac{1}{l}\int_{-l}^l{f\qty(\xi)\cos{\omega_k\xi}\dd{\xi}})\cos{\omega_k x}+\qty(\frac{1}{l}\int_{-l}^l{f\qty(\xi)\sin{\omega_k\xi}\dd{\xi}})\sin{\omega_k x}]}}\\
-            \Rightarrow&f\qty(x)=\lim_{l\to\infty}{\sum_{k=1}^{\infty}{\qty[\Delta\omega_k\qty(\frac{1}{\pi}\int_{-l}^l{f\qty(\xi)\cos{\omega_k\xi}\dd{\xi}})\cos{\omega_k x}+\Delta\omega_k\qty(\frac{1}{\pi}\int_{-l}^l{f\qty(\xi)\sin{\omega_k\xi}\dd{\xi}})\sin{\omega_k x}]}}\\
-            \Rightarrow&f\qty(x)=\lim_{l\to\infty}{\sum_{k=1}^{\infty}{\qty[\qty(\frac{1}{\pi}\int_{-\infty}^\infty{f\qty(\xi)\cos{\omega_k\xi}\dd{\xi}})\cos{\omega_k x}+\qty(\frac{1}{\pi}\int_{-\infty}^\infty{f\qty(\xi)\sin{\omega_k\xi}\dd{\xi}})\sin{\omega_k x}]\Delta\omega_k}}\\
-            \Rightarrow&f\qty(x)=\int_0^\infty{\qty[\qty(\frac{1}{\pi}\int_{-\infty}^\infty{f\qty(\xi)\cos{\omega\xi}\dd{\xi}})\cos{\omega x}+\qty(\frac{1}{\pi}\int_{-\infty}^\infty{f\qty(\xi)\sin{\omega\xi}\dd{\xi}})\sin{\omega x}]\dd{\omega}}\\
-            \Rightarrow&f\qty(x)=\int_0^\infty{A\qty(\omega)\cos{\omega x}\dd{\omega}}+\int_0^\infty{B\qty(\omega)\sin{\omega x}\dd{x}}
-          \end{aligned}  
-          .
-        \end{equation}
-        而系数为
-        \begin{equation}
-          \begin{cases}
-            \label{fourier_transformation_real_coefficient}
-            A\qty(\omega)=\frac{1}{\pi}\int^\infty_{-\infty}{f\qty(\xi)\cos{\omega\xi}\dd{\xi}}\\
-            B\qty(\omega)=\frac{1}{\pi}\int^\infty_{-\infty}{f\qty(\xi)\sin{\omega\xi}\dd{\xi}} 
-          \end{cases}
-          .
-        \end{equation}
-        注意\ref{fourier_transformation_derivation}的推导过程。我们第一步代入了傅里叶展开的系数的表达式，第二步代入了周期$l$的表达式，第三步只是简单的提取了公因式，但是这样根据积分的极限定义我们就可以把第三步的结果写成第四步的积分，归纳就得到了最后一步以及对应的系数表达式\ref{fourier_transformation_real_coefficient}。
-
-        那么类似地，我们也可以得到复数域中的傅立叶变换以及对应的傅立叶逆变换，即
-        \begin{equation}
-          F\qty(k)=\mathcal{F}\qty[f\qty(x)]=\frac{1}{2\pi}\int_{-\infty}^{\infty}{f\qty(x)e^{-ikx}\dd{x}} 
-          .
-        \end{equation}
-        以及
-        \begin{equation}
-          \mathcal{F}^{-1}\qty[F\qty(k)]=\int_{-\infty}^\infty{F\qty(k)e^{ikx}\dd{k}}
-          .
-        \end{equation}
-        这便是一般意义下的傅立叶变换\footnote{其实也有不少地方把那个系数$\frac{1}{2\pi}$分摊在正变换与逆变换上。}。我们从完备基上也可以理解，事实上傅立叶变换就是对$e^{-ikx}$进行展开，从而转化为频谱信息。
-
-        我们还能够引入各种定理，
-        \begin{theorem}
-          \begin{align}
-            \mathcal{F}\qty[f'\qty(x)]&=&ikF\qty(k)\\
-            \mathcal{F}\qty[\int^\qty(x){f\qty(\xi)\dd{\xi}}]&=&\frac{1}{ik}F\qty{k}\\
-            \mathcal{F}\qty[f\qty(ax)]&=&\frac{1}{a}F\qty(\frac{k}{a})\\
-            \mathcal{F}\qty[f\qty(x-x_0)]&=&e^{-ikx_0}F\qty(k)\\
-            \mathcal{F}\qty[e^{ik_0x}f\qty(x)]&=&F\qty(k-k_0)\\
-            \mathcal{F}\qty[\int\limits_\mathbb{R}{f_1\qty(\xi)f_2\qty(x-\xi)\dd{\xi}}]&=&2\pi\mathcal{F}\qty[f_1\qty(x)]\mathcal{F}\qty[f_2\qty(x)]
-          \end{align}
-        \end{theorem}
-        上述过程的证明\sout{留做习题}感兴趣的读者可以根据傅里叶变换的定义自行完成。
-
-        当然傅立叶变换不只是在一维上。我们对三维空间$\vb*{r}$也可以做傅立叶变换，
-        \begin{equation}
-          F(\vb*{k})=\frac{1}{(2\pi)^{\frac{3}{2}}}\iiint\limits_{\mathbb{R}^3}{f(\vb*{r})e^{-i\vb*{k}\cdot\vb*{r}}\dd{\vb*{r}}}
-        \end{equation}
-
-        另外一个跟傅里叶变换相关的内容是连续狄拉克函数$\delta(x)$，它在$x=0$时其值不为零（或者正无穷），$x\neq 0$时恒为零，同时保证
-        \begin{equation}
-          \int\limits_\mathbb{R}{\delta(x)\dd{x}}=1
-        \end{equation}
-        它还有这些性质，
-        \begin{align}
-          \delta\qty(-x)&=\delta\qty(x)\\
-          x\delta\qty(x)&=0\\
-          \delta\qty(ax)&=\frac{1}{\abs{a}}\delta\qty(x)\\
-          \delta\qty(x^2-a^2)&=\frac{1}{2\abs{a}}{\delta\qty(x-a)+\delta\qty(x+a)}\quad\qty(a>0)\\
-          \int\limits_\mathbb{R}{\delta\qty(a-x)\delta\qty(x-b)\dd{x}}&=\delta\qty(a-b)\\
-          f\qty(x)\delta\qty(x-a)&=f\qty(a)\delta\qty(x-a)\\
-          \int\limits_\mathbb{R}{f\qty(x)x\delta\qty(x)\dd{x}}&=0
-        \end{align}
-
-        傅立叶变换实现了函数在实空间和像空间之间的相互转换，而一些算符在两个空间会发生转变（如导数算符转换为常数相乘），使问题能够简化。一个经典的实例就是，
-        \begin{center}
-          \textbf{实空间的波函数在动量空间下的完备基展开就是傅立叶变换。}
-        \end{center}
-        当然傅立叶变换的意义不止于此，它还代表了信号和频谱之间的转换关系，使其成为信号分析的基础。
-
-        薛定谔方程是什么呢？它或许是玄学，它也可能只是一个线性代数的延伸点，它也可能只是一个简单的扩散方程。你可以构建好的完备基来展开对这个体系的描述，你也可以着眼于它的偏微分方程的性质进行求解（比如用格林函数（传播子），比如用傅立叶变换）。这也就是量子力学存在很多学派的原因：量子力学的描述是多种多样的。
-
-        王林军老师组存在一个一脉单传（\sout{而且马上就要断了香火}）的项目，也就是SMD（旧为PS-QHD —— Phase-Space Quantum Hamiltonian Dynamics）。Moyal得到他的体系便是充分利用了傅立叶变换的这些性质，留给后面叙述。
-
-      \section{简易矢量代数及张量}
-        矢量和标量是两个非常直观的物理量的存在方式，这个从物理的发展历史中便可以充分看出。矢量和标量让人们最先拥有了对“线性”这个概念的最原始的认识，而张量这个概念的引入某种程度上使“线性”这个概念达到了非常高的理论化水平。从某种程度上，张量代表了所有具有线性的元素。\footnote{仅限一家之言，实际情况可能并非如此。}在量子力学中也无法避免对高阶张量进行分析的情况\footnote{但实际上在初等量子力学中并不会涉及矢量代数，或者张量分析的内容，只有进入相对论量子力学才有必要引入这些东西。那为什么要写这些呢？\sout{没错，是主编催稿}}。
-
-        在开始讲述之前，我们先引入爱因斯坦求和约定。在矢量代数中，当一个字母成对出现后，即默认对这个字母遍历的所有情况进行求和。而在张量分析中，若一个上指标和一个下指标成对出现，那么进行遍历求和。
-
-        为更详细地描述该约定，我们假设存在两个向量$\vb*{a}=\mqty(\xmat*{a}{1}{3}),\ \vb*{b}=\mqty(\xmat*{b}{1}{3})$.此时我们可以使用$a_i$及$b_i$来直接代表这两个向量，因为 $i$没有重复出现，说明它是“灵活的”，也就是它对能够遍历的所有情况都成立。那么求和约定怎么弄呢？其实很简单，
-        \begin{equation*}
-          a_ib_i\equiv\mqty(\xmat*{a}{1}{3})\cdot\mqty(\xmat*{b}{1}{3})=\sum_{i=1}^3{A_iB_i}
-        \end{equation*} 
-        那么很容易联想，
-        \begin{equation*}
-          a_ia_i=\norm{\vb*{a}}^2
-        \end{equation*} 
-        那$a_ib_j$呢？ $i,j$都是没有成对出现的，说明它们都是灵活的，可以遍历所有情况，那么这个玩意儿应该出现9个元素。没错，它某种程度上就代表了一个矩阵。更准确地说，它代表了一个并矢。用矩阵来表示，
-        \begin{equation*}
-          a_ib_j\equiv\mqty(
-            a_1b_1 & a_1b_2 & a_1b_3 \\
-            a_2b_1 & a_2b_2 & a_2b_3 \\
-            a_3b_1 & a_3b_2 & a_3b_3 
-          )
-        \end{equation*} 
-        那么易得，
-        \begin{equation}
-          \Tr(a_ib_j)=a_ib_i.
-        \end{equation}
-
-        矢量的一个比较重要的性质便是向量是受旋转矩阵控制的。旋转矩阵$R$(或$R_{ij}$)作为正交矩阵，满足
-        \begin{equation*}
-          R^\mathsf{T}R=I
-        \end{equation*}
-        它代表了对向量的旋转，也可以是向量在一个空间的表述转换到了另一个空间的表述，同时保持各个向量之间的内积保持不变。它表达起来为
-        \begin{equation*}
-          a'_ib'_i=a_jR_{ji}R_{ij}b_j=a_jb_j
-        \end{equation*} 
-        其中$a'_i,\ b'_i$表示为新坐标下的向量表示。我们可以清晰地看到旋转矩阵的正交性质在保持向量内积中起到的作用。我们可以从这一点出发，若某个量是受旋转矩阵控制的，那么它是一个矢量。
-
-        旋转矩阵其实便代表了一个二阶张量：它存在两个指标，这两个指标之间是独立的。我们还可以从并矢得到灵感，在字母上多标箭头来表达高阶张量\footnote{为什么不写出来？\sout{编者\LaTeX 能力太差}}。特别地，二阶张量还可以用$\overleftrightarrow{T}$来表示。
-
-        当然旋转矩阵也并不是只能作用于矢量。我们从并矢可以很容易联想到，高阶张量某种程度上代表了多个向量的笛卡尔积，那么若要对它进行旋转也就意味着对每一个向量进行旋转，而互相之间的旋转可以是独立的。从而我们可以写成
-        \begin{equation*}
-          T'_{i_1i_2\dots i_n}=R_{i_1j_1}R_{i_2j_2}\dots R_{i_nj_n}T_{j_1j_2\dots j_n}
-        \end{equation*} 
-        从旋转矩阵我们也看到了张量的一个重要的性质：高阶张量可以代表对低阶张量的线性变换。这也说明了高阶张量多个指标的作用：这些指标可以自由地与别的张量的指标进行结合，“发动”爱因斯坦求和约定。
-
-        向量之间还有叉乘的形式\footnote{叉乘仅限于三维情况。}，我们可以将其表达为：
-        \begin{equation*}
-          \vb*{a} \times \vb*{b} = \varepsilon_{ijk} \vb*{e}_i a_j b_k
-        \end{equation*} 
-        其中$\vb*{e}_i$便表达了基向量。$\varepsilon_{ijk}$\footnote{被称为Levi-Civita符号}表达的是若 $i,j,k$的顺序为“正序”，也就是从最开始的正序列(即12345\dots)通过偶数次元素得到的序列时(比如231，312），其值为1，若为“倒序”（即321，213和132）其值为$-1$，若存在重复数字则为零。\footnote{没错其实就是行列式的求值方法。}
-
-        由此可以出发证明一个非常有用的公式：
-        \begin{equation}
-          \vb*{a}\times(\vb*{b}\times\vb*{c})=(\vb*{a}\cdot\vb*{c})\vb*{b}-(\vb*{a}\cdot\vb*{b})\vb*{c}
-        \end{equation} 
-        我们可以这么出发：
-        \begin{align*}
-          \vb*{a}\times(\vb*{b}\times\vb*{c})&=\vb*{e}_i\varepsilon_{ijk}a_j(\vb*{b}\times\vb*{c})_k\\
-          &=\vb*{e}_i\varepsilon_{ijk}\varepsilon_{kmn}a_jb_mc_n \\
-          &=\vb*{e}_ib_ia_jc_j-\vb*{e}_ic_ia_jb_j
-        \end{align*}
-        其中利用了
-        \begin{equation}
-          \varepsilon_{ijk}\varepsilon_{kmn}=\varepsilon_{kij}\varepsilon_{kmn}=\delta_{im}\delta_{jn}-\delta_{in}\delta_{jm}
-        \end{equation} 
-        我们可以这么想这个公式：由于$i,j,k,m,n$都是取三个坐标元，保持$k$一致后其余的指标的选择是非常有限的，然后就能很容易想明白上式是如何推出来的。
-
-        \textbf{梯度}算符是在矢量代数中比较重要的算符，但它也并不神秘，它其实就代表了向各个维度求一阶导的“向量”。比如
-        \begin{equation*}
-          \grad{f}=\qty(\pdv{f}{x},\pdv{f}{y},\pdv{f}{z})\equiv\pdv{f}{x_i}\equiv\partial_i f
-        \end{equation*} 
-        那么与此对应，求一个向量的\textbf{散度}也很容易：
-        \begin{equation*}
-          \div{\vb*{a}}=\partial_i a_i 
-        \end{equation*} 
-        \textbf{旋度}也很简单：
-        \begin{equation*}
-          \curl{\vb*{a}}=\varepsilon_{ijk}\vb*{e}_i\partial_j a_k
-        \end{equation*} 
-        但这些东西能够延伸的内容是非常丰富的。比如对$\vb*{r} = (x,y,z)$及单位矩阵$\overleftrightarrow{I}$，有
-        \begin{align}
-          &\div{\vb*{r}}=3 \\
-          &\curl{\vb*{r}}=0 \\
-          &\curl{(\grad{f})}=0 \\
-          &\grad{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}}=\frac{-\qty(\vb*{r}-\vb*{r}')}{\abs{\vb*{r}-\vb*{r}'}^3}=-\grad'{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} \\
-          &\curl{\qty(r^n \vb*{r})}=0 
-        \end{align}
-        读者有兴趣可以自行证明。对此感兴趣的读者可进一步阅读附录\ref{tensor_higher}。\\
-
-        {\color{red}{\textbf{Warning: 前方高能！非\sout{战斗人员}相对论量子力学相关读者请迅速撤离！！！}}}
-
-        张量分析在矢量代数的基础上考虑了坐标系自身的影响，比如，这个坐标系的各个基向量之间是不互相正交的。此时向量之间的内积自然就不能简单地利用向量系数的相乘。为了方便地搞定这个事情，张量分析使用了“协变张量”和“逆变张量”的概念。“协变张量”是我们所熟悉的张量，而“逆变张量”则代表了与它相对应的另一种张量\footnote{\sout{好了好了我知道我中文很菜}}。
-
-        比如我们有两个基向量$\vb*{i}_1,\vb*{i}_2$，他们满足
-        \begin{equation*}
-          \vb*{i}_1\cdot\vb*{i}_1=\vb*{i}_2\cdot\vb*{i}_2=1,\ \vb*{i}_1\cdot\vb*{i}_2=\cos{\varphi}
-        \end{equation*} 
-        甚至还不止于此，我们有两个非归一的基向量
-        \begin{equation*}
-          \vb*{g}_1=\norm{\vb*{g}_1}\vb*{i}_1,\ \vb*{g}_2=\norm{\vb*{g}_2}\vb*{i}_2
-        \end{equation*} 
-        此时两个向量$\vb*{p},\vb*{q}$ 的内积直接写起来是非常复杂的。但我们可以通过代数方程构建这两个基向量对应的逆变基矢量$\vb*{g}^1,\vb*{g}^2$，使
-        \begin{equation*}
-          \vb*{g}^1\cdot\vb*{g}_2=0,\ \vb*{g}^1\cdot\vb*{g}_1=\vb*{g}^2\cdot\vb*{g}_2=1 
-        \end{equation*} 
-        也就是
-        \begin{equation*}
-          \vb*{g}^i\cdot\vb*{g}_j=\delta^i_j
-        \end{equation*}
-        我们就可以方便地写出两个向量的内积，
-        \begin{equation*}
-          \mean{\vb*{p},\vb*{q}}=p^i \cdot q_i
-        \end{equation*} 
-        其中上标的向量表示通过逆变基向量线性组合得到的逆变向量，下标为对应的协变向量。
-
-        这样我们就在一定程度上解决了坐标系自身带来的影响。那么对协变向量/逆变向量自然存在对应的线性变换
-        \begin{equation*}
-          \begin{cases}
-            \vb*{p}_{j'}=\beta^{j'}_i p_i \\
-            \vb*{p}^{j'}=\beta^{j'}_i p^i
-          \end{cases}
-        \end{equation*} 
-        可以很容易地证明
-        \begin{equation*}
-          \beta^j_i\beta^i_k=\delta^j_k
-        \end{equation*}
-        同时还需引入 fundamental tensor $g^{ij}$,它某种程度上起到了“抬升指标”的作用，
-        \begin{equation*}
-          p^j=g^{ji}p_i
-        \end{equation*} 
-        那么$\beta^{ij}$就是在变换的同时抬升指标的一个算符。
-
-        相对论量子力学引入了狭义相对论中的核心——光速不变原理引入的各种修正。从原点发光，光的传播满足
-        \begin{equation}
-          c^2t^2-\qty(x^2+y^2+z^2)=0
-        \end{equation}
-        以不同的参考系来看，由于光速不变，同样会有
-        \begin{equation}
-          c^2t'^2-\qty(x'^2+y'^2+z'^2)=0
-        \end{equation}
-        从而
-        \begin{equation}
-          c^2t'^2-\qty(x'^2+y'^2+z'^2)=c^2t^2-\qty(x^2+y^2+z^2)
-        \end{equation}
-        定义坐标形式为$\qty(x,y,z,ct)$，建立 Minkowski Space，定义该空间的内积为:
-        \begin{equation}
-          \begin{cases}
-            \eta\qty(u,v)=u_0v_0-u_1v_1-u_2 v_2-u_3v_3\\
-            u=\mqty(
-              u_0\\
-              u_1\\
-              u_2\\
-              u_3
-            ),
-            v=\mqty(
-              v_0\\
-              v_1\\
-              v_2\\
-              v_3
-            )
-          \end{cases}
-        \end{equation}
-        那么在原参考系下，新参考系下的物理量分别写作为$A,A^*$时，有
-        \begin{equation}
-          \eta\qty(A^*,A^*)=\eta\qty(A,A)
-        \end{equation}
-        在这个情况下原来的张量的一些性质会发生改变——因为内积定义发生了变化。
-
-        那么原来的协变/逆变基向量之间的关系也就发生了改变，
-        \begin{equation}
-          \vb*{g}^i\cdot\vb*{g}_j=\delta_{ij}\rightarrow\eta\qty(A_i,A_j)=
-          \begin{cases}
-            1,\ i=j=0\\
-            -1,\ i=j\neq 0\\
-            0,\ i\neq j
-          \end{cases}
-        \end{equation}
-        这个时候的fundamental tensor就需要改为
-        \begin{equation}
-          g^{\mu\nu} =
-          \begin{cases}
-            1,\ i=j=0\\
-            -1,\ i=j\neq 0\\
-            0,\ i\neq j
-          \end{cases}
-        \end{equation}
-        相对论量子力学便基于这样的符号系统展开了包含了狭义相对论修正的量子力学描述。
-
-      \section{简易数值计算方法}
-        我们一般将可以直接写出数学表达式的问题称为解析的，与之对应的就是数值的。虽然解析的数学在相当多的方面都有重要意义，但是对于实际的应用来说，尤其是计算机模拟的问题来说，得到解析表达式是极为困难。举个简单的例子，常微分方程，就连本科生课程中给出的例子很多都需要做数值计算才能真正得到结果。而在王老师课题组，由于研究的都是动力学问题，即体系随时间演化，更是需要很多数值拟合，微分积分和数值解微分方程的概念，因此本节中我们将极其简要地介绍相关问题的最基础方法，为了简单，我们都用单变量函数的最简单的数值方法作为例子，实际操作中需要多变量、较高精度方法请参阅相关书籍\cite{numerical_calc_methods}及其它，这部分只是给读者一个概念，在之后查阅资料过程中不至于\sout{被水淹没}不知所措。
-        \subsection{非线性方程求解}
-          对于线性方程，方程组，如果我们已经确定其有解，则一定可以通过消元法等方法将其求解，最多只是过程繁琐，但是总可以交给计算机去解决，线性方程组更是有各类已有的数学运算库函数来求解，比我们在课本上学到的方法要精确，这也是我们跳过线性方程组求解的原因\footnote{读者在需要这类功能时可以咨询学长学姐相关的MKL库函数使用，本指南不再特别说明。另外，这也是我们不讲述矩阵特征值数值解法的原因。}。对于非线性方程$f\qty(x)=0$，这件事情是很让人头疼的，因为没有一个严格的普适求解方法，在这里我们介绍最简单的几种数值方法。
-
-          \textbf{二分法：}这是一个非常朴素的方法，相信读者之前就听说过，只要函数连续，那么总可以通过二分的方法从一正一负两个函数值点出发，不断迭代，就能找到其中的解。思路是首先选择一对具有相反函数值的自变量点，取它们的平均值计算函数值$f\qty(\frac{x_i+x_j}{2})$，根据符号相反的一侧选择下一个区域，继续二分，直到两次二分的区间都极小，就可以取最后区间的点作为非线性方程的解。
-
-          \textbf{不动点迭代法：}相信很多读者在学习分析化学1时都用过这个方法，就是将非线性方程$f\qty(x)=0$写成$x=g\qty(x)$的形式，然后选择一个初值$x_0$代入得到$x_1=g\qty(x_0)$，进而迭代得到$x_2,x_3,\dots$，直到最后两个数相差很小，就可以认为迭代法收敛，收敛的值就是非线性方程的解。我们还相信，读者在学习分析化学1的时候就发现这个方法不总是能收敛的，或者收敛到两个值，不动点迭代法强烈依赖于$g\qty(x)$的性质，具体数学证明不予展开，但是很多时候任意构造的$g\qty(x)$并不能满足收敛性的要求，因此这个方法的适用范围非常局限。
-
-          \textbf{牛顿迭代法：}牛顿迭代法也是迭代求解非线性方程的重要方法，尽管比很多后续方法慢，但是多数情况下，其收敛性可以得到保证，也是正常的求解非线性方程中最一般的方法(前面两个基本没人用)。牛顿迭代法的核心思想是，设方程$f\qty(x)=0$有近似解$x_k$，且$f'\qty(x_k)\neq0$，那么真正的解就可以在这个近似解附近展开
-          \begin{equation*}
-            f(x)\approx f\qty(x_k)+f'\qty(x_k)\qty(x-x_k)
-          \end{equation*}
-          方程$f(x)=0$就是上式右边等于0，或者写成
-          \begin{equation*}
-            x=x_k-\frac{f\qty(x_k)}{f'\qty(x_k)}
-          \end{equation*}
-          左边的$x$变成$x_{k+1}$，这个方程就是牛顿迭代法的迭代方程，其几何意义是，对于某个点$x_k$，$x_{k+1}$就等于当前点切线与$y=0$的交点，这样一步步逼近真实解。当读者遇到非线性方程时，可以优先采用牛顿法尝试，非线性方程组也可以从上面的方法进行简单地推广得到。
-
-          鉴于牛顿法有时候收敛速度较慢，我们也可以使用一些加速迭代的算法，此处不详细展开，感兴趣的读者可以阅读相关文献专著。
-        \subsection{插值与拟合}
-          插值与拟合的问题在研究中是非常常见的，这两个问题是极其相似的，他们都来自于我们希望对已有数据的规律进行分析，得到未知数据。比如说，我们通过了实验或者计算的手段，知道了一组自变量$\qty{x_i},i=1,2,\dots,N$和这组自变量对应的函数值$\qty{y_i}$，我们希望用一个函数表示它们之间的关系，进而求出其他没有测量的自变量对应的函数值。根据需要，我们会涉及插值或者拟合的问题，我们将各介绍其中最简单的方法，分别是拉格朗日(Lagrange)插值多项式和最小二乘法。
-
-          之所以称为插值问题，是因为插值函数有一个要求，就是必须经过所有的$\qty(x_i,y_i)$点，即所有的已知数据都严格符合插值多项式，多数情况下，对于一组数据的插值多项式是存在且唯一的，比如两个点确定直线是唯一的，三个点确定抛物线也是唯一的。因此用哪种插值多项式，只是代码实现的难度和速度上的差别，拉格朗日插值多项式就是思路最平凡的一种：对于一组$n+1$个互不相同的插值点$\qty{x_i}_{i=0}^n$，如果能找到一个多项式$\qty{l_{i}\qty(x)}_{i=0}^{n}$，满足
-          \begin{equation}
-            l_{i}\qty(x_{j})=\delta_{i j}=\begin{cases}
-              1,i=j \\
-              0,i\neq j 
-            \end{cases}\ \ \ \ \ i,j=0,1,\cdots,n
-          \end{equation}
-          那么
-          \begin{equation}
-            L_{n}\qty(x)=\sum_{i=0}^{n}{l_{i}\qty(x)f\qty(x_{i})}
-          \end{equation}
-          就是关于这组插值点的拉格朗日插值多项式。它的思路非常简单，即要求在每个插值点的位置，只有正确插值点对应的函数值不是0，这个思路实现起来也非常容易，只需要
-          \begin{equation}
-            l_{i}(x)=\prod_{j=0,j\neq i}^n{\frac{x-x_j}{x_i-x_j}}=\frac{\qty(x-x_0)\cdots\qty(x-x_{i-1})\qty(x-x_{i+1})\cdots\qty(x-x_{n})}{qty(x_{i}-x_0)\cdots\qty(x_i-x_{i-1})\qty(x_i-x_{i+1})\cdots\qty(x_i-x_{n})}
-          \end{equation}
-          读者可以自行验证上式满足$\delta_{ij}$的条件，这样拉格郎日插值多项式就可以写成
-          \begin{equation}
-            L_{n}\qty(x)=\sum_{i=0}^n{l_{i}\qty(x)y_i}=\sum_{i=0}^{n}{\qty(\prod_{j=0,j\neq i}^n \frac{x-x_j}{x_i-x_j})y_i}
-          \end{equation}
-          上式就满足插值多项式的基本要求。除去拉格朗日插值之外，还有牛顿插值多项式，Hermite插值多项式等，读者可自行查阅。这些插值多项式的出发点不同，但是最终结果是一致的，读者也可自行验证。
-          
-          在这里需要提及的是，插值多项式可以分段进行，最简单的是每相邻的两个点用直线表示，或者邻近三个点用二次函数表示，这样的缺点是函数的导数不连续，而且在插值点上导数不存在。如果希望对于插值点，给定函数值和一阶导数值，做这样的插值多项式可以使用样条插值，常用的是三次样条插值多项式，在这里不予展开。
-
-          上面是插值问题，接下来讨论拟合问题。这两者的重要区别就是插值多项式要求必须过已知数据点，但是拟合就不是了，顾名思义，拟合通常是有一个含$n+1$参数的函数$f\qty(x;a_0,a_1,\dots,a_n)$，希望调整这些参数使得这个函数最\textbf{接近}已有数据，就像我们实验课所做的那样。所谓的“接近”，通常用误差函数$\delta\qty(x_i)=f\qty(x_i)-y_i$来表征，其中$y_i$为已知数据，$f\qty(x_i)$是拟合函数在这点给出的值，而整体的误差的评判标准有很多，比如所有点误差函数绝对值求和，或者绝对值中最大的那个，最小二乘法的原则是所有误差函数的平方和最小，即$S=\sum_{i=1}^m{\delta_i^2}=\sum_{i=1}^m{\qty[f\qty(x_{i})-y_{i}]^{2}}=\min$。正如上所述，一般采用的拟合函数都是参数依赖的，所以想实现这个非常简单，只需要这个总误差函数对所有参数的导数等于0
-          \begin{equation}
-            \pdv{S}{a_k}=0\ \qty(k=0,1,\cdots,n)
-            \label{least square}
-          \end{equation}
-          解上式$n+1$个方程就能得到$n+1$个参数值，就得到了最小二乘解。看起来非常简单，最小二乘法的核心难度在于找合适的拟合函数，只有拟合函数合适，这个参数才能较好地匹配，在不知道用什么函数的时候，可以用一组基函数来试，把最终的函数表达式写成一组函数的线性组合，参数就是线性组合系数，这个方法称为线性最小二乘法：在某个函数类$\Phi=\operatorname{span}\qty{\varphi_0\qty(x),\varphi_1\qty(x),\cdots,\varphi_n\qty(x)}$寻找一个函数$\varphi^*\qty(x)=a_0^*\varphi_0\qty(x)+a_1^*\varphi_1\qty(x)+\cdots+a_n^*\varphi_n\qty(x)$使其满足
-          \begin{equation}
-            \sum_{i=1}^m{\qty[\varphi^*\qty(x_i)-y_i]^2}=\min_{\varphi\qty(x)\in\Phi}\sum_{i=1}^m{\qty[\varphi\qty(x_i)-y_i]^2}
-          \end{equation}
-          此时的总误差函数为
-          \begin{equation}
-            S\qty(a_0,a_1,\cdots,a_n)=\sum_{i=1}^m{\qty[\sum_{k=0}^n{a_k\varphi_k\qty(x_i)}-y_i]^2}
-          \end{equation}
-          代入式(\ref{least square})得到
-          \begin{equation}
-            \sum_{i=1}^m{\varphi_k\qty(x_i)\qty[a_0\varphi_0\qty(x_i)+\cdots+a_n\varphi_n\qty(x_i)-y_i]}=0,\ k=0,1,\cdots,n
-          \end{equation}
-          即
-          \begin{equation}
-            a_0\sum_{i=1}^m{\varphi_k\qty(x_i)\varphi_0\qty(x_i)}+\cdots+a_n\sum_{i=1}^m{\varphi_k\qty(x_i)\varphi_n\qty(x_i)}=\sum_{i=1}^m{\varphi_k\qty(x_i)y_i}
-          \end{equation}
-          如果定义这个函数空间的内积为$\mean{h,g}=\sum_{i=1}^m{h\qty(x_i)g\qty(x_i)}$，那么所有偏导可以表达成一个矩阵的形式
-          \begin{equation}
-            \mqty[
-              \mean{\varphi_0,\varphi_0}&\mean{\varphi_0,\varphi_1}&\cdots&\mean{\varphi_0,\varphi_n}\\
-              \mean{\varphi_1,\varphi_0}&\mean{\varphi_1,\varphi_1}&\cdots&\mean{\varphi_1,\varphi_n}\\
-              \vdots&\vdots&\ddots&\vdots\\
-              \mean{\varphi_n,\varphi_0}&\mean{\varphi_n,\varphi_1}&\cdots&\mean{\varphi_n,\varphi_n}
-            ]\mqty[
-              a_0\\
-              a_1\\
-              \vdots\\
-              a_n
-            ]=\mqty[
-              \mean{\varphi_0,f}\\
-              \mean{\varphi_1,f}\\
-              \vdots\\
-              \mean{\varphi_n,f}
-            ]
-            \label{linear least square}
-          \end{equation}
-          如果式(\ref{linear least square})有唯一解，线性最小二乘函数就有解。
-
-          如果对于非线性最小二乘法，偏导的方程很可能是非线性方程，通常可以用迭代解方程的方式求解。
-
-          此外还有必要提到的是条件极值问题。这类问题一般结合最小二乘法形成条件最小二乘，即满足最小二乘误差$S=\sum_{i=0}^m{\qty[f\qty(x_i)-y_i]^2}$最小的同时，需要满足一系列独立的条件，通常写作$g_j\qty(x_1,x_2,\dots,x_n)=0,j=1,2,\dots,r$。对于这样的问题，我们一般采用\textbf{拉格朗日乘因子法}\footnote{Lagrange Multiplier Method, LMM}求解。具体做法如下：将总误差函数$S$写作
-          \begin{equation}
-            S=\sum_{i=0}^m{\qty[f\qty(x_i;a_1,a_2,\cdots,a_n)-y_i]^2}+\sum_{j=0}^r{\lambda_j g_j\qty(x_1,x_2,\dots,x_m)}
-          \end{equation}
-          此时，$c_i$和$\lambda_j$都是参数。如果希望修正之后的总误差最小，则需要对这些参数的偏导数均为零，即
-          \begin{equation}
-            \begin{cases}
-              \pdv{S}{a_i}=0,\ i=1,2,\dots,n\\
-              \pdv{S}{\lambda_j}=0,\ j=1,2,\dots,r
-            \end{cases}
-          \end{equation}
-          此时得到的误差即为满足条件的最小误差，证明略去。
-
-          条件最小二乘方法应用于许多实际的问题，感兴趣的读者可以阅读第\ref{phase_space_dynamics}章。
-
-        \subsection{数值微分和数值积分}
-          \label{numerical_differential_integral}
-          我们微积分里学过各类的微分和积分的计算，但是对于实际应用来说几乎完全没有用。而数值方法却在微分和积分领域大放异彩。最简单的数值微分和数值积分都是基于插值多项式的，我们从最简单的等距结点的情况说明几种方法。
-
-          数值微分里最简单的就是两点公式和三点公式，两点公式相当于当前点与邻近的结点做两点的插值多项式(直线)，然后用直线的斜率代替在这个点的导数
-          \begin{equation}
-            \begin{aligned}
-              f'\qty(x_0)&\approx&\frac{f\qty(x_1)-f\qty(x_0)}{h}\\
-              f'\qty(x_1)&\approx&\frac{f\qty(x_1)-f\qty(x_0)}{h}
-            \end{aligned}
-          \end{equation}
-          其中$h=x_1-x_0$是两个点间的距离。
-          
-          两点法的公式非常简单，精度也较低。而在三点法中，插值多项式是一个二次函数。如果有等间距的三点，相邻两点的距离为$h$，它们的拉格朗日插值多项式为
-          \begin{equation*}
-            \begin{aligned}
-              P_2\qty(x)&=\frac{qty(x-x_1)\qty(x-x_2)}{\qty(x_0-x_1)\qty(x_0-x_2)}f\qty(x_0)+\frac{\qty(x-x_0)\qty(x-x_2)}{\qty(x_1-x_0)\qty(x_1-x_2)}f\qty(x_1) \\
-              &+\frac{\qty(x-x_0)\qty(x-x_1)}{\qty(x_2-x_0)\qty(x_2-x_1)}f\qty(x_2)
-            \end{aligned}
-          \end{equation*}
-          对这个式子求导就得到了三点法的一阶导数公式
-          \begin{equation}
-            \begin{cases}
-              f'\qty(x_0)\approx\frac{-3f\qty(x_0)+4f\qty(x_1)-f\qty(x_2)}{2h} \\
-              f'\qty(x_1)\approx\frac{f\qty(x_2)-f\qty(x_0)}{2h} \\
-              f'\qty(x_2)\approx\frac{f\qty(x_0)-4f\qty(x_1)+3f\qty(x_2)}{2h}
-            \end{cases}
-          \end{equation}
-          我们通常用中间的那个点，尽管三点法比两点法精度只提高了一级，甚至特殊情况下精度是同一量级，但是三点法结合了当前点之前和之后的信息，往往能有更好的效果。另外，既然三点法是二次函数的插值，就可以求二阶导数
-          \begin{equation}
-            f''\qty(x_i)\approx P''_2\qty(x_i)=\frac{f\qty(x_0)-2f\qty(x_1)+f\qty(x_2)}{h^2}, i=0,1,2
-          \end{equation}
-          除了用拉格朗日插值多项式，也可以用三次样条等方法插值，然后再求导得到精度更高的数值微分。
-
-          数值积分的思路略有不同，核心思想是用有限个点的求和代替积分，即
-          \begin{equation}
-            \int_a^b{f\qty(x)\dd{x}}\approx\sum_{k=0}^n{A_k f\qty(x_k)}
-          \end{equation}
-          我们介绍普适的牛顿-科茨(Newton-Cotes)公式，在积分区域$\qty[a,b]$上$n$等分，取$x_i=a+ih,\ h=\frac{b-a}{n},\ i=0,1,\dots,n$，采用拉格朗日插值多项式来代表真实的函数，令$x=a+th$，那么积分公式中的系数就可以写作
-          \begin{equation}
-            A_i=\int_a^b{l_i\qty(x)\dd{x}}=h\int_0^n{\qty(\prod_{j=0 \atop j \neq i}^n{\frac{t-j}{i-j}}) \dd{t}}=\qty(b-a) C_i^\qty(n)
-          \end{equation}
-          其中定义了
-          \begin{equation}
-            C_i^\qty(n)=\frac{1}{n} \frac{\qty(-1)^{n-i}}{i !\qty(n-i) !} \int_0^n{\prod_{j=0 \atop j \neq i}^n{\qty(t-j)}\dd{t}},\ i=0,\cdots,n
-          \end{equation}
-          我们称
-          \begin{equation}
-            \int_a^b{f\qty(x)\dd{x}}\approx\qty(b-a)\sum_{i=0}^n{C_i^\qty(n)f\qty(x_i)}
-          \end{equation}
-          为数值积分的牛顿-科茨公式，这些$C_i^\qty(n)$称为牛顿-科茨系数，可以直接在各种书中查到，代入函数值，完成积分。接下来，我们来看牛顿-科茨公式低阶的两个例子。$n=1$时，牛顿-科茨公式退化为梯形公式
-          \begin{equation}
-            \int_a^b{f\qty(x)\dd{x}}\approx\frac{b-a}{2}\qty[f\qty(a)+f\qty(b)]
-          \end{equation}
-          即函数的积分用它前后两个点构成的梯形面积代替。$n=2$时，退化为辛普森(Simpson)公式\footnote{在几何学上也称为拟柱体公式，对计算各种物体的体积很有用}，
-          \begin{equation}
-            \int_a^b{f\qty(x)\dd{x}}\approx\frac{b-a}{6}\qty[f\qty(a)+4f\qty(\frac{a+b}{2})+f\qty(b)]
-          \end{equation}
-          牛顿-科茨公式只是数值积分的入门方法，精度和速度都有待提高，我们推荐读者自行学习与之相关的龙贝格算法，可在任意一本数值计算的教材上找到。
-
-          插值型积分公式尽管图像简单，但是显然不是最精确的，理论上精度最高的积分公式是高斯型积分公式。高斯型积分公式的特点在于，对于已知数值点的选择不再是简单的等距取点，而遵循一定的策略以追求更高的数值精度，各点的权重也有所不同。想要对此进一步了解的读者请移步相关专著如\cite{numerical_calc_methods}，此处不再赘述。
-
-        \subsection{ODE初值问题的数值解法}
-          既然积分和微分都主要靠数值解法，那么对于实际科研中遇到的常微分方程(ODE)来说，几乎是只能用数值方法求解的。本节介绍最常用的一阶常微分方程初值问题：
-          \begin{equation*}
-            \begin{cases}
-              y'=f\qty(x,y)\\
-              y\qty(x_0)=y_0
-            \end{cases}
-          \end{equation*}
-          的数值解法。微分方程组和高阶微分方程求解的思路基本是一致的。
-
-          上文中的初值问题，要求解的其实是一根曲线，它经过初始点$\qty(x_0,y_0)$，并且满足对每一点$x$的导数满足$y'=f\qty(x,y)$。要描述这样一根曲线，最容易的办法就是用分段线性的方式，过点$\qty(x_0,y_0)$作曲线斜率为$f\qty(x_0,y_0)$的切线，与$x=x_1$交于$\qty(x_1,y_1)$，用$y_1$作为真实解$y\qty(x_1)$的近似值。这样的方法称为欧拉法，即用下列点代替真实点
-          \begin{equation}
-            \begin{cases}
-              y_{i+1}=y_i+hf\qty(x_i, y_i)\\
-              x_i=x_0+ih,\ i=0,1,2,\cdots
-            \end{cases}
-          \end{equation}
-          这样就可以从初始点出发求解任意坐标$x$处的函数值，当$h=x_{i+1}-x_i$的值足够小的时候，欧拉法就是足够准确的。欧拉法的几何意义非常明确，即用当前点$x_i$的导数代替$\qty(x_i,x_{i+1})$之间的真实函数的平均导数，也可以理解成对$y\qty(x_{i+1})$点在$y\qty(x_i)$点的泰勒展开，只保留到第一项的结果。
-
-          上文中其实可以看出，欧拉法在$h$稍大一些时，误差就会很大，泰勒展开保留到一阶项是一个及其粗糙的近似。上述欧拉法是用$x_i$和$x_{i+1}$来计算$y\qty(x_{i+1})$的，因此又叫做向前欧拉法，与之对应的就是向后欧拉法
-          \begin{equation}
-            y_{i+1}=y_i+hf\qty(x_{i+1}, y_{i+1})
-          \end{equation}
-          读者可以看到，想求$y_{i+1}$的话，需要知道它自己的值，因此向后欧拉法中通常用迭代的方式求解$y_{i+1}$。既然有向前和向后，结合之前在\ref{numerical_differential_integral}节提到过的梯形公式，自然就可以想到用向前和向后的平均，可以提高精度，这就是改进的欧拉法
-          \begin{equation*}
-            y_{i+1}=y_i+\frac{h}{2}\qty[f\qty(x_i,y_i)+f\qty(x_{i+1},y_{i+1})]
-          \end{equation*}
-          加入一个表示迭代次数的上标$^\qty(k)$，改进的欧拉方法可以写作
-          \begin{equation}
-            \begin{cases}
-              y_{i+1}^\qty(0)=y_i+hf\qty(x_i,y_i)\\
-              y_{i+1}^\qty(k+1)=y_i+\frac{h}{2}\qty[f\qty(x_i,y_i)+f\qty(x_{i+1},y_{i+1}^\qty(k))]
-            \end{cases},\ k=0,1,2,\cdots
-          \end{equation}
-          另外，也可以不用迭代，先用向前欧拉方法预测一个$y_{i+1}^\qty(0)$的值，然后直接代入梯形积分公式来得到更精确的$y_{i+1}$值，相当于只做一次迭代，称为改进的欧拉法的预估-校正公式，也是通常实际中使用的改进欧拉方法。
-
-          当然所有在王老师组写过代码的人都会知道，王老师课题组所使用的数值方法称为龙格-库塔法(Runge-Kutta, 简称RK)。RK法的基本思想是用复合函数的值来代替积分的值，简单地说，就是用更多的点的导数的某种加权平均代替这一段上的平均导数，用m个点就称为m阶RK法。可以想象，2阶RK法与改进欧拉方法是等价的\footnote{尽管系数不完全相同，但是精度是相同的}。m阶RK法的通式可以写作
-          \begin{equation}
-            \begin{cases}
-              y_{i+1}=y_i+h\qty(\alpha_1 K_1+\alpha_2 K_2+\cdots+\alpha_m K_m)\\
-              K_1=f\qty(x_i, y_i)\\
-              K_2=f\qty(x_i+\lambda_2 h, y_i+\mu_2 h K_1)\\
-              \cdots\cdots\cdots\\
-              K_m=f\qty(x_i+\lambda_m h, y_i+\mu_m h K_{m-1})
-            \end{cases}
-            \label{m order RK}
-          \end{equation}
-          这些参数的计算原则，就是让式(\ref{m order RK})中$y_{i+1}$的展开式与$y\qty(x_{i+1})$在$\qty(x_i,y_i)$处的泰勒展开尽可能相同，限于篇幅，我们不做仔细推导，直接给出最常用的4阶RK法(又称作经典RK法)的表达式
-          \begin{equation}
-            \begin{cases}
-              y_{i+1}=y_i+\frac{h}{6}\qty(K_1+2K_2+2K_3+K_4)\\
-              K_1=f\qty(x_i,y_i)\\
-              K_2=f\qty(x_i+\frac{h}{2},y_i+\frac{h}{2}K_1) \\
-              K_3=f\qty(x_i+\frac{h}{2},y_i+\frac{h}{2}K_2) \\
-              K_4=f\qty(x_i+h, y_i+hK_3)
-            \end{cases}
-            \label{4 order RK}
-          \end{equation}
-          4阶RK法的精度已经较高，已经满足了王老师课题组和多数其他物理工程领域的数值精度要求。
-
-    \chapter{量子力学}
+    \chapter{初等量子力学（简化版）}
       本指南默认入门者对量子力学最基础的部分有一定的理解，因此不会从最简单的东西慢慢入手，我们通过直接讲解五大基本假设来帮助读者回忆基础量子力学的内容。作为量子化学的学习，并不需要每个量子力学中的模型都需要自己掌握解法（当然掌握最好），量子化学更多地关注方程的近似解。因此我们的量子力学部分会包括基础量子力学课讲到的，但是结构化学可能不会涉及的微扰理论以及变分法。另外就是会被熟练的
       
       在这些之后，我们从高等量子力学的角度重新阐述了波函数、力学量以及表象理论。最后，我们简单涉及了密度矩阵，在王老师课题组的实际应用中，一般只会涉及到密度矩阵的定义，不会深究，这里我们也只是多半复制了樱井纯高等量子力学中的表述，为大家提供一个更全面的密度矩阵的意义。
@@ -1877,7 +1223,7 @@
           i \hbar \frac{\partial \rho}{\partial t}=&-[\rho,\hat{H}]
         \end{align*}
     
-
+    \part{B卷}
     \chapter{量子化学-电子结构基础}
       量子化学(电子结构)部分，我们将简要介绍常见的电子结构计算方法，所谓电子结构方法，即求解分子(或者固体)体系的定态\sch 方程的方法，大家都知道，多体的SE是难以求得精确的解析结果的，因此量子化学某种程度上也是各类近似方法及其如何一步步逼近精确解的简介，本节会\textbf{简要}介绍基于分子电子结构计算的各种理论，包括Hartree-Fock方法，post-Hartree-Fock方法和DFT理论，编者还在最后加入了简化版的电子(费米子)二次量子化的内容。限于篇幅，上述理论的部分证明被略去，暂时也不涉及关于固体理论的相关计算。本节内容与王老师高等物理化学-量子化学课程内容相似，但是又很多不同，我们也参考了非常多经典电子结构教材的内容。
       
@@ -3718,6 +3064,665 @@
         
         \paragraph{相位修正：}传统的FSSH方法在处理不同势能面的波函数时会有一个相位差的问题。这个问题的来源是当FSSH决定电子要跃迁时，电子是直接跃迁到当前原子核结构下的其他势能面。但是由于势能面的能量不同，其对应的原子核速度不同，以两能级系统举例，如果两个原子核波包同时开始演化，电子一开始位于基态势能面，能量较高的势能面原子核速度较低(这是能量守恒的要求)，因此在电子跃迁时，相同相位对应的激发态还未运动到基态波函数对应的位置，而是在其之前，这要求实际操作电子跃迁时，需要对波函数的相位进行修正(Phase Correction)。
 
+    \chapter{更多数学}
+      这是B卷中的数学部分，内容已经开始涉及部分数学物理方法的部分，基础矢量代数，以及非常重要的简要数值计算方法部分
+      \section{完备基展开}
+    \label{expansion_of_complete_basis}
+    完备基展开是一个非常重要的概念，它直接提供了解决众多微分方程的方法，而解决微分方程是量子力学的至关重要的一个内容。
+
+    “完备”一词说明某一个基组的完备性，也就是我只要通过这个基组的线性组合就能完整描述我所研究的空间中的所有内容。
+    
+    回忆一下线性代数，对于一个线性空间，我给定了一组基向量，那么这个线性空间中的所有向量都可以用这一组基向量的线性组合得到，那么这组基向量就是完备的。例如，我用$\hat{x}$,$\hat{y}$,$\hat{z}$三个基向量就能完整描述三维实空间里的所有向量，那么这三个方向向量构成的基组就是三维实空间的完备基。
+    
+    拓展到函数空间也是一样。我用$\qty{x^n}_{n=0}^\infty$便能描述所有的一维函数，我用$\qty{\sin{nx},\cos{nx}}_{n=0}^\infty$\footnote{即傅里叶变换，参考\ref{fourier_transformation}一节}就能描述所有一维周期性函数，这些也构成了对应空间中完备基。至于函数是怎么用基组描述的，请回顾\ref{expantion_to_function_space}一节。
+
+    它有什么用呢？其中一个应用可见附录\ref{sturm_Liouville_eigenvalue_problem}。可以看到，它提供了一个解决复杂的微分方程问题的方法\footnote{其实线性代数里的本征值和本征向量也有同样的性质。}。同时它从某种角度上已经道明了量子力学的一个重要的点：
+    \begin{center}
+      所有的态都能用本征态的线性组合来表示。
+    \end{center}
+    至于为什么是本征态？想想\ref{expansion_to_complex_field}一节中提到的谱定理：复空间正规矩阵的本征态是该线性空间的完备基。
+
+    哦，我们的读者，然而故事还没有结束呢。
+
+    我们先用曾经描述的量子力学符号来说说这个完备基。对于某个完备的特征值集$\qty{\lambda_n}$和特征向量集$\qty{\ket{e_i}}$，我们认为特征向量集已经正交归一\footnote{即不同的两个特征向量之间相互正交，且每个向量模为1（即\sout{自交}自己与自己的内积为1）。你可能还记得存在多重特征根的情况，此时你或许也记得这个特征根对应多个特征向量，它们并不一定需要正交。那么你想想就能明白，你能通过某些奇技淫巧让它们互相之间变得正交并仍旧是特征向量（比如大名鼎鼎的Gram-Schmidt 正交化）。}，那么有定理
+    \begin{theorem}
+      \begin{equation}
+        \sum_i{\dyad{e_i}}=1\,\text{or}\,\int{\dd{q'}\dyad{q'}}=1.
+      \end{equation}
+    \end{theorem}
+
+    $\dyad{e_i}$是一个全新的操作，事实上它其实就是一个算符。为什么呢？因为你可以看到，
+    \begin{equation}
+      \qty(\dyad{e_i})\ket{\xi}=\ket{e_i}\bra{e_i}\ket{\xi}=\bra{e_i}\ket{\xi}\ket{e_i}.
+      \label{ ket bra }
+    \end{equation}
+    这是由于$\bra{e_i}\ket{\xi}$是一个数，所以它可以游荡在任何地方（向量可以非常自然地乘上任何一个数而不需要管顺序）。也就是我作用于$\ket{\xi}$然后获得了一个新的向量，那么它就是一个算符\footnote{从线性代数的角度理解，$\ket{e_i}$是一个列向量，$\bra{e_i}$是一个行向量，两者相乘即为列向量乘行向量，那么自然得到的$\dyad{e_i}$就是一个矩阵；根据之前所讲的，矩阵和算符是等价的}。
+
+    $1$是沿用了Dirac大佬的写法\footnote{编者表示被Dirac虐得越多\sout{对Dirac越爱得深沉}}，就是表示单位算符（或者单位矩阵$I$），作用后得到原来的结果，即
+    \begin{equation}
+      1\ket{\xi}=\ket{\xi}.
+    \end{equation}
+    所以上面的定理就是在说我把特征向量按照那种方式组合求和后它就会变成单位算符。
+
+    \begin{proof}
+      证明思路：验证其对完备基中任意向量都成立$\Rightarrow$空间内任意向量皆成立
+      \begin{equation}
+        \sum_i{\ket{e_i}\bra{e_i}\ket{e_j}}=\sum_i{\ket{e_i}\delta_{ij}}=\ket{e_j}.
+      \end{equation}
+      从而说明，对所有特征向量，该算符和单位算符等价。
+
+      注：$\delta_{ij}$是kronecker $\delta$符号，其含义为
+      \begin{equation}
+        \delta_{ij}=
+        \begin{cases}
+          1,\ i=j\\
+          0,\ i\neq j
+        \end{cases}
+      \end{equation}
+
+      利用展开的唯一性(即一个向量只有一种方式展开/系数组是唯一的)，得到
+      \begin{equation}
+        \begin{aligned}
+          &\ket{\psi}=\sum_i{c_i\ket{e_i}}\Rightarrow\bra{e_j}\ket{\psi}=\bra{e_j}\sum_i{c_i\ket{e_i}}\\
+          \Rightarrow&\bra{e_j}\ket{\psi}=\sum_i{c_i\bra{e_j}\ket{e_i}}\Rightarrow\bra{e_j}\ket{\psi}=\sum_i{c_i\delta_{ij}}\\
+          \Rightarrow&c_j=\bra{e_j}\ket{\psi}.
+        \end{aligned}
+      \end{equation}
+      则
+      \begin{equation}
+        \sum_i{\ket{e_i}\bra{e_i}\ket{\psi}}=\sum_i{\ket{e_i}c_i}=\ket{\psi}
+      \end{equation}
+      因此对所有向量，该算符都与单位算符等价，所以该算符就是单位算符，证毕。
+    \end{proof}
+    \sout{恭喜你发现了镇站之宝，}对于任意一个向量$\ket{\psi}$，其在某组完备基$\qty{\ket{e_i}}$下的展开系数为
+    \begin{equation}
+      c_i=\bra{e_i}\ket{\psi} 
+      \label{expansion coeff}
+    \end{equation}
+    \sout{是不是有那么一点感觉？其实就是广义傅立叶级数展开。}
+
+      \section{傅里叶展开和傅里叶变换}
+    \label{fourier_transformation}
+    \begin{quote}
+      它，改变了世界。
+      \begin{flushright}
+        ——李睿，谈傅里叶变换时
+      \end{flushright}
+    \end{quote}     
+    还记得傅里叶级数嘛？\sout{不记得也没事，我们慢慢讲。}它长这样：
+    \begin{theorem}
+      当一个有界函数在$\qty[-l,l]$可积时，该函数可展开为：
+      \begin{equation}
+        \label{real_fourier_series}
+        f\qty(x)=\sum_{k=0}^{\infty}\qty(a_k\cos{\omega_k x}+b_k\sin{\omega_k x}).
+      \end{equation}
+      其中，
+      \begin{equation} 
+        \begin{cases}
+          a_k=\frac{1}{\delta_k l}\int_{-l}^l{f\qty(\xi)\cos{\omega_k\xi}\dd{\xi}}\\
+          b_k=\frac{1}{l}\int_{-l}^l{f\qty(\xi)\sin{\omega_k\xi}\dd{\xi}}
+        \end{cases}
+        .
+      \end{equation}
+      其中
+      \begin{equation}
+        \omega_k=\frac{k\pi}{l}.
+      \end{equation}
+      以及
+      \begin{equation}
+        \delta_k=
+        \begin{cases}
+          1,\quad k=0 \\
+          2, quad k\neq0 
+        \end{cases}
+        .
+      \end{equation}
+    \end{theorem}
+
+    {\color{red}{\textbf{Warning: 前方高能！}}}
+
+    我们刚刚描述过完备基展开，而且$\sin{\omega_k x}$和$\cos{\omega_k x}$恰好是 $f''\qty(x) + \lambda f\qty(x) = 0$的解，所以它们在$\qty[-l,l]$上构成了完备基，而且它们互相之间是正交的。在这里值得一提的是，$\sin{\omega_k x}$满足了\textbf{第一类齐次边界条件}，即在边界上函数值为零，而$\cos{\omega_k x}$满足了\textbf{第二类齐次边界条件}，即在边界上的一阶导为零，这允许我们在各类边界条件下研究一个物理问题。同时从某种意义上，我们可以说
+    \begin{center}
+      \textbf{边界条件导致了特征值的分立。}
+    \end{center}
+
+    比如在氢原子模型的解里，我们事实上引入了一些“自然边界条件”：在球坐标下的函数必须要满足
+    \begin{equation}
+      f\qty(r,\theta, \phi)=f\qty(r,\theta,\phi+2\pi)
+    \end{equation}
+    这引发了角向的特征值分立，也就是\textbf{磁量子数的分立}。
+
+    而我们认为波函数在空间的任何一个点都是不发散的，因此在$\theta$方向上必须要展开成多项式而非无穷级数，而$\phi$方向的方程使它必须要符合连属Legendre多项式的形式\footnote{详细讨论还是见任何一本数学物理方法或者量子力学的书。}。同时波函数在全空间下是绝对可积的（因为我们已经定义了波函数的内积——它必须是在Hilbert空间下的），所以在无穷远处它必须收敛于零，这使得径向函数必须满足连带Laguerre函数的形式。所以从某种角度而言，\textbf{量子力学的能级分立是由于量子力学是使用一个偏微分方程描述且存在边界条件的}。
+
+    \sout{上面那段关于特征值的部分看不懂也没事，等你以后神功大成了再回看也不迟。}
+    
+    简单地说，对于任意一个周期为$2l$\footnote{$l>0$}的函数$f\qty(x)$，其都可以展开为$\qty{\sin{\omega_k x},\cos{\omega x}}_{n=0}^\infty$的线性组合。回顾\ref{expansion_of_complete_basis}一节的内容，这就是完备基展开。
+
+    然后，让我们用一个更一般的形式来处理这个问题。著名的Euler公式表明
+    \begin{equation}
+      e^{i\theta}=\cos\theta+i\sin\theta
+    \end{equation}
+    于是易证
+    \begin{equation}
+      \frac{1}{2l}\int_{-l}^l{e^{i\omega_k x}e^{-i\omega_l x}\dd{x}}=\delta_{kl}
+    \end{equation}
+    于是，对于我们的完备基$\qty{\sin{\omega_k x},\cos{\omega_k x}}_{n=0}^\infty$，一个平凡的想法是对其中的项进行线性组合
+    \begin{equation}
+      \begin{cases}
+        \sin{\omega_k x}=\frac{1}{2i}\qty(e^{i\omega_k x}-e^{-i\omega_k x})\\
+        \cos{\omega_k x}=\frac{1}{2}\qty(e^{i\omega_k x}+e^{-i\omega_k x})
+      \end{cases}
+    \end{equation}
+    于是，我们的基组就可以写为$\qty{e^{i\omega_k x}}_{n=-\infty}^\infty$。换句话说，我们可以把\ref{real_fourier_series}写为
+    \begin{equation}
+      f(x) = \sum_{k=-\infty}^{\infty}{c_k e^{i\omega_k x}}
+    \end{equation}
+    其中系数为
+    \begin{equation}
+      c_k=\frac{1}{2l}\int_{-l}^l{f\qty(\xi)e^{-i\omega_k\xi}\dd{\xi}}
+    \end{equation}
+    利用正交性即可。显然，$c_k\in\mathbb{C}$，$c_k=c_{-k}^*$。这种形式的好处在于形式上更加统一，而且不用考虑要不要除以二的问题。
+
+    如果我们想要展开的是一个全实数域的函数呢？我们还是从\ref{real_fourier_series}出发，然后令$l\to\infty$，我们发现它转换为一个积分。首先对于$a_0$
+    \begin{equation}
+      \lim_{l\to\infty}{a_0}=\lim_{l\to\infty}{\frac{1}{2l}\int_{-l}^{l}{f\qty(\xi)\dd{\xi}}}=0
+    \end{equation}
+    如果积分是可积的，那么就有$a_0=0$。我们令$\Delta\omega_k=\omega_k-\omega_{k-1}=\frac{\pi}{l}\to0$，于是，
+    \begin{equation}
+      \label{fourier_transformation_derivation}
+      \begin{aligned}
+        &f\qty(x)=\lim_{l\to\infty}\sum_{k=1}^{\infty}{\qty(a_k\cos{\omega_k x}+b_k\sin{\omega_k x})}\\
+        \Rightarrow&f\qty(x)=\lim_{l\to\infty}{\sum_{k=1}^{\infty}{\qty[\qty(\frac{1}{l}\int_{-l}^l{f\qty(\xi)\cos{\omega_k\xi}\dd{\xi}})\cos{\omega_k x}+\qty(\frac{1}{l}\int_{-l}^l{f\qty(\xi)\sin{\omega_k\xi}\dd{\xi}})\sin{\omega_k x}]}}\\
+        \Rightarrow&f\qty(x)=\lim_{l\to\infty}{\sum_{k=1}^{\infty}{\qty[\Delta\omega_k\qty(\frac{1}{\pi}\int_{-l}^l{f\qty(\xi)\cos{\omega_k\xi}\dd{\xi}})\cos{\omega_k x}+\Delta\omega_k\qty(\frac{1}{\pi}\int_{-l}^l{f\qty(\xi)\sin{\omega_k\xi}\dd{\xi}})\sin{\omega_k x}]}}\\
+        \Rightarrow&f\qty(x)=\lim_{l\to\infty}{\sum_{k=1}^{\infty}{\qty[\qty(\frac{1}{\pi}\int_{-\infty}^\infty{f\qty(\xi)\cos{\omega_k\xi}\dd{\xi}})\cos{\omega_k x}+\qty(\frac{1}{\pi}\int_{-\infty}^\infty{f\qty(\xi)\sin{\omega_k\xi}\dd{\xi}})\sin{\omega_k x}]\Delta\omega_k}}\\
+        \Rightarrow&f\qty(x)=\int_0^\infty{\qty[\qty(\frac{1}{\pi}\int_{-\infty}^\infty{f\qty(\xi)\cos{\omega\xi}\dd{\xi}})\cos{\omega x}+\qty(\frac{1}{\pi}\int_{-\infty}^\infty{f\qty(\xi)\sin{\omega\xi}\dd{\xi}})\sin{\omega x}]\dd{\omega}}\\
+        \Rightarrow&f\qty(x)=\int_0^\infty{A\qty(\omega)\cos{\omega x}\dd{\omega}}+\int_0^\infty{B\qty(\omega)\sin{\omega x}\dd{x}}
+      \end{aligned}  
+      .
+    \end{equation}
+    而系数为
+    \begin{equation}
+      \begin{cases}
+        \label{fourier_transformation_real_coefficient}
+        A\qty(\omega)=\frac{1}{\pi}\int^\infty_{-\infty}{f\qty(\xi)\cos{\omega\xi}\dd{\xi}}\\
+        B\qty(\omega)=\frac{1}{\pi}\int^\infty_{-\infty}{f\qty(\xi)\sin{\omega\xi}\dd{\xi}} 
+      \end{cases}
+      .
+    \end{equation}
+    注意\ref{fourier_transformation_derivation}的推导过程。我们第一步代入了傅里叶展开的系数的表达式，第二步代入了周期$l$的表达式，第三步只是简单的提取了公因式，但是这样根据积分的极限定义我们就可以把第三步的结果写成第四步的积分，归纳就得到了最后一步以及对应的系数表达式\ref{fourier_transformation_real_coefficient}。
+
+    那么类似地，我们也可以得到复数域中的傅立叶变换以及对应的傅立叶逆变换，即
+    \begin{equation}
+      F\qty(k)=\mathcal{F}\qty[f\qty(x)]=\frac{1}{2\pi}\int_{-\infty}^{\infty}{f\qty(x)e^{-ikx}\dd{x}} 
+      .
+    \end{equation}
+    以及
+    \begin{equation}
+      \mathcal{F}^{-1}\qty[F\qty(k)]=\int_{-\infty}^\infty{F\qty(k)e^{ikx}\dd{k}}
+      .
+    \end{equation}
+    这便是一般意义下的傅立叶变换\footnote{其实也有不少地方把那个系数$\frac{1}{2\pi}$分摊在正变换与逆变换上。}。我们从完备基上也可以理解，事实上傅立叶变换就是对$e^{-ikx}$进行展开，从而转化为频谱信息。
+
+    我们还能够引入各种定理，
+    \begin{theorem}
+      \begin{align}
+        \mathcal{F}\qty[f'\qty(x)]&=&ikF\qty(k)\\
+        \mathcal{F}\qty[\int^\qty(x){f\qty(\xi)\dd{\xi}}]&=&\frac{1}{ik}F\qty{k}\\
+        \mathcal{F}\qty[f\qty(ax)]&=&\frac{1}{a}F\qty(\frac{k}{a})\\
+        \mathcal{F}\qty[f\qty(x-x_0)]&=&e^{-ikx_0}F\qty(k)\\
+        \mathcal{F}\qty[e^{ik_0x}f\qty(x)]&=&F\qty(k-k_0)\\
+        \mathcal{F}\qty[\int\limits_\mathbb{R}{f_1\qty(\xi)f_2\qty(x-\xi)\dd{\xi}}]&=&2\pi\mathcal{F}\qty[f_1\qty(x)]\mathcal{F}\qty[f_2\qty(x)]
+      \end{align}
+    \end{theorem}
+    上述过程的证明\sout{留做习题}感兴趣的读者可以根据傅里叶变换的定义自行完成。
+
+    当然傅立叶变换不只是在一维上。我们对三维空间$\vb*{r}$也可以做傅立叶变换，
+    \begin{equation}
+      F(\vb*{k})=\frac{1}{(2\pi)^{\frac{3}{2}}}\iiint\limits_{\mathbb{R}^3}{f(\vb*{r})e^{-i\vb*{k}\cdot\vb*{r}}\dd{\vb*{r}}}
+    \end{equation}
+
+    另外一个跟傅里叶变换相关的内容是连续狄拉克函数$\delta(x)$，它在$x=0$时其值不为零（或者正无穷），$x\neq 0$时恒为零，同时保证
+    \begin{equation}
+      \int\limits_\mathbb{R}{\delta(x)\dd{x}}=1
+    \end{equation}
+    它还有这些性质，
+    \begin{align}
+      \delta\qty(-x)&=\delta\qty(x)\\
+      x\delta\qty(x)&=0\\
+      \delta\qty(ax)&=\frac{1}{\abs{a}}\delta\qty(x)\\
+      \delta\qty(x^2-a^2)&=\frac{1}{2\abs{a}}{\delta\qty(x-a)+\delta\qty(x+a)}\quad\qty(a>0)\\
+      \int\limits_\mathbb{R}{\delta\qty(a-x)\delta\qty(x-b)\dd{x}}&=\delta\qty(a-b)\\
+      f\qty(x)\delta\qty(x-a)&=f\qty(a)\delta\qty(x-a)\\
+      \int\limits_\mathbb{R}{f\qty(x)x\delta\qty(x)\dd{x}}&=0
+    \end{align}
+
+    傅立叶变换实现了函数在实空间和像空间之间的相互转换，而一些算符在两个空间会发生转变（如导数算符转换为常数相乘），使问题能够简化。一个经典的实例就是，
+    \begin{center}
+      \textbf{实空间的波函数在动量空间下的完备基展开就是傅立叶变换。}
+    \end{center}
+    当然傅立叶变换的意义不止于此，它还代表了信号和频谱之间的转换关系，使其成为信号分析的基础。
+
+    薛定谔方程是什么呢？它或许是玄学，它也可能只是一个线性代数的延伸点，它也可能只是一个简单的扩散方程。你可以构建好的完备基来展开对这个体系的描述，你也可以着眼于它的偏微分方程的性质进行求解（比如用格林函数（传播子），比如用傅立叶变换）。这也就是量子力学存在很多学派的原因：量子力学的描述是多种多样的。
+
+    王林军老师组存在一个一脉单传（\sout{而且马上就要断了香火}）的项目，也就是SMD（旧为PS-QHD —— Phase-Space Quantum Hamiltonian Dynamics）。Moyal得到他的体系便是充分利用了傅立叶变换的这些性质，留给后面叙述。
+
+      \section{简易矢量代数及张量}
+    矢量和标量是两个非常直观的物理量的存在方式，这个从物理的发展历史中便可以充分看出。矢量和标量让人们最先拥有了对“线性”这个概念的最原始的认识，而张量这个概念的引入某种程度上使“线性”这个概念达到了非常高的理论化水平。从某种程度上，张量代表了所有具有线性的元素。\footnote{仅限一家之言，实际情况可能并非如此。}在量子力学中也无法避免对高阶张量进行分析的情况\footnote{但实际上在初等量子力学中并不会涉及矢量代数，或者张量分析的内容，只有进入相对论量子力学才有必要引入这些东西。那为什么要写这些呢？\sout{没错，是主编催稿}}。
+
+    在开始讲述之前，我们先引入爱因斯坦求和约定。在矢量代数中，当一个字母成对出现后，即默认对这个字母遍历的所有情况进行求和。而在张量分析中，若一个上指标和一个下指标成对出现，那么进行遍历求和。
+
+    为更详细地描述该约定，我们假设存在两个向量$\vb*{a}=\mqty(\xmat*{a}{1}{3}),\ \vb*{b}=\mqty(\xmat*{b}{1}{3})$.此时我们可以使用$a_i$及$b_i$来直接代表这两个向量，因为 $i$没有重复出现，说明它是“灵活的”，也就是它对能够遍历的所有情况都成立。那么求和约定怎么弄呢？其实很简单，
+    \begin{equation*}
+      a_ib_i\equiv\mqty(\xmat*{a}{1}{3})\cdot\mqty(\xmat*{b}{1}{3})=\sum_{i=1}^3{A_iB_i}
+    \end{equation*} 
+    那么很容易联想，
+    \begin{equation*}
+      a_ia_i=\norm{\vb*{a}}^2
+    \end{equation*} 
+    那$a_ib_j$呢？ $i,j$都是没有成对出现的，说明它们都是灵活的，可以遍历所有情况，那么这个玩意儿应该出现9个元素。没错，它某种程度上就代表了一个矩阵。更准确地说，它代表了一个并矢。用矩阵来表示，
+    \begin{equation*}
+      a_ib_j\equiv\mqty(
+        a_1b_1 & a_1b_2 & a_1b_3 \\
+        a_2b_1 & a_2b_2 & a_2b_3 \\
+        a_3b_1 & a_3b_2 & a_3b_3 
+      )
+    \end{equation*} 
+    那么易得，
+    \begin{equation}
+      \Tr(a_ib_j)=a_ib_i.
+    \end{equation}
+
+    矢量的一个比较重要的性质便是向量是受旋转矩阵控制的。旋转矩阵$R$(或$R_{ij}$)作为正交矩阵，满足
+    \begin{equation*}
+      R^\mathsf{T}R=I
+    \end{equation*}
+    它代表了对向量的旋转，也可以是向量在一个空间的表述转换到了另一个空间的表述，同时保持各个向量之间的内积保持不变。它表达起来为
+    \begin{equation*}
+      a'_ib'_i=a_jR_{ji}R_{ij}b_j=a_jb_j
+    \end{equation*} 
+    其中$a'_i,\ b'_i$表示为新坐标下的向量表示。我们可以清晰地看到旋转矩阵的正交性质在保持向量内积中起到的作用。我们可以从这一点出发，若某个量是受旋转矩阵控制的，那么它是一个矢量。
+
+    旋转矩阵其实便代表了一个二阶张量：它存在两个指标，这两个指标之间是独立的。我们还可以从并矢得到灵感，在字母上多标箭头来表达高阶张量\footnote{为什么不写出来？\sout{编者\LaTeX 能力太差}}。特别地，二阶张量还可以用$\overleftrightarrow{T}$来表示。
+
+    当然旋转矩阵也并不是只能作用于矢量。我们从并矢可以很容易联想到，高阶张量某种程度上代表了多个向量的笛卡尔积，那么若要对它进行旋转也就意味着对每一个向量进行旋转，而互相之间的旋转可以是独立的。从而我们可以写成
+    \begin{equation*}
+      T'_{i_1i_2\dots i_n}=R_{i_1j_1}R_{i_2j_2}\dots R_{i_nj_n}T_{j_1j_2\dots j_n}
+    \end{equation*} 
+    从旋转矩阵我们也看到了张量的一个重要的性质：高阶张量可以代表对低阶张量的线性变换。这也说明了高阶张量多个指标的作用：这些指标可以自由地与别的张量的指标进行结合，“发动”爱因斯坦求和约定。
+
+    向量之间还有叉乘的形式\footnote{叉乘仅限于三维情况。}，我们可以将其表达为：
+    \begin{equation*}
+      \vb*{a} \times \vb*{b} = \varepsilon_{ijk} \vb*{e}_i a_j b_k
+    \end{equation*} 
+    其中$\vb*{e}_i$便表达了基向量。$\varepsilon_{ijk}$\footnote{被称为Levi-Civita符号}表达的是若 $i,j,k$的顺序为“正序”，也就是从最开始的正序列(即12345\dots)通过偶数次元素得到的序列时(比如231，312），其值为1，若为“倒序”（即321，213和132）其值为$-1$，若存在重复数字则为零。\footnote{没错其实就是行列式的求值方法。}
+
+    由此可以出发证明一个非常有用的公式：
+    \begin{equation}
+      \vb*{a}\times(\vb*{b}\times\vb*{c})=(\vb*{a}\cdot\vb*{c})\vb*{b}-(\vb*{a}\cdot\vb*{b})\vb*{c}
+    \end{equation} 
+    我们可以这么出发：
+    \begin{align*}
+      \vb*{a}\times(\vb*{b}\times\vb*{c})&=\vb*{e}_i\varepsilon_{ijk}a_j(\vb*{b}\times\vb*{c})_k\\
+      &=\vb*{e}_i\varepsilon_{ijk}\varepsilon_{kmn}a_jb_mc_n \\
+      &=\vb*{e}_ib_ia_jc_j-\vb*{e}_ic_ia_jb_j
+    \end{align*}
+    其中利用了
+    \begin{equation}
+      \varepsilon_{ijk}\varepsilon_{kmn}=\varepsilon_{kij}\varepsilon_{kmn}=\delta_{im}\delta_{jn}-\delta_{in}\delta_{jm}
+    \end{equation} 
+    我们可以这么想这个公式：由于$i,j,k,m,n$都是取三个坐标元，保持$k$一致后其余的指标的选择是非常有限的，然后就能很容易想明白上式是如何推出来的。
+
+    \textbf{梯度}算符是在矢量代数中比较重要的算符，但它也并不神秘，它其实就代表了向各个维度求一阶导的“向量”。比如
+    \begin{equation*}
+      \grad{f}=\qty(\pdv{f}{x},\pdv{f}{y},\pdv{f}{z})\equiv\pdv{f}{x_i}\equiv\partial_i f
+    \end{equation*} 
+    那么与此对应，求一个向量的\textbf{散度}也很容易：
+    \begin{equation*}
+      \div{\vb*{a}}=\partial_i a_i 
+    \end{equation*} 
+    \textbf{旋度}也很简单：
+    \begin{equation*}
+      \curl{\vb*{a}}=\varepsilon_{ijk}\vb*{e}_i\partial_j a_k
+    \end{equation*} 
+    但这些东西能够延伸的内容是非常丰富的。比如对$\vb*{r} = (x,y,z)$及单位矩阵$\overleftrightarrow{I}$，有
+    \begin{align}
+      &\div{\vb*{r}}=3 \\
+      &\curl{\vb*{r}}=0 \\
+      &\curl{(\grad{f})}=0 \\
+      &\grad{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}}=\frac{-\qty(\vb*{r}-\vb*{r}')}{\abs{\vb*{r}-\vb*{r}'}^3}=-\grad'{\frac{1}{\abs{\vb*{r}-\vb*{r}'}}} \\
+      &\curl{\qty(r^n \vb*{r})}=0 
+    \end{align}
+    读者有兴趣可以自行证明。对此感兴趣的读者可进一步阅读附录\ref{tensor_higher}。\\
+
+    {\color{red}{\textbf{Warning: 前方高能！非\sout{战斗人员}相对论量子力学相关读者请迅速撤离！！！}}}
+
+    张量分析在矢量代数的基础上考虑了坐标系自身的影响，比如，这个坐标系的各个基向量之间是不互相正交的。此时向量之间的内积自然就不能简单地利用向量系数的相乘。为了方便地搞定这个事情，张量分析使用了“协变张量”和“逆变张量”的概念。“协变张量”是我们所熟悉的张量，而“逆变张量”则代表了与它相对应的另一种张量\footnote{\sout{好了好了我知道我中文很菜}}。
+
+    比如我们有两个基向量$\vb*{i}_1,\vb*{i}_2$，他们满足
+    \begin{equation*}
+      \vb*{i}_1\cdot\vb*{i}_1=\vb*{i}_2\cdot\vb*{i}_2=1,\ \vb*{i}_1\cdot\vb*{i}_2=\cos{\varphi}
+    \end{equation*} 
+    甚至还不止于此，我们有两个非归一的基向量
+    \begin{equation*}
+      \vb*{g}_1=\norm{\vb*{g}_1}\vb*{i}_1,\ \vb*{g}_2=\norm{\vb*{g}_2}\vb*{i}_2
+    \end{equation*} 
+    此时两个向量$\vb*{p},\vb*{q}$ 的内积直接写起来是非常复杂的。但我们可以通过代数方程构建这两个基向量对应的逆变基矢量$\vb*{g}^1,\vb*{g}^2$，使
+    \begin{equation*}
+      \vb*{g}^1\cdot\vb*{g}_2=0,\ \vb*{g}^1\cdot\vb*{g}_1=\vb*{g}^2\cdot\vb*{g}_2=1 
+    \end{equation*} 
+    也就是
+    \begin{equation*}
+      \vb*{g}^i\cdot\vb*{g}_j=\delta^i_j
+    \end{equation*}
+    我们就可以方便地写出两个向量的内积，
+    \begin{equation*}
+      \mean{\vb*{p},\vb*{q}}=p^i \cdot q_i
+    \end{equation*} 
+    其中上标的向量表示通过逆变基向量线性组合得到的逆变向量，下标为对应的协变向量。
+
+    这样我们就在一定程度上解决了坐标系自身带来的影响。那么对协变向量/逆变向量自然存在对应的线性变换
+    \begin{equation*}
+      \begin{cases}
+        \vb*{p}_{j'}=\beta^{j'}_i p_i \\
+        \vb*{p}^{j'}=\beta^{j'}_i p^i
+      \end{cases}
+    \end{equation*} 
+    可以很容易地证明
+    \begin{equation*}
+      \beta^j_i\beta^i_k=\delta^j_k
+    \end{equation*}
+    同时还需引入 fundamental tensor $g^{ij}$,它某种程度上起到了“抬升指标”的作用，
+    \begin{equation*}
+      p^j=g^{ji}p_i
+    \end{equation*} 
+    那么$\beta^{ij}$就是在变换的同时抬升指标的一个算符。
+
+    相对论量子力学引入了狭义相对论中的核心——光速不变原理引入的各种修正。从原点发光，光的传播满足
+    \begin{equation}
+      c^2t^2-\qty(x^2+y^2+z^2)=0
+    \end{equation}
+    以不同的参考系来看，由于光速不变，同样会有
+    \begin{equation}
+      c^2t'^2-\qty(x'^2+y'^2+z'^2)=0
+    \end{equation}
+    从而
+    \begin{equation}
+      c^2t'^2-\qty(x'^2+y'^2+z'^2)=c^2t^2-\qty(x^2+y^2+z^2)
+    \end{equation}
+    定义坐标形式为$\qty(x,y,z,ct)$，建立 Minkowski Space，定义该空间的内积为:
+    \begin{equation}
+      \begin{cases}
+        \eta\qty(u,v)=u_0v_0-u_1v_1-u_2 v_2-u_3v_3\\
+        u=\mqty(
+          u_0\\
+          u_1\\
+          u_2\\
+          u_3
+        ),
+        v=\mqty(
+          v_0\\
+          v_1\\
+          v_2\\
+          v_3
+        )
+      \end{cases}
+    \end{equation}
+    那么在原参考系下，新参考系下的物理量分别写作为$A,A^*$时，有
+    \begin{equation}
+      \eta\qty(A^*,A^*)=\eta\qty(A,A)
+    \end{equation}
+    在这个情况下原来的张量的一些性质会发生改变——因为内积定义发生了变化。
+
+    那么原来的协变/逆变基向量之间的关系也就发生了改变，
+    \begin{equation}
+      \vb*{g}^i\cdot\vb*{g}_j=\delta_{ij}\rightarrow\eta\qty(A_i,A_j)=
+      \begin{cases}
+        1,\ i=j=0\\
+        -1,\ i=j\neq 0\\
+        0,\ i\neq j
+      \end{cases}
+    \end{equation}
+    这个时候的fundamental tensor就需要改为
+    \begin{equation}
+      g^{\mu\nu} =
+      \begin{cases}
+        1,\ i=j=0\\
+        -1,\ i=j\neq 0\\
+        0,\ i\neq j
+      \end{cases}
+    \end{equation}
+    相对论量子力学便基于这样的符号系统展开了包含了狭义相对论修正的量子力学描述。
+
+      \section{简易数值计算方法}
+    我们一般将可以直接写出数学表达式的问题称为解析的，与之对应的就是数值的。虽然解析的数学在相当多的方面都有重要意义，但是对于实际的应用来说，尤其是计算机模拟的问题来说，得到解析表达式是极为困难。举个简单的例子，常微分方程，就连本科生课程中给出的例子很多都需要做数值计算才能真正得到结果。而在王老师课题组，由于研究的都是动力学问题，即体系随时间演化，更是需要很多数值拟合，微分积分和数值解微分方程的概念，因此本节中我们将极其简要地介绍相关问题的最基础方法，为了简单，我们都用单变量函数的最简单的数值方法作为例子，实际操作中需要多变量、较高精度方法请参阅相关书籍\cite{numerical_calc_methods}及其它，这部分只是给读者一个概念，在之后查阅资料过程中不至于\sout{被水淹没}不知所措。
+    \subsection{非线性方程求解}
+      对于线性方程，方程组，如果我们已经确定其有解，则一定可以通过消元法等方法将其求解，最多只是过程繁琐，但是总可以交给计算机去解决，线性方程组更是有各类已有的数学运算库函数来求解，比我们在课本上学到的方法要精确，这也是我们跳过线性方程组求解的原因\footnote{读者在需要这类功能时可以咨询学长学姐相关的MKL库函数使用，本指南不再特别说明。另外，这也是我们不讲述矩阵特征值数值解法的原因。}。对于非线性方程$f\qty(x)=0$，这件事情是很让人头疼的，因为没有一个严格的普适求解方法，在这里我们介绍最简单的几种数值方法。
+
+      \textbf{二分法：}这是一个非常朴素的方法，相信读者之前就听说过，只要函数连续，那么总可以通过二分的方法从一正一负两个函数值点出发，不断迭代，就能找到其中的解。思路是首先选择一对具有相反函数值的自变量点，取它们的平均值计算函数值$f\qty(\frac{x_i+x_j}{2})$，根据符号相反的一侧选择下一个区域，继续二分，直到两次二分的区间都极小，就可以取最后区间的点作为非线性方程的解。
+
+      \textbf{不动点迭代法：}相信很多读者在学习分析化学1时都用过这个方法，就是将非线性方程$f\qty(x)=0$写成$x=g\qty(x)$的形式，然后选择一个初值$x_0$代入得到$x_1=g\qty(x_0)$，进而迭代得到$x_2,x_3,\dots$，直到最后两个数相差很小，就可以认为迭代法收敛，收敛的值就是非线性方程的解。我们还相信，读者在学习分析化学1的时候就发现这个方法不总是能收敛的，或者收敛到两个值，不动点迭代法强烈依赖于$g\qty(x)$的性质，具体数学证明不予展开，但是很多时候任意构造的$g\qty(x)$并不能满足收敛性的要求，因此这个方法的适用范围非常局限。
+
+      \textbf{牛顿迭代法：}牛顿迭代法也是迭代求解非线性方程的重要方法，尽管比很多后续方法慢，但是多数情况下，其收敛性可以得到保证，也是正常的求解非线性方程中最一般的方法(前面两个基本没人用)。牛顿迭代法的核心思想是，设方程$f\qty(x)=0$有近似解$x_k$，且$f'\qty(x_k)\neq0$，那么真正的解就可以在这个近似解附近展开
+      \begin{equation*}
+        f(x)\approx f\qty(x_k)+f'\qty(x_k)\qty(x-x_k)
+      \end{equation*}
+      方程$f(x)=0$就是上式右边等于0，或者写成
+      \begin{equation*}
+        x=x_k-\frac{f\qty(x_k)}{f'\qty(x_k)}
+      \end{equation*}
+      左边的$x$变成$x_{k+1}$，这个方程就是牛顿迭代法的迭代方程，其几何意义是，对于某个点$x_k$，$x_{k+1}$就等于当前点切线与$y=0$的交点，这样一步步逼近真实解。当读者遇到非线性方程时，可以优先采用牛顿法尝试，非线性方程组也可以从上面的方法进行简单地推广得到。
+
+      鉴于牛顿法有时候收敛速度较慢，我们也可以使用一些加速迭代的算法，此处不详细展开，感兴趣的读者可以阅读相关文献专著。
+    \subsection{插值与拟合}
+      插值与拟合的问题在研究中是非常常见的，这两个问题是极其相似的，他们都来自于我们希望对已有数据的规律进行分析，得到未知数据。比如说，我们通过了实验或者计算的手段，知道了一组自变量$\qty{x_i},i=1,2,\dots,N$和这组自变量对应的函数值$\qty{y_i}$，我们希望用一个函数表示它们之间的关系，进而求出其他没有测量的自变量对应的函数值。根据需要，我们会涉及插值或者拟合的问题，我们将各介绍其中最简单的方法，分别是拉格朗日(Lagrange)插值多项式和最小二乘法。
+
+      之所以称为插值问题，是因为插值函数有一个要求，就是必须经过所有的$\qty(x_i,y_i)$点，即所有的已知数据都严格符合插值多项式，多数情况下，对于一组数据的插值多项式是存在且唯一的，比如两个点确定直线是唯一的，三个点确定抛物线也是唯一的。因此用哪种插值多项式，只是代码实现的难度和速度上的差别，拉格朗日插值多项式就是思路最平凡的一种：对于一组$n+1$个互不相同的插值点$\qty{x_i}_{i=0}^n$，如果能找到一个多项式$\qty{l_{i}\qty(x)}_{i=0}^{n}$，满足
+      \begin{equation}
+        l_{i}\qty(x_{j})=\delta_{i j}=\begin{cases}
+          1,i=j \\
+          0,i\neq j 
+        \end{cases}\ \ \ \ \ i,j=0,1,\cdots,n
+      \end{equation}
+      那么
+      \begin{equation}
+        L_{n}\qty(x)=\sum_{i=0}^{n}{l_{i}\qty(x)f\qty(x_{i})}
+      \end{equation}
+      就是关于这组插值点的拉格朗日插值多项式。它的思路非常简单，即要求在每个插值点的位置，只有正确插值点对应的函数值不是0，这个思路实现起来也非常容易，只需要
+      \begin{equation}
+        l_{i}(x)=\prod_{j=0,j\neq i}^n{\frac{x-x_j}{x_i-x_j}}=\frac{\qty(x-x_0)\cdots\qty(x-x_{i-1})\qty(x-x_{i+1})\cdots\qty(x-x_{n})}{qty(x_{i}-x_0)\cdots\qty(x_i-x_{i-1})\qty(x_i-x_{i+1})\cdots\qty(x_i-x_{n})}
+      \end{equation}
+      读者可以自行验证上式满足$\delta_{ij}$的条件，这样拉格郎日插值多项式就可以写成
+      \begin{equation}
+        L_{n}\qty(x)=\sum_{i=0}^n{l_{i}\qty(x)y_i}=\sum_{i=0}^{n}{\qty(\prod_{j=0,j\neq i}^n \frac{x-x_j}{x_i-x_j})y_i}
+      \end{equation}
+      上式就满足插值多项式的基本要求。除去拉格朗日插值之外，还有牛顿插值多项式，Hermite插值多项式等，读者可自行查阅。这些插值多项式的出发点不同，但是最终结果是一致的，读者也可自行验证。
+      
+      在这里需要提及的是，插值多项式可以分段进行，最简单的是每相邻的两个点用直线表示，或者邻近三个点用二次函数表示，这样的缺点是函数的导数不连续，而且在插值点上导数不存在。如果希望对于插值点，给定函数值和一阶导数值，做这样的插值多项式可以使用样条插值，常用的是三次样条插值多项式，在这里不予展开。
+
+      上面是插值问题，接下来讨论拟合问题。这两者的重要区别就是插值多项式要求必须过已知数据点，但是拟合就不是了，顾名思义，拟合通常是有一个含$n+1$参数的函数$f\qty(x;a_0,a_1,\dots,a_n)$，希望调整这些参数使得这个函数最\textbf{接近}已有数据，就像我们实验课所做的那样。所谓的“接近”，通常用误差函数$\delta\qty(x_i)=f\qty(x_i)-y_i$来表征，其中$y_i$为已知数据，$f\qty(x_i)$是拟合函数在这点给出的值，而整体的误差的评判标准有很多，比如所有点误差函数绝对值求和，或者绝对值中最大的那个，最小二乘法的原则是所有误差函数的平方和最小，即$S=\sum_{i=1}^m{\delta_i^2}=\sum_{i=1}^m{\qty[f\qty(x_{i})-y_{i}]^{2}}=\min$。正如上所述，一般采用的拟合函数都是参数依赖的，所以想实现这个非常简单，只需要这个总误差函数对所有参数的导数等于0
+      \begin{equation}
+        \pdv{S}{a_k}=0\ \qty(k=0,1,\cdots,n)
+        \label{least square}
+      \end{equation}
+      解上式$n+1$个方程就能得到$n+1$个参数值，就得到了最小二乘解。看起来非常简单，最小二乘法的核心难度在于找合适的拟合函数，只有拟合函数合适，这个参数才能较好地匹配，在不知道用什么函数的时候，可以用一组基函数来试，把最终的函数表达式写成一组函数的线性组合，参数就是线性组合系数，这个方法称为线性最小二乘法：在某个函数类$\Phi=\operatorname{span}\qty{\varphi_0\qty(x),\varphi_1\qty(x),\cdots,\varphi_n\qty(x)}$寻找一个函数$\varphi^*\qty(x)=a_0^*\varphi_0\qty(x)+a_1^*\varphi_1\qty(x)+\cdots+a_n^*\varphi_n\qty(x)$使其满足
+      \begin{equation}
+        \sum_{i=1}^m{\qty[\varphi^*\qty(x_i)-y_i]^2}=\min_{\varphi\qty(x)\in\Phi}\sum_{i=1}^m{\qty[\varphi\qty(x_i)-y_i]^2}
+      \end{equation}
+      此时的总误差函数为
+      \begin{equation}
+        S\qty(a_0,a_1,\cdots,a_n)=\sum_{i=1}^m{\qty[\sum_{k=0}^n{a_k\varphi_k\qty(x_i)}-y_i]^2}
+      \end{equation}
+      代入式(\ref{least square})得到
+      \begin{equation}
+        \sum_{i=1}^m{\varphi_k\qty(x_i)\qty[a_0\varphi_0\qty(x_i)+\cdots+a_n\varphi_n\qty(x_i)-y_i]}=0,\ k=0,1,\cdots,n
+      \end{equation}
+      即
+      \begin{equation}
+        a_0\sum_{i=1}^m{\varphi_k\qty(x_i)\varphi_0\qty(x_i)}+\cdots+a_n\sum_{i=1}^m{\varphi_k\qty(x_i)\varphi_n\qty(x_i)}=\sum_{i=1}^m{\varphi_k\qty(x_i)y_i}
+      \end{equation}
+      如果定义这个函数空间的内积为$\mean{h,g}=\sum_{i=1}^m{h\qty(x_i)g\qty(x_i)}$，那么所有偏导可以表达成一个矩阵的形式
+      \begin{equation}
+        \mqty[
+          \mean{\varphi_0,\varphi_0}&\mean{\varphi_0,\varphi_1}&\cdots&\mean{\varphi_0,\varphi_n}\\
+          \mean{\varphi_1,\varphi_0}&\mean{\varphi_1,\varphi_1}&\cdots&\mean{\varphi_1,\varphi_n}\\
+          \vdots&\vdots&\ddots&\vdots\\
+          \mean{\varphi_n,\varphi_0}&\mean{\varphi_n,\varphi_1}&\cdots&\mean{\varphi_n,\varphi_n}
+        ]\mqty[
+          a_0\\
+          a_1\\
+          \vdots\\
+          a_n
+        ]=\mqty[
+          \mean{\varphi_0,f}\\
+          \mean{\varphi_1,f}\\
+          \vdots\\
+          \mean{\varphi_n,f}
+        ]
+        \label{linear least square}
+      \end{equation}
+      如果式(\ref{linear least square})有唯一解，线性最小二乘函数就有解。
+
+      如果对于非线性最小二乘法，偏导的方程很可能是非线性方程，通常可以用迭代解方程的方式求解。
+
+      此外还有必要提到的是条件极值问题。这类问题一般结合最小二乘法形成条件最小二乘，即满足最小二乘误差$S=\sum_{i=0}^m{\qty[f\qty(x_i)-y_i]^2}$最小的同时，需要满足一系列独立的条件，通常写作$g_j\qty(x_1,x_2,\dots,x_n)=0,j=1,2,\dots,r$。对于这样的问题，我们一般采用\textbf{拉格朗日乘因子法}\footnote{Lagrange Multiplier Method, LMM}求解。具体做法如下：将总误差函数$S$写作
+      \begin{equation}
+        S=\sum_{i=0}^m{\qty[f\qty(x_i;a_1,a_2,\cdots,a_n)-y_i]^2}+\sum_{j=0}^r{\lambda_j g_j\qty(x_1,x_2,\dots,x_m)}
+      \end{equation}
+      此时，$c_i$和$\lambda_j$都是参数。如果希望修正之后的总误差最小，则需要对这些参数的偏导数均为零，即
+      \begin{equation}
+        \begin{cases}
+          \pdv{S}{a_i}=0,\ i=1,2,\dots,n\\
+          \pdv{S}{\lambda_j}=0,\ j=1,2,\dots,r
+        \end{cases}
+      \end{equation}
+      此时得到的误差即为满足条件的最小误差，证明略去。
+
+      条件最小二乘方法应用于许多实际的问题，感兴趣的读者可以阅读第\ref{phase_space_dynamics}章。
+
+    \subsection{数值微分和数值积分}
+      \label{numerical_differential_integral}
+      我们微积分里学过各类的微分和积分的计算，但是对于实际应用来说几乎完全没有用。而数值方法却在微分和积分领域大放异彩。最简单的数值微分和数值积分都是基于插值多项式的，我们从最简单的等距结点的情况说明几种方法。
+
+      数值微分里最简单的就是两点公式和三点公式，两点公式相当于当前点与邻近的结点做两点的插值多项式(直线)，然后用直线的斜率代替在这个点的导数
+      \begin{equation}
+        \begin{aligned}
+          f'\qty(x_0)&\approx&\frac{f\qty(x_1)-f\qty(x_0)}{h}\\
+          f'\qty(x_1)&\approx&\frac{f\qty(x_1)-f\qty(x_0)}{h}
+        \end{aligned}
+      \end{equation}
+      其中$h=x_1-x_0$是两个点间的距离。
+      
+      两点法的公式非常简单，精度也较低。而在三点法中，插值多项式是一个二次函数。如果有等间距的三点，相邻两点的距离为$h$，它们的拉格朗日插值多项式为
+      \begin{equation*}
+        \begin{aligned}
+          P_2\qty(x)&=\frac{qty(x-x_1)\qty(x-x_2)}{\qty(x_0-x_1)\qty(x_0-x_2)}f\qty(x_0)+\frac{\qty(x-x_0)\qty(x-x_2)}{\qty(x_1-x_0)\qty(x_1-x_2)}f\qty(x_1) \\
+          &+\frac{\qty(x-x_0)\qty(x-x_1)}{\qty(x_2-x_0)\qty(x_2-x_1)}f\qty(x_2)
+        \end{aligned}
+      \end{equation*}
+      对这个式子求导就得到了三点法的一阶导数公式
+      \begin{equation}
+        \begin{cases}
+          f'\qty(x_0)\approx\frac{-3f\qty(x_0)+4f\qty(x_1)-f\qty(x_2)}{2h} \\
+          f'\qty(x_1)\approx\frac{f\qty(x_2)-f\qty(x_0)}{2h} \\
+          f'\qty(x_2)\approx\frac{f\qty(x_0)-4f\qty(x_1)+3f\qty(x_2)}{2h}
+        \end{cases}
+      \end{equation}
+      我们通常用中间的那个点，尽管三点法比两点法精度只提高了一级，甚至特殊情况下精度是同一量级，但是三点法结合了当前点之前和之后的信息，往往能有更好的效果。另外，既然三点法是二次函数的插值，就可以求二阶导数
+      \begin{equation}
+        f''\qty(x_i)\approx P''_2\qty(x_i)=\frac{f\qty(x_0)-2f\qty(x_1)+f\qty(x_2)}{h^2}, i=0,1,2
+      \end{equation}
+      除了用拉格朗日插值多项式，也可以用三次样条等方法插值，然后再求导得到精度更高的数值微分。
+
+      数值积分的思路略有不同，核心思想是用有限个点的求和代替积分，即
+      \begin{equation}
+        \int_a^b{f\qty(x)\dd{x}}\approx\sum_{k=0}^n{A_k f\qty(x_k)}
+      \end{equation}
+      我们介绍普适的牛顿-科茨(Newton-Cotes)公式，在积分区域$\qty[a,b]$上$n$等分，取$x_i=a+ih,\ h=\frac{b-a}{n},\ i=0,1,\dots,n$，采用拉格朗日插值多项式来代表真实的函数，令$x=a+th$，那么积分公式中的系数就可以写作
+      \begin{equation}
+        A_i=\int_a^b{l_i\qty(x)\dd{x}}=h\int_0^n{\qty(\prod_{j=0 \atop j \neq i}^n{\frac{t-j}{i-j}}) \dd{t}}=\qty(b-a) C_i^\qty(n)
+      \end{equation}
+      其中定义了
+      \begin{equation}
+        C_i^\qty(n)=\frac{1}{n} \frac{\qty(-1)^{n-i}}{i !\qty(n-i) !} \int_0^n{\prod_{j=0 \atop j \neq i}^n{\qty(t-j)}\dd{t}},\ i=0,\cdots,n
+      \end{equation}
+      我们称
+      \begin{equation}
+        \int_a^b{f\qty(x)\dd{x}}\approx\qty(b-a)\sum_{i=0}^n{C_i^\qty(n)f\qty(x_i)}
+      \end{equation}
+      为数值积分的牛顿-科茨公式，这些$C_i^\qty(n)$称为牛顿-科茨系数，可以直接在各种书中查到，代入函数值，完成积分。接下来，我们来看牛顿-科茨公式低阶的两个例子。$n=1$时，牛顿-科茨公式退化为梯形公式
+      \begin{equation}
+        \int_a^b{f\qty(x)\dd{x}}\approx\frac{b-a}{2}\qty[f\qty(a)+f\qty(b)]
+      \end{equation}
+      即函数的积分用它前后两个点构成的梯形面积代替。$n=2$时，退化为辛普森(Simpson)公式\footnote{在几何学上也称为拟柱体公式，对计算各种物体的体积很有用}，
+      \begin{equation}
+        \int_a^b{f\qty(x)\dd{x}}\approx\frac{b-a}{6}\qty[f\qty(a)+4f\qty(\frac{a+b}{2})+f\qty(b)]
+      \end{equation}
+      牛顿-科茨公式只是数值积分的入门方法，精度和速度都有待提高，我们推荐读者自行学习与之相关的龙贝格算法，可在任意一本数值计算的教材上找到。
+
+      插值型积分公式尽管图像简单，但是显然不是最精确的，理论上精度最高的积分公式是高斯型积分公式。高斯型积分公式的特点在于，对于已知数值点的选择不再是简单的等距取点，而遵循一定的策略以追求更高的数值精度，各点的权重也有所不同。想要对此进一步了解的读者请移步相关专著如\cite{numerical_calc_methods}，此处不再赘述。
+
+    \subsection{ODE初值问题的数值解法}
+      既然积分和微分都主要靠数值解法，那么对于实际科研中遇到的常微分方程(ODE)来说，几乎是只能用数值方法求解的。本节介绍最常用的一阶常微分方程初值问题：
+      \begin{equation*}
+        \begin{cases}
+          y'=f\qty(x,y)\\
+          y\qty(x_0)=y_0
+        \end{cases}
+      \end{equation*}
+      的数值解法。微分方程组和高阶微分方程求解的思路基本是一致的。
+
+      上文中的初值问题，要求解的其实是一根曲线，它经过初始点$\qty(x_0,y_0)$，并且满足对每一点$x$的导数满足$y'=f\qty(x,y)$。要描述这样一根曲线，最容易的办法就是用分段线性的方式，过点$\qty(x_0,y_0)$作曲线斜率为$f\qty(x_0,y_0)$的切线，与$x=x_1$交于$\qty(x_1,y_1)$，用$y_1$作为真实解$y\qty(x_1)$的近似值。这样的方法称为欧拉法，即用下列点代替真实点
+      \begin{equation}
+        \begin{cases}
+          y_{i+1}=y_i+hf\qty(x_i, y_i)\\
+          x_i=x_0+ih,\ i=0,1,2,\cdots
+        \end{cases}
+      \end{equation}
+      这样就可以从初始点出发求解任意坐标$x$处的函数值，当$h=x_{i+1}-x_i$的值足够小的时候，欧拉法就是足够准确的。欧拉法的几何意义非常明确，即用当前点$x_i$的导数代替$\qty(x_i,x_{i+1})$之间的真实函数的平均导数，也可以理解成对$y\qty(x_{i+1})$点在$y\qty(x_i)$点的泰勒展开，只保留到第一项的结果。
+
+      上文中其实可以看出，欧拉法在$h$稍大一些时，误差就会很大，泰勒展开保留到一阶项是一个及其粗糙的近似。上述欧拉法是用$x_i$和$x_{i+1}$来计算$y\qty(x_{i+1})$的，因此又叫做向前欧拉法，与之对应的就是向后欧拉法
+      \begin{equation}
+        y_{i+1}=y_i+hf\qty(x_{i+1}, y_{i+1})
+      \end{equation}
+      读者可以看到，想求$y_{i+1}$的话，需要知道它自己的值，因此向后欧拉法中通常用迭代的方式求解$y_{i+1}$。既然有向前和向后，结合之前在\ref{numerical_differential_integral}节提到过的梯形公式，自然就可以想到用向前和向后的平均，可以提高精度，这就是改进的欧拉法
+      \begin{equation*}
+        y_{i+1}=y_i+\frac{h}{2}\qty[f\qty(x_i,y_i)+f\qty(x_{i+1},y_{i+1})]
+      \end{equation*}
+      加入一个表示迭代次数的上标$^\qty(k)$，改进的欧拉方法可以写作
+      \begin{equation}
+        \begin{cases}
+          y_{i+1}^\qty(0)=y_i+hf\qty(x_i,y_i)\\
+          y_{i+1}^\qty(k+1)=y_i+\frac{h}{2}\qty[f\qty(x_i,y_i)+f\qty(x_{i+1},y_{i+1}^\qty(k))]
+        \end{cases},\ k=0,1,2,\cdots
+      \end{equation}
+      另外，也可以不用迭代，先用向前欧拉方法预测一个$y_{i+1}^\qty(0)$的值，然后直接代入梯形积分公式来得到更精确的$y_{i+1}$值，相当于只做一次迭代，称为改进的欧拉法的预估-校正公式，也是通常实际中使用的改进欧拉方法。
+
+      当然所有在王老师组写过代码的人都会知道，王老师课题组所使用的数值方法称为龙格-库塔法(Runge-Kutta, 简称RK)。RK法的基本思想是用复合函数的值来代替积分的值，简单地说，就是用更多的点的导数的某种加权平均代替这一段上的平均导数，用m个点就称为m阶RK法。可以想象，2阶RK法与改进欧拉方法是等价的\footnote{尽管系数不完全相同，但是精度是相同的}。m阶RK法的通式可以写作
+      \begin{equation}
+        \begin{cases}
+          y_{i+1}=y_i+h\qty(\alpha_1 K_1+\alpha_2 K_2+\cdots+\alpha_m K_m)\\
+          K_1=f\qty(x_i, y_i)\\
+          K_2=f\qty(x_i+\lambda_2 h, y_i+\mu_2 h K_1)\\
+          \cdots\cdots\cdots\\
+          K_m=f\qty(x_i+\lambda_m h, y_i+\mu_m h K_{m-1})
+        \end{cases}
+        \label{m order RK}
+      \end{equation}
+      这些参数的计算原则，就是让式(\ref{m order RK})中$y_{i+1}$的展开式与$y\qty(x_{i+1})$在$\qty(x_i,y_i)$处的泰勒展开尽可能相同，限于篇幅，我们不做仔细推导，直接给出最常用的4阶RK法(又称作经典RK法)的表达式
+      \begin{equation}
+        \begin{cases}
+          y_{i+1}=y_i+\frac{h}{6}\qty(K_1+2K_2+2K_3+K_4)\\
+          K_1=f\qty(x_i,y_i)\\
+          K_2=f\qty(x_i+\frac{h}{2},y_i+\frac{h}{2}K_1) \\
+          K_3=f\qty(x_i+\frac{h}{2},y_i+\frac{h}{2}K_2) \\
+          K_4=f\qty(x_i+h, y_i+hK_3)
+        \end{cases}
+        \label{4 order RK}
+      \end{equation}
+      4阶RK法的精度已经较高，已经满足了王老师课题组和多数其他物理工程领域的数值精度要求。
+
+
+    \part{C卷}
     \chapter{全局优化问题}
       全局优化问题其实是个数学问题，简单地说就是有一个复杂的高维函数，我们如何求得其最小值的问题，但是这个数学问题在化学物理等领域都有重要的意义，我们也主要是全局优化算法在我们的问题中的应用。以最常见的也是王老师课题组之前处理的一个例子，如果任意两个原子之间的相互作用势能是LJ势，给定两个原子，可以通过对坐标求导等于0的方式找到这两个原子的最稳定的位置，但是如果是三个原子，事情就会变得麻烦起来，那如果是一千个原子呢？事实证明当原子数到13个时，极小值点就有至少1000个。这个问题其实等价于一个三千维的函数的最小值问题，想通过简单的解析方法求解是几乎不可能的。即使人们有强大的计算机，这样的一个问题还是不简单的，尤其是自由度增多时额外增加的计算量更是不可估计的。人们基于各种各样的思路发展了一系列全局优化算法，限于编者水平，在这里我们只能简单介绍其中的几种，主要参考了文献\cite{Kaplan2006}\cite{卡普兰2013分子间相互作用}。
 
